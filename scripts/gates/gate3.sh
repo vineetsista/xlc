@@ -65,10 +65,14 @@ else
     fail=1
 fi
 
-if cargo test -q -p xlc-graph scc 2>&1 | tail -1 | grep -q "test result: ok"; then
+scc_out=$(cargo test -q -p xlc-graph scc 2>&1)
+if echo "$scc_out" | grep -q "FAILED"; then
+    say "FAIL: SCC tests failing"
+    fail=1
+elif echo "$scc_out" | grep -qE "test result: ok\. [1-9]"; then
     say "ok: SCC tests pass"
 else
-    say "FAIL: SCC tests failing or absent"
+    say "FAIL: SCC tests absent"
     fail=1
 fi
 
