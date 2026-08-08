@@ -477,6 +477,7 @@ dependencies = [
  "sha2",
  "xlc-eval",
  "xlc-ingest",
+ "xlc-ir",
  "xlc-lint",
  "xlc-parse",
  "zip",
@@ -512,6 +513,10 @@ dependencies = [
 [[package]]
 name = "xlc-ir"
 version = "0.1.0"
+dependencies = [
+ "xlc-eval",
+ "xlc-parse",
+]
 
 [[package]]
 name = "xlc-lint"

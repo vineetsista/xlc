@@ -5,6 +5,7 @@
 
 mod census;
 mod check;
+mod ir_verify;
 mod parse_corpus;
 mod receipt;
 mod corpus;
@@ -20,6 +21,7 @@ fn main() {
         Some("receipt") => receipt::receipt_cmd(&args[1..]),
         Some("check") => check::check_cmd(&args[1..]),
         Some("lint-corpus") => check::lint_corpus_cmd(&args[1..]),
+        Some("ir-verify") => ir_verify::ir_verify_cmd(&args[1..]),
         Some(cmd) => {
             eprintln!("xlc: unknown or not-yet-implemented command `{cmd}`");
             2

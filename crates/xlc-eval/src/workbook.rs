@@ -35,6 +35,11 @@ pub struct Workbook {
 }
 
 impl Workbook {
+    /// Public sheet-name resolution (case-insensitive) for lowering.
+    pub fn resolve_sheet_pub(&self, name: &str) -> Option<SheetId> {
+        self.by_name.get(&name.to_lowercase()).copied()
+    }
+
     pub fn add_sheet(&mut self, name: &str) -> SheetId {
         let id = self.sheets.len() as SheetId;
         self.sheets.push(Sheet { name: name.to_string(), ..Default::default() });

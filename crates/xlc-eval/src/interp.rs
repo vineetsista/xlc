@@ -81,13 +81,60 @@ impl<'a, C: Ctx> Interp<'a, C> {
     /// A formula result is never Blank: `=A1` with A1 empty yields 0.
     pub fn eval_formula(&self, e: &Expr) -> Value {
         let op = self.eval(e);
+        self.finalize(op)
+    }
+
+    /// Final formula-result rule shared with the IR interpreter.
+    pub fn finalize(&self, op: Operand) -> Value {
         match self.deref_scalar(op) {
             Value::Blank => Value::Num(0.0),
             v => v,
         }
     }
 
-    pub(crate) fn eval(&self, e: &Expr) -> Operand {
+    /// Operand-level binary application (the IR's entry point — same
+    /// semantics as AST evaluation because it IS the same code).
+    pub fn apply_binary(&self, op: BinOp, a: Operand, b: Operand) -> Operand {
+        match op {
+            BinOp::Range | BinOp::Union | BinOp::Intersect => self.ref_op_operands(op, a, b),
+            _ => {
+                let x = self.deref_scalar(a);
+                let y = self.deref_scalar(b);
+                Operand::Val(apply_scalar_binop(op, &x, &y))
+            }
+        }
+    }
+
+    /// Operand-level unary application.
+    pub fn apply_unary(&self, op: UnOp, a: Operand) -> Operand {
+        match op {
+            UnOp::ImplicitIntersect => Operand::Val(self.deref_scalar(a)),
+            UnOp::SpillRange => Operand::Val(Value::Err(ExcelError::Name)),
+            _ => {
+                let v = self.deref_scalar(a);
+                Operand::Val(match op {
+                    UnOp::Neg => value::neg(&v),
+                    UnOp::Pos => value::pos(&v),
+                    UnOp::Percent => value::percent(&v),
+                    _ => unreachable!(),
+                })
+            }
+        }
+    }
+
+    /// Resolve an area on explicit sheets into a reference operand.
+    pub fn resolve_area(&self, sheets: &[SheetId], area: &Area) -> Operand {
+        let mut rects = Vec::with_capacity(sheets.len());
+        for &s in sheets {
+            match area_to_rect(area, s, self.ctx) {
+                Some(rect) => rects.push(rect),
+                None => return Operand::Val(Value::Err(ExcelError::Ref)),
+            }
+        }
+        Operand::Ref(rects)
+    }
+
+    pub fn eval(&self, e: &Expr) -> Operand {
         match e {
             Expr::Number { value, .. } => Operand::Val(Value::Num(*value)),
             Expr::Text(s) => Operand::Val(Value::Text(s.clone())),
@@ -162,7 +209,7 @@ impl<'a, C: Ctx> Interp<'a, C> {
     /// Scalar deref: single cell → value; multi-cell → implicit
     /// intersection with the formula's own row/column (legacy semantics);
     /// no intersection → #VALUE!.
-    pub(crate) fn deref_scalar(&self, op: Operand) -> Value {
+    pub fn deref_scalar(&self, op: Operand) -> Value {
         match op {
             Operand::Val(v) => v,
             Operand::Ref(rects) => match rects.as_slice() {
@@ -237,6 +284,10 @@ impl<'a, C: Ctx> Interp<'a, C> {
     fn eval_ref_op(&self, op: BinOp, lhs: &Expr, rhs: &Expr) -> Operand {
         let a = self.eval(lhs);
         let b = self.eval(rhs);
+        self.ref_op_operands(op, a, b)
+    }
+
+    fn ref_op_operands(&self, op: BinOp, a: Operand, b: Operand) -> Operand {
         let (Operand::Ref(ra), Operand::Ref(rb)) = (&a, &b) else {
             // Range op over non-refs (e.g. INDEX(..):A1) needs ref-valued
             // function returns — not yet modeled; error out clearly.
@@ -1164,7 +1215,7 @@ fn canonical_fn_name(name: &str) -> String {
     n
 }
 
-fn area_to_rect(area: &Area, sheet: SheetId, ctx: &dyn Ctx) -> Option<Rect> {
+pub fn area_to_rect(area: &Area, sheet: SheetId, ctx: &dyn Ctx) -> Option<Rect> {
     Some(match area {
         Area::Cell(c) => Rect { sheet, r0: c.row, c0: c.col, r1: c.row, c1: c.col },
         Area::CellRange(a, b) => rect_from_coords(sheet, a, b),

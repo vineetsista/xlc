@@ -1,0 +1,16 @@
+{
+  "cells_compared": 930372,
+  "mismatches": 0,
+  "parse_skipped": 0,
+  "panics": 0,
+  "coarsening": {
+    "cells": 930372,
+    "nodes": 83095
+  },
+  "cse": {
+    "insts_before": 176378,
+    "insts_after": 175036
+  },
+  "per_workbook_ratios_recorded": true,
+  "per_workbook_ratio_mean": 36.262258865775685
+}
