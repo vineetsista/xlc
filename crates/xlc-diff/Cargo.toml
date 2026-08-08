@@ -7,3 +7,6 @@ license.workspace = true
 rust-version.workspace = true
 
 [dependencies]
+xlc-eval.workspace = true
+xlc-ir.workspace = true
+xlc-scenario.workspace = true

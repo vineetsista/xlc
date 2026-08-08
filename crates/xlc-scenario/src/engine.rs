@@ -224,6 +224,139 @@ impl<'wb> Engine<'wb> {
         self.spec.inputs.len()
     }
 
+    pub fn spec_inputs(&self) -> &[(CellKey, Dist)] {
+        &self.spec.inputs
+    }
+
+    pub fn seed(&self) -> u64 {
+        self.spec.seed
+    }
+
+    /// Local derivatives of cone cell `pos` with respect to its numeric
+    /// sources, evaluated at the point given by `inputs` and the solved
+    /// cone `value_of`. None => opaque to AD (structural boundary).
+    pub(crate) fn local_derivatives(
+        &self,
+        pos: usize,
+        inputs: &[f64],
+        value_of: &std::collections::HashMap<CellKey, f64>,
+    ) -> Option<Vec<(crate::ad::Source, f64)>> {
+        use crate::ad::Source;
+        let (fi, li) = self.schedule[pos];
+        let plan = self.fast[fi].as_ref()?;
+        let fam = &self.module.families[fi];
+        let (row, col) = fam.lanes[li];
+        let (er, ec) = fam.lanes[0];
+        let (dr, dc) = (row as i64 - er as i64, col as i64 - ec as i64);
+
+        // Forward with per-inst value + sparse gradient.
+        let mut vals: Vec<f64> = Vec::with_capacity(plan.insts.len());
+        let mut grads: Vec<std::collections::HashMap<Source, f64>> =
+            Vec::with_capacity(plan.insts.len());
+        let mut source_of = |sheet: SheetId, rr: u32, cc: u32| -> (f64, Option<Source>) {
+            let key = (sheet, rr, cc);
+            if let Some(&ii) = self.input_index.get(&key) {
+                (inputs[ii], Some(Source::Input(ii)))
+            } else if let Some(&p) = self.dirty_index.get(&key) {
+                (value_of.get(&key).copied().unwrap_or(f64::NAN), Some(Source::Cone(p)))
+            } else {
+                match self.wb.sheets[sheet as usize].values.get(&(rr, cc)) {
+                    Some(Value::Num(x)) => (*x, None),
+                    Some(Value::Bool(b)) => (if *b { 1.0 } else { 0.0 }, None),
+                    None => (0.0, None),
+                    Some(_) => (f64::NAN, None),
+                }
+            }
+        };
+        for inst in &plan.insts {
+            let (v, g) = match inst {
+                FastInst::Const(x) => (*x, std::collections::HashMap::new()),
+                FastInst::Load { sheet, row: r, col: c, row_abs, col_abs } => {
+                    let rr = u32::try_from(if *row_abs { *r } else { *r + dr }).ok()?;
+                    let cc = u32::try_from(if *col_abs { *c } else { *c + dc }).ok()?;
+                    let (v, src) = source_of(*sheet, rr, cc);
+                    if v.is_nan() {
+                        return None;
+                    }
+                    let mut g = std::collections::HashMap::new();
+                    if let Some(src) = src {
+                        g.insert(src, 1.0);
+                    }
+                    (v, g)
+                }
+                FastInst::SumRange { sheet, area } => {
+                    let a2 = xlc_ir::rebase_pub(area, dr, dc)?;
+                    let interp = Interp::new(self.wb, Origin { sheet: *sheet, row, col });
+                    let Operand::Ref(rects) = interp.resolve_area(&[*sheet], &a2) else {
+                        return None;
+                    };
+                    let mut total = 0.0;
+                    let mut g = std::collections::HashMap::new();
+                    for r2 in &rects {
+                        for (rr, cc) in r2.cells() {
+                            let key = (r2.sheet, rr, cc);
+                            if let Some(&ii) = self.input_index.get(&key) {
+                                total += inputs[ii];
+                                *g.entry(Source::Input(ii)).or_insert(0.0) += 1.0;
+                            } else if let Some(&p) = self.dirty_index.get(&key) {
+                                total += value_of.get(&key).copied().unwrap_or(f64::NAN);
+                                *g.entry(Source::Cone(p)).or_insert(0.0) += 1.0;
+                            } else if let Some(Value::Num(x)) =
+                                self.wb.sheets[r2.sheet as usize].values.get(&(rr, cc))
+                            {
+                                total += x;
+                            }
+                        }
+                    }
+                    if total.is_nan() {
+                        return None;
+                    }
+                    (total, g)
+                }
+                FastInst::Bin { op, a, b } => {
+                    let (va, vb) = (vals[*a as usize], vals[*b as usize]);
+                    let (da, db) = match op {
+                        BinOp::Add => (1.0, 1.0),
+                        BinOp::Sub => (1.0, -1.0),
+                        BinOp::Mul => (vb, va),
+                        BinOp::Div => {
+                            if vb == 0.0 {
+                                return None;
+                            }
+                            (1.0 / vb, -va / (vb * vb))
+                        }
+                        _ => return None,
+                    };
+                    let v = match op {
+                        BinOp::Add => va + vb,
+                        BinOp::Sub => va - vb,
+                        BinOp::Mul => va * vb,
+                        BinOp::Div => va / vb,
+                        _ => unreachable!(),
+                    };
+                    let mut g = std::collections::HashMap::new();
+                    for (src, gd) in &grads[*a as usize] {
+                        *g.entry(*src).or_insert(0.0) += gd * da;
+                    }
+                    for (src, gd) in &grads[*b as usize] {
+                        *g.entry(*src).or_insert(0.0) += gd * db;
+                    }
+                    (v, g)
+                }
+                FastInst::Neg(a) => {
+                    let mut g = std::collections::HashMap::new();
+                    for (src, gd) in &grads[*a as usize] {
+                        g.insert(*src, -gd);
+                    }
+                    (-vals[*a as usize], g)
+                }
+            };
+            vals.push(v);
+            grads.push(g);
+        }
+        Some(grads[plan.result as usize].iter().map(|(s, d)| (*s, *d)).collect())
+    }
+
     pub fn cone_keys(&self) -> Vec<CellKey> {
         (0..self.schedule.len()).map(|p| self.key_of(p)).collect()
     }

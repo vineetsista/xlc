@@ -545,6 +545,9 @@ dependencies = [
 [[package]]
 name = "xlc-ad"
 version = "0.1.0"
+dependencies = [
+ "xlc-scenario",
+]
 
 [[package]]
 name = "xlc-cli"
@@ -556,6 +559,7 @@ dependencies = [
  "serde",
  "serde_json",
  "sha2",
+ "xlc-diff",
  "xlc-eval",
  "xlc-ingest",
  "xlc-ir",
@@ -568,6 +572,11 @@ dependencies = [
 [[package]]
 name = "xlc-diff"
 version = "0.1.0"
+dependencies = [
+ "xlc-eval",
+ "xlc-ir",
+ "xlc-scenario",
+]
 
 [[package]]
 name = "xlc-eval"

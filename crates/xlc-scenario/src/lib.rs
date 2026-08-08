@@ -1,6 +1,7 @@
 //! Scenario axis (§8.6): counter-based RNG, five distributions, and the
 //! vectorized engine over the coarsened IR.
 
+pub mod ad;
 pub mod dist;
 pub mod engine;
 pub mod rng;

@@ -1,0 +1,28 @@
+{
+  "incremental": {
+    "latency_ms": 12.631725999999999,
+    "model_formulas": 40000,
+    "cone_cells": 20,
+    "scenarios": 100000,
+    "schedule_build_ms": 131.865187,
+    "model": "synthetic 20x2000 row-independent chains, single input changed"
+  },
+  "ad": {
+    "models": 50,
+    "gradients_checked": 232,
+    "max_rel_err": 8.030969844974312e-7
+  },
+  "diff": {
+    "divergence_detected": true,
+    "divergent_pct": 100.0,
+    "witness_scenario": 0,
+    "witness_inputs": [
+      {
+        "cell": "(0, 25, 0)",
+        "value": 33.15195846359372
+      }
+    ],
+    "v1_output": "Num(552.3671543099531)",
+    "v2_output": "Num(554.6877914024046)"
+  }
+}

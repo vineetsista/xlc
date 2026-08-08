@@ -22,5 +22,6 @@ xlc-lint.workspace = true
 xlc-ingest.workspace = true
 xlc-ir.workspace = true
 xlc-scenario.workspace = true
+xlc-diff.workspace = true
 sha2.workspace = true
 zip.workspace = true
