@@ -1,3 +1,5 @@
-//! Dependency graph, Tarjan SCC, topological schedule.
-//!
-//! Stub — implemented in its owning phase per XLC.md Part III.
+//! Dependency graph, Tarjan SCC, topological schedule (§8.3).
+
+pub mod scc;
+
+pub use scc::{is_cyclic, schedule, tarjan_scc, Adj};
