@@ -2,6 +2,7 @@
 
 pub mod dates;
 pub mod interp;
+pub mod workbook;
 pub mod value;
 
 pub use value::{ExcelError, Value};

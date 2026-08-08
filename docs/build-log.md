@@ -3,6 +3,23 @@
 Dated entries written for a human reader; the Phase 9 engineering essay is
 assembled from these.
 
+## 2026-08-08 (evening) — Gates 0 and 1 fall, and the census kills Kill Risk 2
+
+The corpus pipeline is real: 249,376 Common Crawl files filtered to 10,703
+valid OOXML workbooks (the spec's red-team predicted ~10,500 — within 2%),
+a deterministic 500-workbook regression subset committed behind a sha256
+manifest, and zero errors or panics across the entire scan. Then the census,
+16,167 workbooks and 7,003,444 formula cells later, answered the question
+the whole business model hangs on: the projected refusal rate is 5.7%, not
+the feared 50%. Four of five real workbooks compile fully under a 75-function
+set; 14% compile partially. The function table is a power law with a long
+tail — IF alone appears in 1.77M cells, and 75 functions cover 99% of all
+function mentions, so the ~180-function budget has comfortable headroom.
+Other surprises: VBA — the feature everyone assumes blocks everything —
+appears in six workbooks out of sixteen thousand; meanwhile 240 workbooks
+still carry the Mac 1904 epoch, and TEXTAFTER (shipped 2022) already outranks
+ROUND. The corpus keeps correcting intuitions; that is exactly what it is for.
+
 ## 2026-08-08 (later) — The corpus fights back, productively
 
 FUSE turned out to be a matryoshka: the 9.4 GB zip holds a 140-part split 7z,

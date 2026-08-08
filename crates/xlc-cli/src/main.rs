@@ -5,6 +5,7 @@
 
 mod census;
 mod parse_corpus;
+mod receipt;
 mod corpus;
 
 fn main() {
@@ -15,6 +16,7 @@ fn main() {
         Some("corpus-verify") => corpus::verify_cmd(&args[1..]),
         Some("census") => census::census_cmd(&args[1..]),
         Some("parse-corpus") => parse_corpus::parse_corpus_cmd(&args[1..]),
+        Some("receipt") => receipt::receipt_cmd(&args[1..]),
         Some(cmd) => {
             eprintln!("xlc: unknown or not-yet-implemented command `{cmd}`");
             2

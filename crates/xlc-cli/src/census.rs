@@ -96,7 +96,7 @@ fn strip_quoted(formula: &str) -> String {
 /// A function call is an identifier immediately followed by `(` (with
 /// optional whitespace). Modern functions are stored with `_xlfn.` /
 /// `_xlws.` prefixes in the file format; those are stripped.
-fn extract_functions(formula: &str, out: &mut BTreeSet<String>) {
+pub(crate) fn extract_functions(formula: &str, out: &mut BTreeSet<String>) {
     let cleaned = strip_quoted(formula);
     let b = cleaned.as_bytes();
     let mut i = 0;

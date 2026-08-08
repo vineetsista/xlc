@@ -1,0 +1,861 @@
+{
+  "workbooks_total": 16167,
+  "workbooks_examined": 16167,
+  "workbooks_with_formulas": 6682,
+  "formula_cells_total": 7003444,
+  "sources": {
+    "fuse": 10703,
+    "sb": 5464
+  },
+  "features": {
+    "vba": 6,
+    "external_links": 1123,
+    "pivot_tables": 93,
+    "power_query": 825,
+    "tables": 1016,
+    "defined_names": 6112,
+    "epoch_1904": 240,
+    "volatile_any": 377
+  },
+  "volatile": {
+    "CELL": 32,
+    "INDIRECT": 54,
+    "INFO": 0,
+    "NOW": 39,
+    "OFFSET": 63,
+    "RAND": 9,
+    "RANDARRAY": 0,
+    "RANDBETWEEN": 16,
+    "TODAY": 184
+  },
+  "functions": {
+    "IF": {
+      "cells": 1768859,
+      "workbooks": 2265
+    },
+    "SUM": {
+      "cells": 567375,
+      "workbooks": 3054
+    },
+    "ISBLANK": {
+      "cells": 494297,
+      "workbooks": 493
+    },
+    "VLOOKUP": {
+      "cells": 430667,
+      "workbooks": 692
+    },
+    "AVERAGE": {
+      "cells": 391807,
+      "workbooks": 546
+    },
+    "IFERROR": {
+      "cells": 283588,
+      "workbooks": 562
+    },
+    "COUNTIFS": {
+      "cells": 226308,
+      "workbooks": 191
+    },
+    "TIME": {
+      "cells": 221241,
+      "workbooks": 24
+    },
+    "ISTEXT": {
+      "cells": 181502,
+      "workbooks": 111
+    },
+    "LEFT": {
+      "cells": 137237,
+      "workbooks": 320
+    },
+    "HLOOKUP": {
+      "cells": 130050,
+      "workbooks": 84
+    },
+    "TEXTAFTER": {
+      "cells": 126126,
+      "workbooks": 3
+    },
+    "ROUND": {
+      "cells": 125092,
+      "workbooks": 231
+    },
+    "SUBSTITUTE": {
+      "cells": 121866,
+      "workbooks": 223
+    },
+    "VALUE": {
+      "cells": 113421,
+      "workbooks": 171
+    },
+    "OR": {
+      "cells": 105343,
+      "workbooks": 201
+    },
+    "SUMIF": {
+      "cells": 96197,
+      "workbooks": 230
+    },
+    "AND": {
+      "cells": 91992,
+      "workbooks": 356
+    },
+    "INDEX": {
+      "cells": 81792,
+      "workbooks": 817
+    },
+    "MATCH": {
+      "cells": 76858,
+      "workbooks": 705
+    },
+    "COUNTIF": {
+      "cells": 72743,
+      "workbooks": 494
+    },
+    "NOT": {
+      "cells": 63930,
+      "workbooks": 180
+    },
+    "MAX": {
+      "cells": 57266,
+      "workbooks": 520
+    },
+    "SQRT": {
+      "cells": 53457,
+      "workbooks": 37
+    },
+    "YEAR": {
+      "cells": 52708,
+      "workbooks": 117
+    },
+    "ERFC": {
+      "cells": 50450,
+      "workbooks": 5
+    },
+    "NORMDIST": {
+      "cells": 42356,
+      "workbooks": 2
+    },
+    "MIN": {
+      "cells": 40583,
+      "workbooks": 313
+    },
+    "HYPERLINK": {
+      "cells": 39855,
+      "workbooks": 105
+    },
+    "TODAY": {
+      "cells": 37547,
+      "workbooks": 184
+    },
+    "INT": {
+      "cells": 36851,
+      "workbooks": 71
+    },
+    "MONTH": {
+      "cells": 35066,
+      "workbooks": 129
+    },
+    "RIGHT": {
+      "cells": 27566,
+      "workbooks": 141
+    },
+    "LEN": {
+      "cells": 25196,
+      "workbooks": 136
+    },
+    "CONCATENATE": {
+      "cells": 24775,
+      "workbooks": 117
+    },
+    "COUNT": {
+      "cells": 24438,
+      "workbooks": 233
+    },
+    "ROW": {
+      "cells": 23815,
+      "workbooks": 266
+    },
+    "PI": {
+      "cells": 22925,
+      "workbooks": 15
+    },
+    "TEXT": {
+      "cells": 21956,
+      "workbooks": 233
+    },
+    "LARGE": {
+      "cells": 21850,
+      "workbooks": 38
+    },
+    "ROUNDUP": {
+      "cells": 21514,
+      "workbooks": 66
+    },
+    "LOOKUP": {
+      "cells": 20687,
+      "workbooks": 112
+    },
+    "EXP": {
+      "cells": 20459,
+      "workbooks": 10
+    },
+    "ISNA": {
+      "cells": 18832,
+      "workbooks": 198
+    },
+    "SUMPRODUCT": {
+      "cells": 17215,
+      "workbooks": 302
+    },
+    "SUMIFS": {
+      "cells": 16691,
+      "workbooks": 205
+    },
+    "DAYS": {
+      "cells": 16371,
+      "workbooks": 21
+    },
+    "COUNTA": {
+      "cells": 12505,
+      "workbooks": 275
+    },
+    "REPT": {
+      "cells": 11786,
+      "workbooks": 199
+    },
+    "EOMONTH": {
+      "cells": 11321,
+      "workbooks": 91
+    },
+    "ISNUMBER": {
+      "cells": 11270,
+      "workbooks": 176
+    },
+    "NA": {
+      "cells": 10179,
+      "workbooks": 5
+    },
+    "SMALL": {
+      "cells": 10110,
+      "workbooks": 106
+    },
+    "ROWS": {
+      "cells": 9691,
+      "workbooks": 152
+    },
+    "CELL": {
+      "cells": 9423,
+      "workbooks": 32
+    },
+    "POWER": {
+      "cells": 9413,
+      "workbooks": 4
+    },
+    "ISERROR": {
+      "cells": 9039,
+      "workbooks": 68
+    },
+    "MID": {
+      "cells": 8508,
+      "workbooks": 194
+    },
+    "SEARCH": {
+      "cells": 7515,
+      "workbooks": 110
+    },
+    "ROUNDDOWN": {
+      "cells": 7368,
+      "workbooks": 31
+    },
+    "FIND": {
+      "cells": 6806,
+      "workbooks": 125
+    },
+    "INDIRECT": {
+      "cells": 6635,
+      "workbooks": 54
+    },
+    "OFFSET": {
+      "cells": 6585,
+      "workbooks": 63
+    },
+    "MOD": {
+      "cells": 6460,
+      "workbooks": 68
+    },
+    "AGGREGATE": {
+      "cells": 6414,
+      "workbooks": 111
+    },
+    "TRIM": {
+      "cells": 5350,
+      "workbooks": 74
+    },
+    "ABS": {
+      "cells": 4787,
+      "workbooks": 56
+    },
+    "TRUE": {
+      "cells": 4655,
+      "workbooks": 5
+    },
+    "MEDIAN": {
+      "cells": 4651,
+      "workbooks": 48
+    },
+    "DAY": {
+      "cells": 4250,
+      "workbooks": 59
+    },
+    "RANK": {
+      "cells": 4233,
+      "workbooks": 41
+    },
+    "FLOOR": {
+      "cells": 4031,
+      "workbooks": 6
+    },
+    "DATE": {
+      "cells": 3812,
+      "workbooks": 88
+    },
+    "LN": {
+      "cells": 3727,
+      "workbooks": 10
+    },
+    "EXACT": {
+      "cells": 3629,
+      "workbooks": 11
+    },
+    "XLOOKUP": {
+      "cells": 3593,
+      "workbooks": 48
+    },
+    "COLUMNS": {
+      "cells": 3562,
+      "workbooks": 78
+    },
+    "GEOMEAN": {
+      "cells": 3513,
+      "workbooks": 117
+    },
+    "DATEDIF": {
+      "cells": 3511,
+      "workbooks": 50
+    },
+    "STDEV": {
+      "cells": 3058,
+      "workbooks": 47
+    },
+    "YEARFRAC": {
+      "cells": 2652,
+      "workbooks": 9
+    },
+    "SUBTOTAL": {
+      "cells": 2509,
+      "workbooks": 103
+    },
+    "COLUMN": {
+      "cells": 2479,
+      "workbooks": 60
+    },
+    "ADDRESS": {
+      "cells": 2292,
+      "workbooks": 6
+    },
+    "RAND": {
+      "cells": 2292,
+      "workbooks": 9
+    },
+    "CEILING": {
+      "cells": 1980,
+      "workbooks": 13
+    },
+    "PROPER": {
+      "cells": 1949,
+      "workbooks": 15
+    },
+    "TEXTJOIN": {
+      "cells": 1878,
+      "workbooks": 30
+    },
+    "TTEST": {
+      "cells": 1715,
+      "workbooks": 4
+    },
+    "SORT": {
+      "cells": 1648,
+      "workbooks": 16
+    },
+    "AVERAGEIFS": {
+      "cells": 1614,
+      "workbooks": 29
+    },
+    "EDATE": {
+      "cells": 1535,
+      "workbooks": 20
+    },
+    "ISODD": {
+      "cells": 1428,
+      "workbooks": 18
+    },
+    "SIN": {
+      "cells": 1354,
+      "workbooks": 7
+    },
+    "FREQUENCY": {
+      "cells": 1324,
+      "workbooks": 27
+    },
+    "CHAR": {
+      "cells": 1169,
+      "workbooks": 29
+    },
+    "RANDBETWEEN": {
+      "cells": 1014,
+      "workbooks": 16
+    },
+    "AVERAGEIF": {
+      "cells": 1000,
+      "workbooks": 29
+    },
+    "MINA": {
+      "cells": 971,
+      "workbooks": 7
+    },
+    "MAXA": {
+      "cells": 960,
+      "workbooks": 5
+    },
+    "MINIFS": {
+      "cells": 959,
+      "workbooks": 6
+    },
+    "IFNA": {
+      "cells": 903,
+      "workbooks": 48
+    },
+    "PMT": {
+      "cells": 797,
+      "workbooks": 10
+    },
+    "WEEKDAY": {
+      "cells": 783,
+      "workbooks": 36
+    },
+    "COS": {
+      "cells": 782,
+      "workbooks": 7
+    },
+    "WEEKNUM": {
+      "cells": 781,
+      "workbooks": 22
+    },
+    "UPPER": {
+      "cells": 771,
+      "workbooks": 38
+    },
+    "CHOOSE": {
+      "cells": 732,
+      "workbooks": 27
+    },
+    "ISEVEN": {
+      "cells": 705,
+      "workbooks": 12
+    },
+    "LOG": {
+      "cells": 696,
+      "workbooks": 8
+    },
+    "WORKDAY": {
+      "cells": 589,
+      "workbooks": 13
+    },
+    "__XLUDF.DUMMYFUNCTION": {
+      "cells": 540,
+      "workbooks": 6
+    },
+    "TRANSPOSE": {
+      "cells": 522,
+      "workbooks": 34
+    },
+    "FILTER": {
+      "cells": 435,
+      "workbooks": 53
+    },
+    "HOUR": {
+      "cells": 406,
+      "workbooks": 8
+    },
+    "MINUTE": {
+      "cells": 406,
+      "workbooks": 8
+    },
+    "TRUNC": {
+      "cells": 384,
+      "workbooks": 17
+    },
+    "PRODUCT": {
+      "cells": 352,
+      "workbooks": 15
+    },
+    "SECOND": {
+      "cells": 324,
+      "workbooks": 6
+    },
+    "REPLACE": {
+      "cells": 313,
+      "workbooks": 24
+    },
+    "TRIMMEAN": {
+      "cells": 300,
+      "workbooks": 12
+    },
+    "ISERR": {
+      "cells": 280,
+      "workbooks": 11
+    },
+    "LET": {
+      "cells": 267,
+      "workbooks": 20
+    },
+    "ACOS": {
+      "cells": 265,
+      "workbooks": 2
+    },
+    "FIXED": {
+      "cells": 255,
+      "workbooks": 15
+    },
+    "MMULT": {
+      "cells": 255,
+      "workbooks": 10
+    },
+    "ATAN": {
+      "cells": 247,
+      "workbooks": 4
+    },
+    "DEGREES": {
+      "cells": 227,
+      "workbooks": 3
+    },
+    "UNIQUE": {
+      "cells": 211,
+      "workbooks": 43
+    },
+    "GETPIVOTDATA": {
+      "cells": 200,
+      "workbooks": 5
+    },
+    "NOW": {
+      "cells": 186,
+      "workbooks": 39
+    },
+    "VAPORPRESSURE": {
+      "cells": 186,
+      "workbooks": 2
+    },
+    "MAXIFS": {
+      "cells": 168,
+      "workbooks": 12
+    },
+    "QUARTILE": {
+      "cells": 154,
+      "workbooks": 3
+    },
+    "CODE": {
+      "cells": 138,
+      "workbooks": 6
+    },
+    "PPMT": {
+      "cells": 130,
+      "workbooks": 4
+    },
+    "COUNTBLANK": {
+      "cells": 121,
+      "workbooks": 14
+    },
+    "N": {
+      "cells": 117,
+      "workbooks": 17
+    },
+    "CONFIDENCE": {
+      "cells": 115,
+      "workbooks": 1
+    },
+    "ATAN2": {
+      "cells": 94,
+      "workbooks": 2
+    },
+    "DATEVALUE": {
+      "cells": 81,
+      "workbooks": 15
+    },
+    "SIGN": {
+      "cells": 81,
+      "workbooks": 3
+    },
+    "STDEVP": {
+      "cells": 77,
+      "workbooks": 3
+    },
+    "NORMSINV": {
+      "cells": 75,
+      "workbooks": 2
+    },
+    "IPMT": {
+      "cells": 70,
+      "workbooks": 3
+    },
+    "IRR": {
+      "cells": 65,
+      "workbooks": 4
+    },
+    "MROUND": {
+      "cells": 62,
+      "workbooks": 6
+    },
+    "NPV": {
+      "cells": 57,
+      "workbooks": 15
+    },
+    "QUOTIENT": {
+      "cells": 55,
+      "workbooks": 2
+    },
+    "CONCAT": {
+      "cells": 52,
+      "workbooks": 11
+    },
+    "STDEVA": {
+      "cells": 47,
+      "workbooks": 2
+    },
+    "T": {
+      "cells": 47,
+      "workbooks": 8
+    },
+    "CLRCNT": {
+      "cells": 42,
+      "workbooks": 3
+    },
+    "LOG10": {
+      "cells": 38,
+      "workbooks": 2
+    },
+    "EOM": {
+      "cells": 36,
+      "workbooks": 3
+    },
+    "TJDAY": {
+      "cells": 36,
+      "workbooks": 6
+    },
+    "NETWORKDAYS": {
+      "cells": 35,
+      "workbooks": 1
+    },
+    "SLOPE": {
+      "cells": 35,
+      "workbooks": 7
+    },
+    "SWITCH": {
+      "cells": 33,
+      "workbooks": 3
+    },
+    "LOWER": {
+      "cells": 30,
+      "workbooks": 1
+    },
+    "TEXTSPLIT": {
+      "cells": 30,
+      "workbooks": 6
+    },
+    "ARRAYFORMULA": {
+      "cells": 24,
+      "workbooks": 3
+    },
+    "FILTERXML": {
+      "cells": 24,
+      "workbooks": 3
+    },
+    "POW": {
+      "cells": 24,
+      "workbooks": 4
+    },
+    "FV": {
+      "cells": 22,
+      "workbooks": 4
+    },
+    "ERROR.TYPE": {
+      "cells": 21,
+      "workbooks": 3
+    },
+    "SKEW": {
+      "cells": 19,
+      "workbooks": 2
+    },
+    "DB": {
+      "cells": 18,
+      "workbooks": 6
+    },
+    "DOLLARFR": {
+      "cells": 18,
+      "workbooks": 3
+    },
+    "VAR.S": {
+      "cells": 16,
+      "workbooks": 2
+    },
+    "SEQUENCE": {
+      "cells": 15,
+      "workbooks": 15
+    },
+    "XMATCH": {
+      "cells": 15,
+      "workbooks": 3
+    },
+    "LINEST": {
+      "cells": 14,
+      "workbooks": 4
+    },
+    "CORREL": {
+      "cells": 12,
+      "workbooks": 5
+    },
+    "PV": {
+      "cells": 12,
+      "workbooks": 4
+    },
+    "FORMULATEXT": {
+      "cells": 9,
+      "workbooks": 3
+    },
+    "IFS": {
+      "cells": 9,
+      "workbooks": 3
+    },
+    "EMISSIONS": {
+      "cells": 8,
+      "workbooks": 2
+    },
+    "LOGEST": {
+      "cells": 8,
+      "workbooks": 4
+    },
+    "COVARIANCE.S": {
+      "cells": 7,
+      "workbooks": 1
+    },
+    "CLEAN": {
+      "cells": 6,
+      "workbooks": 3
+    },
+    "DAYS360": {
+      "cells": 6,
+      "workbooks": 3
+    },
+    "HSTACK": {
+      "cells": 6,
+      "workbooks": 6
+    },
+    "IMAGE": {
+      "cells": 6,
+      "workbooks": 6
+    },
+    "RADIANS": {
+      "cells": 6,
+      "workbooks": 2
+    },
+    "SINGLE": {
+      "cells": 6,
+      "workbooks": 6
+    },
+    "SORTBY": {
+      "cells": 6,
+      "workbooks": 6
+    },
+    "ASIN": {
+      "cells": 5,
+      "workbooks": 1
+    },
+    "INTERCEPT": {
+      "cells": 5,
+      "workbooks": 4
+    },
+    "FORECAST": {
+      "cells": 4,
+      "workbooks": 2
+    },
+    "DROP": {
+      "cells": 3,
+      "workbooks": 3
+    },
+    "MINVERSE": {
+      "cells": 3,
+      "workbooks": 1
+    },
+    "MODE": {
+      "cells": 3,
+      "workbooks": 2
+    },
+    "PEARSON": {
+      "cells": 3,
+      "workbooks": 1
+    },
+    "ACOSH": {
+      "cells": 2,
+      "workbooks": 1
+    },
+    "DOUBLETEST": {
+      "cells": 2,
+      "workbooks": 1
+    },
+    "NORMSDIST": {
+      "cells": 2,
+      "workbooks": 1
+    },
+    "NPER": {
+      "cells": 2,
+      "workbooks": 2
+    },
+    "RATE": {
+      "cells": 2,
+      "workbooks": 2
+    },
+    "STDEV.S": {
+      "cells": 2,
+      "workbooks": 1
+    },
+    "TAN": {
+      "cells": 2,
+      "workbooks": 1
+    },
+    "TANH": {
+      "cells": 2,
+      "workbooks": 1
+    },
+    "COSH": {
+      "cells": 1,
+      "workbooks": 1
+    },
+    "DOLLAR": {
+      "cells": 1,
+      "workbooks": 1
+    },
+    "ISNONTEXT": {
+      "cells": 1,
+      "workbooks": 1
+    },
+    "VAR": {
+      "cells": 1,
+      "workbooks": 1
+    },
+    "_XLL.CB.RECALCCOUNTERFN": {
+      "cells": 1,
+      "workbooks": 1
+    }
+  }
+}
