@@ -1,11 +1,18 @@
 {
-  "workbook": "corpus/work/fuse-bins/cc-binaries/56cbca12-9c02-49e5-a064-53129669df80",
+ "workbook": "corpus/work/fuse-bins/cc-binaries/56cbca12-9c02-49e5-a064-53129669df80",
+ "formula_cells": 58389,
+ "elapsed_s": 0.521522738,
+ "findings": 19,
+ "machine": "12th Gen Intel(R) Core(TM) i7-1250U",
+ "threads": 12,
+ "capability_report": {
+  "compilable_cells": 58389
+ },
+ "browser": {
   "formula_cells": 58389,
-  "elapsed_s": 0.521522738,
-  "findings": 19,
-  "machine": "12th Gen Intel(R) Core(TM) i7-1250U",
-  "threads": 12,
-  "capability_report": {
-    "compilable_cells": 58389
-  }
+  "elapsed_s": 4.19,
+  "engine": "wasm32 single-thread, headless Chromium via Playwright",
+  "note": "native and browser figures published separately (Law 3); wasm threads land with the scenario engine (COOP/COEP, Gate 8)",
+  "receipt_in_browser": "58,389/58,389 verifiable cells bit-exact (100.00%)"
+ }
 }

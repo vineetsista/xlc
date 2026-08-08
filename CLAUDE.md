@@ -13,6 +13,10 @@ session and follow its Session Protocol exactly. Mutable state lives in
   raw data in `corpus/raw/`, gitignored).
 - `make build` / `make test` / `make clippy` — cargo across the workspace.
 - `make receipt` — the bit-diff against Excel's cached values (Phase 3+).
+- Web surface: `wasm-pack build crates/xlc-wasm --target web --release
+  --out-dir ../../web/pkg`, then `cd web && npm run build`;
+  `node verify.mjs` drives the built page in headless Chromium
+  (three-act sequence + suppression persistence).
 
 ## Unchanging conventions
 

@@ -1,0 +1,84 @@
+/* §9: a compiler, not a dashboard. Near-black, mono, diagnostic colors,
+   one accent. Numbers use tabular figures so counters don't jitter. */
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('/fonts/JetBrainsMono-Bold.woff2') format('woff2');
+  font-weight: 700;
+}
+
+:root {
+  --bg: #0d1117;
+  --fg: #e6edf3;
+  --dim: #7d8590;
+  --green: #3fb950;
+  --amber: #d29922;
+  --red: #f85149;
+  --accent: #58a6ff;
+  --rule: #21262d;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 14px;
+  line-height: 1.55;
+  font-variant-numeric: tabular-nums;
+}
+
+#app { max-width: 900px; margin: 0 auto; padding: 3rem 1.5rem; }
+
+header h1 { font-size: 1.25rem; font-weight: 700; }
+header p { margin-top: 0.5rem; }
+.dim { color: var(--dim); }
+em { color: var(--fg); font-style: normal; font-weight: 700; }
+
+#drop {
+  margin: 2rem 0;
+  padding: 3rem 1.5rem;
+  border: 1px dashed var(--dim);
+  text-align: center;
+  cursor: pointer;
+}
+#drop.over { border-color: var(--accent); color: var(--accent); }
+
+#log { margin: 2rem 0; border-top: 1px solid var(--rule); padding-top: 1.5rem; }
+.act { margin-bottom: 0.4rem; white-space: pre-wrap; }
+.act .ok { color: var(--green); font-weight: 700; }
+.act .warn { color: var(--amber); }
+.act .err { color: var(--red); }
+
+#findings { margin-top: 1.25rem; }
+.finding {
+  margin-bottom: 1rem;
+  padding-left: 0.75rem;
+  border-left: 2px solid var(--amber);
+}
+.finding.suppressed { opacity: 0.35; border-left-color: var(--dim); }
+.finding .head { color: var(--amber); font-weight: 700; }
+.finding .loc { color: var(--accent); }
+.finding .formula { color: var(--fg); }
+.finding .proof { color: var(--dim); }
+.finding button {
+  background: none;
+  border: 1px solid var(--rule);
+  color: var(--dim);
+  font: inherit;
+  font-size: 12px;
+  padding: 0 0.5rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+.finding button:hover { border-color: var(--dim); color: var(--fg); }
+
+#capability { margin-top: 1.5rem; white-space: pre-wrap; }
+
+footer { margin-top: 3rem; border-top: 1px solid var(--rule); padding-top: 1rem; font-size: 12px; }

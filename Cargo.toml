@@ -28,7 +28,8 @@ rayon = "1"
 serde = { version = "1", features = ["derive"] }
 # preserve_order: census.json stores the function table rank-ordered.
 serde_json = { version = "1", features = ["preserve_order"] }
-zip = "8"
+# xlsx needs only deflate; default features drag in zstd-sys (C, breaks wasm).
+zip = { version = "8", default-features = false, features = ["deflate"] }
 anyhow = "1"
 sha2 = "0.10"
 # musl-derived pure-Rust libm: erf/erfc for NORMDIST-family bit-fidelity.

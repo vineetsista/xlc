@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>xlc — a compiler for Excel</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <main id="app">
+    <header>
+      <h1>xlc<span class="dim"> — an optimizing compiler for Excel</span></h1>
+      <p class="dim">drop a workbook. it is parsed, recomputed, and audited
+      <em>on this machine</em> — nothing is uploaded, there is no server.</p>
+    </header>
+
+    <section id="drop" tabindex="0">
+      <p><strong>drop an .xlsx here</strong> <span class="dim">or click to choose a file</span></p>
+      <input type="file" id="file" accept=".xlsx,.xlsm" hidden />
+    </section>
+
+    <section id="log" hidden>
+      <div id="act1" class="act"></div>
+      <div id="act2" class="act"></div>
+      <div id="act3" class="act"></div>
+      <div id="findings"></div>
+      <div id="capability" class="dim"></div>
+    </section>
+
+    <footer class="dim">
+      <p>the receipt re-derives every verifiable formula cell and bit-compares
+      against the value Excel itself cached in the file. policy: bit-identical,
+      1 ULP, or 15 significant decimal digits. exclusions are always listed,
+      never hidden.</p>
+    </footer>
+  </main>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

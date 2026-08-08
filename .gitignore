@@ -12,3 +12,6 @@
 # Scratch
 *.log
 .DS_Store
+
+# Generated wasm bindings (wasm-pack) and playwright cache
+/web/pkg
