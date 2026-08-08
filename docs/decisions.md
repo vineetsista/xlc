@@ -2,6 +2,42 @@
 
 Dated, append-only. Each entry: the decision, the alternative, why.
 
+## 2026-08-08 — Receipt denominator: verifiable cells, exclusions always visible
+The receipt pass rate is measured over VERIFIABLE cells: formula cells whose
+oracle exists and which XLC compiles. Excluded and separately reported, per
+Law 9: external-workbook refs (their cached values came from files we do not
+have — including cells reaching external data through defined names),
+nondeterministic volatiles (NOW/TODAY/RAND*), legacy CSE array formulas
+(until the IR provides array semantics), unimplemented functions, and cells
+Excel stored no cached value for. gate3 asserts the exclusions are present
+in the artifact and total under half the subset, so the denominator cannot
+be quietly gamed. Alternative — all-cells denominator — rejected: it makes
+the metric measure corpus composition (12% of subset cells sit in
+external-link workbooks) rather than semantic fidelity.
+
+## 2026-08-08 — Oracle noise classes discovered by the receipt
+Two corpus-reality classes cap the receipt below 100% and are NOT XLC bugs:
+(1) stale caches — files saved after edits without recalculation
+(1496fe18…: B19:B23 changed, SUM(IF(...)) caches kept; calcMode="auto", so
+undetectable in general); (2) display-rounded caches — writers that store
+the FORMATTED value as the cached value (26673f97…: D199/C199 cached as
+1004.97 exactly). The LibreOffice-UNO secondary oracle adjudicates disputed
+cells in a later pass. Recorded in methodology.md.
+
+## 2026-08-08 — Criteria equality coerces numeric-looking text (corpus-verified)
+COUNTIF/SUMIF-family equality criteria match numeric-looking text cells:
+criteria "003607" matches text \'003607\', text \'3607\', and the number 3607
+(27905c2f…: 4,400 cells flipped from fail to pass). Ordering comparisons
+(>, <, >=, <=) remain strict-numeric until the corpus shows otherwise.
+VLOOKUP/MATCH exact mode is the opposite: same-family equality only, text
+never matches numbers (06a8920b…).
+
+## 2026-08-08 — ROUND is decimal-faithful
+Excel ROUND decides on the value\'s 15-significant-digit DECIMAL rendering,
+not its binary value: the f64 nearest 1.275 sits just below it, yet
+ROUND(x,2)=1.28. Implemented by string-rounding the {:.14e} rendering.
+Discovered via ROUND(MEDIAN(...)) cells over a 3D 57-sheet span.
+
 ## 2026-08-08 — SpreadsheetBench data file renamed upstream
 XLC.md Part IV points at `data/all_data_912.tar.gz`; that path 404s. The repo
 (default branch `main`) now ships `data/spreadsheetbench_912_v0.1.tar.gz`

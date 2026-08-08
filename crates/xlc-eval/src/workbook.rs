@@ -1,7 +1,7 @@
 //! In-memory workbook model implementing `Ctx`. Pure data — calamine
 //! ingest lives in xlc-cli; this crate never does I/O.
 
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 use crate::interp::{Ctx, SheetId};
 use crate::value::Value;
@@ -16,6 +16,10 @@ pub struct Sheet {
     pub formulas: HashMap<(u32, u32), String>,
     /// Highest used (row, col).
     pub extent: (u32, u32),
+    /// Cells whose formula is a legacy CSE array formula (`<f t="array">`).
+    /// Scalar evaluation is wrong for these; they are excluded until the
+    /// IR provides array semantics (§8.5).
+    pub array_cells: HashSet<(u32, u32)>,
 }
 
 #[derive(Default)]
@@ -24,6 +28,10 @@ pub struct Workbook {
     by_name: HashMap<String, SheetId>,
     /// Defined names → parsed body (only refs/constants matter early).
     pub names: HashMap<String, Expr>,
+    /// Defined names whose body references another workbook — cells using
+    /// them are external-ref exclusions (Law 9).
+    pub external_names: HashSet<String>,
+    pub epoch_1904: bool,
 }
 
 impl Workbook {
@@ -66,5 +74,9 @@ impl Ctx for Workbook {
 
     fn defined_name(&self, name: &str) -> Option<&Expr> {
         self.names.get(&name.to_uppercase()).or_else(|| self.names.get(name))
+    }
+
+    fn epoch_1904(&self) -> bool {
+        self.epoch_1904
     }
 }

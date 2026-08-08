@@ -1,0 +1,379 @@
+{
+  "mode": "per-cell (cached-neighbor context)",
+  "ulp_policy": "pass iff bit-identical, within 1 ULP (same sign), or equal at 15 significant decimal digits (Excel's stored-literal precision); ulp1/sig15 tracked separately",
+  "cells_total": 927827,
+  "cells_pass": 797511,
+  "no_cached_value": 2545,
+  "pass_ulp1": 1492,
+  "pass_sig15": 3399,
+  "excluded": {
+    "unimplemented_function": 1716,
+    "parse": 0,
+    "external_ref": 116253,
+    "volatile_nondeterministic": 186,
+    "array_formula": 6967
+  },
+  "mismatch_classes": {
+    "numeric": 4691,
+    "type": 503,
+    "error": 0
+  },
+  "panics": 0,
+  "per_function": {
+    "IF": {
+      "pass": 195934,
+      "total": 195973,
+      "rate": 0.9998009929939329
+    },
+    "SUM": {
+      "pass": 69113,
+      "total": 69302,
+      "rate": 0.9972728059796254
+    },
+    "ISBLANK": {
+      "pass": 52031,
+      "total": 52037,
+      "rate": 0.999884697426831
+    },
+    "AVERAGE": {
+      "pass": 50312,
+      "total": 50490,
+      "rate": 0.9964745494157259
+    },
+    "ROUND": {
+      "pass": 31114,
+      "total": 31114,
+      "rate": 1.0
+    },
+    "OR": {
+      "pass": 26739,
+      "total": 26749,
+      "rate": 0.999626154248757
+    },
+    "ISTEXT": {
+      "pass": 24368,
+      "total": 24368,
+      "rate": 1.0
+    },
+    "HYPERLINK": {
+      "pass": 20241,
+      "total": 20253,
+      "rate": 0.9994074951858983
+    },
+    "LEFT": {
+      "pass": 13708,
+      "total": 13708,
+      "rate": 1.0
+    },
+    "VALUE": {
+      "pass": 12859,
+      "total": 12859,
+      "rate": 1.0
+    },
+    "SUBSTITUTE": {
+      "pass": 12183,
+      "total": 12183,
+      "rate": 1.0
+    },
+    "VLOOKUP": {
+      "pass": 10244,
+      "total": 10260,
+      "rate": 0.9984405458089669
+    },
+    "SUMIF": {
+      "pass": 9147,
+      "total": 9217,
+      "rate": 0.9924053379624607
+    },
+    "MAX": {
+      "pass": 4899,
+      "total": 4899,
+      "rate": 1.0
+    },
+    "ROW": {
+      "pass": 4314,
+      "total": 4314,
+      "rate": 1.0
+    },
+    "MIN": {
+      "pass": 3935,
+      "total": 3935,
+      "rate": 1.0
+    },
+    "IFERROR": {
+      "pass": 3017,
+      "total": 3035,
+      "rate": 0.9940691927512356
+    },
+    "TRUE": {
+      "pass": 2314,
+      "total": 2314,
+      "rate": 1.0
+    },
+    "ISERROR": {
+      "pass": 2145,
+      "total": 2148,
+      "rate": 0.9986033519553073
+    },
+    "INDIRECT": {
+      "pass": 1714,
+      "total": 1714,
+      "rate": 1.0
+    },
+    "AND": {
+      "pass": 1643,
+      "total": 1643,
+      "rate": 1.0
+    },
+    "COUNTIF": {
+      "pass": 1616,
+      "total": 1627,
+      "rate": 0.9932390903503381
+    },
+    "COUNT": {
+      "pass": 1610,
+      "total": 1610,
+      "rate": 1.0
+    },
+    "CONCATENATE": {
+      "pass": 1568,
+      "total": 1574,
+      "rate": 0.9961880559085133
+    },
+    "ABS": {
+      "pass": 1359,
+      "total": 1359,
+      "rate": 1.0
+    },
+    "SEARCH": {
+      "pass": 1253,
+      "total": 1253,
+      "rate": 1.0
+    },
+    "INDEX": {
+      "pass": 1008,
+      "total": 1012,
+      "rate": 0.9960474308300395
+    },
+    "POWER": {
+      "pass": 869,
+      "total": 871,
+      "rate": 0.9977037887485649
+    },
+    "ROUNDDOWN": {
+      "pass": 804,
+      "total": 804,
+      "rate": 1.0
+    },
+    "NOT": {
+      "pass": 762,
+      "total": 768,
+      "rate": 0.9921875
+    },
+    "PI": {
+      "pass": 767,
+      "total": 768,
+      "rate": 0.9986979166666666
+    },
+    "SIN": {
+      "pass": 748,
+      "total": 749,
+      "rate": 0.9986648865153538
+    },
+    "MID": {
+      "pass": 672,
+      "total": 672,
+      "rate": 1.0
+    },
+    "MATCH": {
+      "pass": 599,
+      "total": 606,
+      "rate": 0.9884488448844885
+    },
+    "GEOMEAN": {
+      "pass": 468,
+      "total": 468,
+      "rate": 1.0
+    },
+    "LN": {
+      "pass": 448,
+      "total": 448,
+      "rate": 1.0
+    },
+    "COUNTA": {
+      "pass": 386,
+      "total": 386,
+      "rate": 1.0
+    },
+    "ISNA": {
+      "pass": 301,
+      "total": 301,
+      "rate": 1.0
+    },
+    "MEDIAN": {
+      "pass": 226,
+      "total": 226,
+      "rate": 1.0
+    },
+    "LOG": {
+      "pass": 221,
+      "total": 224,
+      "rate": 0.9866071428571429
+    },
+    "MONTH": {
+      "pass": 208,
+      "total": 208,
+      "rate": 1.0
+    },
+    "YEAR": {
+      "pass": 207,
+      "total": 207,
+      "rate": 1.0
+    },
+    "LEN": {
+      "pass": 193,
+      "total": 193,
+      "rate": 1.0
+    },
+    "TRUNC": {
+      "pass": 186,
+      "total": 186,
+      "rate": 1.0
+    },
+    "REPT": {
+      "pass": 150,
+      "total": 150,
+      "rate": 1.0
+    },
+    "ISNUMBER": {
+      "pass": 110,
+      "total": 110,
+      "rate": 1.0
+    },
+    "STDEV": {
+      "pass": 57,
+      "total": 77,
+      "rate": 0.7402597402597403
+    },
+    "ROUNDUP": {
+      "pass": 49,
+      "total": 49,
+      "rate": 1.0
+    },
+    "SUBTOTAL": {
+      "pass": 46,
+      "total": 47,
+      "rate": 0.9787234042553191
+    },
+    "RANK": {
+      "pass": 45,
+      "total": 45,
+      "rate": 1.0
+    },
+    "AVERAGEIFS": {
+      "pass": 36,
+      "total": 36,
+      "rate": 1.0
+    },
+    "SUMPRODUCT": {
+      "pass": 33,
+      "total": 33,
+      "rate": 1.0
+    },
+    "DATE": {
+      "pass": 31,
+      "total": 31,
+      "rate": 1.0
+    },
+    "STDEVP": {
+      "pass": 29,
+      "total": 30,
+      "rate": 0.9666666666666667
+    },
+    "OFFSET": {
+      "pass": 26,
+      "total": 29,
+      "rate": 0.896551724137931
+    },
+    "AVERAGEIF": {
+      "pass": 24,
+      "total": 24,
+      "rate": 1.0
+    },
+    "COUNTIFS": {
+      "pass": 20,
+      "total": 20,
+      "rate": 1.0
+    },
+    "DAY": {
+      "pass": 20,
+      "total": 20,
+      "rate": 1.0
+    },
+    "RIGHT": {
+      "pass": 19,
+      "total": 19,
+      "rate": 1.0
+    },
+    "TEXT": {
+      "pass": 11,
+      "total": 11,
+      "rate": 1.0
+    },
+    "SLOPE": {
+      "pass": 10,
+      "total": 10,
+      "rate": 1.0
+    },
+    "PRODUCT": {
+      "pass": 9,
+      "total": 9,
+      "rate": 1.0
+    },
+    "HOUR": {
+      "pass": 7,
+      "total": 7,
+      "rate": 1.0
+    },
+    "MINUTE": {
+      "pass": 7,
+      "total": 7,
+      "rate": 1.0
+    },
+    "EXP": {
+      "pass": 6,
+      "total": 6,
+      "rate": 1.0
+    },
+    "HLOOKUP": {
+      "pass": 5,
+      "total": 5,
+      "rate": 1.0
+    },
+    "INT": {
+      "pass": 4,
+      "total": 4,
+      "rate": 1.0
+    },
+    "CONCAT": {
+      "pass": 1,
+      "total": 2,
+      "rate": 0.5
+    },
+    "COUNTBLANK": {
+      "pass": 1,
+      "total": 1,
+      "rate": 1.0
+    },
+    "DOLLAR": {
+      "pass": 1,
+      "total": 1,
+      "rate": 1.0
+    },
+    "VAR": {
+      "pass": 1,
+      "total": 1,
+      "rate": 1.0
+    }
+  }
+}
