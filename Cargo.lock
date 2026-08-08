@@ -810,6 +810,7 @@ dependencies = [
  "serde_json",
  "sha2 0.10.9",
  "xlc-eval",
+ "xlc-lint",
  "xlc-parse",
  "zip",
 ]
@@ -837,6 +838,11 @@ version = "0.1.0"
 [[package]]
 name = "xlc-lint"
 version = "0.1.0"
+dependencies = [
+ "serde",
+ "xlc-eval",
+ "xlc-parse",
+]
 
 [[package]]
 name = "xlc-parse"

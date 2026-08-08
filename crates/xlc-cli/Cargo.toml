@@ -18,5 +18,6 @@ serde_json.workspace = true
 anyhow.workspace = true
 xlc-parse.workspace = true
 xlc-eval.workspace = true
+xlc-lint.workspace = true
 sha2.workspace = true
 zip.workspace = true
