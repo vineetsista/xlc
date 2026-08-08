@@ -1,23 +1,24 @@
 # XLC — STATE
 Updated: 2026-08-08   |   LAUNCH TARGET: TBD (set after Phase 1 census)   |   Week 1
-Phase: 0 — Bootstrap and corpus          Gate: FAILING: subset not yet built (gate written first per Law 12)
+Phase: 0 — Bootstrap and corpus          Gate: FAILING: subset not yet built (blocked on FUSE extraction, in flight)
 
 ## Done / In flight / Blocked
-- Done: repo scaffold (10 crates, workspace builds on stable 1.97.1), git init,
-  gate dispatcher (exit 0/1/2/3) + gate0.sh, corpus/Makefile with pinned sources,
-  SpreadsheetBench fetched + sha256 pinned (9cf7228b…).
-- In flight: FUSE 9.4 GB download from Zenodo (background, ~16 MB/s).
-  sha256 pin PENDING until it lands; md5 pin from Zenodo API: 13e955c44f0b77d1c36088c0bbb3366d.
-- In flight: `xlc corpus-filter` / `corpus-subset` / `corpus-verify` subcommands.
-- Blocked: none.
+- Done: scaffold (10 crates build, stable 1.97.1), gate dispatcher + gate0 + gate1
+  (both written before their code, Law 12), corpus/Makefile with all sha256 pins
+  (FUSE md5 verified vs Zenodo, our sha256 4f9126bd… pinned; SB 9cf7228b…),
+  corpus-filter/subset/verify smoke-tested end-to-end, census subcommand +
+  7 unit tests + projection.py ready for Phase 1, first tests/cases entry.
+- In flight: FUSE extraction (fuse.zip → 140-part split 7z → py7zr venv),
+  detached `make -C corpus extract`, monitored. ~4.4 GB extracted so far.
+- Blocked: none (extraction is a wait, not a blocker; census tooling was
+  built during the wait per Never-Stall rung 6).
 
 ## Next action
-When fuse.zip lands: verify md5, pin sha256 in corpus/Makefile, extract, run
-corpus-filter over FUSE, build the deterministic 500-workbook subset + manifest,
-commit, run `make gate-0`.
+When extraction completes: run corpus-filter over work/fuse (detached +
+monitored), then corpus-subset → commit subset + manifest → `make gate-0`.
 
 ## Numbers of Record
-corpus workbooks: pending | parse rate: — | receipt pass rate: — | functions implemented: 0
+corpus workbooks: pending (FUSE extracting) | parse rate: — | receipt pass rate: — | functions implemented: 0
 detectors shipped: 0 | precision per detector: — | refusal rate: — | partial-compile rate: —
 scenario throughput native: — | browser: — | bytes moved per scenario: —
 peak RSS: — | incremental recompute latency: —
