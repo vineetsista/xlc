@@ -1,0 +1,3 @@
+[toolchain]
+# Law: Rust stable, no nightly anywhere (XLC.md §7).
+channel = "stable"

@@ -1,0 +1,14 @@
+# Build outputs
+/target
+/web/node_modules
+/web/dist
+
+# Corpus raw data is fetched by `make corpus`, never committed (9.4 GB).
+# The committed artifacts are corpus/manifest.json, corpus/census.json,
+# and corpus/subset/ (the 500-workbook regression set).
+/corpus/raw
+/corpus/work
+
+# Scratch
+*.log
+.DS_Store

@@ -1,0 +1,18 @@
+[package]
+name = "xlc-cli"
+description = "The `xlc` binary: check, monte, diff, and corpus tooling."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[[bin]]
+name = "xlc"
+path = "src/main.rs"
+
+[dependencies]
+calamine.workspace = true
+rayon.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+anyhow.workspace = true

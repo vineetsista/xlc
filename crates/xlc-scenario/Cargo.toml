@@ -1,0 +1,9 @@
+[package]
+name = "xlc-scenario"
+description = "Scenario axis, pulp SIMD kernels, tiling scheduler."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]

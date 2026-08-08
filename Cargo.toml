@@ -1,0 +1,47 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/xlc-parse",
+    "crates/xlc-graph",
+    "crates/xlc-eval",
+    "crates/xlc-ir",
+    "crates/xlc-scenario",
+    "crates/xlc-ad",
+    "crates/xlc-lint",
+    "crates/xlc-diff",
+    "crates/xlc-cli",
+    "crates/xlc-wasm",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+rust-version = "1.85"
+
+[workspace.dependencies]
+# Pinned per XLC.md Part IV. calamine is why the project works; pulp is Law 6.
+calamine = "=0.36.1"
+pulp = "=0.22.3"
+rayon = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+anyhow = "1"
+
+xlc-parse = { path = "crates/xlc-parse" }
+xlc-graph = { path = "crates/xlc-graph" }
+xlc-eval = { path = "crates/xlc-eval" }
+xlc-ir = { path = "crates/xlc-ir" }
+xlc-scenario = { path = "crates/xlc-scenario" }
+xlc-ad = { path = "crates/xlc-ad" }
+xlc-lint = { path = "crates/xlc-lint" }
+xlc-diff = { path = "crates/xlc-diff" }
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+
+# Corpus runs want release speed with usable backtraces.
+[profile.corpus]
+inherits = "release"
+debug = true
