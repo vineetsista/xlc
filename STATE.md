@@ -16,16 +16,16 @@ Phase: 4 — The analyzer, first launchable product          Gate: UNWRITTEN (wr
 - Blocked: none.
 
 ## Next action
-Write gate4.sh (Law 12) — detectors ≥90% hand-audited precision on 200
-samples each, proof strings, <2.5s drag-to-findings, partial-compile
-reporting — then build detectors 1–3 (§8.8: inconsistent-formula-in-region,
-range off-by-one vs siblings, #REF!-cone) over parsed formulas + the
-precision harness. Phase 5 note: full-recompute receipt (schedule-driven)
-is the IR invariant target; per-cell receipt is the Phase 3 artifact.
+Corpus-wide lint run in flight (detached, monitored). When it lands:
+AUDIT the 200 samples per detector in docs/precision/*.json (verdict
+tp/fp per sample, evidence-based), then `make gate-4`'s precision checks.
+Remaining for gate 4 after audit: web drag-and-drop surface (xlc-wasm +
+web/) with the three-act sequence. Timing artifact done: 58,389 formulas
+in 0.51s. Phase 5 note: full-recompute receipt is the IR invariant.
 
 ## Numbers of Record
 corpus workbooks: 16167 (6682 with formulas; 7003444 formula cells) | parse rate: 99.9970% | receipt pass rate: 99.35% subset / 98.81% full (verifiable) | functions implemented: ~75
-detectors shipped: 0 | precision per detector: — | refusal rate: 5.7% | partial-compile rate: 14.1%
+detectors built: 3 (audit pending) | precision per detector: audit pending | refusal rate: 5.7% | partial-compile rate: 14.1%
 99th-percentile function cut-off: 75 (top-75 = 99% of cell-mentions)
 parse throughput: 253k formulas/s | receipt full-corpus: 0 panics
 scenario throughput native: — | browser: — | bytes moved per scenario: —
