@@ -14,7 +14,7 @@ WORK := work
 # --- FUSE spreadsheet corpus (Zenodo record 581678, DOI 10.5281/zenodo.581678)
 FUSE_URL := https://zenodo.org/api/records/581678/files/fuse.zip/content
 FUSE_MD5 := 13e955c44f0b77d1c36088c0bbb3366d
-FUSE_SHA256 := PENDING
+FUSE_SHA256 := 4f9126bd83aa27118366b2b16b3b378d3bdb27b27728337b392e48c0ef3d93bb
 FUSE_ZIP := $(RAW)/fuse.zip
 
 # --- SpreadsheetBench (RUCKBReasoning/SpreadsheetBench, main branch)
@@ -54,11 +54,25 @@ verify-raw:
 	fi; \
 	exit $$ok
 
+# fuse.zip wraps a 140-part split 7z (FUSE.7z.001..140) — discovered on
+# first extraction, not documented on Zenodo (docs/decisions.md). We stream
+# each part out of the zip in order into one FUSE.7z, then extract with
+# py7zr in a local venv (no system 7z assumed, no sudo needed).
 extract: fetch verify-raw
 	mkdir -p $(WORK)
+	@if [ ! -f $(WORK)/venv/bin/python ]; then \
+		python3 -m venv $(WORK)/venv && $(WORK)/venv/bin/pip install -q py7zr; \
+	fi
+	@if [ ! -f $(WORK)/FUSE.7z ]; then \
+		echo "reassembling FUSE.7z from 140 split parts..."; \
+		rm -f $(WORK)/FUSE.7z.partial; \
+		for i in $$(seq -w 1 140); do unzip -p $(FUSE_ZIP) FUSE.7z.$$i >> $(WORK)/FUSE.7z.partial; done; \
+		mv $(WORK)/FUSE.7z.partial $(WORK)/FUSE.7z; \
+	fi
 	@if [ ! -d $(WORK)/fuse ]; then \
-		echo "extracting fuse.zip (this is large)..."; \
-		unzip -q -n $(FUSE_ZIP) -d $(WORK)/fuse; \
+		echo "extracting FUSE.7z (large, takes a while)..."; \
+		$(WORK)/venv/bin/python -c "import py7zr; py7zr.SevenZipFile('$(WORK)/FUSE.7z').extractall('$(WORK)/fuse.partial')"; \
+		mv $(WORK)/fuse.partial $(WORK)/fuse; \
 	fi
 	@if [ ! -d $(WORK)/spreadsheetbench ]; then \
 		mkdir -p $(WORK)/spreadsheetbench; \

@@ -25,6 +25,16 @@ Alternative considered: stratified sampling by formula count — rejected for
 now as it adds a knob without a demonstrated need; revisit after Phase 3 if
 the subset's function mix under-represents the corpus census.
 
+## 2026-08-08 — fuse.zip wraps a 140-part split 7z; extract via py7zr venv
+Undocumented on Zenodo: fuse.zip contains FUSE.7z.001..140 (64 MB parts) plus
+a README pointing at the defunct tera-PROMISE repo. No 7z binary exists on
+this machine and `sudo apt` needs a password (Law 13: no privileged installs),
+so `make corpus` reassembles the parts by streaming them out of the zip in
+order and extracts with py7zr inside a project-local venv
+(corpus/work/venv, gitignored). Pure-userland, reproducible, no sudo.
+Zenodo pins only an md5 for fuse.zip (verified: 13e955c4…); our own
+sha256 (4f9126bd…) is the committed reproducibility anchor.
+
 ## 2026-08-08 — Corpus tooling lives in xlc-cli
 `xlc corpus-filter` / `corpus-subset` / `corpus-verify` are subcommands of the
 product binary rather than a separate tool: they exercise the same calamine

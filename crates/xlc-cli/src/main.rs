@@ -1,17 +1,25 @@
-//! The `xlc` binary. Phase 0 ships only the corpus tooling
-//! (`xlc corpus-filter`, `xlc corpus-subset`); product verbs land in Phase 8.
+//! The `xlc` binary. Phase 0 ships the corpus tooling
+//! (`corpus-filter`, `corpus-subset`, `corpus-verify`); product verbs land in
+//! Phase 8. The corpus tools deliberately go through the same calamine ingest
+//! path the compiler uses, so every corpus run is an integration test of §8.1.
+
+mod corpus;
 
 fn main() {
     let args: Vec<String> = std::env::args().skip(1).collect();
-    match args.first().map(String::as_str) {
+    let code = match args.first().map(String::as_str) {
+        Some("corpus-filter") => corpus::filter_cmd(&args[1..]),
+        Some("corpus-subset") => corpus::subset_cmd(&args[1..]),
+        Some("corpus-verify") => corpus::verify_cmd(&args[1..]),
         Some(cmd) => {
             eprintln!("xlc: unknown or not-yet-implemented command `{cmd}`");
-            std::process::exit(2);
+            2
         }
         None => {
-            eprintln!("xlc — an optimizing compiler for Excel (Phase 0 scaffold)");
-            eprintln!("usage: xlc <command> [args]");
-            std::process::exit(2);
+            eprintln!("xlc — an optimizing compiler for Excel");
+            eprintln!("usage: xlc <corpus-filter|corpus-subset|corpus-verify> [args]");
+            2
         }
-    }
+    };
+    std::process::exit(code);
 }
