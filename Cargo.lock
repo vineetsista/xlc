@@ -814,6 +814,9 @@ version = "0.1.0"
 [[package]]
 name = "xlc-eval"
 version = "0.1.0"
+dependencies = [
+ "xlc-parse",
+]
 
 [[package]]
 name = "xlc-graph"
