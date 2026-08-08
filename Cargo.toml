@@ -25,7 +25,9 @@ calamine = "=0.36.1"
 pulp = "=0.22.3"
 rayon = "1"
 serde = { version = "1", features = ["derive"] }
-serde_json = "1"
+# preserve_order: census.json stores the function table rank-ordered.
+serde_json = { version = "1", features = ["preserve_order"] }
+zip = "8"
 anyhow = "1"
 sha2 = "0.10"
 

@@ -64,10 +64,19 @@ extract: fetch verify-raw
 		python3 -m venv $(WORK)/venv && $(WORK)/venv/bin/pip install -q py7zr; \
 	fi
 	@if [ ! -f $(WORK)/FUSE.7z ]; then \
-		echo "reassembling FUSE.7z from 140 split parts..."; \
-		rm -f $(WORK)/FUSE.7z.partial; \
-		for i in $$(seq -w 1 140); do unzip -p $(FUSE_ZIP) FUSE.7z.$$i >> $(WORK)/FUSE.7z.partial; done; \
-		mv $(WORK)/FUSE.7z.partial $(WORK)/FUSE.7z; \
+		echo "reassembling FUSE.7z from 140 split parts (idempotent per part)..."; \
+		mkdir -p $(WORK)/parts; \
+		for i in $$(seq -w 1 140); do \
+			want=67108864; [ "$$i" = "140" ] && want=64239570; \
+			have=$$(stat -c%s $(WORK)/parts/FUSE.7z.$$i 2>/dev/null || echo 0); \
+			if [ "$$have" != "$$want" ]; then \
+				echo "  part $$i"; \
+				unzip -p $(FUSE_ZIP) FUSE.7z.$$i > $(WORK)/parts/FUSE.7z.$$i.tmp && \
+				mv $(WORK)/parts/FUSE.7z.$$i.tmp $(WORK)/parts/FUSE.7z.$$i; \
+			fi; \
+		done; \
+		cat $(WORK)/parts/FUSE.7z.* > $(WORK)/FUSE.7z.partial && \
+		mv $(WORK)/FUSE.7z.partial $(WORK)/FUSE.7z && rm -rf $(WORK)/parts; \
 	fi
 	@if [ ! -d $(WORK)/fuse ]; then \
 		echo "extracting FUSE.7z (large, takes a while)..."; \
