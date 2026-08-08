@@ -3,6 +3,22 @@
 Dated entries written for a human reader; the Phase 9 engineering essay is
 assembled from these.
 
+## 2026-08-09 (early) — Three detectors ship, and the audit earns its keep
+
+Gate 4's numeric checks pass: ref-error at 200/200, range-off-by-one at
+34/34 (a full census — the corpus only contains 34 of them, and every one
+came with boundary-cell evidence like a sum whose siblings include the
+59,384 sitting in the row it skips), and inconsistent-region at 59/65 =
+90.8% after two full rejection cycles. The v1 detector measured 27%
+precision and died; v2 measured 72% and died; what ships is v4, which
+flags exactly one thing: a copied formula whose references slipped. The
+false positives that survived to the final audit are a museum of deliberate
+irregularity — prior-year comparison columns pulling an external workbook,
+baseline columns referencing a top-of-sheet assumption, counters that skip
+separator rows. The audit trail keeps all of it, including both corpses,
+because a precision number nobody can re-derive is just marketing. The
+whole analyzer runs 58,389 formulas in half a second. Next: the browser.
+
 ## 2026-08-08 (late night) — The receipt learns what Excel actually does
 
 From 71.96% to 99.35% of verifiable cells in one sitting, and every point of
