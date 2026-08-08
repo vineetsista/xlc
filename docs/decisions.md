@@ -2,6 +2,25 @@
 
 Dated, append-only. Each entry: the decision, the alternative, why.
 
+## 2026-08-08 — Gate 4 amendment: full-population audits below 200 findings
+The 200-sample audit floor assumes a large finding population. When a
+detector's entire corpus population is smaller than 200 (range-off-by-one:
+34 findings across 16,167 workbooks), the audit must instead cover the FULL
+population — a census is statistically stronger than a sample — with a hard
+minimum of 20 findings for the detector to count toward the gate. Gate
+updated before the pass is claimed (Law 12).
+
+## 2026-08-08 — Detector guard evolution, priced by audits
+v1 inconsistent-region: ~27% precision — rejected. v2 (structural equality,
+no anchor flips, minority-unique) measured ~72% on its first 58 samples:
+remaining fps were orientation-flip subtotals (a row-sum family totalled by
+a column-vector SUM), semantically-identical argument reorders
+(SUM(C3,C4) vs SUM(C4,C3)), and column-consistent deviations repeated
+across runs (deliberate column semantics). v3 restored off-by-one's
+repeated-slip findings (the uniqueness guard belongs to the generic class
+only). v4 adds guards d/e/f for the three v2 classes. Every rejected
+version's samples are preserved in docs/precision/.
+
 ## 2026-08-08 — Receipt denominator: verifiable cells, exclusions always visible
 The receipt pass rate is measured over VERIFIABLE cells: formula cells whose
 oracle exists and which XLC compiles. Excluded and separately reported, per

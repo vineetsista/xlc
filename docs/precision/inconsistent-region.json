@@ -1,7 +1,7 @@
 {
   "detector": "inconsistent-region",
-  "findings_total": 116,
-  "sampled": 116,
+  "findings_total": 65,
+  "sampled": 65,
   "samples": [
     {
       "file": "corpus/work/fuse-bins/cc-binaries/1a9f92c8-fdcc-4e41-9fb3-a0503dc52914",
@@ -54,15 +54,6 @@
       "cell": "P5",
       "formula": "IF(K4>H5,\"Late\",\"Success\")",
       "proof": "Customer!P2:P11: 9 of 10 cells share the copied formula pattern (e.g. P2 = IF(K2>H2,\"Late\",\"Success\")), but P5 = IF(K4>H5,\"Late\",\"Success\")",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/0c1f4102-6b35-44f4-852b-428f6e0a9765",
-      "sheet": "CSRBASESAL",
-      "cell": "F48",
-      "formula": "ROUND(E$42*B48,0)",
-      "proof": "CSRBASESAL!F44:F49: 5 of 6 cells share the copied formula pattern (e.g. F44 = ROUND(F$42*B44,0)), but F48 = ROUND(E$42*B48,0)",
       "verdict": null,
       "note": null
     },
@@ -130,83 +121,11 @@
       "note": null
     },
     {
-      "file": "corpus/work/fuse-bins/cc-binaries/0b405207-99c7-4a3a-bc47-07e0b78c73c5",
-      "sheet": "15d",
-      "cell": "C9",
-      "formula": "SUM(C3,C4,C8)",
-      "proof": "15d!B9:G9: 5 of 6 cells share the copied formula pattern (e.g. B9 = SUM(B4,B3,B8)), but C9 = SUM(C3,C4,C8)",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/2fb2d92d-dafd-4716-8609-f1686a76c3e6",
-      "sheet": "Time Report",
-      "cell": "R40",
-      "formula": "IF(SUM(R27:R39)=0,\"-\",SUM(R27:R39))",
-      "proof": "Time Report!R27:R41: 14 of 15 cells share the copied formula pattern (e.g. R27 = IF(SUM(B27:Q27)=0,\"-\",SUM(B27:Q27))), but R40 = IF(SUM(R27:R39)=0,\"-\",SUM(R27:R39))",
-      "verdict": null,
-      "note": null
-    },
-    {
       "file": "corpus/work/fuse-bins/cc-binaries/3e0495be-c307-4df7-8b49-b8ca0ae395a8",
       "sheet": "SUMMARY-Approp Table",
       "cell": "G195",
       "formula": "G9-G121",
       "proof": "SUMMARY-Approp Table!F195:T195: 14 of 15 cells share the copied formula pattern (e.g. H195 = H47-H121), but G195 = G9-G121",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/04f15da6-829e-4e78-b90f-276b208fff50",
-      "sheet": "Calc2",
-      "cell": "G851",
-      "formula": "$H$835*G850/1000/1000",
-      "proof": "Calc2!F851:N851: 8 of 9 cells share the copied formula pattern (e.g. F851 = $G$835*F850/1000/1000), but G851 = $H$835*G850/1000/1000",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/04f15da6-829e-4e78-b90f-276b208fff50",
-      "sheet": "Calc2",
-      "cell": "G821",
-      "formula": "$H$805*G820/1000/1000",
-      "proof": "Calc2!F821:N821: 8 of 9 cells share the copied formula pattern (e.g. F821 = $G$805*F820/1000/1000), but G821 = $H$805*G820/1000/1000",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/1d4436c7-7939-4370-9a3a-df3800e077bd",
-      "sheet": "CPL SPREADSHEET",
-      "cell": "X9",
-      "formula": "(H9/(D9-E6))",
-      "proof": "CPL SPREADSHEET!X5:X89: 84 of 85 cells share the copied formula pattern (e.g. X5 = (H5/(D5-E5))), but X9 = (H9/(D9-E6))",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/1d4436c7-7939-4370-9a3a-df3800e077bd",
-      "sheet": "CPL SPREADSHEET",
-      "cell": "U9",
-      "formula": "(G6-T9)",
-      "proof": "CPL SPREADSHEET!U5:U89: 84 of 85 cells share the copied formula pattern (e.g. U5 = (G5-T5)), but U9 = (G6-T9)",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/1d4436c7-7939-4370-9a3a-df3800e077bd",
-      "sheet": "CPL SPREADSHEET",
-      "cell": "W9",
-      "formula": "(G6/(D9-E6))",
-      "proof": "CPL SPREADSHEET!W5:W89: 84 of 85 cells share the copied formula pattern (e.g. W5 = (G5/(D5-E5))), but W9 = (G6/(D9-E6))",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/0ed2258c-e2b4-471d-934a-dd3c0662e06c",
-      "sheet": "Summary-to post",
-      "cell": "V514",
-      "formula": "SUMIF('[1]JOBS MAR 15'!$E$8:$E$525,$E$18:$E$533,'[1]JOBS MAR 15'!$I$8:$I$525)",
-      "proof": "Summary-to post!V16:V533: 517 of 518 cells share the copied formula pattern (e.g. V16 = SUMIF('[1]JOBS MAR 15'!$E$8:$E$525,$E$16:$E$533,'[1]JOBS MAR 15'!$I$8:$I$525)), but V514 = SUMIF('[1]JOBS MAR 15'!$E$8:$E$525,$E$18:$E$533,'[1]JOBS MAR 15'!$I$8:$I$525)",
       "verdict": null,
       "note": null
     },
@@ -220,29 +139,11 @@
       "note": null
     },
     {
-      "file": "corpus/work/fuse-bins/cc-binaries/24584f8f-a380-4e35-b7e3-3d9444bb5e41",
-      "sheet": "Time Report",
-      "cell": "R40",
-      "formula": "IF(SUM(R27:R39)=0,\"-\",SUM(R27:R39))",
-      "proof": "Time Report!R27:R41: 14 of 15 cells share the copied formula pattern (e.g. R27 = IF(SUM(B27:Q27)=0,\"-\",SUM(B27:Q27))), but R40 = IF(SUM(R27:R39)=0,\"-\",SUM(R27:R39))",
-      "verdict": null,
-      "note": null
-    },
-    {
       "file": "corpus/work/fuse-bins/cc-binaries/3b39c74e-fd69-471a-b775-bf2365d7d2a4",
       "sheet": "Inputs",
       "cell": "F13",
       "formula": "B13/E14",
       "proof": "Inputs!F9:F14: 5 of 6 cells share the copied formula pattern (e.g. F9 = B9/E9), but F13 = B13/E14",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/0ed2258c-e2b4-471d-934a-dd3c0662e06c",
-      "sheet": "Summary-to post",
-      "cell": "U514",
-      "formula": "SUMIF('[1]JOBS MAR 15'!$E$8:$E$525,$E$18:$E$533,'[1]JOBS MAR 15'!$H$8:$H$525)",
-      "proof": "Summary-to post!U16:U533: 517 of 518 cells share the copied formula pattern (e.g. U16 = SUMIF('[1]JOBS MAR 15'!$E$8:$E$525,$E$16:$E$533,'[1]JOBS MAR 15'!$H$8:$H$525)), but U514 = SUMIF('[1]JOBS MAR 15'!$E$8:$E$525,$E$18:$E$533,'[1]JOBS MAR 15'!$H$8:$H$525)",
       "verdict": null,
       "note": null
     },
@@ -265,83 +166,11 @@
       "note": null
     },
     {
-      "file": "corpus/work/fuse-bins/cc-binaries/0943fbf3-dea3-45ce-97cf-8d8a7dbd04ac",
-      "sheet": "Time Report",
-      "cell": "R40",
-      "formula": "IF(SUM(R27:R39)=0,\"-\",SUM(R27:R39))",
-      "proof": "Time Report!R27:R41: 14 of 15 cells share the copied formula pattern (e.g. R27 = IF(SUM(B27:Q27)=0,\"-\",SUM(B27:Q27))), but R40 = IF(SUM(R27:R39)=0,\"-\",SUM(R27:R39))",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/66c18e94-3a93-4a91-8fc4-edc2380a683e",
-      "sheet": "Time Report",
-      "cell": "R40",
-      "formula": "IF(SUM(R27:R39)=0,\"-\",SUM(R27:R39))",
-      "proof": "Time Report!R27:R41: 14 of 15 cells share the copied formula pattern (e.g. R27 = IF(SUM(B27:Q27)=0,\"-\",SUM(B27:Q27))), but R40 = IF(SUM(R27:R39)=0,\"-\",SUM(R27:R39))",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/351e2649-c8d6-4fb5-9d1e-eab0c9c80823",
-      "sheet": "Capacity Planning Tool",
-      "cell": "F86",
-      "formula": "D37*30",
-      "proof": "Capacity Planning Tool!E86:L86: 7 of 8 cells share the copied formula pattern (e.g. G86 = G81*30), but F86 = D37*30",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/351e2649-c8d6-4fb5-9d1e-eab0c9c80823",
-      "sheet": "Capacity Planning Tool",
-      "cell": "F85",
-      "formula": "D37*100",
-      "proof": "Capacity Planning Tool!E85:L85: 7 of 8 cells share the copied formula pattern (e.g. G85 = G81*100), but F85 = D37*100",
-      "verdict": null,
-      "note": null
-    },
-    {
       "file": "corpus/work/fuse-bins/cc-binaries/1df77834-f32e-4f31-99c0-b6a32aed632b",
       "sheet": "REPORT 2 - Summary",
       "cell": "F60",
       "formula": "F69+1",
       "proof": "REPORT 2 - Summary!F35:F70: 35 of 36 cells share the copied formula pattern (e.g. F35 = F34+1), but F60 = F69+1",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/0acfb244-a1ff-40b9-acdd-b080cccc38b7",
-      "sheet": "Summary",
-      "cell": "T125",
-      "formula": "T117+T119",
-      "proof": "Summary!O125:Y125: 10 of 11 cells share the copied formula pattern (e.g. O125 = O117+O123), but T125 = T117+T119",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/0acfb244-a1ff-40b9-acdd-b080cccc38b7",
-      "sheet": "Summary",
-      "cell": "T138",
-      "formula": "T131+T133",
-      "proof": "Summary!O138:Y138: 10 of 11 cells share the copied formula pattern (e.g. O138 = O131+O136), but T138 = T131+T133",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/13bb7ad5-2e0a-47c4-965a-30f0362c841c",
-      "sheet": "Task Score Sheet Data",
-      "cell": "M6",
-      "formula": "MEDIAN(I6,I19,I34,I47,I75,I62,I90,I103,I118)",
-      "proof": "Task Score Sheet Data!M3:M12: 9 of 10 cells share the copied formula pattern (e.g. M3 = MEDIAN(I3,I16,I31,I44,I59,I72,I87,I100,I115)), but M6 = MEDIAN(I6,I19,I34,I47,I75,I62,I90,I103,I118)",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/13bb7ad5-2e0a-47c4-965a-30f0362c841c",
-      "sheet": "Task Score Sheet Data",
-      "cell": "M7",
-      "formula": "MEDIAN(I7,I20,I35,I48,I63,I76,I104,I91,I119)",
-      "proof": "Task Score Sheet Data!M3:M12: 9 of 10 cells share the copied formula pattern (e.g. M3 = MEDIAN(I3,I16,I31,I44,I59,I72,I87,I100,I115)), but M7 = MEDIAN(I7,I20,I35,I48,I63,I76,I104,I91,I119)",
       "verdict": null,
       "note": null
     },
@@ -364,38 +193,11 @@
       "note": null
     },
     {
-      "file": "corpus/work/fuse-bins/cc-binaries/351e2649-c8d6-4fb5-9d1e-eab0c9c80823",
-      "sheet": "Small Elementary Example",
-      "cell": "F86",
-      "formula": "D37*30",
-      "proof": "Small Elementary Example!E86:L86: 7 of 8 cells share the copied formula pattern (e.g. G86 = G81*30), but F86 = D37*30",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/351e2649-c8d6-4fb5-9d1e-eab0c9c80823",
-      "sheet": "Small Elementary Example",
-      "cell": "F85",
-      "formula": "D37*100",
-      "proof": "Small Elementary Example!E85:L85: 7 of 8 cells share the copied formula pattern (e.g. G85 = G81*100), but F85 = D37*100",
-      "verdict": null,
-      "note": null
-    },
-    {
       "file": "corpus/work/fuse-bins/cc-binaries/0d8a1748-ce5b-42e2-a38a-e3006a72f204",
       "sheet": "Trans2Publication",
       "cell": "E291",
       "formula": "SUM(E5:E290)",
       "proof": "Trans2Publication!D291:W291: 19 of 20 cells share the copied formula pattern (e.g. D291 = SUM(D2:D290)), but E291 = SUM(E5:E290)",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/0a895535-929c-4486-a447-f3ee55844f1c",
-      "sheet": "Summary-to post",
-      "cell": "U514",
-      "formula": "SUMIF('[1]JOBS MAR 15'!$E$8:$E$525,$E$18:$E$533,'[1]JOBS MAR 15'!$H$8:$H$525)",
-      "proof": "Summary-to post!U16:U533: 517 of 518 cells share the copied formula pattern (e.g. U16 = SUMIF('[1]JOBS MAR 15'!$E$8:$E$525,$E$16:$E$533,'[1]JOBS MAR 15'!$H$8:$H$525)), but U514 = SUMIF('[1]JOBS MAR 15'!$E$8:$E$525,$E$18:$E$533,'[1]JOBS MAR 15'!$H$8:$H$525)",
       "verdict": null,
       "note": null
     },
@@ -481,33 +283,6 @@
       "note": null
     },
     {
-      "file": "corpus/work/fuse-bins/cc-binaries/4d0b4e62-8115-48f1-bf3a-532e66662940",
-      "sheet": "Time Report",
-      "cell": "R40",
-      "formula": "IF(SUM(R27:R39)=0,\"-\",SUM(R27:R39))",
-      "proof": "Time Report!R27:R41: 14 of 15 cells share the copied formula pattern (e.g. R27 = IF(SUM(B27:Q27)=0,\"-\",SUM(B27:Q27))), but R40 = IF(SUM(R27:R39)=0,\"-\",SUM(R27:R39))",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/351e2649-c8d6-4fb5-9d1e-eab0c9c80823",
-      "sheet": "Large High School Example",
-      "cell": "F86",
-      "formula": "D37*30",
-      "proof": "Large High School Example!E86:L86: 7 of 8 cells share the copied formula pattern (e.g. G86 = G81*30), but F86 = D37*30",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/351e2649-c8d6-4fb5-9d1e-eab0c9c80823",
-      "sheet": "Large High School Example",
-      "cell": "F85",
-      "formula": "D37*100",
-      "proof": "Large High School Example!E85:L85: 7 of 8 cells share the copied formula pattern (e.g. G85 = G81*100), but F85 = D37*100",
-      "verdict": null,
-      "note": null
-    },
-    {
       "file": "corpus/work/fuse-bins/cc-binaries/189e7500-2c3c-451b-8252-51033e8fccb9",
       "sheet": "Interfaces",
       "cell": "A92",
@@ -535,33 +310,6 @@
       "note": null
     },
     {
-      "file": "corpus/work/fuse-bins/cc-binaries/04f15da6-829e-4e78-b90f-276b208fff50",
-      "sheet": "Calc2",
-      "cell": "G679",
-      "formula": "$J$662*G678/1000/1000",
-      "proof": "Calc2!F679:M679: 7 of 8 cells share the copied formula pattern (e.g. F679 = $I$662*F678/1000/1000), but G679 = $J$662*G678/1000/1000",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/04f15da6-829e-4e78-b90f-276b208fff50",
-      "sheet": "Calc2",
-      "cell": "G601",
-      "formula": "$J$584*G600/1000/1000",
-      "proof": "Calc2!F601:N601: 8 of 9 cells share the copied formula pattern (e.g. F601 = $I$584*F600/1000/1000), but G601 = $J$584*G600/1000/1000",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/04f15da6-829e-4e78-b90f-276b208fff50",
-      "sheet": "Calc2",
-      "cell": "G632",
-      "formula": "$J$615*G631/1000/1000",
-      "proof": "Calc2!F632:N632: 8 of 9 cells share the copied formula pattern (e.g. F632 = $I$615*F631/1000/1000), but G632 = $J$615*G631/1000/1000",
-      "verdict": null,
-      "note": null
-    },
-    {
       "file": "corpus/work/fuse-bins/cc-binaries/a4dc19dc-5745-41a5-a13d-632f0bced20f",
       "sheet": "US",
       "cell": "I383",
@@ -571,83 +319,11 @@
       "note": null
     },
     {
-      "file": "corpus/work/fuse-bins/cc-binaries/04f15da6-829e-4e78-b90f-276b208fff50",
-      "sheet": "Calc2",
-      "cell": "G761",
-      "formula": "$H$745*G760/1000/1000",
-      "proof": "Calc2!F761:N761: 8 of 9 cells share the copied formula pattern (e.g. F761 = $G$745*F760/1000/1000), but G761 = $H$745*G760/1000/1000",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/04f15da6-829e-4e78-b90f-276b208fff50",
-      "sheet": "Calc2",
-      "cell": "G791",
-      "formula": "$H$775*G790/1000/1000",
-      "proof": "Calc2!F791:N791: 8 of 9 cells share the copied formula pattern (e.g. F791 = $G$775*F790/1000/1000), but G791 = $H$775*G790/1000/1000",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/058907ad-200a-4360-87ff-79ac9494d8e5",
-      "sheet": "Worksheet",
-      "cell": "FY277",
-      "formula": "FY266+FY275",
-      "proof": "Worksheet!C277:FZ277: 179 of 180 cells share the copied formula pattern (e.g. C277 = C264+C274), but FY277 = FY266+FY275",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/058907ad-200a-4360-87ff-79ac9494d8e5",
-      "sheet": "Worksheet",
-      "cell": "FY281",
-      "formula": "IF(MIN((((FY266*-$GE$265)+FY275)),(FY56-FY271))<0,0,(MIN((((FY266*-$GE$265)+FY275)),(FY56-FY271))))",
-      "proof": "Worksheet!C281:FZ281: 179 of 180 cells share the copied formula pattern (e.g. C281 = IF(MIN((((C264*-$GE$265)+C274)),(C56-C269))<0,0,(MIN((((C264*-$GE$265)+C274)),(C56-C269))))), but FY281 = IF(MIN((((FY266*-$GE$265)+FY275)),(FY56-FY271))<0,0,(MIN((((FY266*-$GE$265)+FY275)),(FY56-FY271))))",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/0c1f4102-6b35-44f4-852b-428f6e0a9765",
-      "sheet": "CSRBASESAL",
-      "cell": "H48",
-      "formula": "ROUND(G$42*C48,0)",
-      "proof": "CSRBASESAL!H44:H49: 5 of 6 cells share the copied formula pattern (e.g. H44 = ROUND(H$42*C44,0)), but H48 = ROUND(G$42*C48,0)",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/0f34369a-b0c0-45f4-92d4-32bbb8e637fc",
-      "sheet": "CPL SPREADSHEET",
-      "cell": "W9",
-      "formula": "(G6/(D9-E6))",
-      "proof": "CPL SPREADSHEET!W5:W89: 84 of 85 cells share the copied formula pattern (e.g. W5 = (G5/(D5-E5))), but W9 = (G6/(D9-E6))",
-      "verdict": null,
-      "note": null
-    },
-    {
       "file": "corpus/work/fuse-bins/cc-binaries/d08b578a-16e3-45f6-b4f9-56ed094d612d",
       "sheet": "MATH & SCIENCE TITLE IIB",
       "cell": "K20",
       "formula": "SUM(K14:K18)",
       "proof": "MATH & SCIENCE TITLE IIB!C20:V20: 19 of 20 cells share the copied formula pattern (e.g. C20 = SUM(C12:C18)), but K20 = SUM(K14:K18)",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/0f34369a-b0c0-45f4-92d4-32bbb8e637fc",
-      "sheet": "CPL SPREADSHEET",
-      "cell": "U9",
-      "formula": "(G6-T9)",
-      "proof": "CPL SPREADSHEET!U5:U89: 84 of 85 cells share the copied formula pattern (e.g. U5 = (G5-T5)), but U9 = (G6-T9)",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/0f34369a-b0c0-45f4-92d4-32bbb8e637fc",
-      "sheet": "CPL SPREADSHEET",
-      "cell": "X9",
-      "formula": "(H9/(D9-E6))",
-      "proof": "CPL SPREADSHEET!X5:X89: 84 of 85 cells share the copied formula pattern (e.g. X5 = (H5/(D5-E5))), but X9 = (H9/(D9-E6))",
       "verdict": null,
       "note": null
     },
@@ -666,15 +342,6 @@
       "cell": "I383",
       "formula": "+B383-J382",
       "proof": "US!I332:I387: 55 of 56 cells share the copied formula pattern (e.g. I332 = +F332-F331), but I383 = +B383-J382",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/4445fe5f-61c7-494c-9168-08899020cdd9",
-      "sheet": "MATH & SCIENCE TITLE IIB",
-      "cell": "D20",
-      "formula": "SUM(F20:U20)",
-      "proof": "MATH & SCIENCE TITLE IIB!C20:V20: 19 of 20 cells share the copied formula pattern (e.g. C20 = SUM(C12:C18)), but D20 = SUM(F20:U20)",
       "verdict": null,
       "note": null
     },
@@ -706,60 +373,6 @@
       "note": null
     },
     {
-      "file": "corpus/work/fuse-bins/cc-binaries/04f15da6-829e-4e78-b90f-276b208fff50",
-      "sheet": "Calc2",
-      "cell": "G571",
-      "formula": "$J$554*G570/1000/1000",
-      "proof": "Calc2!F571:M571: 7 of 8 cells share the copied formula pattern (e.g. F571 = $I$554*F570/1000/1000), but G571 = $J$554*G570/1000/1000",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/44b49163-54b3-4522-bd3b-96caade6c83c",
-      "sheet": "Worksheet",
-      "cell": "FY281",
-      "formula": "FY270+FY279",
-      "proof": "Worksheet!C281:FZ281: 179 of 180 cells share the copied formula pattern (e.g. C281 = C268+C278), but FY281 = FY270+FY279",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/44b49163-54b3-4522-bd3b-96caade6c83c",
-      "sheet": "Worksheet",
-      "cell": "FY285",
-      "formula": "IF(MIN((((FY270*-$GE$269)+FY279)),(FY59-FY275))<0,0,(MIN((((FY270*-$GE$269)+FY279)),(FY59-FY275))))",
-      "proof": "Worksheet!C285:FZ285: 179 of 180 cells share the copied formula pattern (e.g. C285 = IF(MIN((((C268*-$GE$269)+C278)),(C59-C273))<0,0,(MIN((((C268*-$GE$269)+C278)),(C59-C273))))), but FY285 = IF(MIN((((FY270*-$GE$269)+FY279)),(FY59-FY275))<0,0,(MIN((((FY270*-$GE$269)+FY279)),(FY59-FY275))))",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/27e1dbf7-f1c1-411a-b889-7c91ea7ccb53",
-      "sheet": "15d",
-      "cell": "C9",
-      "formula": "SUM(C3,C4,C8)",
-      "proof": "15d!B9:G9: 5 of 6 cells share the copied formula pattern (e.g. B9 = SUM(B4,B3,B8)), but C9 = SUM(C3,C4,C8)",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/0a1c2b6a-d846-49b7-9826-a8d2b35d2d48",
-      "sheet": "EI Format (2)",
-      "cell": "B8",
-      "formula": "EI!D5",
-      "proof": "EI Format (2)!B3:B10: 7 of 8 cells share the copied formula pattern (e.g. B3 = EI!D6), but B8 = EI!D5",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/0a1c2b6a-d846-49b7-9826-a8d2b35d2d48",
-      "sheet": "EI Format (2)",
-      "cell": "C8",
-      "formula": "EI!F5",
-      "proof": "EI Format (2)!C3:C10: 7 of 8 cells share the copied formula pattern (e.g. C3 = EI!F6), but C8 = EI!F5",
-      "verdict": null,
-      "note": null
-    },
-    {
       "file": "corpus/work/fuse-bins/cc-binaries/0208db61-e963-43b7-98f3-67ad452ae351",
       "sheet": "CALCULADORA",
       "cell": "G70",
@@ -778,47 +391,11 @@
       "note": null
     },
     {
-      "file": "corpus/work/fuse-bins/cc-binaries/2c30ef58-d81e-4000-8f23-d25e736b7f88",
-      "sheet": "Time Report",
-      "cell": "R40",
-      "formula": "IF(SUM(R27:R39)=0,\"-\",SUM(R27:R39))",
-      "proof": "Time Report!R27:R41: 14 of 15 cells share the copied formula pattern (e.g. R27 = IF(SUM(B27:Q27)=0,\"-\",SUM(B27:Q27))), but R40 = IF(SUM(R27:R39)=0,\"-\",SUM(R27:R39))",
-      "verdict": null,
-      "note": null
-    },
-    {
       "file": "corpus/work/fuse-bins/cc-binaries/e2faf986-4ab3-454c-a916-4f77f1e475b3",
       "sheet": "Ark1",
       "cell": "X33",
       "formula": "SUM(D33+K33+G33+O33+S34+W33)",
       "proof": "Ark1!X3:X109: 106 of 107 cells share the copied formula pattern (e.g. X3 = SUM(D3+G3+K3+O3+S3+W3)), but X33 = SUM(D33+K33+G33+O33+S34+W33)",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/0a895535-929c-4486-a447-f3ee55844f1c",
-      "sheet": "Summary-to post",
-      "cell": "V514",
-      "formula": "SUMIF('[1]JOBS MAR 15'!$E$8:$E$525,$E$18:$E$533,'[1]JOBS MAR 15'!$I$8:$I$525)",
-      "proof": "Summary-to post!V16:V533: 517 of 518 cells share the copied formula pattern (e.g. V16 = SUMIF('[1]JOBS MAR 15'!$E$8:$E$525,$E$16:$E$533,'[1]JOBS MAR 15'!$I$8:$I$525)), but V514 = SUMIF('[1]JOBS MAR 15'!$E$8:$E$525,$E$18:$E$533,'[1]JOBS MAR 15'!$I$8:$I$525)",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/01655fa4-4d0f-48a7-a5da-e90de9d574dd",
-      "sheet": "CPL SPREADSHEET",
-      "cell": "X9",
-      "formula": "(H9/(D9-E6))",
-      "proof": "CPL SPREADSHEET!X5:X89: 84 of 85 cells share the copied formula pattern (e.g. X5 = (H5/(D5-E5))), but X9 = (H9/(D9-E6))",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/01655fa4-4d0f-48a7-a5da-e90de9d574dd",
-      "sheet": "CPL SPREADSHEET",
-      "cell": "U9",
-      "formula": "(G6-T9)",
-      "proof": "CPL SPREADSHEET!U5:U89: 84 of 85 cells share the copied formula pattern (e.g. U5 = (G5-T5)), but U9 = (G6-T9)",
       "verdict": null,
       "note": null
     },
@@ -859,15 +436,6 @@
       "note": null
     },
     {
-      "file": "corpus/work/fuse-bins/cc-binaries/1f1d1560-0c9e-4531-be8d-934fd864dac3",
-      "sheet": "ChartersMidJrHigh",
-      "cell": "M35",
-      "formula": "SUM(M3:M34)",
-      "proof": "ChartersMidJrHigh!M4:M36: 32 of 33 cells share the copied formula pattern (e.g. M4 = SUM(B4:L4)), but M35 = SUM(M3:M34)",
-      "verdict": null,
-      "note": null
-    },
-    {
       "file": "corpus/work/fuse-bins/cc-binaries/c103dc5a-6ec8-4f8f-8fb8-ff143ea06e90",
       "sheet": "China",
       "cell": "K175",
@@ -891,15 +459,6 @@
       "cell": "Q13",
       "formula": "Rammeplan!Z13",
       "proof": "37!Q7:Q21: 14 of 15 cells share the copied formula pattern (e.g. Q7 = Rammeplan!X7), but Q13 = Rammeplan!Z13",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/0ed2258c-e2b4-471d-934a-dd3c0662e06c",
-      "sheet": "Summary-to post",
-      "cell": "T514",
-      "formula": "SUMIF('[1]JOBS MAR 15'!$E$8:$E$525,$E$18:$E$533,'[1]JOBS MAR 15'!$G$8:$G$525)",
-      "proof": "Summary-to post!T16:T533: 517 of 518 cells share the copied formula pattern (e.g. T16 = SUMIF('[1]JOBS MAR 15'!$E$8:$E$525,$E$16:$E$533,'[1]JOBS MAR 15'!$G$8:$G$525)), but T514 = SUMIF('[1]JOBS MAR 15'!$E$8:$E$525,$E$18:$E$533,'[1]JOBS MAR 15'!$G$8:$G$525)",
       "verdict": null,
       "note": null
     },
@@ -954,15 +513,6 @@
       "cell": "C19",
       "formula": "'[1]Page 1 - FY2012-13'!$C7",
       "proof": "Budget Summaries 4!B19:H19: 6 of 7 cells share the copied formula pattern (e.g. B19 = 'Page 1 - FY2013-14'!$C7), but C19 = '[1]Page 1 - FY2012-13'!$C7",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/4641aa7e-eb0f-4545-ad83-b50f6ff3533c",
-      "sheet": "Time Report",
-      "cell": "R40",
-      "formula": "IF(SUM(R27:R39)=0,\"-\",SUM(R27:R39))",
-      "proof": "Time Report!R27:R41: 14 of 15 cells share the copied formula pattern (e.g. R27 = IF(SUM(B27:Q27)=0,\"-\",SUM(B27:Q27))), but R40 = IF(SUM(R27:R39)=0,\"-\",SUM(R27:R39))",
       "verdict": null,
       "note": null
     },
@@ -1035,15 +585,6 @@
       "cell": "BJ163",
       "formula": "SUM(BJ7:BJ160)",
       "proof": "Drains General Obligation Bonds!B163:BM163: 63 of 64 cells share the copied formula pattern (e.g. B163 = SUM(B7:B162)), but BJ163 = SUM(BJ7:BJ160)",
-      "verdict": null,
-      "note": null
-    },
-    {
-      "file": "corpus/work/fuse-bins/cc-binaries/0a895535-929c-4486-a447-f3ee55844f1c",
-      "sheet": "Summary-to post",
-      "cell": "T514",
-      "formula": "SUMIF('[1]JOBS MAR 15'!$E$8:$E$525,$E$18:$E$533,'[1]JOBS MAR 15'!$G$8:$G$525)",
-      "proof": "Summary-to post!T16:T533: 517 of 518 cells share the copied formula pattern (e.g. T16 = SUMIF('[1]JOBS MAR 15'!$E$8:$E$525,$E$16:$E$533,'[1]JOBS MAR 15'!$G$8:$G$525)), but T514 = SUMIF('[1]JOBS MAR 15'!$E$8:$E$525,$E$18:$E$533,'[1]JOBS MAR 15'!$G$8:$G$525)",
       "verdict": null,
       "note": null
     }

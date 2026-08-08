@@ -29,8 +29,13 @@ for path in audits:
     name = a.get("detector", path)
     samples = a.get("samples", [])
     n = len(samples)
-    if n < 200:
-        print(f"gate(4): {name}: only {n} samples (<200) — not counted")
+    total = a.get("findings_total", n)
+    # 200 samples required — unless the detector's entire corpus population
+    # is smaller, in which case the audit must cover ALL of it (a census
+    # beats a sample) and still comprise at least 20 findings
+    # (docs/decisions.md 2026-08-08, full-population amendment).
+    if n < 200 and not (n == total and n >= 20):
+        print(f"gate(4): {name}: {n} samples of {total} findings — below the audit floor")
         continue
     missing_proof = sum(1 for s in samples if not s.get("proof"))
     unaudited = sum(1 for s in samples if s.get("verdict") not in ("tp", "fp"))

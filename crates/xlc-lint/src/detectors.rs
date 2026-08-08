@@ -73,14 +73,34 @@ pub fn analyze(wb: &Workbook) -> Vec<Finding> {
 
         // Horizontal runs (fixed row, contiguous columns) and vertical
         // runs (fixed column, contiguous rows).
-        run_findings(&mut findings, &sheet.name, &cells, &shape_counts, true);
-        run_findings(&mut findings, &sheet.name, &cells, &shape_counts, false);
+        let mut sheet_findings: Vec<(Finding, bool, u32)> = Vec::new();
+        run_findings(&mut sheet_findings, &sheet.name, &cells, &shape_counts, true);
+        run_findings(&mut sheet_findings, &sheet.name, &cells, &shape_counts, false);
+
+        // (f) lane-repeat filter, generic findings only: the same column
+        // deviating the same way in several horizontal runs (or row in
+        // several vertical runs) is deliberate column/row semantics, not
+        // repeated accidents.
+        let mut lane_counts: HashMap<(bool, u32), usize> = HashMap::new();
+        for (f, horiz, lane) in &sheet_findings {
+            if f.detector == "inconsistent-region" {
+                *lane_counts.entry((*horiz, *lane)).or_insert(0) += 1;
+            }
+        }
+        for (f, horiz, lane) in sheet_findings {
+            if f.detector == "inconsistent-region"
+                && lane_counts.get(&(horiz, lane)).copied().unwrap_or(0) > 1
+            {
+                continue;
+            }
+            findings.push(f);
+        }
     }
     findings
 }
 
 fn run_findings(
-    findings: &mut Vec<Finding>,
+    findings: &mut Vec<(Finding, bool, u32)>,
     sheet: &str,
     cells: &[CellShape],
     shape_counts: &HashMap<&str, usize>,
@@ -110,7 +130,7 @@ fn run_findings(
 }
 
 fn flag_run(
-    findings: &mut Vec<Finding>,
+    findings: &mut Vec<(Finding, bool, u32)>,
     sheet: &str,
     run: &[&CellShape],
     shape_counts: &HashMap<&str, usize>,
@@ -170,29 +190,45 @@ fn flag_run(
         if kind_flip {
             continue;
         }
-        // (c) the deviant shape is a one-off on this sheet — if it repeats
-        //     elsewhere it is a second copied pattern (alternating-region
-        //     layout), not a mistake.
-        if shape_counts.get(d.shapes.full.as_str()).copied().unwrap_or(0) > 1 {
-            continue;
-        }
         let run_desc = format!(
             "{}:{}",
             cell_a1(first.row, first.col),
             cell_a1(last.row, last.col)
         );
         // Off-by-one refinement: identical structure, exactly one range
-        // boundary moved by exactly one row/column.
+        // boundary moved by exactly one row/column. Checked BEFORE the
+        // uniqueness guard: a bad formula drag-copied to sibling cells
+        // repeats its shape, and the boundary evidence stands on its own
+        // (corpus audit: 34/34 tp including repeated slips).
         if let Some(proof) = off_by_one_proof(sheet, d, exemplar, &run_desc, run.len()) {
-            findings.push(Finding {
-                detector: "range-off-by-one".into(),
-                sheet: sheet.to_string(),
-                cell: cell_a1(d.row, d.col),
-                formula: d.formula.clone(),
-                proof,
-            });
+            findings.push((
+                Finding {
+                    detector: "range-off-by-one".into(),
+                    sheet: sheet.to_string(),
+                    cell: cell_a1(d.row, d.col),
+                    formula: d.formula.clone(),
+                    proof,
+                },
+                horizontal,
+                if horizontal { d.col } else { d.row },
+            ));
+        } else if shape_counts.get(d.shapes.full.as_str()).copied().unwrap_or(0) > 1 {
+            // (c) generic findings only: a deviant shape that repeats on
+            // this sheet is a second copied pattern (alternating-region
+            // layout), not a mistake.
+            continue;
+        } else if orientation_flip(d, exemplar) {
+            // (d) a range that flips from row-vector to column-vector is
+            // the embedded-subtotal idiom (R40 totals R27:R39 inside a
+            // family of row sums), not a slip.
+            continue;
+        } else if multiset_equal_ranges(d, exemplar) {
+            // (e) same ranges in a different order: semantically identical
+            // for symmetric functions (SUM(C3,C4) vs SUM(C4,C3)) — noise.
+            continue;
         } else {
-            findings.push(Finding {
+            findings.push((
+                Finding {
                 detector: "inconsistent-region".into(),
                 sheet: sheet.to_string(),
                 cell: cell_a1(d.row, d.col),
@@ -206,9 +242,42 @@ fn flag_run(
                     cell_a1(d.row, d.col),
                     d.formula
                 ),
-            });
+                },
+                horizontal,
+                if horizontal { d.col } else { d.row },
+            ));
         }
     }
+}
+
+/// Did any range flip between row-vector and column-vector orientation?
+fn orientation_flip(d: &CellShape, exemplar: &CellShape) -> bool {
+    d.shapes.ranges.iter().zip(&exemplar.shapes.ranges).any(|(ra, rb)| {
+        if ra == rb || ra.single || rb.single {
+            return false;
+        }
+        let a_horiz = ra.r0 == ra.r1 && ra.c0 != ra.c1;
+        let a_vert = ra.c0 == ra.c1 && ra.r0 != ra.r1;
+        let b_horiz = rb.r0 == rb.r1 && rb.c0 != rb.c1;
+        let b_vert = rb.c0 == rb.c1 && rb.r0 != rb.r1;
+        (a_horiz && b_vert) || (a_vert && b_horiz)
+    })
+}
+
+/// Same multiset of range descriptors in a different order?
+fn multiset_equal_ranges(d: &CellShape, exemplar: &CellShape) -> bool {
+    if d.shapes.ranges.len() != exemplar.shapes.ranges.len() {
+        return false;
+    }
+    let key = |r: &crate::shape::RangeDesc| format!("{r:?}");
+    let mut a: Vec<String> = d.shapes.ranges.iter().map(key).collect();
+    let mut b: Vec<String> = exemplar.shapes.ranges.iter().map(key).collect();
+    if a == b {
+        return false; // identical order — the difference lies elsewhere
+    }
+    a.sort();
+    b.sort();
+    a == b
 }
 
 fn off_by_one_proof(
