@@ -4,6 +4,7 @@
 //! path the compiler uses, so every corpus run is an integration test of §8.1.
 
 mod census;
+mod parse_corpus;
 mod corpus;
 
 fn main() {
@@ -13,6 +14,7 @@ fn main() {
         Some("corpus-subset") => corpus::subset_cmd(&args[1..]),
         Some("corpus-verify") => corpus::verify_cmd(&args[1..]),
         Some("census") => census::census_cmd(&args[1..]),
+        Some("parse-corpus") => parse_corpus::parse_corpus_cmd(&args[1..]),
         Some(cmd) => {
             eprintln!("xlc: unknown or not-yet-implemented command `{cmd}`");
             2
