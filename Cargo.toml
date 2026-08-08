@@ -30,6 +30,8 @@ serde_json = { version = "1", features = ["preserve_order"] }
 zip = "8"
 anyhow = "1"
 sha2 = "0.10"
+# musl-derived pure-Rust libm: erf/erfc for NORMDIST-family bit-fidelity.
+libm = "0.2"
 
 xlc-parse = { path = "crates/xlc-parse" }
 xlc-graph = { path = "crates/xlc-graph" }
