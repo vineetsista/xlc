@@ -1,0 +1,1813 @@
+{
+ "detector": "ref-error",
+ "findings_total": 20098,
+ "sampled": 200,
+ "samples": [
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/c3e23a25-2f72-49c7-9b3b-a97f7e23c9e2",
+   "sheet": "3.Condition Sum",
+   "cell": "E7",
+   "formula": "AVERAGE(#REF!)",
+   "proof": "3.Condition Sum!E7 contains a reference to a deleted cell or sheet (#REF!): AVERAGE(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/c3e23a25-2f72-49c7-9b3b-a97f7e23c9e2",
+   "sheet": "3.Condition Sum",
+   "cell": "E6",
+   "formula": "AVERAGE(#REF!)",
+   "proof": "3.Condition Sum!E6 contains a reference to a deleted cell or sheet (#REF!): AVERAGE(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/c3e23a25-2f72-49c7-9b3b-a97f7e23c9e2",
+   "sheet": "3.Condition Sum",
+   "cell": "E5",
+   "formula": "AVERAGE(#REF!)",
+   "proof": "3.Condition Sum!E5 contains a reference to a deleted cell or sheet (#REF!): AVERAGE(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/c3e23a25-2f72-49c7-9b3b-a97f7e23c9e2",
+   "sheet": "3.Condition Sum",
+   "cell": "E4",
+   "formula": "AVERAGE(#REF!)",
+   "proof": "3.Condition Sum!E4 contains a reference to a deleted cell or sheet (#REF!): AVERAGE(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/c3e23a25-2f72-49c7-9b3b-a97f7e23c9e2",
+   "sheet": "3.Condition Sum",
+   "cell": "E3",
+   "formula": "AVERAGE(#REF!)",
+   "proof": "3.Condition Sum!E3 contains a reference to a deleted cell or sheet (#REF!): AVERAGE(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/c3e23a25-2f72-49c7-9b3b-a97f7e23c9e2",
+   "sheet": "3.Condition Sum",
+   "cell": "F3",
+   "formula": "AVERAGE(#REF!)",
+   "proof": "3.Condition Sum!F3 contains a reference to a deleted cell or sheet (#REF!): AVERAGE(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/c3e23a25-2f72-49c7-9b3b-a97f7e23c9e2",
+   "sheet": "3.Condition Sum",
+   "cell": "F6",
+   "formula": "AVERAGE(#REF!)",
+   "proof": "3.Condition Sum!F6 contains a reference to a deleted cell or sheet (#REF!): AVERAGE(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/c3e23a25-2f72-49c7-9b3b-a97f7e23c9e2",
+   "sheet": "3.Condition Sum",
+   "cell": "F7",
+   "formula": "AVERAGE(#REF!)",
+   "proof": "3.Condition Sum!F7 contains a reference to a deleted cell or sheet (#REF!): AVERAGE(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/c3e23a25-2f72-49c7-9b3b-a97f7e23c9e2",
+   "sheet": "3.Condition Sum",
+   "cell": "F4",
+   "formula": "AVERAGE(#REF!)",
+   "proof": "3.Condition Sum!F4 contains a reference to a deleted cell or sheet (#REF!): AVERAGE(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/c3e23a25-2f72-49c7-9b3b-a97f7e23c9e2",
+   "sheet": "3.Condition Sum",
+   "cell": "F5",
+   "formula": "AVERAGE(#REF!)",
+   "proof": "3.Condition Sum!F5 contains a reference to a deleted cell or sheet (#REF!): AVERAGE(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/9c44460a-789d-422c-9fb5-e94c6ddb730e",
+   "sheet": "5887 Bid Tab All",
+   "cell": "AL343",
+   "formula": "AJ343-(AI343*#REF!)",
+   "proof": "5887 Bid Tab All!AL343 contains a reference to a deleted cell or sheet (#REF!): AJ343-(AI343*#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/9c44460a-789d-422c-9fb5-e94c6ddb730e",
+   "sheet": "5887 Bid Tab All",
+   "cell": "AL342",
+   "formula": "AJ342-(AI342*#REF!)",
+   "proof": "5887 Bid Tab All!AL342 contains a reference to a deleted cell or sheet (#REF!): AJ342-(AI342*#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/9c44460a-789d-422c-9fb5-e94c6ddb730e",
+   "sheet": "5887 Bid Tab All",
+   "cell": "AL341",
+   "formula": "AJ341-(AI341*#REF!)",
+   "proof": "5887 Bid Tab All!AL341 contains a reference to a deleted cell or sheet (#REF!): AJ341-(AI341*#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/9c44460a-789d-422c-9fb5-e94c6ddb730e",
+   "sheet": "5887 Bid Tab All",
+   "cell": "AL346",
+   "formula": "AJ346-(AI346*#REF!)",
+   "proof": "5887 Bid Tab All!AL346 contains a reference to a deleted cell or sheet (#REF!): AJ346-(AI346*#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/9c44460a-789d-422c-9fb5-e94c6ddb730e",
+   "sheet": "5887 Bid Tab All",
+   "cell": "AL345",
+   "formula": "AJ345-(AI345*#REF!)",
+   "proof": "5887 Bid Tab All!AL345 contains a reference to a deleted cell or sheet (#REF!): AJ345-(AI345*#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/9c44460a-789d-422c-9fb5-e94c6ddb730e",
+   "sheet": "5887 Bid Tab All",
+   "cell": "AL344",
+   "formula": "AJ344-(AI344*#REF!)",
+   "proof": "5887 Bid Tab All!AL344 contains a reference to a deleted cell or sheet (#REF!): AJ344-(AI344*#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/9c44460a-789d-422c-9fb5-e94c6ddb730e",
+   "sheet": "5887 Bid Tab All",
+   "cell": "AL318",
+   "formula": "AJ318+(#REF!/AH318)-(AI318*T$12)",
+   "proof": "5887 Bid Tab All!AL318 contains a reference to a deleted cell or sheet (#REF!): AJ318+(#REF!/AH318)-(AI318*T$12)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/9c44460a-789d-422c-9fb5-e94c6ddb730e",
+   "sheet": "5887 Bid Tab All",
+   "cell": "AL319",
+   "formula": "AJ319+(#REF!/AH319)-(AI319*T$12)",
+   "proof": "5887 Bid Tab All!AL319 contains a reference to a deleted cell or sheet (#REF!): AJ319+(#REF!/AH319)-(AI319*T$12)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/9c44460a-789d-422c-9fb5-e94c6ddb730e",
+   "sheet": "5887 Bid Tab All",
+   "cell": "AL316",
+   "formula": "AJ316+(#REF!/AH316)-(AI316*T$12)",
+   "proof": "5887 Bid Tab All!AL316 contains a reference to a deleted cell or sheet (#REF!): AJ316+(#REF!/AH316)-(AI316*T$12)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/9c44460a-789d-422c-9fb5-e94c6ddb730e",
+   "sheet": "5887 Bid Tab All",
+   "cell": "AL317",
+   "formula": "AJ317+(#REF!/AH317)-(AI317*T$12)",
+   "proof": "5887 Bid Tab All!AL317 contains a reference to a deleted cell or sheet (#REF!): AJ317+(#REF!/AH317)-(AI317*T$12)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/9c44460a-789d-422c-9fb5-e94c6ddb730e",
+   "sheet": "5887 Bid Tab All",
+   "cell": "AL336",
+   "formula": "AJ336+(T$28/AH336)-(AI336*#REF!)",
+   "proof": "5887 Bid Tab All!AL336 contains a reference to a deleted cell or sheet (#REF!): AJ336+(T$28/AH336)-(AI336*#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/9c44460a-789d-422c-9fb5-e94c6ddb730e",
+   "sheet": "5887 Bid Tab All",
+   "cell": "AL337",
+   "formula": "AJ337+(T$28/AH337)-(AI337*#REF!)",
+   "proof": "5887 Bid Tab All!AL337 contains a reference to a deleted cell or sheet (#REF!): AJ337+(T$28/AH337)-(AI337*#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/9c44460a-789d-422c-9fb5-e94c6ddb730e",
+   "sheet": "5887 Bid Tab All",
+   "cell": "AL335",
+   "formula": "AJ335+(T$27/AH335)-(AI335*#REF!)",
+   "proof": "5887 Bid Tab All!AL335 contains a reference to a deleted cell or sheet (#REF!): AJ335+(T$27/AH335)-(AI335*#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/9c44460a-789d-422c-9fb5-e94c6ddb730e",
+   "sheet": "5887 Bid Tab All",
+   "cell": "AL338",
+   "formula": "AJ338+(T$28/AH338)-(AI338*#REF!)",
+   "proof": "5887 Bid Tab All!AL338 contains a reference to a deleted cell or sheet (#REF!): AJ338+(T$28/AH338)-(AI338*#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/8cdd0284-21fe-4641-be38-14313ba54478",
+   "sheet": "China",
+   "cell": "AO1",
+   "formula": "+#REF!",
+   "proof": "China!AO1 contains a reference to a deleted cell or sheet (#REF!): +#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/8cdd0284-21fe-4641-be38-14313ba54478",
+   "sheet": "China",
+   "cell": "AP1",
+   "formula": "+#REF!",
+   "proof": "China!AP1 contains a reference to a deleted cell or sheet (#REF!): +#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/1_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "BU20",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A20,#REF!,0))",
+   "proof": "HR !BU20 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A20,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/1_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "BU11",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A11,#REF!,0))",
+   "proof": "HR !BU11 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A11,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/1_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "BU10",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A10,#REF!,0))",
+   "proof": "HR !BU10 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A10,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/1_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "BU12",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A12,#REF!,0))",
+   "proof": "HR !BU12 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A12,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/1_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "BU14",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A14,#REF!,0))",
+   "proof": "HR !BU14 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A14,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/1_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "BU17",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A17,#REF!,0))",
+   "proof": "HR !BU17 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A17,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/1_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "BU16",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A16,#REF!,0))",
+   "proof": "HR !BU16 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A16,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/1_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "BU19",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A19,#REF!,0))",
+   "proof": "HR !BU19 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A19,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/4547bdc9-d899-42f0-b282-9085d641ac92",
+   "sheet": "Sheet2",
+   "cell": "V33",
+   "formula": "'6. Warehouse Trend by Agency'!#REF!+'6. Warehouse Trend by Agency'!#REF!+'6. Warehouse Trend by Agency'!#REF!+'6. Warehouse Trend by Agency'!#REF!+'6. Warehouse Trend by Agency'!#REF!",
+   "proof": "Sheet2!V33 contains a reference to a deleted cell or sheet (#REF!): '6. Warehouse Trend by Agency'!#REF!+'6. Warehouse Trend by Agency'!#REF!+'6. Warehouse Trend by Agency'!#REF!+'6. Warehouse Trend by Agency'!#REF!+'6. Warehouse Trend by Agency'!#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/4547bdc9-d899-42f0-b282-9085d641ac92",
+   "sheet": "Sheet2",
+   "cell": "V36",
+   "formula": "'6. Warehouse Trend by Agency'!#REF!-V33",
+   "proof": "Sheet2!V36 contains a reference to a deleted cell or sheet (#REF!): '6. Warehouse Trend by Agency'!#REF!-V33",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/4547bdc9-d899-42f0-b282-9085d641ac92",
+   "sheet": "Sheet2",
+   "cell": "V39",
+   "formula": "'6. Warehouse Trend by Agency'!#REF!",
+   "proof": "Sheet2!V39 contains a reference to a deleted cell or sheet (#REF!): '6. Warehouse Trend by Agency'!#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/4547bdc9-d899-42f0-b282-9085d641ac92",
+   "sheet": "Sheet2",
+   "cell": "V22",
+   "formula": "'5. Office Trend by Agency'!#REF!+'5. Office Trend by Agency'!#REF!+'5. Office Trend by Agency'!#REF!+'5. Office Trend by Agency'!#REF!+'5. Office Trend by Agency'!#REF!",
+   "proof": "Sheet2!V22 contains a reference to a deleted cell or sheet (#REF!): '5. Office Trend by Agency'!#REF!+'5. Office Trend by Agency'!#REF!+'5. Office Trend by Agency'!#REF!+'5. Office Trend by Agency'!#REF!+'5. Office Trend by Agency'!#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/4547bdc9-d899-42f0-b282-9085d641ac92",
+   "sheet": "Sheet2",
+   "cell": "V25",
+   "formula": "'5. Office Trend by Agency'!#REF!-V22",
+   "proof": "Sheet2!V25 contains a reference to a deleted cell or sheet (#REF!): '5. Office Trend by Agency'!#REF!-V22",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/4547bdc9-d899-42f0-b282-9085d641ac92",
+   "sheet": "Sheet2",
+   "cell": "V28",
+   "formula": "'5. Office Trend by Agency'!#REF!",
+   "proof": "Sheet2!V28 contains a reference to a deleted cell or sheet (#REF!): '5. Office Trend by Agency'!#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/1_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "AX20",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A20,#REF!,0))",
+   "proof": "HR !AX20 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A20,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/1_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "AX19",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A19,#REF!,0))",
+   "proof": "HR !AX19 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A19,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/1_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "AX11",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A11,#REF!,0))",
+   "proof": "HR !AX11 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A11,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/1_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "AX10",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A10,#REF!,0))",
+   "proof": "HR !AX10 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A10,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/1_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "AX12",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A12,#REF!,0))",
+   "proof": "HR !AX12 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A12,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/1_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "AX14",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A14,#REF!,0))",
+   "proof": "HR !AX14 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A14,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/1_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "AX17",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A17,#REF!,0))",
+   "proof": "HR !AX17 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A17,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/1_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "AX16",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A16,#REF!,0))",
+   "proof": "HR !AX16 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A16,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "AC20",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A20,#REF!,0))",
+   "proof": "HR !AC20 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A20,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/a5ec482d-9d5f-43c6-a626-7138bd139bd2",
+   "sheet": "BAAG",
+   "cell": "H8",
+   "formula": "'InsHRA-Request'!B39&\" & Insured HRA to $\"&'InsHRA-Request'!E69&\"/\"&IF('InsHRA-Request'!#REF!=0,\"100%\",100-'InsHRA-Request'!#REF!&\"%\")",
+   "proof": "BAAG!H8 contains a reference to a deleted cell or sheet (#REF!): 'InsHRA-Request'!B39&\" & Insured HRA to $\"&'InsHRA-Request'!E69&\"/\"&IF('InsHRA-Request'!#REF!=0,\"100%\",100-'InsHRA-Request'!#REF!&\"%\")",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/a5ec482d-9d5f-43c6-a626-7138bd139bd2",
+   "sheet": "BAAG",
+   "cell": "I8",
+   "formula": "'InsHRA-Request'!B39&\" & Insured HRA to $\"&'InsHRA-Request'!G69&\"/\"&IF('InsHRA-Request'!#REF!=0,\"100%\",100-'InsHRA-Request'!#REF!&\"%\")",
+   "proof": "BAAG!I8 contains a reference to a deleted cell or sheet (#REF!): 'InsHRA-Request'!B39&\" & Insured HRA to $\"&'InsHRA-Request'!G69&\"/\"&IF('InsHRA-Request'!#REF!=0,\"100%\",100-'InsHRA-Request'!#REF!&\"%\")",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "AC19",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A19,#REF!,0))",
+   "proof": "HR !AC19 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A19,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "AC11",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A11,#REF!,0))",
+   "proof": "HR !AC11 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A11,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "AC10",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A10,#REF!,0))",
+   "proof": "HR !AC10 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A10,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "AC12",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A12,#REF!,0))",
+   "proof": "HR !AC12 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A12,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "AC14",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A14,#REF!,0))",
+   "proof": "HR !AC14 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A14,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "AC17",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A17,#REF!,0))",
+   "proof": "HR !AC17 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A17,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "AC16",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A16,#REF!,0))",
+   "proof": "HR !AC16 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A16,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/15ce5775-daba-45ed-8ef8-76b96054f3f2",
+   "sheet": "Sheet1",
+   "cell": "I133",
+   "formula": "VLOOKUP(G133,#REF!,2,FALSE)",
+   "proof": "Sheet1!I133 contains a reference to a deleted cell or sheet (#REF!): VLOOKUP(G133,#REF!,2,FALSE)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/15ce5775-daba-45ed-8ef8-76b96054f3f2",
+   "sheet": "Sheet1",
+   "cell": "I113",
+   "formula": "VLOOKUP(G113,#REF!,2,FALSE)",
+   "proof": "Sheet1!I113 contains a reference to a deleted cell or sheet (#REF!): VLOOKUP(G113,#REF!,2,FALSE)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/15ce5775-daba-45ed-8ef8-76b96054f3f2",
+   "sheet": "Sheet1",
+   "cell": "I176",
+   "formula": "VLOOKUP(G176,#REF!,2,FALSE)",
+   "proof": "Sheet1!I176 contains a reference to a deleted cell or sheet (#REF!): VLOOKUP(G176,#REF!,2,FALSE)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/15ce5775-daba-45ed-8ef8-76b96054f3f2",
+   "sheet": "Sheet1",
+   "cell": "I171",
+   "formula": "VLOOKUP(G171,#REF!,2,FALSE)",
+   "proof": "Sheet1!I171 contains a reference to a deleted cell or sheet (#REF!): VLOOKUP(G171,#REF!,2,FALSE)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/15ce5775-daba-45ed-8ef8-76b96054f3f2",
+   "sheet": "Sheet1",
+   "cell": "I172",
+   "formula": "VLOOKUP(G172,#REF!,2,FALSE)",
+   "proof": "Sheet1!I172 contains a reference to a deleted cell or sheet (#REF!): VLOOKUP(G172,#REF!,2,FALSE)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/15ce5775-daba-45ed-8ef8-76b96054f3f2",
+   "sheet": "Sheet1",
+   "cell": "I162",
+   "formula": "VLOOKUP(G162,#REF!,2,FALSE)",
+   "proof": "Sheet1!I162 contains a reference to a deleted cell or sheet (#REF!): VLOOKUP(G162,#REF!,2,FALSE)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/15ce5775-daba-45ed-8ef8-76b96054f3f2",
+   "sheet": "Sheet1",
+   "cell": "I153",
+   "formula": "VLOOKUP(G153,#REF!,2,FALSE)",
+   "proof": "Sheet1!I153 contains a reference to a deleted cell or sheet (#REF!): VLOOKUP(G153,#REF!,2,FALSE)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/15ce5775-daba-45ed-8ef8-76b96054f3f2",
+   "sheet": "Sheet1",
+   "cell": "I151",
+   "formula": "VLOOKUP(G151,#REF!,2,FALSE)",
+   "proof": "Sheet1!I151 contains a reference to a deleted cell or sheet (#REF!): VLOOKUP(G151,#REF!,2,FALSE)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/15ce5775-daba-45ed-8ef8-76b96054f3f2",
+   "sheet": "Sheet1",
+   "cell": "I186",
+   "formula": "VLOOKUP(G186,#REF!,2,FALSE)",
+   "proof": "Sheet1!I186 contains a reference to a deleted cell or sheet (#REF!): VLOOKUP(G186,#REF!,2,FALSE)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/50631/2_50631_input.xlsx",
+   "sheet": "Sheet1",
+   "cell": "C7",
+   "formula": "IFERROR(INDEX(#REF!,MATCH(B7,#REF!,0)),\"\")",
+   "proof": "Sheet1!C7 contains a reference to a deleted cell or sheet (#REF!): IFERROR(INDEX(#REF!,MATCH(B7,#REF!,0)),\"\")",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/50631/2_50631_input.xlsx",
+   "sheet": "Sheet1",
+   "cell": "C9",
+   "formula": "IFERROR(INDEX(#REF!,MATCH(B9,#REF!,0)),\"\")",
+   "proof": "Sheet1!C9 contains a reference to a deleted cell or sheet (#REF!): IFERROR(INDEX(#REF!,MATCH(B9,#REF!,0)),\"\")",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/50631/2_50631_input.xlsx",
+   "sheet": "Sheet1",
+   "cell": "C8",
+   "formula": "IFERROR(INDEX(#REF!,MATCH(B8,#REF!,0)),\"\")",
+   "proof": "Sheet1!C8 contains a reference to a deleted cell or sheet (#REF!): IFERROR(INDEX(#REF!,MATCH(B8,#REF!,0)),\"\")",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "ET12",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A12,#REF!,0))",
+   "proof": "HR !ET12 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A12,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "ET11",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A11,#REF!,0))",
+   "proof": "HR !ET11 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A11,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "ET10",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A10,#REF!,0))",
+   "proof": "HR !ET10 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A10,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "ET17",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A17,#REF!,0))",
+   "proof": "HR !ET17 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A17,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "ET16",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A16,#REF!,0))",
+   "proof": "HR !ET16 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A16,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "ET14",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A14,#REF!,0))",
+   "proof": "HR !ET14 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A14,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "ET19",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A19,#REF!,0))",
+   "proof": "HR !ET19 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A19,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "ET20",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A20,#REF!,0))",
+   "proof": "HR !ET20 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A20,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/1_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "GT13",
+   "formula": "SUM(#REF!,GB13,GM13)",
+   "proof": "HR !GT13 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!,GB13,GM13)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "CQ14",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A14,#REF!,0))",
+   "proof": "HR !CQ14 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A14,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "CQ16",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A16,#REF!,0))",
+   "proof": "HR !CQ16 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A16,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "CQ17",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A17,#REF!,0))",
+   "proof": "HR !CQ17 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A17,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "CQ10",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A10,#REF!,0))",
+   "proof": "HR !CQ10 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A10,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "CQ11",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A11,#REF!,0))",
+   "proof": "HR !CQ11 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A11,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "CQ12",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A12,#REF!,0))",
+   "proof": "HR !CQ12 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A12,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "CQ19",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A19,#REF!,0))",
+   "proof": "HR !CQ19 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A19,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "CQ20",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A20,#REF!,0))",
+   "proof": "HR !CQ20 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A20,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "T20",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A20,#REF!,0))",
+   "proof": "HR !T20 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A20,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "T11",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A11,#REF!,0))",
+   "proof": "HR !T11 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A11,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "T10",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A10,#REF!,0))",
+   "proof": "HR !T10 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A10,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "T12",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A12,#REF!,0))",
+   "proof": "HR !T12 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A12,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "T14",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A14,#REF!,0))",
+   "proof": "HR !T14 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A14,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "T17",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A17,#REF!,0))",
+   "proof": "HR !T17 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A17,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "T16",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A16,#REF!,0))",
+   "proof": "HR !T16 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A16,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "T19",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A19,#REF!,0))",
+   "proof": "HR !T19 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A19,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/1ebdbd0e-15ee-401c-a7cf-f4275889937c",
+   "sheet": "E Recomend",
+   "cell": "P101",
+   "formula": "#REF!",
+   "proof": "E Recomend!P101 contains a reference to a deleted cell or sheet (#REF!): #REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/0a4c9bd7-e346-4832-a9e5-324a7fdd4328",
+   "sheet": "Prioritized Objectives by Area",
+   "cell": "A94",
+   "formula": "IF(C94='PPR Prioritized Objectives'!E16,'PPR Prioritized Objectives'!#REF!)",
+   "proof": "Prioritized Objectives by Area!A94 contains a reference to a deleted cell or sheet (#REF!): IF(C94='PPR Prioritized Objectives'!E16,'PPR Prioritized Objectives'!#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E162",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E162 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E161",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E161 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E160",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E160 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E166",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E166 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E165",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E165 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E164",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E164 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E158",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E158 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E159",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E159 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E156",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E156 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E157",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E157 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E154",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E154 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E155",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E155 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E152",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E152 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E153",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E153 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E150",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E150 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E151",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E151 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E141",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E141 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E140",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E140 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E145",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E145 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E144",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E144 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E146",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E146 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E149",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E149 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E148",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E148 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E134",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E134 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E135",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E135 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E136",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E136 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E137",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E137 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E130",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E130 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E131",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E131 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E132",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E132 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E133",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E133 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E138",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E138 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E139",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E139 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E127",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E127 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E126",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E126 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E124",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E124 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E123",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E123 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E122",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E122 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E121",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E121 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E120",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E120 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E129",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E129 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E128",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E128 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E118",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E118 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E119",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E119 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E112",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E112 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E113",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E113 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E110",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E110 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E111",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E111 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E116",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E116 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E117",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E117 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E114",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E114 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E115",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E115 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E109",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E109 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E108",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E108 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E105",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E105 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E104",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E104 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E107",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E107 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E106",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E106 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+   "sheet": "Detail Summary",
+   "cell": "E103",
+   "formula": "SUM(#REF!)",
+   "proof": "Detail Summary!E103 contains a reference to a deleted cell or sheet (#REF!): SUM(#REF!)",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "DM10",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A10,#REF!,0))",
+   "proof": "HR !DM10 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A10,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "DM11",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A11,#REF!,0))",
+   "proof": "HR !DM11 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A11,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "DM12",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A12,#REF!,0))",
+   "proof": "HR !DM12 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A12,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "DM14",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A14,#REF!,0))",
+   "proof": "HR !DM14 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A14,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "DM16",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A16,#REF!,0))",
+   "proof": "HR !DM16 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A16,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "DM17",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A17,#REF!,0))",
+   "proof": "HR !DM17 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A17,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "DM19",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A19,#REF!,0))",
+   "proof": "HR !DM19 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A19,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/2_54590_input.xlsx",
+   "sheet": "HR ",
+   "cell": "DM20",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A20,#REF!,0))",
+   "proof": "HR !DM20 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A20,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "FQ3",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A3,#REF!,0))",
+   "proof": "HR !FQ3 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A3,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "FQ7",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A7,#REF!,0))",
+   "proof": "HR !FQ7 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A7,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "FQ4",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A4,#REF!,0))",
+   "proof": "HR !FQ4 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A4,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "FQ5",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A5,#REF!,0))",
+   "proof": "HR !FQ5 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A5,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "FQ8",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A8,#REF!,0))",
+   "proof": "HR !FQ8 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A8,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/a338b62c-458b-4295-bb63-398d7578a23d",
+   "sheet": "Capex as a % of Cable Capex",
+   "cell": "B18",
+   "formula": "'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "proof": "Capex as a % of Cable Capex!B18 contains a reference to a deleted cell or sheet (#REF!): 'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/a338b62c-458b-4295-bb63-398d7578a23d",
+   "sheet": "Capex as a % of Cable Capex",
+   "cell": "B19",
+   "formula": "'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "proof": "Capex as a % of Cable Capex!B19 contains a reference to a deleted cell or sheet (#REF!): 'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/a338b62c-458b-4295-bb63-398d7578a23d",
+   "sheet": "Capex as a % of Cable Capex",
+   "cell": "B14",
+   "formula": "'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "proof": "Capex as a % of Cable Capex!B14 contains a reference to a deleted cell or sheet (#REF!): 'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/a338b62c-458b-4295-bb63-398d7578a23d",
+   "sheet": "Capex as a % of Cable Capex",
+   "cell": "B15",
+   "formula": "'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "proof": "Capex as a % of Cable Capex!B15 contains a reference to a deleted cell or sheet (#REF!): 'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/a338b62c-458b-4295-bb63-398d7578a23d",
+   "sheet": "Capex as a % of Cable Capex",
+   "cell": "B10",
+   "formula": "'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "proof": "Capex as a % of Cable Capex!B10 contains a reference to a deleted cell or sheet (#REF!): 'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/a338b62c-458b-4295-bb63-398d7578a23d",
+   "sheet": "Capex as a % of Cable Capex",
+   "cell": "B11",
+   "formula": "'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "proof": "Capex as a % of Cable Capex!B11 contains a reference to a deleted cell or sheet (#REF!): 'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/a338b62c-458b-4295-bb63-398d7578a23d",
+   "sheet": "Capex as a % of Cable Capex",
+   "cell": "B12",
+   "formula": "'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "proof": "Capex as a % of Cable Capex!B12 contains a reference to a deleted cell or sheet (#REF!): 'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/a338b62c-458b-4295-bb63-398d7578a23d",
+   "sheet": "Capex as a % of Cable Capex",
+   "cell": "B13",
+   "formula": "'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "proof": "Capex as a % of Cable Capex!B13 contains a reference to a deleted cell or sheet (#REF!): 'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/876db03c-6b7c-43aa-9786-4893d62fa3f0",
+   "sheet": "Select Measures-High School",
+   "cell": "K493",
+   "formula": "IF(#REF!=\"YES\",\"YES\",\"NO\")",
+   "proof": "Select Measures-High School!K493 contains a reference to a deleted cell or sheet (#REF!): IF(#REF!=\"YES\",\"YES\",\"NO\")",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "FP5",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A5,#REF!,0))",
+   "proof": "HR !FP5 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A5,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "FP4",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A4,#REF!,0))",
+   "proof": "HR !FP4 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A4,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "FP7",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A7,#REF!,0))",
+   "proof": "HR !FP7 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A7,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "FP3",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A3,#REF!,0))",
+   "proof": "HR !FP3 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A3,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "FP8",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A8,#REF!,0))",
+   "proof": "HR !FP8 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A8,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/a338b62c-458b-4295-bb63-398d7578a23d",
+   "sheet": "Capex as a % of Cable Capex",
+   "cell": "B32",
+   "formula": "'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "proof": "Capex as a % of Cable Capex!B32 contains a reference to a deleted cell or sheet (#REF!): 'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/876db03c-6b7c-43aa-9786-4893d62fa3f0",
+   "sheet": "Select Measures-High School",
+   "cell": "K480",
+   "formula": "IF(#REF!=\"YES\",\"YES\",\"NO\")",
+   "proof": "Select Measures-High School!K480 contains a reference to a deleted cell or sheet (#REF!): IF(#REF!=\"YES\",\"YES\",\"NO\")",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/a338b62c-458b-4295-bb63-398d7578a23d",
+   "sheet": "Capex as a % of Cable Capex",
+   "cell": "B33",
+   "formula": "+B32/'Revenue and Exp'!#REF!",
+   "proof": "Capex as a % of Cable Capex!B33 contains a reference to a deleted cell or sheet (#REF!): +B32/'Revenue and Exp'!#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/a338b62c-458b-4295-bb63-398d7578a23d",
+   "sheet": "Capex as a % of Cable Capex",
+   "cell": "B30",
+   "formula": "'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "proof": "Capex as a % of Cable Capex!B30 contains a reference to a deleted cell or sheet (#REF!): 'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/a338b62c-458b-4295-bb63-398d7578a23d",
+   "sheet": "Capex as a % of Cable Capex",
+   "cell": "B24",
+   "formula": "'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "proof": "Capex as a % of Cable Capex!B24 contains a reference to a deleted cell or sheet (#REF!): 'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/a338b62c-458b-4295-bb63-398d7578a23d",
+   "sheet": "Capex as a % of Cable Capex",
+   "cell": "B26",
+   "formula": "'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "proof": "Capex as a % of Cable Capex!B26 contains a reference to a deleted cell or sheet (#REF!): 'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/a338b62c-458b-4295-bb63-398d7578a23d",
+   "sheet": "Capex as a % of Cable Capex",
+   "cell": "B21",
+   "formula": "'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "proof": "Capex as a % of Cable Capex!B21 contains a reference to a deleted cell or sheet (#REF!): 'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/a338b62c-458b-4295-bb63-398d7578a23d",
+   "sheet": "Capex as a % of Cable Capex",
+   "cell": "B20",
+   "formula": "'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "proof": "Capex as a % of Cable Capex!B20 contains a reference to a deleted cell or sheet (#REF!): 'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/a338b62c-458b-4295-bb63-398d7578a23d",
+   "sheet": "Capex as a % of Cable Capex",
+   "cell": "B22",
+   "formula": "'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "proof": "Capex as a % of Cable Capex!B22 contains a reference to a deleted cell or sheet (#REF!): 'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/a338b62c-458b-4295-bb63-398d7578a23d",
+   "sheet": "Capex as a % of Cable Capex",
+   "cell": "B28",
+   "formula": "'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "proof": "Capex as a % of Cable Capex!B28 contains a reference to a deleted cell or sheet (#REF!): 'Capex and FCF'!#REF!/'Capex and FCF'!#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/fuse-bins/cc-binaries/3e7c6c7b-9b29-4da2-a715-61e614612906",
+   "sheet": "MBG",
+   "cell": "AB17",
+   "formula": "#REF!+#REF!+#REF!+#REF!",
+   "proof": "MBG!AB17 contains a reference to a deleted cell or sheet (#REF!): #REF!+#REF!+#REF!+#REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/55085/1_55085_input.xlsx",
+   "sheet": "Result",
+   "cell": "J1",
+   "formula": "#REF!",
+   "proof": "Result!J1 contains a reference to a deleted cell or sheet (#REF!): #REF!",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "FF3",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A3,#REF!,0))",
+   "proof": "HR !FF3 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A3,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "FF7",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A7,#REF!,0))",
+   "proof": "HR !FF7 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A7,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "FF5",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A5,#REF!,0))",
+   "proof": "HR !FF5 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A5,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "FF4",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A4,#REF!,0))",
+   "proof": "HR !FF4 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A4,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  },
+  {
+   "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/54590/3_54590_answer.xlsx",
+   "sheet": "HR ",
+   "cell": "FF8",
+   "formula": "INDEX(#REF!,MATCH('HR '!$A8,#REF!,0))",
+   "proof": "HR !FF8 contains a reference to a deleted cell or sheet (#REF!): INDEX(#REF!,MATCH('HR '!$A8,#REF!,0))",
+   "verdict": "tp",
+   "note": "independent text check: #REF! outside quotes"
+  }
+ ],
+ "audit": {
+  "standard": "tp = the formula genuinely references a destroyed cell or sheet (#REF! outside string literals) \u2014 by construction a defect: the computation this cell once performed is unrecoverable. Verified by an independent text-level check (different implementation from the detector's parser path); 15 samples additionally eyeballed in context.",
+  "auditor": "agent audit, mechanical cross-check + spot inspection",
+  "date": "2026-08-08"
+ },
+ "precision": 1.0
+}

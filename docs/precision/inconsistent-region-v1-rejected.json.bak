@@ -1,0 +1,1807 @@
+{
+  "detector": "inconsistent-region",
+  "findings_total": 6565,
+  "sampled": 200,
+  "samples": [
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/c795fadd-c4ef-4333-880f-7b9d53e811b7",
+      "sheet": "Shuttle Bids",
+      "cell": "B10",
+      "formula": "+B11-7-1",
+      "proof": "Shuttle Bids!B8:B42: 34 of 35 cells share the copied formula pattern (e.g. B8 = +B9-7), but B10 = +B11-7-1",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/c795fadd-c4ef-4333-880f-7b9d53e811b7",
+      "sheet": "Shuttle Bids",
+      "cell": "B11",
+      "formula": "+B12-7+1",
+      "proof": "Shuttle Bids!B8:B42: 34 of 35 cells share the copied formula pattern (e.g. B8 = +B9-7), but B11 = +B12-7+1",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/064e5cc7-1446-462f-b033-63e09f4e0862",
+      "sheet": "Licensed FTEs",
+      "cell": "O107",
+      "formula": "SUM(O49:O106)",
+      "proof": "Licensed FTEs!O49:O109: 60 of 61 cells share the copied formula pattern (e.g. O49 = P49+Q49), but O107 = SUM(O49:O106)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/2555ac8d-d90f-4a82-be7e-801f87d9fa5e",
+      "sheet": "YR 11-12 to 12-13 Combined",
+      "cell": "G15",
+      "formula": "SUM(G3:G14)",
+      "proof": "YR 11-12 to 12-13 Combined!G3:G29: 26 of 27 cells share the copied formula pattern (e.g. G3 = IF(WithPerformance!G3=\"\",\"\",WithPerformance!G3)), but G15 = SUM(G3:G14)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/53062/3_53062_input.xlsx",
+      "sheet": "formamspnc (7)",
+      "cell": "EB8",
+      "formula": "LOOKUP(SUM(_xlfn.AGGREGATE(14,6,1+TEXT(FREQUENCY(IF(($AE8:$AP8<>\"\")*($AF8:$AQ8<>\"\")*($AF8:$AQ8=$AE8:$AP8),COLUMN($AE8:$AP8)),IF(($AE8:$AP8=\"\")+($AF8:$AQ8=\"\")+($AF8:$AQ8<>$AE8:$AP8),COLUMN($AE8:$AP8))),\"[=0]-1;#\"),{1,2})*{10,1}),{0,20,22,30,32,40},{0,5,3,4,2,1})",
+      "proof": "formamspnc (7)!DO8:EC8: 14 of 15 cells share the copied formula pattern (e.g. DO8 = IF(OR(AE8=1,AE8=0,AE8=-1),1,\"\")), but EB8 = LOOKUP(SUM(_xlfn.AGGREGATE(14,6,1+TEXT(FREQUENCY(IF(($AE8:$AP8<>\"\")*($AF8:$AQ8<>\"\")*($AF8:$AQ8=$AE8:$AP8),COLUMN($AE8:$AP8)),IF(($AE8:$AP8=\"\")+($AF8:$AQ8=\"\")+($AF8:$AQ8<>$AE8:$AP8),COLUMN($AE8:$AP8))),\"[=0]-1;#\"),{1,2})*{10,1}),{0,20,22,30,32,40},{0,5,3,4,2,1})",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/53062/3_53062_input.xlsx",
+      "sheet": "formamspnc (7)",
+      "cell": "EB9",
+      "formula": "LOOKUP(SUM(_xlfn.AGGREGATE(14,6,1+TEXT(FREQUENCY(IF(($AE9:$AP9<>\"\")*($AF9:$AQ9<>\"\")*($AF9:$AQ9=$AE9:$AP9),COLUMN($AE9:$AP9)),IF(($AE9:$AP9=\"\")+($AF9:$AQ9=\"\")+($AF9:$AQ9<>$AE9:$AP9),COLUMN($AE9:$AP9))),\"[=0]-1;#\"),{1,2})*{10,1}),{0,20,22,30,32,40},{0,5,3,4,2,1})",
+      "proof": "formamspnc (7)!DO9:EC9: 14 of 15 cells share the copied formula pattern (e.g. DO9 = IF(OR(AE9=1,AE9=0,AE9=-1),1,\"\")), but EB9 = LOOKUP(SUM(_xlfn.AGGREGATE(14,6,1+TEXT(FREQUENCY(IF(($AE9:$AP9<>\"\")*($AF9:$AQ9<>\"\")*($AF9:$AQ9=$AE9:$AP9),COLUMN($AE9:$AP9)),IF(($AE9:$AP9=\"\")+($AF9:$AQ9=\"\")+($AF9:$AQ9<>$AE9:$AP9),COLUMN($AE9:$AP9))),\"[=0]-1;#\"),{1,2})*{10,1}),{0,20,22,30,32,40},{0,5,3,4,2,1})",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/53062/3_53062_input.xlsx",
+      "sheet": "formamspnc (7)",
+      "cell": "EB6",
+      "formula": "LOOKUP(SUM(_xlfn.AGGREGATE(14,6,1+TEXT(FREQUENCY(IF(($AE6:$AP6<>\"\")*($AF6:$AQ6<>\"\")*($AF6:$AQ6=$AE6:$AP6),COLUMN($AE6:$AP6)),IF(($AE6:$AP6=\"\")+($AF6:$AQ6=\"\")+($AF6:$AQ6<>$AE6:$AP6),COLUMN($AE6:$AP6))),\"[=0]-1;#\"),{1,2})*{10,1}),{0,20,22,30,32,40},{0,5,3,4,2,1})",
+      "proof": "formamspnc (7)!DO6:EC6: 14 of 15 cells share the copied formula pattern (e.g. DO6 = IF(OR(AE6=1,AE6=0,AE6=-1),1,\"\")), but EB6 = LOOKUP(SUM(_xlfn.AGGREGATE(14,6,1+TEXT(FREQUENCY(IF(($AE6:$AP6<>\"\")*($AF6:$AQ6<>\"\")*($AF6:$AQ6=$AE6:$AP6),COLUMN($AE6:$AP6)),IF(($AE6:$AP6=\"\")+($AF6:$AQ6=\"\")+($AF6:$AQ6<>$AE6:$AP6),COLUMN($AE6:$AP6))),\"[=0]-1;#\"),{1,2})*{10,1}),{0,20,22,30,32,40},{0,5,3,4,2,1})",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/53062/3_53062_input.xlsx",
+      "sheet": "formamspnc (7)",
+      "cell": "EB7",
+      "formula": "LOOKUP(SUM(_xlfn.AGGREGATE(14,6,1+TEXT(FREQUENCY(IF(($AE7:$AP7<>\"\")*($AF7:$AQ7<>\"\")*($AF7:$AQ7=$AE7:$AP7),COLUMN($AE7:$AP7)),IF(($AE7:$AP7=\"\")+($AF7:$AQ7=\"\")+($AF7:$AQ7<>$AE7:$AP7),COLUMN($AE7:$AP7))),\"[=0]-1;#\"),{1,2})*{10,1}),{0,20,22,30,32,40},{0,5,3,4,2,1})",
+      "proof": "formamspnc (7)!DO7:EC7: 14 of 15 cells share the copied formula pattern (e.g. DO7 = IF(OR(AE7=1,AE7=0,AE7=-1),1,\"\")), but EB7 = LOOKUP(SUM(_xlfn.AGGREGATE(14,6,1+TEXT(FREQUENCY(IF(($AE7:$AP7<>\"\")*($AF7:$AQ7<>\"\")*($AF7:$AQ7=$AE7:$AP7),COLUMN($AE7:$AP7)),IF(($AE7:$AP7=\"\")+($AF7:$AQ7=\"\")+($AF7:$AQ7<>$AE7:$AP7),COLUMN($AE7:$AP7))),\"[=0]-1;#\"),{1,2})*{10,1}),{0,20,22,30,32,40},{0,5,3,4,2,1})",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/15eeee22-a2d2-49c5-a6e3-95cf22d74731",
+      "sheet": "Fase I Cordoba",
+      "cell": "AG17",
+      "formula": "+SUM(AG18:AG21)",
+      "proof": "Fase I Cordoba!AG12:AG23: 11 of 12 cells share the copied formula pattern (e.g. AG13 = +Y13+AA13+AC13+AE13), but AG17 = +SUM(AG18:AG21)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/c2eadff1-0a88-4c79-9e5b-0091afef9a51",
+      "sheet": "Sheet1",
+      "cell": "E2",
+      "formula": "SUM(E5:E504)",
+      "proof": "Sheet1!B2:I2: 7 of 8 cells share the copied formula pattern (e.g. B2 = COUNTA(B5:B504)), but E2 = SUM(E5:E504)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/7d90bb3b-1454-498e-b867-183299c8b5ca",
+      "sheet": "Sorted by % Kept by Charity",
+      "cell": "I1306",
+      "formula": "H1306/G1306",
+      "proof": "Sorted by % Kept by Charity!I1300:I1308: 8 of 9 cells share the copied formula pattern (e.g. I1300 = H1300/F1300), but I1306 = H1306/G1306",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/7d90bb3b-1454-498e-b867-183299c8b5ca",
+      "sheet": "Sorted by % Kept by Charity",
+      "cell": "I1304",
+      "formula": "H1304/G1304",
+      "proof": "Sorted by % Kept by Charity!I1300:I1308: 8 of 9 cells share the copied formula pattern (e.g. I1300 = H1300/F1300), but I1304 = H1304/G1304",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/44b49163-54b3-4522-bd3b-96caade6c83c",
+      "sheet": "Worksheet",
+      "cell": "FZ22",
+      "formula": "SUM(C22:FX22)+FY27",
+      "proof": "Worksheet!FZ13:FZ29: 16 of 17 cells share the copied formula pattern (e.g. FZ13 = SUM(C13:FX13)), but FZ22 = SUM(C22:FX22)+FY27",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/7d90bb3b-1454-498e-b867-183299c8b5ca",
+      "sheet": "Sorted by % Kept by Charity",
+      "cell": "I1381",
+      "formula": "H1381/G1381",
+      "proof": "Sorted by % Kept by Charity!I1379:I1389: 10 of 11 cells share the copied formula pattern (e.g. I1379 = H1379/F1379), but I1381 = H1381/G1381",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/01b84952-7097-4862-b760-e0b6e8f19207",
+      "sheet": "Total FTE",
+      "cell": "J11",
+      "formula": "SUM(J12:J14)",
+      "proof": "Total FTE!J6:J14: 8 of 9 cells share the copied formula pattern (e.g. J7 = 'Resident FTE'!J7+'Non-Resident FTE'!J7), but J11 = SUM(J12:J14)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/16c0646d-9f7b-4557-b1f0-b5748af1739e",
+      "sheet": "17",
+      "cell": "I56",
+      "formula": "E56",
+      "proof": "17!I37:I57: 20 of 21 cells share the copied formula pattern (e.g. I37 = SUM(E37:G37)), but I56 = E56",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/131e6084-0e7a-47e8-afe3-77ef5dacb519",
+      "sheet": "A",
+      "cell": "M55",
+      "formula": "(L55-L53)/L53",
+      "proof": "A!M12:M56: 44 of 45 cells share the copied formula pattern (e.g. M12 = (L12-L11)/L11), but M55 = (L55-L53)/L53",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/131e6084-0e7a-47e8-afe3-77ef5dacb519",
+      "sheet": "A",
+      "cell": "M44",
+      "formula": "(L44-L42)/L42",
+      "proof": "A!M12:M56: 44 of 45 cells share the copied formula pattern (e.g. M12 = (L12-L11)/L11), but M44 = (L44-L42)/L42",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/419532c3-44fb-4527-8bc1-dfdcefb4127c",
+      "sheet": "Exhibit 24 - 30 Year Proforma",
+      "cell": "D12",
+      "formula": "$C$12*(1+$B$12)",
+      "proof": "Exhibit 24 - 30 Year Proforma!C12:AF12: 29 of 30 cells share the copied formula pattern (e.g. E12 = D12*(1+$B$12)), but D12 = $C$12*(1+$B$12)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/20fc3695-e2cd-4b9d-84cb-62e68e187654",
+      "sheet": "Option 5",
+      "cell": "O100",
+      "formula": "SUMIF($P$131:$P$136,$P100,O$131:O$136)*1.5",
+      "proof": "Option 5!O90:O127: 37 of 38 cells share the copied formula pattern (e.g. O90 = SUMIF($P$131:$P$136,$P90,O$131:O$136)), but O100 = SUMIF($P$131:$P$136,$P100,O$131:O$136)*1.5",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/216b5582-e0fa-4d61-a484-83297a184095",
+      "sheet": "SF-424A (18)",
+      "cell": "D24",
+      "formula": "SUM(D16:D23)",
+      "proof": "SF-424A (18)!D16:D26: 10 of 11 cells share the copied formula pattern (e.g. D16 = 'SF-424A (17)'!H16), but D24 = SUM(D16:D23)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/20fc3695-e2cd-4b9d-84cb-62e68e187654",
+      "sheet": "Option 5",
+      "cell": "O151",
+      "formula": "O193*O$140*1.5",
+      "proof": "Option 5!O141:O179: 38 of 39 cells share the copied formula pattern (e.g. O141 = O183*O$140), but O151 = O193*O$140*1.5",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/8ab6b48a-d1d8-41cd-8f40-1c0f77279e7b",
+      "sheet": "Table 9_data",
+      "cell": "U488",
+      "formula": "AVERAGE(L332,L384,L436)",
+      "proof": "Table 9_data!T488:AA488: 7 of 8 cells share the copied formula pattern (e.g. V488 = (M332+M384+M436)/3), but U488 = AVERAGE(L332,L384,L436)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/8ab6b48a-d1d8-41cd-8f40-1c0f77279e7b",
+      "sheet": "Table 9_data",
+      "cell": "U489",
+      "formula": "AVERAGE(L333,L385,L437)",
+      "proof": "Table 9_data!T489:AA489: 7 of 8 cells share the copied formula pattern (e.g. V489 = (M333+M385+M437)/3), but U489 = AVERAGE(L333,L385,L437)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/8ab6b48a-d1d8-41cd-8f40-1c0f77279e7b",
+      "sheet": "Table 9_data",
+      "cell": "U487",
+      "formula": "AVERAGE(L331,L383,L435)",
+      "proof": "Table 9_data!T487:AA487: 7 of 8 cells share the copied formula pattern (e.g. V487 = (M331+M383+M435)/3), but U487 = AVERAGE(L331,L383,L435)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/8ab6b48a-d1d8-41cd-8f40-1c0f77279e7b",
+      "sheet": "Table 9_data",
+      "cell": "U491",
+      "formula": "AVERAGE(L335,L387,L439)",
+      "proof": "Table 9_data!T491:AA491: 7 of 8 cells share the copied formula pattern (e.g. V491 = (M335+M387+M439)/3), but U491 = AVERAGE(L335,L387,L439)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/8ab6b48a-d1d8-41cd-8f40-1c0f77279e7b",
+      "sheet": "Table 9_data",
+      "cell": "U490",
+      "formula": "AVERAGE(L334,L386,L438)",
+      "proof": "Table 9_data!T490:AA490: 7 of 8 cells share the copied formula pattern (e.g. V490 = (M334+M386+M438)/3), but U490 = AVERAGE(L334,L386,L438)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/8ab6b48a-d1d8-41cd-8f40-1c0f77279e7b",
+      "sheet": "Table 9_data",
+      "cell": "U493",
+      "formula": "AVERAGE(L337,L389,L441)",
+      "proof": "Table 9_data!T493:AA493: 7 of 8 cells share the copied formula pattern (e.g. V493 = (M337+M389+M441)/3), but U493 = AVERAGE(L337,L389,L441)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/8ab6b48a-d1d8-41cd-8f40-1c0f77279e7b",
+      "sheet": "Table 9_data",
+      "cell": "U492",
+      "formula": "AVERAGE(L336,L388,L440)",
+      "proof": "Table 9_data!T492:AA492: 7 of 8 cells share the copied formula pattern (e.g. V492 = (M336+M388+M440)/3), but U492 = AVERAGE(L336,L388,L440)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/8ab6b48a-d1d8-41cd-8f40-1c0f77279e7b",
+      "sheet": "Table 9_data",
+      "cell": "U495",
+      "formula": "AVERAGE(L339,L391,L443)",
+      "proof": "Table 9_data!T495:AA495: 7 of 8 cells share the copied formula pattern (e.g. V495 = (M339+M391+M443)/3), but U495 = AVERAGE(L339,L391,L443)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/8ab6b48a-d1d8-41cd-8f40-1c0f77279e7b",
+      "sheet": "Table 9_data",
+      "cell": "U494",
+      "formula": "AVERAGE(L338,L390,L442)",
+      "proof": "Table 9_data!T494:AA494: 7 of 8 cells share the copied formula pattern (e.g. V494 = (M338+M390+M442)/3), but U494 = AVERAGE(L338,L390,L442)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/8ab6b48a-d1d8-41cd-8f40-1c0f77279e7b",
+      "sheet": "Table 9_data",
+      "cell": "U497",
+      "formula": "AVERAGE(L341,L393,L445)",
+      "proof": "Table 9_data!T497:AA497: 7 of 8 cells share the copied formula pattern (e.g. V497 = (M341+M393+M445)/3), but U497 = AVERAGE(L341,L393,L445)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/8ab6b48a-d1d8-41cd-8f40-1c0f77279e7b",
+      "sheet": "Table 9_data",
+      "cell": "U496",
+      "formula": "AVERAGE(L340,L392,L444)",
+      "proof": "Table 9_data!T496:AA496: 7 of 8 cells share the copied formula pattern (e.g. V496 = (M340+M392+M444)/3), but U496 = AVERAGE(L340,L392,L444)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/8ab6b48a-d1d8-41cd-8f40-1c0f77279e7b",
+      "sheet": "Table 9_data",
+      "cell": "U499",
+      "formula": "AVERAGE(L343,L395,L447)",
+      "proof": "Table 9_data!T499:AA499: 7 of 8 cells share the copied formula pattern (e.g. V499 = (M343+M395+M447)/3), but U499 = AVERAGE(L343,L395,L447)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/8ab6b48a-d1d8-41cd-8f40-1c0f77279e7b",
+      "sheet": "Table 9_data",
+      "cell": "U498",
+      "formula": "AVERAGE(L342,L394,L446)",
+      "proof": "Table 9_data!T498:AA498: 7 of 8 cells share the copied formula pattern (e.g. V498 = (M342+M394+M446)/3), but U498 = AVERAGE(L342,L394,L446)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1a9f92c8-fdcc-4e41-9fb3-a0503dc52914",
+      "sheet": "NCLB Title II-A Formula",
+      "cell": "R200",
+      "formula": "SUM(R14:R198)",
+      "proof": "NCLB Title II-A Formula!C200:AH200: 31 of 32 cells share the copied formula pattern (e.g. D200 = SUM(D10:D198)), but R200 = SUM(R14:R198)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/175-10/2_175-10_input.xlsx",
+      "sheet": "DRP",
+      "cell": "I11",
+      "formula": "SUM(I7:I10)",
+      "proof": "DRP!I2:I23: 21 of 22 cells share the copied formula pattern (e.g. I2 = G2-H2), but I11 = SUM(I7:I10)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L487",
+      "formula": "+C487",
+      "proof": "Table 9_data!K487:R487: 7 of 8 cells share the copied formula pattern (e.g. M487 = AVERAGE(D484:D487)), but L487 = +C487",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L488",
+      "formula": "+C488",
+      "proof": "Table 9_data!K488:R488: 7 of 8 cells share the copied formula pattern (e.g. M488 = AVERAGE(D485:D488)), but L488 = +C488",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L489",
+      "formula": "+C489",
+      "proof": "Table 9_data!K489:R489: 7 of 8 cells share the copied formula pattern (e.g. M489 = AVERAGE(D486:D489)), but L489 = +C489",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L499",
+      "formula": "+C499",
+      "proof": "Table 9_data!K499:R499: 7 of 8 cells share the copied formula pattern (e.g. M499 = AVERAGE(D496:D499)), but L499 = +C499",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L498",
+      "formula": "+C498",
+      "proof": "Table 9_data!K498:R498: 7 of 8 cells share the copied formula pattern (e.g. M498 = AVERAGE(D495:D498)), but L498 = +C498",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L491",
+      "formula": "+C491",
+      "proof": "Table 9_data!K491:R491: 7 of 8 cells share the copied formula pattern (e.g. M491 = AVERAGE(D488:D491)), but L491 = +C491",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L490",
+      "formula": "+C490",
+      "proof": "Table 9_data!K490:R490: 7 of 8 cells share the copied formula pattern (e.g. M490 = AVERAGE(D487:D490)), but L490 = +C490",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L493",
+      "formula": "+C493",
+      "proof": "Table 9_data!K493:R493: 7 of 8 cells share the copied formula pattern (e.g. M493 = AVERAGE(D490:D493)), but L493 = +C493",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L492",
+      "formula": "+C492",
+      "proof": "Table 9_data!K492:R492: 7 of 8 cells share the copied formula pattern (e.g. M492 = AVERAGE(D489:D492)), but L492 = +C492",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L495",
+      "formula": "+C495",
+      "proof": "Table 9_data!K495:R495: 7 of 8 cells share the copied formula pattern (e.g. M495 = AVERAGE(D492:D495)), but L495 = +C495",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L494",
+      "formula": "+C494",
+      "proof": "Table 9_data!K494:R494: 7 of 8 cells share the copied formula pattern (e.g. M494 = AVERAGE(D491:D494)), but L494 = +C494",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L497",
+      "formula": "+C497",
+      "proof": "Table 9_data!K497:R497: 7 of 8 cells share the copied formula pattern (e.g. M497 = AVERAGE(D494:D497)), but L497 = +C497",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L496",
+      "formula": "+C496",
+      "proof": "Table 9_data!K496:R496: 7 of 8 cells share the copied formula pattern (e.g. M496 = AVERAGE(D493:D496)), but L496 = +C496",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L464",
+      "formula": "+C464",
+      "proof": "Table 9_data!K464:R464: 7 of 8 cells share the copied formula pattern (e.g. M464 = AVERAGE(D461:D464)), but L464 = +C464",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L465",
+      "formula": "+C465",
+      "proof": "Table 9_data!K465:R465: 7 of 8 cells share the copied formula pattern (e.g. M465 = AVERAGE(D462:D465)), but L465 = +C465",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L466",
+      "formula": "+C466",
+      "proof": "Table 9_data!K466:R466: 7 of 8 cells share the copied formula pattern (e.g. M466 = AVERAGE(D463:D466)), but L466 = +C466",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L467",
+      "formula": "+C467",
+      "proof": "Table 9_data!K467:R467: 7 of 8 cells share the copied formula pattern (e.g. M467 = AVERAGE(D464:D467)), but L467 = +C467",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L460",
+      "formula": "+C460",
+      "proof": "Table 9_data!K460:R460: 7 of 8 cells share the copied formula pattern (e.g. M460 = AVERAGE(D457:D460)), but L460 = +C460",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L461",
+      "formula": "+C461",
+      "proof": "Table 9_data!K461:R461: 7 of 8 cells share the copied formula pattern (e.g. M461 = AVERAGE(D458:D461)), but L461 = +C461",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L462",
+      "formula": "+C462",
+      "proof": "Table 9_data!K462:R462: 7 of 8 cells share the copied formula pattern (e.g. M462 = AVERAGE(D459:D462)), but L462 = +C462",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L463",
+      "formula": "+C463",
+      "proof": "Table 9_data!K463:R463: 7 of 8 cells share the copied formula pattern (e.g. M463 = AVERAGE(D460:D463)), but L463 = +C463",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L468",
+      "formula": "+C468",
+      "proof": "Table 9_data!K468:R468: 7 of 8 cells share the copied formula pattern (e.g. M468 = AVERAGE(D465:D468)), but L468 = +C468",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L469",
+      "formula": "+C469",
+      "proof": "Table 9_data!K469:R469: 7 of 8 cells share the copied formula pattern (e.g. M469 = AVERAGE(D466:D469)), but L469 = +C469",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L448",
+      "formula": "+C448",
+      "proof": "Table 9_data!K448:R448: 7 of 8 cells share the copied formula pattern (e.g. M448 = AVERAGE(D445:D448)), but L448 = +C448",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L449",
+      "formula": "+C449",
+      "proof": "Table 9_data!K449:R449: 7 of 8 cells share the copied formula pattern (e.g. M449 = AVERAGE(D446:D449)), but L449 = +C449",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L442",
+      "formula": "+C442",
+      "proof": "Table 9_data!K442:R442: 7 of 8 cells share the copied formula pattern (e.g. M442 = AVERAGE(D439:D442)), but L442 = +C442",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L443",
+      "formula": "+C443",
+      "proof": "Table 9_data!K443:R443: 7 of 8 cells share the copied formula pattern (e.g. M443 = AVERAGE(D440:D443)), but L443 = +C443",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L446",
+      "formula": "+C446",
+      "proof": "Table 9_data!K446:R446: 7 of 8 cells share the copied formula pattern (e.g. M446 = AVERAGE(D443:D446)), but L446 = +C446",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L447",
+      "formula": "+C447",
+      "proof": "Table 9_data!K447:R447: 7 of 8 cells share the copied formula pattern (e.g. M447 = AVERAGE(D444:D447)), but L447 = +C447",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L444",
+      "formula": "+C444",
+      "proof": "Table 9_data!K444:R444: 7 of 8 cells share the copied formula pattern (e.g. M444 = AVERAGE(D441:D444)), but L444 = +C444",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L445",
+      "formula": "+C445",
+      "proof": "Table 9_data!K445:R445: 7 of 8 cells share the copied formula pattern (e.g. M445 = AVERAGE(D442:D445)), but L445 = +C445",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L459",
+      "formula": "+C459",
+      "proof": "Table 9_data!K459:R459: 7 of 8 cells share the copied formula pattern (e.g. M459 = AVERAGE(D456:D459)), but L459 = +C459",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L458",
+      "formula": "+C458",
+      "proof": "Table 9_data!K458:R458: 7 of 8 cells share the copied formula pattern (e.g. M458 = AVERAGE(D455:D458)), but L458 = +C458",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L455",
+      "formula": "+C455",
+      "proof": "Table 9_data!K455:R455: 7 of 8 cells share the copied formula pattern (e.g. M455 = AVERAGE(D452:D455)), but L455 = +C455",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L454",
+      "formula": "+C454",
+      "proof": "Table 9_data!K454:R454: 7 of 8 cells share the copied formula pattern (e.g. M454 = AVERAGE(D451:D454)), but L454 = +C454",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L457",
+      "formula": "+C457",
+      "proof": "Table 9_data!K457:R457: 7 of 8 cells share the copied formula pattern (e.g. M457 = AVERAGE(D454:D457)), but L457 = +C457",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L456",
+      "formula": "+C456",
+      "proof": "Table 9_data!K456:R456: 7 of 8 cells share the copied formula pattern (e.g. M456 = AVERAGE(D453:D456)), but L456 = +C456",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L451",
+      "formula": "+C451",
+      "proof": "Table 9_data!K451:R451: 7 of 8 cells share the copied formula pattern (e.g. M451 = AVERAGE(D448:D451)), but L451 = +C451",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L450",
+      "formula": "+C450",
+      "proof": "Table 9_data!K450:R450: 7 of 8 cells share the copied formula pattern (e.g. M450 = AVERAGE(D447:D450)), but L450 = +C450",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L453",
+      "formula": "+C453",
+      "proof": "Table 9_data!K453:R453: 7 of 8 cells share the copied formula pattern (e.g. M453 = AVERAGE(D450:D453)), but L453 = +C453",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841",
+      "sheet": "Table 9_data",
+      "cell": "L452",
+      "formula": "+C452",
+      "proof": "Table 9_data!K452:R452: 7 of 8 cells share the copied formula pattern (e.g. M452 = AVERAGE(D449:D452)), but L452 = +C452",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/49490/2_49490_answer.xlsx",
+      "sheet": "Sheet1",
+      "cell": "K4",
+      "formula": "7",
+      "proof": "Sheet1!K3:K1001: 998 of 999 cells share the copied formula pattern (e.g. K5 = \"\"), but K4 = 7",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/9f5d407c-35f1-4789-8cee-d5f90c159667",
+      "sheet": "SW015",
+      "cell": "G9",
+      "formula": "\"BG\"",
+      "proof": "SW015!G2:G10: 8 of 9 cells share the copied formula pattern (e.g. G2 = \"CA\"), but G9 = \"BG\"",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/4e8dc5a0-f0e0-4813-8279-2b9c647c7de9",
+      "sheet": "FORM 11 Cash Flow",
+      "cell": "P22",
+      "formula": "SUM(P20:P21)",
+      "proof": "FORM 11 Cash Flow!C22:Q22: 14 of 15 cells share the copied formula pattern (e.g. C22 = C20+C21), but P22 = SUM(P20:P21)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/216b5582-e0fa-4d61-a484-83297a184095",
+      "sheet": "SF-424A (6)",
+      "cell": "D24",
+      "formula": "SUM(D16:D23)",
+      "proof": "SF-424A (6)!D16:D26: 10 of 11 cells share the copied formula pattern (e.g. D16 = 'SF-424A (5)'!H16), but D24 = SUM(D16:D23)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/55ff905d-f91e-4936-92ef-c57e4fb22efd",
+      "sheet": "Detail Summary",
+      "cell": "E163",
+      "formula": "SUM(E50:E162)",
+      "proof": "Detail Summary!E148:E167: 19 of 20 cells share the copied formula pattern (e.g. E148 = SUM(#REF!)), but E163 = SUM(E50:E162)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/260b9a44-42e8-4da9-b08f-4cd3c5c6190f",
+      "sheet": "Option 7",
+      "cell": "L100",
+      "formula": "SUMIF($N$131:$N$135,$N100,L$131:L$135)*1.5",
+      "proof": "Option 7!L90:L127: 37 of 38 cells share the copied formula pattern (e.g. L90 = SUMIF($N$131:$N$135,$N90,L$131:L$135)), but L100 = SUMIF($N$131:$N$135,$N100,L$131:L$135)*1.5",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/0e18296d-e8fe-4923-8474-9b5ae055f4d5",
+      "sheet": "Sheet1",
+      "cell": "Y58",
+      "formula": "SUM(Y33:Y57)",
+      "proof": "Sheet1!Y40:Y59: 19 of 20 cells share the copied formula pattern (e.g. Y40 = $C40*X40), but Y58 = SUM(Y33:Y57)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/4a766bf3-8937-44be-b716-c9385a11fb08",
+      "sheet": "SIG Cohort 8",
+      "cell": "Q21",
+      "formula": "SUM(Q13:Q20)",
+      "proof": "SIG Cohort 8!D21:T21: 16 of 17 cells share the copied formula pattern (e.g. D21 = SUM(D11:D20)), but Q21 = SUM(Q13:Q20)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/3e0495be-c307-4df7-8b49-b8ca0ae395a8",
+      "sheet": "Test Change",
+      "cell": "G208",
+      "formula": "G9-G134",
+      "proof": "Test Change!F208:Q208: 11 of 12 cells share the copied formula pattern (e.g. H208 = H47-H134), but G208 = G9-G134",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/3e0495be-c307-4df7-8b49-b8ca0ae395a8",
+      "sheet": "Test Change",
+      "cell": "G295",
+      "formula": "G97-G208",
+      "proof": "Test Change!F295:Q295: 11 of 12 cells share the copied formula pattern (e.g. H295 = IF(H134>0,H208/H134,0)), but G295 = G97-G208",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/0214fb96-971a-45ce-b7fe-1ee598e0ebeb",
+      "sheet": "Sheet1",
+      "cell": "K58",
+      "formula": "SUM(K32:K57)",
+      "proof": "Sheet1!K40:K59: 19 of 20 cells share the copied formula pattern (e.g. K40 = $C40*J40), but K58 = SUM(K32:K57)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/04d3d9f4-72bf-416c-b62d-0449a8f5be6c",
+      "sheet": "Table 9_data",
+      "cell": "U218",
+      "formula": "(M62+M114+M166)/3",
+      "proof": "Table 9_data!U217:U423: 206 of 207 cells share the copied formula pattern (e.g. U217 = (L61+L113+L165)/3), but U218 = (M62+M114+M166)/3",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/04d3d9f4-72bf-416c-b62d-0449a8f5be6c",
+      "sheet": "Table 9_data",
+      "cell": "U219",
+      "formula": "(M63+M115+M167)/3",
+      "proof": "Table 9_data!U217:U423: 206 of 207 cells share the copied formula pattern (e.g. U217 = (L61+L113+L165)/3), but U219 = (M63+M115+M167)/3",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/04d3d9f4-72bf-416c-b62d-0449a8f5be6c",
+      "sheet": "Table 9_data",
+      "cell": "U217",
+      "formula": "(L61+L113+L165)/3",
+      "proof": "Table 9_data!T217:AA217: 7 of 8 cells share the copied formula pattern (e.g. V217 = (N61+N113+N165)/3), but U217 = (L61+L113+L165)/3",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/2df8ad0c-9064-4eb6-852c-24b17d31f7fb",
+      "sheet": "Data",
+      "cell": "E213",
+      "formula": "AVERAGE(E201,E189,E177,E165)",
+      "proof": "Data!E103:E230: 127 of 128 cells share the copied formula pattern (e.g. E103 = AVERAGE(D91,D79,D67,D55)), but E213 = AVERAGE(E201,E189,E177,E165)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/56cbca12-9c02-49e5-a064-53129669df80",
+      "sheet": "SPARE 1",
+      "cell": "O12",
+      "formula": "IF($D12=\"\",\"\",$G12/$F12)",
+      "proof": "SPARE 1!O11:O137: 126 of 127 cells share the copied formula pattern (e.g. O13 = IF($D13=\"\",\"\",G13/$F13)), but O12 = IF($D12=\"\",\"\",$G12/$F12)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/05552109-fe4e-4827-bb03-d897a0104261",
+      "sheet": "Sheet1",
+      "cell": "G58",
+      "formula": "SUM(G32:G57)",
+      "proof": "Sheet1!G40:G59: 19 of 20 cells share the copied formula pattern (e.g. G40 = $C40*F40), but G58 = SUM(G32:G57)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f1d1560-0c9e-4531-be8d-934fd864dac3",
+      "sheet": "ChartersHighSchool",
+      "cell": "M35",
+      "formula": "SUM(M3:M34)",
+      "proof": "ChartersHighSchool!M3:M36: 33 of 34 cells share the copied formula pattern (e.g. M3 = SUM(B3:L3)), but M35 = SUM(M3:M34)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/053723aa-71ab-4649-987c-326900fc3c22",
+      "sheet": "4 YEARS",
+      "cell": "K46",
+      "formula": "SUM(K44:K45)",
+      "proof": "4 YEARS!K38:K50: 12 of 13 cells share the copied formula pattern (e.g. K38 = SUM(G38:J38)), but K46 = SUM(K44:K45)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/05ee7089-0a60-454e-83e2-0c95b7f42c5c",
+      "sheet": "YR 11-12 to 12-13 Combined",
+      "cell": "D29",
+      "formula": "(C29-B29)/B29",
+      "proof": "YR 11-12 to 12-13 Combined!B29:J29: 8 of 9 cells share the copied formula pattern (e.g. B29 = B15+B28), but D29 = (C29-B29)/B29",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/05ee7089-0a60-454e-83e2-0c95b7f42c5c",
+      "sheet": "YR 11-12 to 12-13 Combined",
+      "cell": "D15",
+      "formula": "(C15-B15)/B15",
+      "proof": "YR 11-12 to 12-13 Combined!B15:J15: 8 of 9 cells share the copied formula pattern (e.g. B15 = SUM(B3:B14)), but D15 = (C15-B15)/B15",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/05ee7089-0a60-454e-83e2-0c95b7f42c5c",
+      "sheet": "YR 11-12 to 12-13 Combined",
+      "cell": "D15",
+      "formula": "(C15-B15)/B15",
+      "proof": "YR 11-12 to 12-13 Combined!D3:D29: 26 of 27 cells share the copied formula pattern (e.g. D3 = IF(WithPerformance!D3=\"\",\"\",WithPerformance!D3)), but D15 = (C15-B15)/B15",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/281f562a-e14b-4942-874e-ec673d305434",
+      "sheet": "Sheet1",
+      "cell": "U58",
+      "formula": "SUM(U32:U57)",
+      "proof": "Sheet1!U40:U59: 19 of 20 cells share the copied formula pattern (e.g. U40 = $C40*T40), but U58 = SUM(U32:U57)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/58147/1_58147_answer.xlsx",
+      "sheet": "Here",
+      "cell": "G3",
+      "formula": "LEFT(F3,1)",
+      "proof": "Here!A3:H3: 7 of 8 cells share the copied formula pattern (e.g. A3 = IF(Sheet1!A3=\"\",\"\",Sheet1!A3)), but G3 = LEFT(F3,1)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/58147/1_58147_answer.xlsx",
+      "sheet": "Here",
+      "cell": "G4",
+      "formula": "LEFT(F4,1)",
+      "proof": "Here!A4:H4: 7 of 8 cells share the copied formula pattern (e.g. A4 = IF(Sheet1!A4=\"\",\"\",Sheet1!A4)), but G4 = LEFT(F4,1)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/58147/1_58147_answer.xlsx",
+      "sheet": "Here",
+      "cell": "G5",
+      "formula": "LEFT(F5,1)",
+      "proof": "Here!A5:H5: 7 of 8 cells share the copied formula pattern (e.g. A5 = IF(Sheet1!A5=\"\",\"\",Sheet1!A5)), but G5 = LEFT(F5,1)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/f7a9ecd0-6b11-490c-b87c-f67a6643691a",
+      "sheet": "Table 9_data",
+      "cell": "L506",
+      "formula": "+C506",
+      "proof": "Table 9_data!K506:R506: 7 of 8 cells share the copied formula pattern (e.g. M506 = AVERAGE(D503:D506)), but L506 = +C506",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/f7a9ecd0-6b11-490c-b87c-f67a6643691a",
+      "sheet": "Table 9_data",
+      "cell": "L507",
+      "formula": "+C507",
+      "proof": "Table 9_data!K507:R507: 7 of 8 cells share the copied formula pattern (e.g. M507 = AVERAGE(D504:D507)), but L507 = +C507",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/f7a9ecd0-6b11-490c-b87c-f67a6643691a",
+      "sheet": "Table 9_data",
+      "cell": "L504",
+      "formula": "+C504",
+      "proof": "Table 9_data!K504:R504: 7 of 8 cells share the copied formula pattern (e.g. M504 = AVERAGE(D501:D504)), but L504 = +C504",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/f7a9ecd0-6b11-490c-b87c-f67a6643691a",
+      "sheet": "Table 9_data",
+      "cell": "L505",
+      "formula": "+C505",
+      "proof": "Table 9_data!K505:R505: 7 of 8 cells share the copied formula pattern (e.g. M505 = AVERAGE(D502:D505)), but L505 = +C505",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/f7a9ecd0-6b11-490c-b87c-f67a6643691a",
+      "sheet": "Table 9_data",
+      "cell": "L502",
+      "formula": "+C502",
+      "proof": "Table 9_data!K502:R502: 7 of 8 cells share the copied formula pattern (e.g. M502 = AVERAGE(D499:D502)), but L502 = +C502",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/f7a9ecd0-6b11-490c-b87c-f67a6643691a",
+      "sheet": "Table 9_data",
+      "cell": "L503",
+      "formula": "+C503",
+      "proof": "Table 9_data!K503:R503: 7 of 8 cells share the copied formula pattern (e.g. M503 = AVERAGE(D500:D503)), but L503 = +C503",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/f7a9ecd0-6b11-490c-b87c-f67a6643691a",
+      "sheet": "Table 9_data",
+      "cell": "L500",
+      "formula": "+C500",
+      "proof": "Table 9_data!K500:R500: 7 of 8 cells share the copied formula pattern (e.g. M500 = AVERAGE(D497:D500)), but L500 = +C500",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/f7a9ecd0-6b11-490c-b87c-f67a6643691a",
+      "sheet": "Table 9_data",
+      "cell": "L501",
+      "formula": "+C501",
+      "proof": "Table 9_data!K501:R501: 7 of 8 cells share the copied formula pattern (e.g. M501 = AVERAGE(D498:D501)), but L501 = +C501",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/f7a9ecd0-6b11-490c-b87c-f67a6643691a",
+      "sheet": "Table 9_data",
+      "cell": "L508",
+      "formula": "+C508",
+      "proof": "Table 9_data!K508:R508: 7 of 8 cells share the copied formula pattern (e.g. M508 = AVERAGE(D505:D508)), but L508 = +C508",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/f7a9ecd0-6b11-490c-b87c-f67a6643691a",
+      "sheet": "Table 9_data",
+      "cell": "L509",
+      "formula": "+C509",
+      "proof": "Table 9_data!K509:R509: 7 of 8 cells share the copied formula pattern (e.g. M509 = AVERAGE(D506:D509)), but L509 = +C509",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/f7a9ecd0-6b11-490c-b87c-f67a6643691a",
+      "sheet": "Table 9_data",
+      "cell": "L510",
+      "formula": "+C510",
+      "proof": "Table 9_data!K510:R510: 7 of 8 cells share the copied formula pattern (e.g. M510 = AVERAGE(D507:D510)), but L510 = +C510",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/0bbff19d-7640-4484-88cf-f2c9b8ac6ff2",
+      "sheet": "3 YEARS",
+      "cell": "P46",
+      "formula": "SUM(P44:P45)",
+      "proof": "3 YEARS!P38:P50: 12 of 13 cells share the copied formula pattern (e.g. P38 = G38+J38+M38), but P46 = SUM(P44:P45)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/216b5582-e0fa-4d61-a484-83297a184095",
+      "sheet": "SF-424A (21)",
+      "cell": "D24",
+      "formula": "SUM(D16:D23)",
+      "proof": "SF-424A (21)!D16:D26: 10 of 11 cells share the copied formula pattern (e.g. D16 = 'SF-424A (20)'!H16), but D24 = SUM(D16:D23)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/0c749109-c86f-482b-bbee-30ed10d421e9",
+      "sheet": "8.1 Students with Disabilities ",
+      "cell": "H27",
+      "formula": "SUM(H21:H26)",
+      "proof": "8.1 Students with Disabilities !H21:H30: 9 of 10 cells share the copied formula pattern (e.g. H21 = SUM(D21,F21)), but H27 = SUM(H21:H26)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/0a53d04b-320d-4de3-ae46-6af5247f28ba",
+      "sheet": "Lansing Dashboard",
+      "cell": "N67",
+      "formula": "IF(L67>J67,0,IF(L67<J67,2,1))",
+      "proof": "Lansing Dashboard!N66:N74: 8 of 9 cells share the copied formula pattern (e.g. N68 = IF(L68>J68,2,IF(L68<J68,0,1))), but N67 = IF(L67>J67,0,IF(L67<J67,2,1))",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/15eeee22-a2d2-49c5-a6e3-95cf22d74731",
+      "sheet": "Fase I Santander",
+      "cell": "U17",
+      "formula": "+SUM(U18:U21)",
+      "proof": "Fase I Santander!U12:U23: 11 of 12 cells share the copied formula pattern (e.g. U13 = S13), but U17 = +SUM(U18:U21)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/11276/3_11276_input.xlsx",
+      "sheet": "ATTENDENCE",
+      "cell": "E6",
+      "formula": "17-12",
+      "proof": "ATTENDENCE!D6:Q6: 13 of 14 cells share the copied formula pattern (e.g. F6 = IF(F3=\"F\",\"O\",\"P\")), but E6 = 17-12",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/014a6c57-a3c8-4ac9-a5a5-4c3e6ab18845",
+      "sheet": "YR 11-12 to 12-13 Combined",
+      "cell": "G15",
+      "formula": "SUM(G3:G14)",
+      "proof": "YR 11-12 to 12-13 Combined!G3:G29: 26 of 27 cells share the copied formula pattern (e.g. G3 = IF(WithPerformance!G3=\"\",\"\",WithPerformance!G3)), but G15 = SUM(G3:G14)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/6e537e52-4565-4f41-b421-b1893255d7e7",
+      "sheet": "Actual",
+      "cell": "R14",
+      "formula": "SUM(R6:R13)",
+      "proof": "Actual!R6:R15: 9 of 10 cells share the copied formula pattern (e.g. R6 = SUM(E6:P6)), but R14 = SUM(R6:R13)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/0c1f4102-6b35-44f4-852b-428f6e0a9765",
+      "sheet": "M200OPR",
+      "cell": "Q33",
+      "formula": "SUM(Q27:Q32)",
+      "proof": "M200OPR!Q27:Q34: 7 of 8 cells share the copied formula pattern (e.g. Q27 = ROUND(Q$23*P27,0)), but Q33 = SUM(Q27:Q32)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 18",
+      "cell": "L58",
+      "formula": "L100*L166*1.5",
+      "proof": "Option 18!L48:L86: 38 of 39 cells share the copied formula pattern (e.g. L48 = L90*L156), but L58 = L100*L166*1.5",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/219bb193-7118-459e-9ca4-a494a82a3510",
+      "sheet": "Stats",
+      "cell": "E13",
+      "formula": "(B13*C13)*D13",
+      "proof": "Stats!E2:E16: 14 of 15 cells share the copied formula pattern (e.g. E2 = (B2+C2)+D2), but E13 = (B13*C13)*D13",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/15eeee22-a2d2-49c5-a6e3-95cf22d74731",
+      "sheet": "Fase I Nte Santander",
+      "cell": "AH11",
+      "formula": "SUM(AH12:AH23)",
+      "proof": "Fase I Nte Santander!AH4:AH12: 8 of 9 cells share the copied formula pattern (e.g. AH5 = +U5+AG5), but AH11 = SUM(AH12:AH23)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/06f2f18c-aaa5-4d8e-ba8a-6ca1ff77a788",
+      "sheet": "Sheet1",
+      "cell": "E23",
+      "formula": "+D23+1",
+      "proof": "Sheet1!E22:E123: 101 of 102 cells share the copied formula pattern (e.g. E24 = IF(DB24<9,E$22*ERFC(DB24),0)), but E23 = +D23+1",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1a9b7a91-fb9b-4fa1-99d0-253f7a20fd31",
+      "sheet": "SUMMARY OF FORMULA GRANT",
+      "cell": "C183",
+      "formula": "'NCLB Title I-A Formula'!G191",
+      "proof": "SUMMARY OF FORMULA GRANT!C4:C186: 182 of 183 cells share the copied formula pattern (e.g. C4 = 'NCLB Title I-A Formula'!G13), but C183 = 'NCLB Title I-A Formula'!G191",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1a9b7a91-fb9b-4fa1-99d0-253f7a20fd31",
+      "sheet": "SUMMARY OF FORMULA GRANT",
+      "cell": "C182",
+      "formula": "'NCLB Title I-A Formula'!G192",
+      "proof": "SUMMARY OF FORMULA GRANT!C4:C186: 182 of 183 cells share the copied formula pattern (e.g. C4 = 'NCLB Title I-A Formula'!G13), but C182 = 'NCLB Title I-A Formula'!G192",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/6a1188cf-8921-4646-9b5a-e25cc3d742cb",
+      "sheet": "Sheet1",
+      "cell": "K58",
+      "formula": "SUM(K32:K57)",
+      "proof": "Sheet1!K40:K59: 19 of 20 cells share the copied formula pattern (e.g. K40 = $C40*J40), but K58 = SUM(K32:K57)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 16",
+      "cell": "E199",
+      "formula": "AVERAGE(E241,E283,E325)*D199",
+      "proof": "Option 16!D199:M199: 9 of 10 cells share the copied formula pattern (e.g. D199 = AVERAGE(D241,D283,D325)), but E199 = AVERAGE(E241,E283,E325)*D199",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 16",
+      "cell": "E198",
+      "formula": "AVERAGE(E240,E282,E324)*D198",
+      "proof": "Option 16!D198:M198: 9 of 10 cells share the copied formula pattern (e.g. D198 = AVERAGE(D240,D282,D324)), but E198 = AVERAGE(E240,E282,E324)*D198",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/11c06fb0-7db7-4b6e-8c65-1d2389df9265",
+      "sheet": "Density & Budget",
+      "cell": "C46",
+      "formula": "SUM(C40:C45)",
+      "proof": "Density & Budget!C40:C47: 7 of 8 cells share the copied formula pattern (e.g. C40 = B40/$B$80), but C46 = SUM(C40:C45)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/2555ac8d-d90f-4a82-be7e-801f87d9fa5e",
+      "sheet": "YR 11-12 to 12-13 Combined",
+      "cell": "F15",
+      "formula": "SUM(F3:F14)",
+      "proof": "YR 11-12 to 12-13 Combined!F3:F29: 26 of 27 cells share the copied formula pattern (e.g. F3 = IF(WithPerformance!F3=\"\",\"\",WithPerformance!F3)), but F15 = SUM(F3:F14)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/4d0b4e62-8115-48f1-bf3a-532e66662940",
+      "sheet": "Time Report",
+      "cell": "B11",
+      "formula": "YEAR(NOW())",
+      "proof": "Time Report!B1:B12: 11 of 12 cells share the copied formula pattern (e.g. B1 = B2-1), but B11 = YEAR(NOW())",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/15eeee22-a2d2-49c5-a6e3-95cf22d74731",
+      "sheet": "Fase I Bolivar",
+      "cell": "AH11",
+      "formula": "SUM(AH12:AH23)",
+      "proof": "Fase I Bolivar!AH4:AH12: 8 of 9 cells share the copied formula pattern (e.g. AH5 = +U5+AG5), but AH11 = SUM(AH12:AH23)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/05b1e175-7154-4716-884f-37c652bf2f65",
+      "sheet": "ARRA Allocation-midyear load",
+      "cell": "E15",
+      "formula": "ROUND(-D15*$D$520,2)+0.15",
+      "proof": "ARRA Allocation-midyear load!E14:E488: 474 of 475 cells share the copied formula pattern (e.g. E14 = ROUND(-D14*$D$520,2)), but E15 = ROUND(-D15*$D$520,2)+0.15",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/15eeee22-a2d2-49c5-a6e3-95cf22d74731",
+      "sheet": "Fase I Cordoba",
+      "cell": "AF17",
+      "formula": "+SUM(AF18:AF21)",
+      "proof": "Fase I Cordoba!AF12:AF23: 11 of 12 cells share the copied formula pattern (e.g. AF13 = +X13+Z13+AB13+AD13), but AF17 = +SUM(AF18:AF21)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/f1951730-b0a4-407a-ae2a-067c896dec24",
+      "sheet": "Data",
+      "cell": "E213",
+      "formula": "AVERAGE(E201,E189,E177,E165)",
+      "proof": "Data!E103:E232: 129 of 130 cells share the copied formula pattern (e.g. E103 = AVERAGE(D91,D79,D67,D55)), but E213 = AVERAGE(E201,E189,E177,E165)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/461d18f2-c493-434a-9490-da594a002e11",
+      "sheet": "Progress Invoice Estimate",
+      "cell": "I37",
+      "formula": "IF(H37=0,0,H37/D37)",
+      "proof": "Progress Invoice Estimate!D37:K37: 7 of 8 cells share the copied formula pattern (e.g. D37 = SUM(D13:D36)), but I37 = IF(H37=0,0,H37/D37)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/58114/2_58114_answer.xlsx",
+      "sheet": "Here",
+      "cell": "G3",
+      "formula": "LEFT(F3,1)",
+      "proof": "Here!A3:H3: 7 of 8 cells share the copied formula pattern (e.g. A3 = IF(Sheet1!A3=\"\",\"\",Sheet1!A3)), but G3 = LEFT(F3,1)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/58114/2_58114_answer.xlsx",
+      "sheet": "Here",
+      "cell": "G2",
+      "formula": "LEFT(F2,1)",
+      "proof": "Here!A2:H2: 7 of 8 cells share the copied formula pattern (e.g. A2 = IF(Sheet1!A2=\"\",\"\",Sheet1!A2)), but G2 = LEFT(F2,1)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/58114/2_58114_answer.xlsx",
+      "sheet": "Here",
+      "cell": "G5",
+      "formula": "LEFT(F5,1)",
+      "proof": "Here!A5:H5: 7 of 8 cells share the copied formula pattern (e.g. A5 = IF(Sheet1!A5=\"\",\"\",Sheet1!A5)), but G5 = LEFT(F5,1)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/spreadsheetbench/all_data_912_v0.1/spreadsheet/58114/2_58114_answer.xlsx",
+      "sheet": "Here",
+      "cell": "G4",
+      "formula": "LEFT(F4,1)",
+      "proof": "Here!A4:H4: 7 of 8 cells share the copied formula pattern (e.g. A4 = IF(Sheet1!A4=\"\",\"\",Sheet1!A4)), but G4 = LEFT(F4,1)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/05a32bfd-b279-4832-aa15-8146ccfc07a4",
+      "sheet": "Details",
+      "cell": "AW553",
+      "formula": "SUM(AW16:AW349)",
+      "proof": "Details!AW547:AW555: 8 of 9 cells share the copied formula pattern (e.g. AW547 = SUMIF($D$16:$D$546,$D547,AX$16:AX$546)), but AW553 = SUM(AW16:AW349)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/44b49163-54b3-4522-bd3b-96caade6c83c",
+      "sheet": "Worksheet",
+      "cell": "FY92",
+      "formula": "SUM(C92:FX92)",
+      "proof": "Worksheet!C92:FZ92: 179 of 180 cells share the copied formula pattern (e.g. C92 = C27), but FY92 = SUM(C92:FX92)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/44b49163-54b3-4522-bd3b-96caade6c83c",
+      "sheet": "Worksheet",
+      "cell": "FY95",
+      "formula": "SUM(C93:FX93)",
+      "proof": "Worksheet!C95:FZ95: 179 of 180 cells share the copied formula pattern (e.g. C95 = IF(AND((C87+C90+C91+C92+C93+C94)<50,(C7=0)),50,(C87+C90+C91+C92+C93+C94))), but FY95 = SUM(C93:FX93)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/44b49163-54b3-4522-bd3b-96caade6c83c",
+      "sheet": "Worksheet",
+      "cell": "FY97",
+      "formula": "SUM(C97:FX97)",
+      "proof": "Worksheet!C97:FZ97: 179 of 180 cells share the copied formula pattern (e.g. C97 = C28), but FY97 = SUM(C97:FX97)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/44b49163-54b3-4522-bd3b-96caade6c83c",
+      "sheet": "Worksheet",
+      "cell": "FY99",
+      "formula": "SUM(C99:FX99)",
+      "proof": "Worksheet!C99:FZ99: 179 of 180 cells share the copied formula pattern (e.g. C99 = C26), but FY99 = SUM(C99:FX99)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/3e0495be-c307-4df7-8b49-b8ca0ae395a8",
+      "sheet": "SUMMARY-Approp Table",
+      "cell": "E67",
+      "formula": "'FY 2004'!I61",
+      "proof": "SUMMARY-Approp Table!D67:P67: 12 of 13 cells share the copied formula pattern (e.g. F67 = 'FY 2005'!I61), but E67 = 'FY 2004'!I61",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/3e0495be-c307-4df7-8b49-b8ca0ae395a8",
+      "sheet": "SUMMARY-Approp Table",
+      "cell": "E68",
+      "formula": "'FY 2004'!I62",
+      "proof": "SUMMARY-Approp Table!D68:P68: 12 of 13 cells share the copied formula pattern (e.g. F68 = 'FY 2005'!I62), but E68 = 'FY 2004'!I62",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/3e0495be-c307-4df7-8b49-b8ca0ae395a8",
+      "sheet": "SUMMARY-Approp Table",
+      "cell": "E69",
+      "formula": "'FY 2004'!I63",
+      "proof": "SUMMARY-Approp Table!D69:P69: 12 of 13 cells share the copied formula pattern (e.g. F69 = 'FY 2005'!I63), but E69 = 'FY 2004'!I63",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/5ee3c2bb-d657-4e93-9a59-97c51ef596ec",
+      "sheet": "WithPerformance",
+      "cell": "J15",
+      "formula": "SUM(J3:J14)",
+      "proof": "WithPerformance!J3:J25: 22 of 23 cells share the copied formula pattern (e.g. J3 = F3-I3), but J15 = SUM(J3:J14)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/01b84952-7097-4862-b760-e0b6e8f19207",
+      "sheet": "Total FTE",
+      "cell": "I11",
+      "formula": "SUM(I12:I14)",
+      "proof": "Total FTE!I6:I14: 8 of 9 cells share the copied formula pattern (e.g. I7 = 'Resident FTE'!I7+'Non-Resident FTE'!I7), but I11 = SUM(I12:I14)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/260b9a44-42e8-4da9-b08f-4cd3c5c6190f",
+      "sheet": "Option 9",
+      "cell": "N100",
+      "formula": "SUMIF($O$131:$O$135,$O100,N$131:N$135)*1.5",
+      "proof": "Option 9!N90:N127: 37 of 38 cells share the copied formula pattern (e.g. N90 = SUMIF($O$131:$O$135,$O90,N$131:N$135)), but N100 = SUMIF($O$131:$O$135,$O100,N$131:N$135)*1.5",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E219",
+      "formula": "AVERAGE(E261,E303,E345)*D219",
+      "proof": "Option 13!D219:M219: 9 of 10 cells share the copied formula pattern (e.g. D219 = AVERAGE(D261,D303,D345)), but E219 = AVERAGE(E261,E303,E345)*D219",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E228",
+      "formula": "AVERAGE(E270,E312,E354)*D228",
+      "proof": "Option 13!D228:M228: 9 of 10 cells share the copied formula pattern (e.g. D228 = AVERAGE(D270,D312,D354)), but E228 = AVERAGE(E270,E312,E354)*D228",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E229",
+      "formula": "AVERAGE(E271,E313,E355)*D229",
+      "proof": "Option 13!D229:M229: 9 of 10 cells share the copied formula pattern (e.g. D229 = AVERAGE(D271,D313,D355)), but E229 = AVERAGE(E271,E313,E355)*D229",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E226",
+      "formula": "AVERAGE(E268,E310,E352)*D226",
+      "proof": "Option 13!D226:M226: 9 of 10 cells share the copied formula pattern (e.g. D226 = AVERAGE(D268,D310,D352)), but E226 = AVERAGE(E268,E310,E352)*D226",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E227",
+      "formula": "AVERAGE(E269,E311,E353)*D227",
+      "proof": "Option 13!D227:M227: 9 of 10 cells share the copied formula pattern (e.g. D227 = AVERAGE(D269,D311,D353)), but E227 = AVERAGE(E269,E311,E353)*D227",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E224",
+      "formula": "AVERAGE(E266,E308,E350)*D224",
+      "proof": "Option 13!D224:M224: 9 of 10 cells share the copied formula pattern (e.g. D224 = AVERAGE(D266,D308,D350)), but E224 = AVERAGE(E266,E308,E350)*D224",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E225",
+      "formula": "AVERAGE(E267,E309,E351)*D225",
+      "proof": "Option 13!D225:M225: 9 of 10 cells share the copied formula pattern (e.g. D225 = AVERAGE(D267,D309,D351)), but E225 = AVERAGE(E267,E309,E351)*D225",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E222",
+      "formula": "AVERAGE(E264,E306,E348)*D222",
+      "proof": "Option 13!D222:M222: 9 of 10 cells share the copied formula pattern (e.g. D222 = AVERAGE(D264,D306,D348)), but E222 = AVERAGE(E264,E306,E348)*D222",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E223",
+      "formula": "AVERAGE(E265,E307,E349)*D223",
+      "proof": "Option 13!D223:M223: 9 of 10 cells share the copied formula pattern (e.g. D223 = AVERAGE(D265,D307,D349)), but E223 = AVERAGE(E265,E307,E349)*D223",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E220",
+      "formula": "AVERAGE(E262,E304,E346)*D220",
+      "proof": "Option 13!D220:M220: 9 of 10 cells share the copied formula pattern (e.g. D220 = AVERAGE(D262,D304,D346)), but E220 = AVERAGE(E262,E304,E346)*D220",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E221",
+      "formula": "AVERAGE(E263,E305,E347)*D221",
+      "proof": "Option 13!D221:M221: 9 of 10 cells share the copied formula pattern (e.g. D221 = AVERAGE(D263,D305,D347)), but E221 = AVERAGE(E263,E305,E347)*D221",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/05a32bfd-b279-4832-aa15-8146ccfc07a4",
+      "sheet": "Details",
+      "cell": "AO553",
+      "formula": "SUM(AO16:AO349)",
+      "proof": "Details!AO547:AO555: 8 of 9 cells share the copied formula pattern (e.g. AO547 = SUMIF($D$16:$D$546,$D547,AO$16:AO$546)), but AO553 = SUM(AO16:AO349)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E231",
+      "formula": "AVERAGE(E273,E315,E357)*D231",
+      "proof": "Option 13!D231:M231: 9 of 10 cells share the copied formula pattern (e.g. D231 = AVERAGE(D273,D315,D357)), but E231 = AVERAGE(E273,E315,E357)*D231",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E230",
+      "formula": "AVERAGE(E272,E314,E356)*D230",
+      "proof": "Option 13!D230:M230: 9 of 10 cells share the copied formula pattern (e.g. D230 = AVERAGE(D272,D314,D356)), but E230 = AVERAGE(E272,E314,E356)*D230",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E233",
+      "formula": "AVERAGE(E275,E317,E359)*D233",
+      "proof": "Option 13!D233:M233: 9 of 10 cells share the copied formula pattern (e.g. D233 = AVERAGE(D275,D317,D359)), but E233 = AVERAGE(E275,E317,E359)*D233",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E232",
+      "formula": "AVERAGE(E274,E316,E358)*D232",
+      "proof": "Option 13!D232:M232: 9 of 10 cells share the copied formula pattern (e.g. D232 = AVERAGE(D274,D316,D358)), but E232 = AVERAGE(E274,E316,E358)*D232",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E235",
+      "formula": "AVERAGE(E277,E319,E361)*D235",
+      "proof": "Option 13!D235:M235: 9 of 10 cells share the copied formula pattern (e.g. D235 = AVERAGE(D277,D319,D361)), but E235 = AVERAGE(E277,E319,E361)*D235",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E234",
+      "formula": "AVERAGE(E276,E318,E360)*D234",
+      "proof": "Option 13!D234:M234: 9 of 10 cells share the copied formula pattern (e.g. D234 = AVERAGE(D276,D318,D360)), but E234 = AVERAGE(E276,E318,E360)*D234",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E237",
+      "formula": "AVERAGE(E279,E321,E363)*D237",
+      "proof": "Option 13!D237:M237: 9 of 10 cells share the copied formula pattern (e.g. D237 = AVERAGE(D279,D321,D363)), but E237 = AVERAGE(E279,E321,E363)*D237",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E236",
+      "formula": "AVERAGE(E278,E320,E362)*D236",
+      "proof": "Option 13!D236:M236: 9 of 10 cells share the copied formula pattern (e.g. D236 = AVERAGE(D278,D320,D362)), but E236 = AVERAGE(E278,E320,E362)*D236",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E239",
+      "formula": "AVERAGE(E281,E323,E365)*D239",
+      "proof": "Option 13!D239:M239: 9 of 10 cells share the copied formula pattern (e.g. D239 = AVERAGE(D281,D323,D365)), but E239 = AVERAGE(E281,E323,E365)*D239",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E238",
+      "formula": "AVERAGE(E280,E322,E364)*D238",
+      "proof": "Option 13!D238:M238: 9 of 10 cells share the copied formula pattern (e.g. D238 = AVERAGE(D280,D322,D364)), but E238 = AVERAGE(E280,E322,E364)*D238",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E244",
+      "formula": "AVERAGE(E286,E328,E370)*D244",
+      "proof": "Option 13!D244:M244: 9 of 10 cells share the copied formula pattern (e.g. D244 = AVERAGE(D286,D328,D370)), but E244 = AVERAGE(E286,E328,E370)*D244",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E245",
+      "formula": "AVERAGE(E287,E329,E371)*D245",
+      "proof": "Option 13!D245:M245: 9 of 10 cells share the copied formula pattern (e.g. D245 = AVERAGE(D287,D329,D371)), but E245 = AVERAGE(E287,E329,E371)*D245",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E246",
+      "formula": "AVERAGE(E288,E330,E372)*D246",
+      "proof": "Option 13!D246:M246: 9 of 10 cells share the copied formula pattern (e.g. D246 = AVERAGE(D288,D330,D372)), but E246 = AVERAGE(E288,E330,E372)*D246",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E247",
+      "formula": "AVERAGE(E289,E331,E373)*D247",
+      "proof": "Option 13!D247:M247: 9 of 10 cells share the copied formula pattern (e.g. D247 = AVERAGE(D289,D331,D373)), but E247 = AVERAGE(E289,E331,E373)*D247",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E240",
+      "formula": "AVERAGE(E282,E324,E366)*D240",
+      "proof": "Option 13!D240:M240: 9 of 10 cells share the copied formula pattern (e.g. D240 = AVERAGE(D282,D324,D366)), but E240 = AVERAGE(E282,E324,E366)*D240",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E241",
+      "formula": "AVERAGE(E283,E325,E367)*D241",
+      "proof": "Option 13!D241:M241: 9 of 10 cells share the copied formula pattern (e.g. D241 = AVERAGE(D283,D325,D367)), but E241 = AVERAGE(E283,E325,E367)*D241",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E242",
+      "formula": "AVERAGE(E284,E326,E368)*D242",
+      "proof": "Option 13!D242:M242: 9 of 10 cells share the copied formula pattern (e.g. D242 = AVERAGE(D284,D326,D368)), but E242 = AVERAGE(E284,E326,E368)*D242",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E243",
+      "formula": "AVERAGE(E285,E327,E369)*D243",
+      "proof": "Option 13!D243:M243: 9 of 10 cells share the copied formula pattern (e.g. D243 = AVERAGE(D285,D327,D369)), but E243 = AVERAGE(E285,E327,E369)*D243",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E248",
+      "formula": "AVERAGE(E290,E332,E374)*D248",
+      "proof": "Option 13!D248:M248: 9 of 10 cells share the copied formula pattern (e.g. D248 = AVERAGE(D290,D332,D374)), but E248 = AVERAGE(E290,E332,E374)*D248",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E249",
+      "formula": "AVERAGE(E291,E333,E375)*D249",
+      "proof": "Option 13!D249:M249: 9 of 10 cells share the copied formula pattern (e.g. D249 = AVERAGE(D291,D333,D375)), but E249 = AVERAGE(E291,E333,E375)*D249",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E256",
+      "formula": "AVERAGE(E298,E340,E382)*D256",
+      "proof": "Option 13!D256:M256: 9 of 10 cells share the copied formula pattern (e.g. D256 = AVERAGE(D298,D340,D382)), but E256 = AVERAGE(E298,E340,E382)*D256",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E255",
+      "formula": "AVERAGE(E297,E339,E381)*D255",
+      "proof": "Option 13!D255:M255: 9 of 10 cells share the copied formula pattern (e.g. D255 = AVERAGE(D297,D339,D381)), but E255 = AVERAGE(E297,E339,E381)*D255",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E254",
+      "formula": "AVERAGE(E296,E338,E380)*D254",
+      "proof": "Option 13!D254:M254: 9 of 10 cells share the copied formula pattern (e.g. D254 = AVERAGE(D296,D338,D380)), but E254 = AVERAGE(E296,E338,E380)*D254",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E253",
+      "formula": "AVERAGE(E295,E337,E379)*D253",
+      "proof": "Option 13!D253:M253: 9 of 10 cells share the copied formula pattern (e.g. D253 = AVERAGE(D295,D337,D379)), but E253 = AVERAGE(E295,E337,E379)*D253",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E252",
+      "formula": "AVERAGE(E294,E336,E378)*D252",
+      "proof": "Option 13!D252:M252: 9 of 10 cells share the copied formula pattern (e.g. D252 = AVERAGE(D294,D336,D378)), but E252 = AVERAGE(E294,E336,E378)*D252",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E251",
+      "formula": "AVERAGE(E293,E335,E377)*D251",
+      "proof": "Option 13!D251:M251: 9 of 10 cells share the copied formula pattern (e.g. D251 = AVERAGE(D293,D335,D377)), but E251 = AVERAGE(E293,E335,E377)*D251",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/1f0a56f9-c7fc-4971-b05b-a10bb345143a",
+      "sheet": "Option 13",
+      "cell": "E250",
+      "formula": "AVERAGE(E292,E334,E376)*D250",
+      "proof": "Option 13!D250:M250: 9 of 10 cells share the copied formula pattern (e.g. D250 = AVERAGE(D292,D334,D376)), but E250 = AVERAGE(E292,E334,E376)*D250",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/149997d7-cf67-493c-b896-4e6d33649468",
+      "sheet": "Sheet1",
+      "cell": "S15",
+      "formula": "+$S$10*R15/12*5",
+      "proof": "Sheet1!S11:S57: 46 of 47 cells share the copied formula pattern (e.g. S11 = +$S$10*R11/12*7), but S15 = +$S$10*R15/12*5",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/149997d7-cf67-493c-b896-4e6d33649468",
+      "sheet": "Sheet1",
+      "cell": "S22",
+      "formula": "+$S$10*R22",
+      "proof": "Sheet1!S11:S57: 46 of 47 cells share the copied formula pattern (e.g. S11 = +$S$10*R11/12*7), but S22 = +$S$10*R22",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/8ab6b48a-d1d8-41cd-8f40-1c0f77279e7b",
+      "sheet": "Table 9_data",
+      "cell": "U550",
+      "formula": "AVERAGE(L394,L446,L498)",
+      "proof": "Table 9_data!T550:AA550: 7 of 8 cells share the copied formula pattern (e.g. V550 = (M394+M446+M498)/3), but U550 = AVERAGE(L394,L446,L498)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/8ab6b48a-d1d8-41cd-8f40-1c0f77279e7b",
+      "sheet": "Table 9_data",
+      "cell": "U551",
+      "formula": "AVERAGE(L395,L447,L499)",
+      "proof": "Table 9_data!T551:AA551: 7 of 8 cells share the copied formula pattern (e.g. V551 = (M395+M447+M499)/3), but U551 = AVERAGE(L395,L447,L499)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/8ab6b48a-d1d8-41cd-8f40-1c0f77279e7b",
+      "sheet": "Table 9_data",
+      "cell": "U552",
+      "formula": "AVERAGE(L396,L448,L500)",
+      "proof": "Table 9_data!T552:AA552: 7 of 8 cells share the copied formula pattern (e.g. V552 = (M396+M448+M500)/3), but U552 = AVERAGE(L396,L448,L500)",
+      "verdict": null,
+      "note": null
+    }
+  ]
+}

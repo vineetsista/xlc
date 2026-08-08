@@ -63,15 +63,29 @@ pub fn analyze(wb: &Workbook) -> Vec<Finding> {
             cells.push(CellShape { row, col, formula: src.clone(), shapes: sh });
         }
 
+        // Sheet-wide shape frequencies: a deviant whose shape appears
+        // more than once on the sheet is itself a copied pattern
+        // (alternating-region layouts), not a one-off slip.
+        let mut shape_counts: HashMap<&str, usize> = HashMap::new();
+        for c in &cells {
+            *shape_counts.entry(c.shapes.full.as_str()).or_insert(0) += 1;
+        }
+
         // Horizontal runs (fixed row, contiguous columns) and vertical
         // runs (fixed column, contiguous rows).
-        run_findings(&mut findings, &sheet.name, &cells, true);
-        run_findings(&mut findings, &sheet.name, &cells, false);
+        run_findings(&mut findings, &sheet.name, &cells, &shape_counts, true);
+        run_findings(&mut findings, &sheet.name, &cells, &shape_counts, false);
     }
     findings
 }
 
-fn run_findings(findings: &mut Vec<Finding>, sheet: &str, cells: &[CellShape], horizontal: bool) {
+fn run_findings(
+    findings: &mut Vec<Finding>,
+    sheet: &str,
+    cells: &[CellShape],
+    shape_counts: &HashMap<&str, usize>,
+    horizontal: bool,
+) {
     // Group by the fixed axis.
     let mut lanes: HashMap<u32, Vec<&CellShape>> = HashMap::new();
     for c in cells {
@@ -85,17 +99,23 @@ fn run_findings(findings: &mut Vec<Finding>, sheet: &str, cells: &[CellShape], h
         for c in lane.iter() {
             let pos = if horizontal { c.col } else { c.row };
             if prev.is_some_and(|p| pos != p + 1) {
-                flag_run(findings, sheet, &run, horizontal);
+                flag_run(findings, sheet, &run, shape_counts, horizontal);
                 run.clear();
             }
             run.push(c);
             prev = Some(pos);
         }
-        flag_run(findings, sheet, &run, horizontal);
+        flag_run(findings, sheet, &run, shape_counts, horizontal);
     }
 }
 
-fn flag_run(findings: &mut Vec<Finding>, sheet: &str, run: &[&CellShape], horizontal: bool) {
+fn flag_run(
+    findings: &mut Vec<Finding>,
+    sheet: &str,
+    run: &[&CellShape],
+    shape_counts: &HashMap<&str, usize>,
+    horizontal: bool,
+) {
     if run.len() < 6 {
         return;
     }
@@ -121,6 +141,39 @@ fn flag_run(findings: &mut Vec<Finding>, sheet: &str, run: &[&CellShape], horizo
         let pos = if horizontal { d.col } else { d.row };
         let (lo, hi) = if horizontal { (first.col, last.col) } else { (first.row, last.row) };
         if pos == lo || pos == hi {
+            continue;
+        }
+        // The v1 corpus audit measured ~25-30% precision without the next
+        // three guards (docs/precision/inconsistent-region-v1.md). What
+        // ships is the SLIPPED-REFERENCE detector:
+        // (a) identical structure — different operators/functions mean a
+        //     deliberate subtotal, plug, or override, not a bad copy;
+        if d.shapes.structural != exemplar.shapes.structural
+            || d.shapes.ranges.len() != exemplar.shapes.ranges.len()
+        {
+            continue;
+        }
+        // (b) no relative<->absolute flips — pinning a seed cell with $
+        //     anchors is an idiom, not a slip;
+        let kind_flip = d
+            .shapes
+            .ranges
+            .iter()
+            .zip(&exemplar.shapes.ranges)
+            .any(|(ra, rb)| {
+                ra != rb
+                    && (ra.r0.diff(rb.r0).is_none()
+                        || ra.c0.diff(rb.c0).is_none()
+                        || ra.r1.diff(rb.r1).is_none()
+                        || ra.c1.diff(rb.c1).is_none())
+            });
+        if kind_flip {
+            continue;
+        }
+        // (c) the deviant shape is a one-off on this sheet — if it repeats
+        //     elsewhere it is a second copied pattern (alternating-region
+        //     layout), not a mistake.
+        if shape_counts.get(d.shapes.full.as_str()).copied().unwrap_or(0) > 1 {
             continue;
         }
         let run_desc = format!(
@@ -268,8 +321,10 @@ mod tests {
     }
 
     #[test]
-    fn generic_inconsistency_in_column_run() {
+    fn changed_constant_is_suppressed_as_deliberate() {
         // Column B rows 1..8: A*2 copied down, one interior cell uses A*3.
+        // A different constant is a plug/override, not a slipped copy —
+        // the v1 corpus audit priced this class at ~25-30% precision.
         let mut owned = Vec::new();
         for row in 0..8u32 {
             let f = if row == 3 {
@@ -281,10 +336,66 @@ mod tests {
         }
         let refs: Vec<(u32, u32, &str)> =
             owned.iter().map(|(r, c, f)| (*r, *c, f.as_str())).collect();
+        assert!(analyze(&wb_with(&refs)).is_empty());
+    }
+
+    #[test]
+    fn slipped_reference_is_flagged() {
+        // Column C rows 1..8: A{r}*2 copied down, one interior cell reads
+        // column B instead — same structure, slipped reference.
+        let mut owned = Vec::new();
+        for row in 0..8u32 {
+            let f = if row == 3 {
+                format!("B{}*2", row + 1)
+            } else {
+                format!("A{}*2", row + 1)
+            };
+            owned.push((row, 2u32, f));
+        }
+        let refs: Vec<(u32, u32, &str)> =
+            owned.iter().map(|(r, c, f)| (*r, *c, f.as_str())).collect();
         let fs = analyze(&wb_with(&refs));
         assert_eq!(fs.len(), 1, "{fs:?}");
+        assert_eq!(fs[0].cell, "C4");
+        // A single-cell ref slip moves both boundaries of the degenerate
+        // range, so it reports as inconsistent-region, not off-by-one.
         assert_eq!(fs[0].detector, "inconsistent-region");
-        assert_eq!(fs[0].cell, "B4");
+    }
+
+    #[test]
+    fn alternating_pattern_is_suppressed() {
+        // Two interleaved copied patterns: the minority repeats on the
+        // sheet, so it is a layout, not a mistake.
+        let mut owned = Vec::new();
+        for row in 0..12u32 {
+            let f = if row == 3 || row == 9 {
+                format!("B{}*2", row + 1)
+            } else {
+                format!("A{}*2", row + 1)
+            };
+            owned.push((row, 2u32, f));
+        }
+        let refs: Vec<(u32, u32, &str)> =
+            owned.iter().map(|(r, c, f)| (*r, *c, f.as_str())).collect();
+        assert!(analyze(&wb_with(&refs)).is_empty());
+    }
+
+    #[test]
+    fn anchor_flip_is_suppressed_as_seed_idiom() {
+        // Family D{r}=C{r}*2 with one cell pinned to $C$1 — anchoring is
+        // an idiom, not a slip.
+        let mut owned = Vec::new();
+        for row in 0..8u32 {
+            let f = if row == 3 {
+                "$C$1*2".to_string()
+            } else {
+                format!("C{}*2", row + 1)
+            };
+            owned.push((row, 3u32, f));
+        }
+        let refs: Vec<(u32, u32, &str)> =
+            owned.iter().map(|(r, c, f)| (*r, *c, f.as_str())).collect();
+        assert!(analyze(&wb_with(&refs)).is_empty());
     }
 
     #[test]
