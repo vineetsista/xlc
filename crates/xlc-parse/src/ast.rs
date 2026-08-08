@@ -99,6 +99,8 @@ pub enum Area {
 /// column). Kept near-verbatim; semantic resolution happens at lowering.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct TableRef {
+    /// External workbook prefix (`[1]!Table1[..]` form), inner text.
+    pub workbook: Option<String>,
     /// Table name; empty for bare `[@Col]` form.
     pub table: String,
     /// The bracketed spec verbatim, including outer brackets.
@@ -173,19 +175,56 @@ pub enum Expr {
     Number { value: f64, lexeme: String },
     /// String literal, unescaped content ("" → ").
     Text(String),
-    Bool(bool),
+    Bool { value: bool, lexeme: String },
     Error(ErrorLit),
     Ref(RefExpr),
     /// Defined name (workbook- or sheet-scoped resolved later), possibly
     /// sheet-qualified: `Sheet1!MyName`.
     Name { sheet: Option<SheetPrefix>, name: String },
-    Call { name: String, args: Vec<Option<Expr>> },
-    Binary { op: BinOp, lhs: Box<Expr>, rhs: Box<Expr> },
-    Unary { op: UnOp, expr: Box<Expr> },
+    Call { name: String, args: Vec<CallArg> },
+    /// ws_l sits before the operator, ws_r after. For Intersect the
+    /// whitespace run IS the operator and lives in ws_l (ws_r empty).
+    Binary { op: BinOp, lhs: Box<Expr>, rhs: Box<Expr>, ws_l: String, ws_r: String },
+    /// Prefix ops: ws between op and operand. Postfix: ws before the op.
+    Unary { op: UnOp, expr: Box<Expr>, ws: String },
     /// `{1,2;3,4}` — rows of constants.
-    ArrayLit(Vec<Vec<Expr>>),
+    ArrayLit(Vec<Vec<ArrayElem>>),
     /// Explicit parentheses, preserved for round-trip.
-    Paren(Box<Expr>),
+    Paren { ws_open: String, inner: Box<Expr>, ws_close: String },
+}
+
+/// One call argument with surrounding whitespace: `IF(a , b)` keeps the
+/// space before the comma as ws_after of the first argument.
+#[derive(Debug, Clone, PartialEq)]
+pub struct CallArg {
+    pub ws_before: String,
+    pub expr: Option<Expr>,
+    pub ws_after: String,
+}
+
+#[derive(Debug, Clone, PartialEq)]
+pub struct ArrayElem {
+    pub ws_before: String,
+    pub expr: Expr,
+    pub ws_after: String,
+}
+
+/// A parsed formula: the expression plus root-level whitespace trivia.
+#[derive(Debug, Clone, PartialEq)]
+pub struct Formula {
+    pub ws_lead: String,
+    pub expr: Expr,
+    pub ws_trail: String,
+}
+
+impl Formula {
+    pub fn to_formula_string(&self) -> String {
+        let mut s = String::new();
+        s.push_str(&self.ws_lead);
+        self.expr.print(&mut s);
+        s.push_str(&self.ws_trail);
+        s
+    }
 }
 
 // ---- printing (the round-trip oracle's other half) ----
@@ -321,7 +360,7 @@ impl Expr {
                 }
                 out.push('"');
             }
-            Expr::Bool(b) => out.push_str(if *b { "TRUE" } else { "FALSE" }),
+            Expr::Bool { lexeme, .. } => out.push_str(lexeme),
             Expr::Error(e) => out.push_str(e.as_str()),
             Expr::Ref(RefExpr::Area { sheet, area }) => {
                 if let Some(s) = sheet {
@@ -330,6 +369,11 @@ impl Expr {
                 area.print(out);
             }
             Expr::Ref(RefExpr::Table(t)) => {
+                if let Some(wb) = &t.workbook {
+                    out.push('[');
+                    out.push_str(wb);
+                    out.push_str("]!");
+                }
                 out.push_str(&t.table);
                 out.push_str(&t.spec);
             }
@@ -346,36 +390,47 @@ impl Expr {
                     if i > 0 {
                         out.push(',');
                     }
-                    if let Some(a) = a {
-                        a.print(out);
+                    out.push_str(&a.ws_before);
+                    if let Some(e) = &a.expr {
+                        e.print(out);
                     }
+                    out.push_str(&a.ws_after);
                 }
                 out.push(')');
             }
-            Expr::Binary { op, lhs, rhs } => {
+            Expr::Binary { op, lhs, rhs, ws_l, ws_r } => {
                 lhs.print(out);
-                out.push_str(op.as_str());
+                out.push_str(ws_l);
+                if *op != BinOp::Intersect {
+                    out.push_str(op.as_str());
+                }
+                out.push_str(ws_r);
                 rhs.print(out);
             }
-            Expr::Unary { op, expr } => match op {
+            Expr::Unary { op, expr, ws } => match op {
                 UnOp::Neg => {
                     out.push('-');
+                    out.push_str(ws);
                     expr.print(out);
                 }
                 UnOp::Pos => {
                     out.push('+');
+                    out.push_str(ws);
                     expr.print(out);
                 }
                 UnOp::Percent => {
                     expr.print(out);
+                    out.push_str(ws);
                     out.push('%');
                 }
                 UnOp::ImplicitIntersect => {
                     out.push('@');
+                    out.push_str(ws);
                     expr.print(out);
                 }
                 UnOp::SpillRange => {
                     expr.print(out);
+                    out.push_str(ws);
                     out.push('#');
                 }
             },
@@ -389,14 +444,18 @@ impl Expr {
                         if j > 0 {
                             out.push(',');
                         }
-                        e.print(out);
+                        out.push_str(&e.ws_before);
+                        e.expr.print(out);
+                        out.push_str(&e.ws_after);
                     }
                 }
                 out.push('}');
             }
-            Expr::Paren(inner) => {
+            Expr::Paren { ws_open, inner, ws_close } => {
                 out.push('(');
+                out.push_str(ws_open);
                 inner.print(out);
+                out.push_str(ws_close);
                 out.push(')');
             }
         }

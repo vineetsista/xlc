@@ -241,7 +241,7 @@ pub fn receipt_cmd(args: &[String]) -> i32 {
                     };
                     let origin = Origin { sheet: sid as u32, row, col };
                     let got = match panic::catch_unwind(AssertUnwindSafe(|| {
-                        Interp::new(&wb, origin).eval_formula(&parsed)
+                        Interp::new(&wb, origin).eval_formula(&parsed.expr)
                     })) {
                         Ok(v) => v,
                         Err(_) => {
@@ -319,7 +319,7 @@ pub fn receipt_cmd(args: &[String]) -> i32 {
     let pf = per_function.into_inner().unwrap();
     let mut per_function_json = serde_json::Map::new();
     let mut ranked: Vec<(&String, &(usize, usize))> = pf.iter().collect();
-    ranked.sort_by(|a, b| (b.1).1.cmp(&(a.1).1));
+    ranked.sort_by_key(|&(_, &(_, total))| std::cmp::Reverse(total));
     for (name, (pass, total)) in ranked {
         per_function_json.insert(
             name.clone(),

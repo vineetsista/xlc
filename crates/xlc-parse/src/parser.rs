@@ -5,9 +5,10 @@
 //!   unary - + (tighter than ^: -2^2 = 4) · reference ops (union `,`
 //!   inside parens < intersection ` ` < range `:`) · @ · # (postfix)
 //!
-//! Whitespace is an operator (intersection) when it sits between two
-//! expressions; decorative whitespace elsewhere is skipped (and therefore
-//! not reproduced — such formulas count against Gate 2's 0.5% budget).
+//! Whitespace is preserved as trivia everywhere (stored formulas keep
+//! user-typed spaces, and the Gate 2 oracle is byte-exact reproduction).
+//! A whitespace run between two expressions is the intersection operator;
+//! anywhere else it is decorative and attaches to the nearest node.
 
 use crate::ast::*;
 use crate::lexer::{lex, LexError, Tok};
@@ -23,16 +24,16 @@ impl From<LexError> for ParseError {
     }
 }
 
-pub fn parse_formula(src: &str) -> Result<Expr, ParseError> {
+pub fn parse_formula(src: &str) -> Result<Formula, ParseError> {
     let toks = lex(src)?;
     let mut p = Parser { toks, pos: 0, paren_depth: 0 };
-    p.skip_ws();
-    let e = p.expr(0)?;
-    p.skip_ws();
+    let ws_lead = p.take_ws();
+    let expr = p.expr(0)?;
+    let ws_trail = p.take_ws();
     if p.pos != p.toks.len() {
         return Err(ParseError { msg: format!("trailing tokens at {}", p.pos) });
     }
-    Ok(e)
+    Ok(Formula { ws_lead, expr, ws_trail })
 }
 
 struct Parser {
@@ -73,9 +74,15 @@ impl Parser {
         t
     }
 
-    fn skip_ws(&mut self) {
-        while matches!(self.peek(), Some(Tok::Ws(_))) {
+    /// Consume a whitespace token if present, returning its text.
+    /// (The lexer merges runs, so at most one Ws token sits here.)
+    fn take_ws(&mut self) -> String {
+        if let Some(Tok::Ws(w)) = self.peek() {
+            let w = w.clone();
             self.pos += 1;
+            w
+        } else {
+            String::new()
         }
     }
 
@@ -93,24 +100,29 @@ impl Parser {
     fn expr(&mut self, min_bp: u8) -> Result<Expr, ParseError> {
         let mut lhs = self.prefix()?;
         loop {
-            // Whitespace in operator position: intersection if what follows
-            // begins an expression, decorative otherwise.
-            let mut la = 0usize;
-            let mut saw_ws = false;
-            while let Some(Tok::Ws(_)) = self.peek_at(la) {
-                la += 1;
-                saw_ws = true;
-            }
-            let Some(next) = self.peek_at(la) else {
-                break;
+            // Peek past optional whitespace WITHOUT consuming: the run may
+            // be an intersection operator, operator-adjacent trivia, or
+            // trivia belonging to the enclosing construct.
+            let (ws_present, la) = match self.peek() {
+                Some(Tok::Ws(_)) => (true, 1usize),
+                _ => (false, 0),
             };
-            if saw_ws && starts_expr(next) {
+            let Some(next) = self.peek_at(la) else { break };
+
+            if ws_present && starts_expr(next) {
+                // Intersection: the whitespace is the operator.
                 if BP_ISECT.0 < min_bp {
                     break;
                 }
-                self.pos += la; // consume the whitespace run
+                let ws = self.take_ws();
                 let rhs = self.expr(BP_ISECT.1)?;
-                lhs = Expr::Binary { op: BinOp::Intersect, lhs: Box::new(lhs), rhs: Box::new(rhs) };
+                lhs = Expr::Binary {
+                    op: BinOp::Intersect,
+                    lhs: Box::new(lhs),
+                    rhs: Box::new(rhs),
+                    ws_l: ws,
+                    ws_r: String::new(),
+                };
                 continue;
             }
             let next = next.clone();
@@ -119,36 +131,49 @@ impl Parser {
                     if BP_PERCENT < min_bp {
                         break;
                     }
-                    self.pos += la + 1;
-                    lhs = Expr::Unary { op: UnOp::Percent, expr: Box::new(lhs) };
+                    let ws = self.take_ws();
+                    self.pos += 1;
+                    lhs = Expr::Unary { op: UnOp::Percent, expr: Box::new(lhs), ws };
                 }
                 Tok::Hash => {
                     if BP_SPILL < min_bp {
                         break;
                     }
-                    self.pos += la + 1;
-                    lhs = Expr::Unary { op: UnOp::SpillRange, expr: Box::new(lhs) };
+                    let ws = self.take_ws();
+                    self.pos += 1;
+                    lhs = Expr::Unary { op: UnOp::SpillRange, expr: Box::new(lhs), ws };
                 }
                 Tok::Colon => {
                     if BP_RANGE.0 < min_bp {
                         break;
                     }
-                    self.pos += la + 1;
-                    self.skip_ws();
+                    let ws_l = self.take_ws();
+                    self.pos += 1;
+                    let ws_r = self.take_ws();
                     let rhs = self.expr(BP_RANGE.1)?;
-                    lhs = Expr::Binary { op: BinOp::Range, lhs: Box::new(lhs), rhs: Box::new(rhs) };
+                    lhs = Expr::Binary {
+                        op: BinOp::Range,
+                        lhs: Box::new(lhs),
+                        rhs: Box::new(rhs),
+                        ws_l,
+                        ws_r,
+                    };
                 }
                 Tok::Comma if self.paren_depth > 0 => {
-                    // Union — only meaningful inside plain parens; in call
-                    // args the Comma is consumed by the call loop first
-                    // because call args reset paren_depth.
                     if BP_UNION.0 < min_bp {
                         break;
                     }
-                    self.pos += la + 1;
-                    self.skip_ws();
+                    let ws_l = self.take_ws();
+                    self.pos += 1;
+                    let ws_r = self.take_ws();
                     let rhs = self.expr(BP_UNION.1)?;
-                    lhs = Expr::Binary { op: BinOp::Union, lhs: Box::new(lhs), rhs: Box::new(rhs) };
+                    lhs = Expr::Binary {
+                        op: BinOp::Union,
+                        lhs: Box::new(lhs),
+                        rhs: Box::new(rhs),
+                        ws_l,
+                        ws_r,
+                    };
                 }
                 t => {
                     let Some((op, (lbp, rbp))) = infix_op(&t) else {
@@ -157,20 +182,20 @@ impl Parser {
                     if lbp < min_bp {
                         break;
                     }
-                    self.pos += la + 1;
-                    self.skip_ws();
+                    let ws_l = self.take_ws();
+                    self.pos += 1;
+                    let ws_r = self.take_ws();
                     let rhs = self.expr(rbp)?;
-                    lhs = Expr::Binary { op, lhs: Box::new(lhs), rhs: Box::new(rhs) };
+                    lhs = Expr::Binary { op, lhs: Box::new(lhs), rhs: Box::new(rhs), ws_l, ws_r };
                 }
             }
         }
         Ok(lhs)
     }
 
-    // ---- prefix position ----
+    // ---- prefix position (leading whitespace already consumed) ----
 
     fn prefix(&mut self) -> Result<Expr, ParseError> {
-        self.skip_ws();
         let Some(t) = self.peek().cloned() else {
             return Err(ParseError { msg: "unexpected end of formula".into() });
         };
@@ -198,7 +223,6 @@ impl Parser {
                             return Ok(expr);
                         }
                     }
-                    // Otherwise: a standalone deleted-cell area.
                     Ok(Expr::Ref(RefExpr::Area { sheet: None, area: Area::RefError }))
                 } else {
                     Ok(Expr::Error(e))
@@ -206,28 +230,31 @@ impl Parser {
             }
             Tok::Minus => {
                 self.pos += 1;
+                let ws = self.take_ws();
                 let e = self.expr(BP_UNARY)?;
-                Ok(Expr::Unary { op: UnOp::Neg, expr: Box::new(e) })
+                Ok(Expr::Unary { op: UnOp::Neg, expr: Box::new(e), ws })
             }
             Tok::Plus => {
                 self.pos += 1;
+                let ws = self.take_ws();
                 let e = self.expr(BP_UNARY)?;
-                Ok(Expr::Unary { op: UnOp::Pos, expr: Box::new(e) })
+                Ok(Expr::Unary { op: UnOp::Pos, expr: Box::new(e), ws })
             }
             Tok::At => {
                 self.pos += 1;
+                let ws = self.take_ws();
                 let e = self.expr(BP_AT)?;
-                Ok(Expr::Unary { op: UnOp::ImplicitIntersect, expr: Box::new(e) })
+                Ok(Expr::Unary { op: UnOp::ImplicitIntersect, expr: Box::new(e), ws })
             }
             Tok::LParen => {
                 self.pos += 1;
                 self.paren_depth += 1;
-                self.skip_ws();
+                let ws_open = self.take_ws();
                 let inner = self.expr(0)?;
-                self.skip_ws();
+                let ws_close = self.take_ws();
                 self.expect(&Tok::RParen, ")")?;
                 self.paren_depth -= 1;
-                Ok(Expr::Paren(Box::new(inner)))
+                Ok(Expr::Paren { ws_open, inner: Box::new(inner), ws_close })
             }
             Tok::LBrace => self.array_literal(),
             Tok::Quoted(q) => {
@@ -238,13 +265,13 @@ impl Parser {
             }
             Tok::Bracket(b) => {
                 self.pos += 1;
-                // `[1]Sheet1!A1` external prefix, or bare `[@Col]` /
-                // `[Col]` structured ref inside a table's own column.
+                let wb_inner = b[1..b.len() - 1].to_string();
+                // `[1]Sheet1!A1` — external prefix with a sheet name.
                 if let Some(Tok::Ident(name)) = self.peek().cloned() {
                     if matches!(self.peek_at(1), Some(Tok::Bang)) {
                         self.pos += 2;
                         let sheet = SheetPrefix {
-                            workbook: Some(b[1..b.len() - 1].to_string()),
+                            workbook: Some(wb_inner),
                             first: name,
                             last: None,
                             quoted: false,
@@ -252,7 +279,38 @@ impl Parser {
                         return self.sheet_suffix(Some(sheet));
                     }
                 }
-                Ok(Expr::Ref(RefExpr::Table(TableRef { table: String::new(), spec: b })))
+                // `[1]!Table1[..]` / `[1]!Name` — workbook-level reference
+                // with no sheet component.
+                if matches!(self.peek(), Some(Tok::Bang)) {
+                    self.pos += 1;
+                    if let Some(Tok::Ident(name)) = self.peek().cloned() {
+                        if let Some(Tok::Bracket(spec)) = self.peek_at(1).cloned() {
+                            self.pos += 2;
+                            return Ok(Expr::Ref(RefExpr::Table(TableRef {
+                                workbook: Some(wb_inner),
+                                table: name,
+                                spec,
+                            })));
+                        }
+                        self.pos += 1;
+                        let sheet = SheetPrefix {
+                            workbook: Some(wb_inner),
+                            first: String::new(),
+                            last: None,
+                            quoted: false,
+                        };
+                        return Ok(Expr::Name { sheet: Some(sheet), name });
+                    }
+                    return Err(ParseError {
+                        msg: "expected name after external workbook prefix".into(),
+                    });
+                }
+                // Bare `[@Col]` / `[Col]` structured ref.
+                Ok(Expr::Ref(RefExpr::Table(TableRef {
+                    workbook: None,
+                    table: String::new(),
+                    spec: b,
+                })))
             }
             Tok::Ident(_) => self.ident_prefix(),
             other => Err(ParseError { msg: format!("unexpected token {other:?}") }),
@@ -295,17 +353,17 @@ impl Parser {
         // Structured table ref: Ident immediately followed by a bracket run.
         if let Some(Tok::Bracket(spec)) = self.peek_at(1).cloned() {
             self.pos += 2;
-            return Ok(Expr::Ref(RefExpr::Table(TableRef { table: name, spec })));
+            return Ok(Expr::Ref(RefExpr::Table(TableRef { workbook: None, table: name, spec })));
         }
 
-        // TRUE/FALSE literals (not followed by `(` — TRUE() handled above).
+        // TRUE/FALSE literals (lexeme preserved: files store `false` too).
         if name.eq_ignore_ascii_case("TRUE") {
             self.pos += 1;
-            return Ok(Expr::Bool(true));
+            return Ok(Expr::Bool { value: true, lexeme: name });
         }
         if name.eq_ignore_ascii_case("FALSE") {
             self.pos += 1;
-            return Ok(Expr::Bool(false));
+            return Ok(Expr::Bool { value: false, lexeme: name });
         }
 
         self.sheet_suffix(None)
@@ -316,7 +374,6 @@ impl Parser {
         if let Some(area) = self.try_area()? {
             return Ok(Expr::Ref(RefExpr::Area { sheet, area }));
         }
-        // Defined name (possibly sheet-qualified).
         if let Some(Tok::Ident(name)) = self.peek().cloned() {
             self.pos += 1;
             return Ok(Expr::Name { sheet, name });
@@ -341,8 +398,6 @@ impl Parser {
         if let Some(first) = self.try_coord() {
             match first {
                 CoordLike::Cell(a) => {
-                    // A1:B2 — only bind the colon if the far side is
-                    // cell-shaped; otherwise leave it for the Pratt loop.
                     if matches!(self.peek(), Some(Tok::Colon)) {
                         let save2 = self.pos;
                         self.pos += 1;
@@ -354,7 +409,6 @@ impl Parser {
                     return Ok(Some(Area::Cell(a)));
                 }
                 CoordLike::Col { idx, anchored } => {
-                    // Whole-column: REQUIRES `:` + column.
                     if matches!(self.peek(), Some(Tok::Colon)) {
                         let save2 = self.pos;
                         self.pos += 1;
@@ -406,7 +460,6 @@ impl Parser {
             Some(Tok::Ident(s)) => {
                 self.pos += 1;
                 if let Some((letters, digits)) = split_cell_ident(&s) {
-                    // `A1` or `$A1` in one ident.
                     let col = crate::ast::letters_col(letters)?;
                     let row: u32 = digits.parse().ok()?;
                     if !valid_cell(col, row) || digits.starts_with('0') {
@@ -423,7 +476,6 @@ impl Parser {
                 if s.bytes().all(|b| b.is_ascii_uppercase()) {
                     if let Some(col) = crate::ast::letters_col(&s) {
                         if col < 16_384 {
-                            // `A$1` / `$A$1`: letters then $ then row digits.
                             if matches!(self.peek(), Some(Tok::Dollar)) {
                                 if let Some(Tok::Number(d)) = self.peek_at(1).cloned() {
                                     if let Ok(row) = d.parse::<u32>() {
@@ -466,32 +518,34 @@ impl Parser {
     }
 
     fn call_args(&mut self, name: String) -> Result<Expr, ParseError> {
-        // Inside call args, plain-paren union rules don't apply until a
-        // nested `(` — stash and reset depth.
         let saved_depth = self.paren_depth;
         self.paren_depth = 0;
-        let mut args: Vec<Option<Expr>> = Vec::new();
-        self.skip_ws();
+        let mut args: Vec<CallArg> = Vec::new();
+        // Zero-arg call: `TRUE()` — but `SUM( )` is one empty arg with ws.
         if matches!(self.peek(), Some(Tok::RParen)) {
             self.pos += 1;
             self.paren_depth = saved_depth;
             return Ok(Expr::Call { name, args });
         }
         loop {
-            self.skip_ws();
-            if matches!(self.peek(), Some(Tok::Comma)) {
-                args.push(None); // omitted argument: IF(A1,,2)
-                self.pos += 1;
-                continue;
-            }
-            if matches!(self.peek(), Some(Tok::RParen)) {
-                args.push(None);
-                self.pos += 1;
-                break;
+            let ws_before = self.take_ws();
+            // Omitted argument: next is , or ).
+            match self.peek() {
+                Some(Tok::Comma) => {
+                    args.push(CallArg { ws_before, expr: None, ws_after: String::new() });
+                    self.pos += 1;
+                    continue;
+                }
+                Some(Tok::RParen) => {
+                    args.push(CallArg { ws_before, expr: None, ws_after: String::new() });
+                    self.pos += 1;
+                    break;
+                }
+                _ => {}
             }
             let e = self.expr(0)?;
-            args.push(Some(e));
-            self.skip_ws();
+            let ws_after = self.take_ws();
+            args.push(CallArg { ws_before, expr: Some(e), ws_after });
             match self.peek() {
                 Some(Tok::Comma) => {
                     self.pos += 1;
@@ -514,13 +568,13 @@ impl Parser {
 
     fn array_literal(&mut self) -> Result<Expr, ParseError> {
         self.expect(&Tok::LBrace, "{")?;
-        let mut rows: Vec<Vec<Expr>> = Vec::new();
-        let mut row: Vec<Expr> = Vec::new();
+        let mut rows: Vec<Vec<ArrayElem>> = Vec::new();
+        let mut row: Vec<ArrayElem> = Vec::new();
         loop {
-            self.skip_ws();
+            let ws_before = self.take_ws();
             let elem = self.array_element()?;
-            row.push(elem);
-            self.skip_ws();
+            let ws_after = self.take_ws();
+            row.push(ArrayElem { ws_before, expr: elem, ws_after });
             match self.bump() {
                 Some(Tok::Comma) => {}
                 Some(Tok::Semi) => {
@@ -543,23 +597,32 @@ impl Parser {
     fn array_element(&mut self) -> Result<Expr, ParseError> {
         match self.bump() {
             Some(Tok::Number(x)) => Ok(number_expr(x)),
-            Some(Tok::Minus) => match self.bump() {
-                Some(Tok::Number(x)) => Ok(Expr::Unary {
-                    op: UnOp::Neg,
-                    expr: Box::new(number_expr(x)),
-                }),
-                other => Err(ParseError { msg: format!("bad array element after -: {other:?}") }),
-            },
+            Some(Tok::Minus) => {
+                let ws = self.take_ws();
+                match self.bump() {
+                    Some(Tok::Number(x)) => Ok(Expr::Unary {
+                        op: UnOp::Neg,
+                        expr: Box::new(number_expr(x)),
+                        ws,
+                    }),
+                    other => {
+                        Err(ParseError { msg: format!("bad array element after -: {other:?}") })
+                    }
+                }
+            }
             Some(Tok::Str(s)) => Ok(Expr::Text(s)),
             Some(Tok::Error(e)) => Ok(Expr::Error(e)),
-            Some(Tok::Ident(s)) if s.eq_ignore_ascii_case("TRUE") => Ok(Expr::Bool(true)),
-            Some(Tok::Ident(s)) if s.eq_ignore_ascii_case("FALSE") => Ok(Expr::Bool(false)),
+            Some(Tok::Ident(s)) if s.eq_ignore_ascii_case("TRUE") => {
+                Ok(Expr::Bool { value: true, lexeme: s })
+            }
+            Some(Tok::Ident(s)) if s.eq_ignore_ascii_case("FALSE") => {
+                Ok(Expr::Bool { value: false, lexeme: s })
+            }
             other => Err(ParseError { msg: format!("bad array element: {other:?}") }),
         }
     }
 
     fn reference_or_number(&mut self) -> Result<Expr, ParseError> {
-        // `$`-anchored coords, whole-row ranges (`1:3`), or a plain number.
         if let Some(area) = self.try_area()? {
             return Ok(Expr::Ref(RefExpr::Area { sheet: None, area }));
         }
@@ -614,7 +677,7 @@ fn infix_op(t: &Tok) -> Option<(BinOp, (u8, u8))> {
         Tok::Star => (BinOp::Mul, BP_MUL),
         Tok::Slash => (BinOp::Div, BP_MUL),
         Tok::Caret => (BinOp::Pow, BP_POW),
-        _ => return None,
+        _ => None?,
     })
 }
 
@@ -660,8 +723,8 @@ mod tests {
     use super::*;
 
     fn rt(src: &str) {
-        let e = parse_formula(src).unwrap_or_else(|err| panic!("parse {src:?}: {err:?}"));
-        assert_eq!(e.to_formula_string(), src, "round-trip of {src:?}");
+        let f = parse_formula(src).unwrap_or_else(|err| panic!("parse {src:?}: {err:?}"));
+        assert_eq!(f.to_formula_string(), src, "round-trip of {src:?}");
     }
 
     #[test]
@@ -717,61 +780,92 @@ mod tests {
     }
 
     #[test]
+    fn whitespace_round_trips() {
+        for f in [
+            " x^3 + y^3",
+            "IF(AND(x >=y, x + y <= show_value), x^3+ y^3, \"\")",
+            "IF((ISBLANK(H10)), \" \", IF(H10<60, I10, (I10/H10)*60))",
+            "\"a\" & B1",
+            "A1 + 1 ",
+            "( A1 )",
+            "SUM( A1:A2 , B1 )",
+            "IF(A1 , , 2)",
+            "{ 1 , 2 ; 3 , 4 }",
+            "- A1",
+            "A1 %",
+            "5 * - 3",
+            "VLOOKUP(N12,$R$12:$S$26,2.0,false)",
+            "IF(a1=true,1,0)",
+        ] {
+            rt(f);
+        }
+    }
+
+    #[test]
+    fn external_workbook_forms() {
+        for f in [
+            "[1]!BinLookup[#Data]",
+            "IFERROR(VLOOKUP(InventoryList68[[#This Row],[Folder]],[1]!BinLookup[#Data],3,FALSE),\"\")",
+            "VLOOKUP([1]!Table3[[#This Row],[Resource Name]],[1]Data!E:J,6,0)",
+            "[1]!ExternalName+1",
+        ] {
+            rt(f);
+        }
+    }
+
+    #[test]
     fn precedence_shapes() {
-        // -2^2 = (-2)^2: unary binds tighter than ^.
-        let e = parse_formula("-2^2").unwrap();
+        let e = parse_formula("-2^2").unwrap().expr;
         match e {
             Expr::Binary { op: BinOp::Pow, lhs, .. } => {
                 assert!(matches!(*lhs, Expr::Unary { op: UnOp::Neg, .. }));
             }
             other => panic!("bad shape: {other:?}"),
         }
-        // 1+2*3: mul under add.
-        let e = parse_formula("1+2*3").unwrap();
+        let e = parse_formula("1+2*3").unwrap().expr;
         match e {
             Expr::Binary { op: BinOp::Add, rhs, .. } => {
                 assert!(matches!(*rhs, Expr::Binary { op: BinOp::Mul, .. }));
             }
             other => panic!("bad shape: {other:?}"),
         }
-        // Concat looser than +: "a"&1+2 is "a"&(1+2).
-        let e = parse_formula("\"a\"&1+2").unwrap();
+        let e = parse_formula("\"a\"&1+2").unwrap().expr;
         assert!(matches!(e, Expr::Binary { op: BinOp::Concat, .. }));
-        // Comparison loosest.
-        let e = parse_formula("A1+1>B1*2").unwrap();
+        let e = parse_formula("A1+1>B1*2").unwrap().expr;
         assert!(matches!(e, Expr::Binary { op: BinOp::Gt, .. }));
     }
 
     #[test]
     fn intersection_vs_decorative_ws() {
-        // Between two refs: intersection.
-        let e = parse_formula("A1:A5 B2:B6").unwrap();
+        let e = parse_formula("A1:A5 B2:B6").unwrap().expr;
         assert!(matches!(e, Expr::Binary { op: BinOp::Intersect, .. }));
-        // Around an infix operator: decorative (drops on print).
-        let e = parse_formula("A1 + 1").unwrap();
-        assert_eq!(e.to_formula_string(), "A1+1");
+        // Around an infix operator: trivia, preserved byte-exact.
+        rt("A1 + 1");
+        let e = parse_formula("A1 + 1").unwrap().expr;
+        assert!(matches!(e, Expr::Binary { op: BinOp::Add, .. }));
     }
 
     #[test]
     fn union_only_in_parens() {
         assert!(parse_formula("(A1,B1)").is_ok());
-        // At top level a bare comma is trailing garbage.
         assert!(parse_formula("A1,B1").is_err());
     }
 
     #[test]
     fn errors_not_panics() {
-        for bad in ["", "SUM(", ")", "A1+", "{1,2", "'x!A1", "[Book", "1..2", "@"] {
+        for bad in ["", "SUM(", ")", "A1+", "{1,2", "'x!A1", "[Book", "1..2", "@", " "] {
             assert!(parse_formula(bad).is_err(), "should fail: {bad:?}");
         }
     }
 
     #[test]
     fn call_vs_name() {
-        assert!(matches!(parse_formula("TRUE()").unwrap(), Expr::Call { .. }));
-        assert!(matches!(parse_formula("TRUE").unwrap(), Expr::Bool(true)));
-        // Space before ( is NOT a call (Excel normalizes; we stay strict).
-        let e = parse_formula("SUM (A1)").unwrap();
-        assert!(matches!(e, Expr::Binary { op: BinOp::Intersect, .. }));
+        assert!(matches!(parse_formula("TRUE()").unwrap().expr, Expr::Call { .. }));
+        assert!(matches!(parse_formula("TRUE").unwrap().expr, Expr::Bool { value: true, .. }));
+        // Space before ( is NOT a call — parses as intersection but must
+        // still round-trip byte-exact.
+        let f = parse_formula("SUM (A1)").unwrap();
+        assert!(matches!(f.expr, Expr::Binary { op: BinOp::Intersect, .. }));
+        assert_eq!(f.to_formula_string(), "SUM (A1)");
     }
 }

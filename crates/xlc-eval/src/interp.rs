@@ -82,22 +82,22 @@ impl<'a, C: Ctx> Interp<'a, C> {
         match e {
             Expr::Number { value, .. } => Operand::Val(Value::Num(*value)),
             Expr::Text(s) => Operand::Val(Value::Text(s.clone())),
-            Expr::Bool(b) => Operand::Val(Value::Bool(*b)),
+            Expr::Bool { value, .. } => Operand::Val(Value::Bool(*value)),
             Expr::Error(err) => Operand::Val(Value::Err(lower_error(*err))),
-            Expr::Paren(inner) => self.eval(inner),
+            Expr::Paren { inner, .. } => self.eval(inner),
             Expr::Ref(r) => self.eval_ref(r),
             Expr::Name { sheet: _, name } => match self.ctx.defined_name(name) {
                 Some(body) => self.eval(body),
                 None => Operand::Val(Value::Err(ExcelError::Name)),
             },
-            Expr::Unary { op, expr } => self.eval_unary(*op, expr),
-            Expr::Binary { op, lhs, rhs } => self.eval_binary(*op, lhs, rhs),
+            Expr::Unary { op, expr, .. } => self.eval_unary(*op, expr),
+            Expr::Binary { op, lhs, rhs, .. } => self.eval_binary(*op, lhs, rhs),
             Expr::Call { name, args } => self.eval_call(name, args),
             Expr::ArrayLit(_rows) => {
                 // Array semantics arrive with the IR (§8.5); scalar receipt
                 // treats a bare array literal as its top-left element.
                 match _rows.first().and_then(|r| r.first()) {
-                    Some(e) => self.eval(e),
+                    Some(e) => self.eval(&e.expr),
                     None => Operand::Val(Value::Err(ExcelError::Value)),
                 }
             }
@@ -278,7 +278,7 @@ impl<'a, C: Ctx> Interp<'a, C> {
 
     // ---- functions (the census-determined set grows here) ----
 
-    fn eval_call(&self, name: &str, args: &[Option<Expr>]) -> Operand {
+    fn eval_call(&self, name: &str, args: &[xlc_parse::ast::CallArg]) -> Operand {
         let canon = canonical_fn_name(name);
         let v = match canon.as_str() {
             "SUM" => self.fold_numeric(args, 0.0, |acc, x| acc + x),
@@ -308,12 +308,12 @@ impl<'a, C: Ctx> Interp<'a, C> {
     /// errors propagate.
     fn fold_numeric(
         &self,
-        args: &[Option<Expr>],
+        args: &[xlc_parse::ast::CallArg],
         init: f64,
         f: impl Fn(f64, f64) -> f64,
     ) -> Value {
         let mut acc = init;
-        for arg in args.iter().flatten() {
+        for arg in args.iter().filter_map(|a| a.expr.as_ref()) {
             let op = self.eval(arg);
             match &op {
                 Operand::Val(v) => match v.to_number() {
@@ -336,11 +336,11 @@ impl<'a, C: Ctx> Interp<'a, C> {
         Value::Num(acc)
     }
 
-    fn count(&self, args: &[Option<Expr>]) -> Value {
+    fn count(&self, args: &[xlc_parse::ast::CallArg]) -> Value {
         // COUNT: numbers only. In ranges, only numeric cells count; as
         // direct args, numbers and number-coercible text count.
         let mut n = 0usize;
-        for arg in args.iter().flatten() {
+        for arg in args.iter().filter_map(|a| a.expr.as_ref()) {
             let op = self.eval(arg);
             match &op {
                 Operand::Val(v) => {
@@ -360,10 +360,10 @@ impl<'a, C: Ctx> Interp<'a, C> {
         Value::Num(n as f64)
     }
 
-    fn average(&self, args: &[Option<Expr>]) -> Value {
+    fn average(&self, args: &[xlc_parse::ast::CallArg]) -> Value {
         let mut sum = 0.0;
         let mut n = 0usize;
-        for arg in args.iter().flatten() {
+        for arg in args.iter().filter_map(|a| a.expr.as_ref()) {
             let op = self.eval(arg);
             match &op {
                 Operand::Val(v) => match v.to_number() {
@@ -396,10 +396,10 @@ impl<'a, C: Ctx> Interp<'a, C> {
         }
     }
 
-    fn min_max(&self, args: &[Option<Expr>], want_min: bool) -> Value {
+    fn min_max(&self, args: &[xlc_parse::ast::CallArg], want_min: bool) -> Value {
         let mut best: Option<f64> = None;
         let mut err = None;
-        for arg in args.iter().flatten() {
+        for arg in args.iter().filter_map(|a| a.expr.as_ref()) {
             let op = self.eval(arg);
             match &op {
                 Operand::Val(v) => match v.to_number() {
@@ -443,11 +443,11 @@ impl<'a, C: Ctx> Interp<'a, C> {
         Value::Num(best.unwrap_or(0.0))
     }
 
-    fn fn_if(&self, args: &[Option<Expr>]) -> Operand {
+    fn fn_if(&self, args: &[xlc_parse::ast::CallArg]) -> Operand {
         if args.is_empty() || args.len() > 3 {
             return Operand::Val(Value::Err(ExcelError::Value));
         }
-        let cond = match args[0].as_ref() {
+        let cond = match args[0].expr.as_ref() {
             Some(e) => self.deref_scalar(self.eval(e)),
             None => Value::Blank,
         };
@@ -456,7 +456,7 @@ impl<'a, C: Ctx> Interp<'a, C> {
             Err(e) => return Operand::Val(Value::Err(e)),
         };
         let branch = if b { args.get(1) } else { args.get(2) };
-        match branch {
+        match branch.map(|a| a.expr.as_ref()) {
             Some(Some(e)) => self.eval(e),
             // Omitted branch: IF(TRUE,,5) → 0; IF(FALSE,1) → FALSE.
             Some(None) => Operand::Val(Value::Num(0.0)),
@@ -465,7 +465,7 @@ impl<'a, C: Ctx> Interp<'a, C> {
     }
 
     /// ROUND: half-AWAY-FROM-ZERO, never banker's rounding (§8.4).
-    fn fn_round(&self, args: &[Option<Expr>]) -> Value {
+    fn fn_round(&self, args: &[xlc_parse::ast::CallArg]) -> Value {
         if args.len() != 2 {
             return Value::Err(ExcelError::Value);
         }
@@ -480,13 +480,13 @@ impl<'a, C: Ctx> Interp<'a, C> {
         Value::Num(round_half_away(x, digits))
     }
 
-    fn unary_math(&self, args: &[Option<Expr>], f: impl Fn(f64) -> f64) -> Value {
+    fn unary_math(&self, args: &[xlc_parse::ast::CallArg], f: impl Fn(f64) -> f64) -> Value {
         self.unary_math_checked(args, |x| Ok(f(x)))
     }
 
     fn unary_math_checked(
         &self,
-        args: &[Option<Expr>],
+        args: &[xlc_parse::ast::CallArg],
         f: impl Fn(f64) -> Result<f64, ExcelError>,
     ) -> Value {
         if args.len() != 1 {
@@ -499,8 +499,8 @@ impl<'a, C: Ctx> Interp<'a, C> {
         }
     }
 
-    fn scalar_number(&self, arg: &Option<Expr>) -> Result<f64, ExcelError> {
-        match arg {
+    fn scalar_number(&self, arg: &xlc_parse::ast::CallArg) -> Result<f64, ExcelError> {
+        match &arg.expr {
             Some(e) => self.deref_scalar(self.eval(e)).to_number(),
             None => Ok(0.0),
         }
@@ -649,7 +649,7 @@ mod tests {
 
     fn eval_at(wb: &MockWb, origin: (u32, u32), formula: &str) -> Value {
         let e = xlc_parse::parse_formula(formula).unwrap();
-        Interp::new(wb, Origin { sheet: 0, row: origin.0, col: origin.1 }).eval_formula(&e)
+        Interp::new(wb, Origin { sheet: 0, row: origin.0, col: origin.1 }).eval_formula(&e.expr)
     }
 
     fn eval(wb: &MockWb, formula: &str) -> Value {
