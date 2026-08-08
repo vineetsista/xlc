@@ -5,7 +5,7 @@
 
 use crate::dates;
 use crate::interp::{Ctx, Interp, Operand};
-use crate::value::{format_general, parse_excel_number, ExcelError, Value};
+use crate::value::{parse_excel_number, ExcelError, Value};
 use xlc_parse::ast::CallArg;
 
 pub(crate) enum IsKind {

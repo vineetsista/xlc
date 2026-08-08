@@ -1,15 +1,6 @@
-//! THE RECEIPT (§8.4): recompute every formula cell and bit-diff against
-//! Excel's cached value.
-//!
-//! This first receipt is the *per-cell semantic check*: each formula is
-//! evaluated against its neighbors' CACHED values, so every cell is an
-//! independent test of function semantics. The full-recompute receipt
-//! (schedule-driven, derived values only) layers on top once ingest and
-//! scheduling are wired together — same comparison machinery.
-//!
-//! ULP policy (documented in the artifact): a numeric result passes if it
-//! is bit-identical OR within 1 ULP of the cached value. Everything else
-//! is classified, counted, and logged.
+//! THE RECEIPT (§8.4): CLI driver over the shared per-cell receipt in
+//! xlc-ingest. Adds corpus parallelism, per-function attribution, failure
+//! logging, and the committed artifact gate3 asserts against.
 
 use std::collections::BTreeMap;
 use std::fs;
@@ -19,213 +10,9 @@ use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Mutex;
 
-use calamine::{open_workbook, Data, Reader, Xlsx};
-use std::collections::{HashMap, HashSet};
 use rayon::prelude::*;
 use serde::Serialize;
-use xlc_eval::interp::{Interp, Origin};
-use xlc_eval::workbook::Workbook;
-use xlc_eval::{ExcelError, Value};
-
-fn lower_cached(d: &Data) -> Value {
-    match d {
-        Data::Int(i) => Value::Num(*i as f64),
-        Data::Float(x) => Value::Num(*x),
-        Data::String(s) => Value::Text(s.clone()),
-        Data::Bool(b) => Value::Bool(*b),
-        Data::DateTime(dt) => Value::Num(dt.as_f64()),
-        Data::DateTimeIso(s) | Data::DurationIso(s) => Value::Text(s.clone()),
-        Data::Error(e) => Value::Err(lower_cell_error(e)),
-        Data::Empty => Value::Blank,
-    }
-}
-
-fn lower_cell_error(e: &calamine::CellErrorType) -> ExcelError {
-    use calamine::CellErrorType as C;
-    match e {
-        C::Div0 => ExcelError::Div0,
-        C::NA => ExcelError::NA,
-        C::Value => ExcelError::Value,
-        C::Ref => ExcelError::Ref,
-        C::Name => ExcelError::Name,
-        C::Num => ExcelError::Num,
-        C::Null => ExcelError::Null,
-        C::GettingData => ExcelError::GettingData,
-    }
-}
-
-/// Load one workbook into the model via the STREAMING cells reader.
-///
-/// Never use `worksheet_range` here: it materializes a dense
-/// width x height grid from the sheet's declared dimension, and real
-/// corpus files lie about their dimension — one subset workbook declared
-/// A1:XFD1048576 and the dense path attempted a 512 GiB allocation.
-/// The cell reader streams each present cell with absolute coordinates
-/// and hands us cached value + expanded formula in one pass.
-/// (Shared-formula cells whose anchor was not yet seen in stream order
-/// come back with formula=None; counted as value-only cells.)
-pub fn ingest(path: &Path) -> Result<Workbook, String> {
-    let array_map = sniff_array_cells(path);
-    let mut xl = open_workbook::<Xlsx<_>, _>(path).map_err(|e| e.to_string())?;
-    let mut wb = Workbook::default();
-    wb.epoch_1904 = xl.has_1904_epoch();
-    // Defined names: bodies are formula text ("Sheet1!$A$1:$B$2", "1.05").
-    // Unparseable ones (external books, LAMBDA) stay absent -> #NAME? ->
-    // counted as excluded, never as a semantic failure.
-    for (name, body) in xl.defined_names().to_vec() {
-        if let Ok(f) = xlc_parse::parse_formula(&body) {
-            if f.expr.has_external_ref() {
-                wb.external_names.insert(name.to_uppercase());
-            } else {
-                wb.names.insert(name.to_uppercase(), f.expr);
-            }
-        }
-    }
-    let sheet_names = xl.sheet_names();
-    for name in &sheet_names {
-        let id = wb.add_sheet(name);
-        if let Some(cells) = array_map.get(name.as_str()) {
-            wb.sheets[id as usize].array_cells = cells.clone();
-        }
-        let mut reader = match xl.worksheet_cells_reader(name) {
-            Ok(r) => r,
-            Err(_) => continue,
-        };
-        while let Some(cell) = reader.next_cell_with_formula().map_err(|e| e.to_string())? {
-            let (row, col) = cell.pos;
-            let v = lower_cached(&Data::from(cell.value));
-            if !matches!(v, Value::Blank) {
-                wb.set_value(id, row, col, v);
-            }
-            if let Some(f) = cell.formula {
-                if !f.is_empty() {
-                    wb.set_formula(id, row, col, f);
-                }
-            }
-        }
-    }
-    Ok(wb)
-}
-
-/// Map sheet name -> set of (row, col) holding `<f t="array">` anchors.
-/// calamine does not expose the array attribute, so we sniff the worksheet
-/// XML directly (machine-written; a narrow attribute scan is reliable).
-fn sniff_array_cells(path: &Path) -> HashMap<String, HashSet<(u32, u32)>> {
-    let mut out: HashMap<String, HashSet<(u32, u32)>> = HashMap::new();
-    let Ok(f) = fs::File::open(path) else { return out };
-    let Ok(mut z) = zip::ZipArchive::new(std::io::BufReader::new(f)) else { return out };
-
-    let read_str = |z: &mut zip::ZipArchive<_>, name: &str| -> Option<String> {
-        let mut s = String::new();
-        z.by_name(name).ok()?.read_to_string(&mut s).ok()?;
-        Some(s)
-    };
-    let Some(workbook_xml) = read_str(&mut z, "xl/workbook.xml") else { return out };
-    let rels_xml = read_str(&mut z, "xl/_rels/workbook.xml.rels").unwrap_or_default();
-
-    // rid -> zip path
-    let mut rid_to_path: HashMap<String, String> = HashMap::new();
-    for chunk in rels_xml.split("<Relationship ").skip(1) {
-        let id = attr(chunk, "Id");
-        let target = attr(chunk, "Target");
-        if let (Some(id), Some(target)) = (id, target) {
-            let path = if let Some(stripped) = target.strip_prefix('/') {
-                stripped.to_string()
-            } else {
-                format!("xl/{target}")
-            };
-            rid_to_path.insert(id.to_string(), path);
-        }
-    }
-    // sheet name -> rid
-    let mut sheets: Vec<(String, String)> = Vec::new();
-    for chunk in workbook_xml.split("<sheet ").skip(1) {
-        if let (Some(name), Some(rid)) = (attr(chunk, "name"), attr(chunk, "r:id")) {
-            sheets.push((unescape_xml(name), rid.to_string()));
-        }
-    }
-    for (name, rid) in sheets {
-        let Some(sheet_path) = rid_to_path.get(&rid) else { continue };
-        let Some(xml) = read_str(&mut z, sheet_path) else { continue };
-        let mut cells = HashSet::new();
-        let mut from = 0usize;
-        while let Some(hit) = xml[from..].find("t=\"array\"") {
-            let abs = from + hit;
-            // Nearest preceding cell ref: r="A1"-shaped (letters+digits).
-            if let Some(rpos) = xml[..abs].rfind("r=\"") {
-                let rest = &xml[rpos + 3..];
-                if let Some(endq) = rest.find('"') {
-                    let cell = &rest[..endq];
-                    if let Some(rc) = a1_to_rc(cell) {
-                        cells.insert(rc);
-                    }
-                }
-            }
-            from = abs + 1;
-        }
-        if !cells.is_empty() {
-            out.insert(name, cells);
-        }
-    }
-    out
-}
-
-fn attr<'x>(chunk: &'x str, name: &str) -> Option<&'x str> {
-    let pat = format!("{name}=\"");
-    let start = chunk.find(&pat)? + pat.len();
-    let end = chunk[start..].find('"')? + start;
-    Some(&chunk[start..end])
-}
-
-fn unescape_xml(s: &str) -> String {
-    s.replace("&amp;", "&")
-        .replace("&lt;", "<")
-        .replace("&gt;", ">")
-        .replace("&quot;", "\"")
-        .replace("&apos;", "'")
-}
-
-fn a1_to_rc(cell: &str) -> Option<(u32, u32)> {
-    let letters_end = cell.bytes().take_while(|b| b.is_ascii_uppercase()).count();
-    if letters_end == 0 || letters_end == cell.len() {
-        return None;
-    }
-    let col = xlc_parse::ast::letters_col(&cell[..letters_end])?;
-    let row: u32 = cell[letters_end..].parse().ok()?;
-    Some((row.checked_sub(1)?, col))
-}
-
-/// Does the formula use a defined name whose body points at another
-/// workbook?
-fn uses_external_name(e: &xlc_parse::Expr, wb: &Workbook) -> bool {
-    let mut found = false;
-    e.walk(&mut |n| {
-        if let xlc_parse::Expr::Name { name, .. } = n {
-            if wb.external_names.contains(&name.to_uppercase()) {
-                found = true;
-            }
-        }
-    });
-    found
-}
-
-#[derive(Default)]
-struct Counts {
-    cells: usize,
-    pass: usize,
-    ulp1: usize, // passes under policy, tracked separately
-    sig15: usize,
-    excluded_unimplemented: usize,
-    excluded_parse: usize,
-    excluded_external: usize,
-    excluded_volatile: usize,
-    excluded_array: usize,
-    no_cached_value: usize,
-    mismatch_numeric: usize,
-    mismatch_type: usize,
-    mismatch_error: usize,
-    panics: usize,
-}
+use xlc_ingest::{run_receipt, CellReport, Outcome, ReceiptSummary};
 
 #[derive(Serialize)]
 struct FailLine {
@@ -238,69 +25,8 @@ struct FailLine {
     class: String,
 }
 
-/// 15-significant-digit decimal rendering (Excel's display boundary).
-fn sig15(x: f64) -> String {
-    format!("{x:.14e}")
-}
-
-fn ulps_apart(a: f64, b: f64) -> u64 {
-    if a == b {
-        return 0;
-    }
-    if a.is_nan() || b.is_nan() || a.is_sign_positive() != b.is_sign_positive() {
-        return u64::MAX;
-    }
-    let ia = a.abs().to_bits();
-    let ib = b.abs().to_bits();
-    ia.abs_diff(ib)
-}
-
-fn classify(expected: &Value, got: &Value) -> (&'static str, bool) {
-    match (expected, got) {
-        (Value::Num(e), Value::Num(g)) => {
-            let u = ulps_apart(*e, *g);
-            if u == 0 {
-                ("exact", true)
-            } else if u <= 1 {
-                ("ulp1", true)
-            } else if sig15(*e) == sig15(*g) {
-                // Cached values are frequently written with only 15
-                // significant digits (§8.4) — the stored literal is a
-                // decimal truncation of the f64 Excel actually computed.
-                ("sig15", true)
-            } else {
-                ("mismatch_numeric", false)
-            }
-        }
-        (Value::Text(e), Value::Text(g)) => {
-            if e == g {
-                ("exact", true)
-            } else {
-                ("mismatch_text", false)
-            }
-        }
-        (Value::Bool(e), Value::Bool(g)) => {
-            if e == g {
-                ("exact", true)
-            } else {
-                ("mismatch_type", false)
-            }
-        }
-        (Value::Err(e), Value::Err(g)) => {
-            if e == g {
-                ("exact", true)
-            } else {
-                ("mismatch_error", false)
-            }
-        }
-        // A formula cell with no cached value (Excel stores none for some
-        // blanks) — treat cached Blank vs computed 0/"" as pass? NO: count
-        // as type mismatch; the corpus will tell us how Excel behaves.
-        _ => ("mismatch_type", false),
-    }
-}
-
-fn fmt_value(v: &Value) -> String {
+fn fmt_value(v: &xlc_eval::Value) -> String {
+    use xlc_eval::Value;
     match v {
         Value::Num(x) => format!("{x:?}"),
         Value::Text(s) => format!("{s:?}"),
@@ -331,34 +57,36 @@ fn arg_value<'a>(args: &'a [String], flag: &str) -> Option<&'a str> {
 }
 
 pub fn receipt_cmd(args: &[String]) -> i32 {
-    let Some(target) = args.first().filter(|a| !a.starts_with("--")) else {
-        eprintln!("usage: xlc receipt <dir-or-file> [--out artifact.json] [--failures failures.jsonl] [--limit N]");
+    let targets: Vec<&String> = args.iter().take_while(|a| !a.starts_with("--")).collect();
+    if targets.is_empty() {
+        eprintln!("usage: xlc receipt <dir-or-file>... [--out artifact.json] [--failures failures.jsonl] [--limit N]");
         return 2;
-    };
+    }
     let out_path = arg_value(args, "--out");
     let failures_path = arg_value(args, "--failures");
     let limit: usize = arg_value(args, "--limit").and_then(|v| v.parse().ok()).unwrap_or(usize::MAX);
 
-    let target = PathBuf::from(target);
     let mut files = Vec::new();
-    if target.is_dir() {
-        walk(&target, &mut files);
-        files.sort();
-    } else {
-        files.push(target);
+    for target in &targets {
+        let target = PathBuf::from(target.as_str());
+        if target.is_dir() {
+            walk(&target, &mut files);
+        } else {
+            files.push(target);
+        }
     }
+    files.sort();
     files.retain(|p| {
         let mut magic = [0u8; 2];
-        matches!(
-            fs::File::open(p).and_then(|mut f| f.read_exact(&mut magic)),
-            Ok(())
-        ) && &magic == b"PK"
+        matches!(fs::File::open(p).and_then(|mut f| f.read_exact(&mut magic)), Ok(()))
+            && &magic == b"PK"
     });
     files.truncate(limit);
     eprintln!("receipt: {} workbooks", files.len());
 
     let per_function: Mutex<BTreeMap<String, (usize, usize)>> = Mutex::new(BTreeMap::new());
     let fail_lines: Mutex<Vec<FailLine>> = Mutex::new(Vec::new());
+    let panics = AtomicUsize::new(0);
     let prev_hook = panic::take_hook();
     panic::set_hook(Box::new(|_| {}));
     let done = AtomicUsize::new(0);
@@ -366,132 +94,78 @@ pub fn receipt_cmd(args: &[String]) -> i32 {
     let totals = files
         .par_iter()
         .map(|path| {
-            let mut t = Counts::default();
-            let wb = match ingest(path) {
-                Ok(wb) => wb,
-                Err(_) => return t,
-            };
-            for (sid, sheet) in wb.sheets.iter().enumerate() {
-                for (&(row, col), src) in &sheet.formulas {
-                    t.cells += 1;
-                    let parsed = match xlc_parse::parse_formula(src) {
-                        Ok(e) => e,
-                        Err(_) => {
-                            t.excluded_parse += 1;
-                            continue;
-                        }
+            let result = panic::catch_unwind(AssertUnwindSafe(|| {
+                let wb = xlc_ingest::ingest_path(path).ok()?;
+                let mut fns = std::collections::BTreeSet::new();
+                let sum = run_receipt(&wb, |cell: &CellReport| {
+                    let verdict = match cell.outcome {
+                        Outcome::Pass(_) => Some(true),
+                        Outcome::Mismatch(_) => Some(false),
+                        _ => None,
                     };
-                    if parsed.expr.has_external_ref() || uses_external_name(&parsed.expr, &wb) {
-                        t.excluded_external += 1;
-                        continue;
-                    }
-                    if sheet.array_cells.contains(&(row, col)) {
-                        t.excluded_array += 1;
-                        continue;
-                    }
-                    {
-                        // Nondeterministic volatiles: the cached value is a
-                        // snapshot of save-time (TODAY) or randomness — not
-                        // reproducible, so not verifiable (Law 9 exclusion;
-                        // the scenario engine gives them fixed-seed
-                        // semantics in Phase 6).
-                        let mut fns = std::collections::BTreeSet::new();
-                        crate::census::extract_functions(src, &mut fns);
-                        const NONDET: [&str; 5] =
-                            ["NOW", "TODAY", "RAND", "RANDBETWEEN", "RANDARRAY"];
-                        if NONDET.iter().any(|f| fns.contains(*f)) {
-                            t.excluded_volatile += 1;
-                            continue;
-                        }
-                    }
-                    let expected = sheet.values.get(&(row, col)).cloned().unwrap_or(Value::Blank);
-                    if matches!(expected, Value::Blank) {
-                        // Excel stored no cached value — nothing to verify.
-                        t.no_cached_value += 1;
-                        continue;
-                    }
-                    let origin = Origin { sheet: sid as u32, row, col };
-                    let got = match panic::catch_unwind(AssertUnwindSafe(|| {
-                        Interp::new(&wb, origin).eval_formula(&parsed.expr)
-                    })) {
-                        Ok(v) => v,
-                        Err(_) => {
-                            t.panics += 1;
-                            continue;
-                        }
-                    };
-                    // Unimplemented functions surface as #NAME? where Excel
-                    // cached something else: that's an exclusion (Law 9),
-                    // not a semantic failure.
-                    if got == Value::Err(ExcelError::Name) && expected != Value::Err(ExcelError::Name)
-                    {
-                        t.excluded_unimplemented += 1;
-                        continue;
-                    }
-                    let (class, ok) = classify(&expected, &got);
-                    let mut funcs = std::collections::BTreeSet::new();
-                    crate::census::extract_functions(src, &mut funcs);
-                    {
+                    if let Some(ok) = verdict {
+                        fns.clear();
+                        xlc_parse::scan::extract_functions(cell.formula, &mut fns);
                         let mut pf = per_function.lock().unwrap();
-                        for f in &funcs {
+                        for f in fns.iter() {
                             let e = pf.entry(f.clone()).or_insert((0, 0));
                             e.1 += 1;
                             if ok {
                                 e.0 += 1;
                             }
                         }
-                    }
-                    if ok {
-                        t.pass += 1;
-                        if class == "ulp1" {
-                            t.ulp1 += 1;
-                        } else if class == "sig15" {
-                            t.sig15 += 1;
-                        }
-                    } else {
-                        match class {
-                            "mismatch_numeric" => t.mismatch_numeric += 1,
-                            "mismatch_error" => t.mismatch_error += 1,
-                            _ => t.mismatch_type += 1,
-                        }
-                        let mut fl = fail_lines.lock().unwrap();
-                        if fl.len() < 50_000 {
-                            fl.push(FailLine {
-                                file: path.display().to_string(),
-                                sheet: sheet.name.clone(),
-                                cell: cell_a1(row, col),
-                                formula: src.clone(),
-                                expected: fmt_value(&expected),
-                                got: fmt_value(&got),
-                                class: class.into(),
-                            });
+                        drop(pf);
+                        if !ok {
+                            let mut fl = fail_lines.lock().unwrap();
+                            if fl.len() < 50_000 {
+                                let class = match cell.outcome {
+                                    Outcome::Mismatch(c) => c,
+                                    _ => unreachable!(),
+                                };
+                                fl.push(FailLine {
+                                    file: path.display().to_string(),
+                                    sheet: wb.sheets[cell.sheet_idx].name.clone(),
+                                    cell: cell_a1(cell.row, cell.col),
+                                    formula: cell.formula.to_string(),
+                                    expected: fmt_value(&cell.expected),
+                                    got: cell.got.as_ref().map(fmt_value).unwrap_or_default(),
+                                    class: format!("mismatch_{class}"),
+                                });
+                            }
                         }
                     }
-                }
-            }
+                });
+                Some(sum)
+            }));
             let n = done.fetch_add(1, Ordering::Relaxed) + 1;
-            if n % 100 == 0 {
+            if n % 500 == 0 {
                 eprintln!("  …{n} workbooks");
             }
-            t
+            match result {
+                Ok(Some(sum)) => sum,
+                Ok(None) => ReceiptSummary::default(),
+                Err(_) => {
+                    panics.fetch_add(1, Ordering::Relaxed);
+                    ReceiptSummary::default()
+                }
+            }
         })
-        .reduce(Counts::default, |a, b| Counts {
-            cells: a.cells + b.cells,
-            pass: a.pass + b.pass,
-            ulp1: a.ulp1 + b.ulp1,
-            sig15: a.sig15 + b.sig15,
-            excluded_unimplemented: a.excluded_unimplemented + b.excluded_unimplemented,
-            excluded_parse: a.excluded_parse + b.excluded_parse,
-            excluded_external: a.excluded_external + b.excluded_external,
-            excluded_volatile: a.excluded_volatile + b.excluded_volatile,
-            excluded_array: a.excluded_array + b.excluded_array,
-            no_cached_value: a.no_cached_value + b.no_cached_value,
-            mismatch_numeric: a.mismatch_numeric + b.mismatch_numeric,
-            mismatch_type: a.mismatch_type + b.mismatch_type,
-            mismatch_error: a.mismatch_error + b.mismatch_error,
-            panics: a.panics + b.panics,
+        .reduce(ReceiptSummary::default, |mut a, b| {
+            a.cells += b.cells;
+            a.pass += b.pass;
+            a.ulp1 += b.ulp1;
+            a.sig15 += b.sig15;
+            a.no_cached += b.no_cached;
+            for (k, v) in b.excluded {
+                *a.excluded.entry(k).or_insert(0) += v;
+            }
+            for (k, v) in b.mismatches {
+                *a.mismatches.entry(k).or_insert(0) += v;
+            }
+            a
         });
     panic::set_hook(prev_hook);
+    let n_panics = panics.load(Ordering::Relaxed);
 
     let pf = per_function.into_inner().unwrap();
     let mut per_function_json = serde_json::Map::new();
@@ -505,27 +179,30 @@ pub fn receipt_cmd(args: &[String]) -> i32 {
         );
     }
 
+    let ex = |k: &str| totals.excluded.get(k).copied().unwrap_or(0);
+    let mm = |k: &str| totals.mismatches.get(k).copied().unwrap_or(0);
+    // "text" folds into "type" for artifact continuity with gate(3).
     let artifact = serde_json::json!({
         "mode": "per-cell (cached-neighbor context)",
         "ulp_policy": "pass iff bit-identical, within 1 ULP (same sign), or equal at 15 significant decimal digits (Excel's stored-literal precision); ulp1/sig15 tracked separately",
-        "cells_total": totals.cells - totals.no_cached_value,
+        "cells_total": totals.cells - totals.no_cached,
         "cells_pass": totals.pass,
-        "no_cached_value": totals.no_cached_value,
+        "no_cached_value": totals.no_cached,
         "pass_ulp1": totals.ulp1,
         "pass_sig15": totals.sig15,
         "excluded": {
-            "unimplemented_function": totals.excluded_unimplemented,
-            "parse": totals.excluded_parse,
-            "external_ref": totals.excluded_external,
-            "volatile_nondeterministic": totals.excluded_volatile,
-            "array_formula": totals.excluded_array,
+            "unimplemented_function": ex("unimplemented"),
+            "parse": ex("parse"),
+            "external_ref": ex("external_ref"),
+            "volatile_nondeterministic": ex("volatile"),
+            "array_formula": ex("array_formula"),
         },
         "mismatch_classes": {
-            "numeric": totals.mismatch_numeric,
-            "type": totals.mismatch_type,
-            "error": totals.mismatch_error,
+            "numeric": mm("numeric"),
+            "type": mm("type") + mm("text"),
+            "error": mm("error"),
         },
-        "panics": totals.panics,
+        "panics": n_panics,
         "per_function": serde_json::Value::Object(per_function_json),
     });
     if let Some(p) = out_path {
@@ -547,23 +224,23 @@ pub fn receipt_cmd(args: &[String]) -> i32 {
         fs::write(p, out).ok();
     }
 
-    let denom = totals.cells - totals.no_cached_value;
+    let denom = totals.cells - totals.no_cached;
     let rate = if denom > 0 { totals.pass as f64 / denom as f64 } else { 0.0 };
     println!(
         "receipt: {}/{} pass ({:.2}%) | excluded: {} unimpl, {} parse, {} extref, {} volatile, {} array | {} no-cached | mismatches: {} num, {} type, {} err | {} panics",
         totals.pass,
         denom,
         rate * 100.0,
-        totals.excluded_unimplemented,
-        totals.excluded_parse,
-        totals.excluded_external,
-        totals.excluded_volatile,
-        totals.excluded_array,
-        totals.no_cached_value,
-        totals.mismatch_numeric,
-        totals.mismatch_type,
-        totals.mismatch_error,
-        totals.panics
+        ex("unimplemented"),
+        ex("parse"),
+        ex("external_ref"),
+        ex("volatile"),
+        ex("array_formula"),
+        totals.no_cached,
+        mm("numeric"),
+        mm("type") + mm("text"),
+        mm("error"),
+        n_panics
     );
     0
 }

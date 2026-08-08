@@ -3,6 +3,7 @@ resolver = "2"
 members = [
     "crates/xlc-parse",
     "crates/xlc-graph",
+    "crates/xlc-ingest",
     "crates/xlc-eval",
     "crates/xlc-ir",
     "crates/xlc-scenario",
@@ -36,6 +37,7 @@ libm = "0.2"
 xlc-parse = { path = "crates/xlc-parse" }
 xlc-graph = { path = "crates/xlc-graph" }
 xlc-eval = { path = "crates/xlc-eval" }
+xlc-ingest = { path = "crates/xlc-ingest" }
 xlc-ir = { path = "crates/xlc-ir" }
 xlc-scenario = { path = "crates/xlc-scenario" }
 xlc-ad = { path = "crates/xlc-ad" }

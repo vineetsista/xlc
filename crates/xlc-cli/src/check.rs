@@ -16,35 +16,6 @@ fn arg_value<'a>(args: &'a [String], flag: &str) -> Option<&'a str> {
     args.iter().position(|a| a == flag).and_then(|i| args.get(i + 1)).map(String::as_str)
 }
 
-/// Per-feature exclusion counts for the capability report (Law 9).
-fn capability_report(wb: &xlc_eval::workbook::Workbook) -> BTreeMap<String, usize> {
-    let mut cr: BTreeMap<String, usize> = BTreeMap::new();
-    let mut fns = std::collections::BTreeSet::new();
-    for sheet in &wb.sheets {
-        for (&(_r, _c), src) in &sheet.formulas {
-            let Ok(parsed) = xlc_parse::parse_formula(src) else {
-                *cr.entry("unparseable".into()).or_insert(0) += 1;
-                continue;
-            };
-            if parsed.expr.has_external_ref() {
-                *cr.entry("external_ref".into()).or_insert(0) += 1;
-            }
-            fns.clear();
-            crate::census::extract_functions(src, &mut fns);
-            if ["NOW", "TODAY", "RAND", "RANDBETWEEN", "RANDARRAY"]
-                .iter()
-                .any(|f| fns.contains(*f))
-            {
-                *cr.entry("volatile_nondeterministic".into()).or_insert(0) += 1;
-            }
-        }
-        if !sheet.array_cells.is_empty() {
-            *cr.entry("array_formula".into()).or_insert(0) += sheet.array_cells.len();
-        }
-    }
-    cr
-}
-
 pub fn check_cmd(args: &[String]) -> i32 {
     let Some(target) = args.first().filter(|a| !a.starts_with("--")) else {
         eprintln!("usage: xlc check <workbook.xlsx> [--timing-out artifact.json]");
@@ -54,7 +25,7 @@ pub fn check_cmd(args: &[String]) -> i32 {
     let path = PathBuf::from(target);
 
     let t0 = Instant::now();
-    let wb = match crate::receipt::ingest(&path) {
+    let wb = match xlc_ingest::ingest_path(&path) {
         Ok(wb) => wb,
         Err(e) => {
             eprintln!("xlc check: cannot read {target}: {e}");
@@ -64,7 +35,7 @@ pub fn check_cmd(args: &[String]) -> i32 {
     let formula_cells: usize = wb.sheets.iter().map(|s| s.formulas.len()).sum();
     let findings = xlc_lint::analyze(&wb);
     let elapsed = t0.elapsed().as_secs_f64();
-    let mut cr = capability_report(&wb);
+    let mut cr = xlc_ingest::capability_report(&wb);
     let excluded_total: usize = cr.values().sum();
     cr.insert(
         "compilable_cells".into(),
@@ -161,7 +132,7 @@ pub fn lint_corpus_cmd(args: &[String]) -> i32 {
         .par_iter()
         .flat_map_iter(|path| {
             let out: Vec<(String, Finding)> =
-                panic::catch_unwind(AssertUnwindSafe(|| match crate::receipt::ingest(path) {
+                panic::catch_unwind(AssertUnwindSafe(|| match xlc_ingest::ingest_path(path) {
                     Ok(wb) => xlc_lint::analyze(&wb)
                         .into_iter()
                         .map(|f| (path.display().to_string(), f))

@@ -1,0 +1,14 @@
+[package]
+name = "xlc-ingest"
+description = "Workbook ingest: calamine streaming -> workbook model; capability report; per-cell receipt."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+calamine.workspace = true
+zip.workspace = true
+serde.workspace = true
+xlc-parse.workspace = true
+xlc-eval.workspace = true

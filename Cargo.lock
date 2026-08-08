@@ -810,6 +810,7 @@ dependencies = [
  "serde_json",
  "sha2 0.10.9",
  "xlc-eval",
+ "xlc-ingest",
  "xlc-lint",
  "xlc-parse",
  "zip",
@@ -830,6 +831,17 @@ dependencies = [
 [[package]]
 name = "xlc-graph"
 version = "0.1.0"
+
+[[package]]
+name = "xlc-ingest"
+version = "0.1.0"
+dependencies = [
+ "calamine",
+ "serde",
+ "xlc-eval",
+ "xlc-parse",
+ "zip",
+]
 
 [[package]]
 name = "xlc-ir"

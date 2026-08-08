@@ -19,5 +19,6 @@ anyhow.workspace = true
 xlc-parse.workspace = true
 xlc-eval.workspace = true
 xlc-lint.workspace = true
+xlc-ingest.workspace = true
 sha2.workspace = true
 zip.workspace = true

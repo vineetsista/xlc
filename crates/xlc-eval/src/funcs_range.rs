@@ -1,7 +1,7 @@
 //! Range-consuming builtins: the lookup family and the criteria family
 //! (COUNTIF/SUMIF/...), plus order statistics and dispersion.
 
-use crate::criteria::{has_wildcard, parse_criteria, wildcard_match, Criteria};
+use crate::criteria::{has_wildcard, parse_criteria, wildcard_match};
 use crate::interp::{Ctx, Interp, Operand, Rect};
 use crate::value::{compare, ExcelError, Value};
 use std::cmp::Ordering;
