@@ -1,0 +1,3505 @@
+{
+  "rule": "valid OOXML, >=10 formula cells, dedupe by sha256, order by sha256 asc, first 500",
+  "workbooks": [
+    {
+      "file": "000fb987c2988e7f.xlsx",
+      "sha256": "000fb987c2988e7f46477cfea8460b705252f5cbeab3e9966a0ea98a10ad5a42",
+      "bytes": 385563,
+      "formula_cells": 77,
+      "source": "cc-binaries/08c40880-867b-4f80-95a4-119f214e92b8"
+    },
+    {
+      "file": "0016495874799ef5.xlsx",
+      "sha256": "0016495874799ef572f20174944dfa7a046ef2b8d0e99e19150814a1c5d57b48",
+      "bytes": 74552,
+      "formula_cells": 940,
+      "source": "cc-binaries/0a6d2f80-6a8b-46b1-8ced-f22fbb53541c"
+    },
+    {
+      "file": "0022bb409664553e.xlsx",
+      "sha256": "0022bb409664553e95b8fd8a0fc88d4e929e3f744a0648b601abc8bea9a79de7",
+      "bytes": 15621,
+      "formula_cells": 154,
+      "source": "cc-binaries/046e0987-0d6a-491f-b67b-c792b06c9b6d"
+    },
+    {
+      "file": "0022cf63d6417b04.xlsx",
+      "sha256": "0022cf63d6417b04b67dc7f300faec2cf10c2ee939dbcc62654e76696f2f8586",
+      "bytes": 126972,
+      "formula_cells": 3685,
+      "source": "cc-binaries/43e2037a-2605-4cec-a12f-f968a64fb794"
+    },
+    {
+      "file": "003014f075766247.xlsx",
+      "sha256": "003014f07576624777f294a3f5ee658b90827a4cae818cdd1db687f95d8a8483",
+      "bytes": 13687,
+      "formula_cells": 22,
+      "source": "cc-binaries/01713a5f-37e0-489d-8046-66d068073fea"
+    },
+    {
+      "file": "004e07a8c769fdd7.xlsx",
+      "sha256": "004e07a8c769fdd76259ac3a46bd73b832d23f0a029c32f78877fbcf3b58d28c",
+      "bytes": 33688,
+      "formula_cells": 17,
+      "source": "cc-binaries/1872b6cb-4c97-41c7-9c68-08c87d8189ef"
+    },
+    {
+      "file": "0066064704e6669f.xlsx",
+      "sha256": "0066064704e6669f22f3e7cfa89d9048799c73c47ef21c51995d5b99065ac0eb",
+      "bytes": 170409,
+      "formula_cells": 786,
+      "source": "cc-binaries/5bd82dcf-1fb3-471a-820f-ddd95ce4d32c"
+    },
+    {
+      "file": "007aab04dc696e33.xlsx",
+      "sha256": "007aab04dc696e33503401962973eeefe6d91274e8914d4cdd11bbe29ea5712a",
+      "bytes": 648119,
+      "formula_cells": 21723,
+      "source": "cc-binaries/41406b63-bfc0-4730-8179-1bc70248d015"
+    },
+    {
+      "file": "00990957a8b7310b.xlsx",
+      "sha256": "00990957a8b7310bb75955a46128d5a79ba1dc6fd5d85609cb2e22fc746bb855",
+      "bytes": 43436,
+      "formula_cells": 562,
+      "source": "cc-binaries/00a43c3d-9fd4-42ee-9328-c0e58391c16a"
+    },
+    {
+      "file": "00a0043e5f61e87d.xlsx",
+      "sha256": "00a0043e5f61e87d02f52cc7e10576fc6324bc0acfed57d05b67e24865b0c23b",
+      "bytes": 704716,
+      "formula_cells": 25377,
+      "source": "cc-binaries/30c9b9de-a041-4679-b250-ba0652b72841"
+    },
+    {
+      "file": "00e475c09e82da76.xlsx",
+      "sha256": "00e475c09e82da76106b300d8dc96efb11f460734a6debfb1a35a1be12945070",
+      "bytes": 255223,
+      "formula_cells": 987,
+      "source": "cc-binaries/c47252b7-29d6-4402-b35c-49cca71918ad"
+    },
+    {
+      "file": "00ffb4e306a87146.xlsx",
+      "sha256": "00ffb4e306a8714639838ca020645b743a0eff18b0e831676a138deabf200af4",
+      "bytes": 147173,
+      "formula_cells": 10,
+      "source": "cc-binaries/13a8744b-7aef-4b33-ba08-ac96e01b5df1"
+    },
+    {
+      "file": "010024c07100b1b2.xlsx",
+      "sha256": "010024c07100b1b2330dd7370f3f14580e0219c1b86332e9f593ae8421ffb0d9",
+      "bytes": 82752,
+      "formula_cells": 205,
+      "source": "cc-binaries/10001d64-c19e-44f3-b829-71a7f513c7eb"
+    },
+    {
+      "file": "011708b4b1456e3b.xlsx",
+      "sha256": "011708b4b1456e3b78a688dacde24be097e9065dec9244c32564c0a109efd9da",
+      "bytes": 78879,
+      "formula_cells": 1043,
+      "source": "cc-binaries/25974ddd-98b1-4a1c-8ea7-eb1f4e51b8b1"
+    },
+    {
+      "file": "0117888989c295eb.xlsx",
+      "sha256": "0117888989c295eba6bd5960a2d4b87d953c0c7d1adef551c6025e9896651c97",
+      "bytes": 26492,
+      "formula_cells": 82,
+      "source": "cc-binaries/0ec3e80b-b959-4c15-82ef-e03af2b3817f"
+    },
+    {
+      "file": "0136ab4b4f4d8006.xlsx",
+      "sha256": "0136ab4b4f4d8006ca082bee8d83d882cbabec6f1923fcfa4847c3c303e312f1",
+      "bytes": 82362,
+      "formula_cells": 4438,
+      "source": "cc-binaries/7db675c9-10ba-4cca-86c2-f40ca9a35aed"
+    },
+    {
+      "file": "0138f14ccab917bd.xlsx",
+      "sha256": "0138f14ccab917bde1c6b6e37c9728e7622a9c82a0a5ef8223988230be1f7f26",
+      "bytes": 19974,
+      "formula_cells": 67,
+      "source": "cc-binaries/8c5c9220-e640-4fbf-abff-35396f341ecd"
+    },
+    {
+      "file": "015de53aa880d85e.xlsx",
+      "sha256": "015de53aa880d85eba947e7bbc94dcbf6a4846f02f03aab3471a0d8cd2bc3fbf",
+      "bytes": 38474,
+      "formula_cells": 560,
+      "source": "cc-binaries/4f6cae3e-5efa-420b-a43c-87eb6b2791cd"
+    },
+    {
+      "file": "01674a946b8059d4.xlsx",
+      "sha256": "01674a946b8059d4dbea7322cd517c7c33d721bf5a34dcbea5f73506cca0265c",
+      "bytes": 594275,
+      "formula_cells": 19484,
+      "source": "cc-binaries/2bc046d5-9789-4608-be4c-740bcb4b7bec"
+    },
+    {
+      "file": "019e79897e1ecb04.xlsx",
+      "sha256": "019e79897e1ecb046d3f67f4be417e0b947535da119753e414394429e0838d76",
+      "bytes": 28416,
+      "formula_cells": 101,
+      "source": "cc-binaries/54e3999b-97b2-416d-af7b-20e75f9d3e08"
+    },
+    {
+      "file": "01ce04effbdf9c43.xlsx",
+      "sha256": "01ce04effbdf9c4314b2fe2e521faf30affaa681155b0f5f664b64516316f49b",
+      "bytes": 90575,
+      "formula_cells": 655,
+      "source": "cc-binaries/0a0fbe0a-6c9f-47e7-9fa4-ebc6d91b3cf0"
+    },
+    {
+      "file": "01cfb7a2dd2d4dc5.xlsx",
+      "sha256": "01cfb7a2dd2d4dc56c1995f1f5286ed702f8c40bec00125d3647e362b56a3f96",
+      "bytes": 21758,
+      "formula_cells": 182,
+      "source": "cc-binaries/e6cb7eac-6cef-4f89-b115-f71e0a7d2293"
+    },
+    {
+      "file": "01fe42393df6b7a0.xlsx",
+      "sha256": "01fe42393df6b7a0a9ccd124a2c1e6a2ff5532479b85531f3a6fb77eb6d38b0e",
+      "bytes": 118861,
+      "formula_cells": 2463,
+      "source": "cc-binaries/c333dad4-5d3f-4a84-8fda-4c703d2950d6"
+    },
+    {
+      "file": "020bc049f8057c1c.xlsx",
+      "sha256": "020bc049f8057c1c362ff290578d04bf3da8878d5ba09a24ccac444585cf1a48",
+      "bytes": 24395,
+      "formula_cells": 24,
+      "source": "cc-binaries/1698df16-f0bf-4e61-8103-9a3d03aacec0"
+    },
+    {
+      "file": "02134a5882dacc0c.xlsx",
+      "sha256": "02134a5882dacc0c6d55c489ad983cf1eddbaefed418e78a32b05c00707f1b80",
+      "bytes": 22494,
+      "formula_cells": 78,
+      "source": "cc-binaries/006adfdb-84a6-4d6b-9ff9-dc1ad088c1d2"
+    },
+    {
+      "file": "021a17f6c497d657.xlsx",
+      "sha256": "021a17f6c497d6578a05c665734a857e21bcbf762d93a3d747ca2d1f1aeac7aa",
+      "bytes": 97045,
+      "formula_cells": 143,
+      "source": "cc-binaries/5b6986a8-b850-45fb-8d33-d46a0e62466f"
+    },
+    {
+      "file": "02566ea11604e94e.xlsx",
+      "sha256": "02566ea11604e94e9b9a9c30173506ed84fb5e6eff8eb1a904ff6c912c70496e",
+      "bytes": 94506,
+      "formula_cells": 666,
+      "source": "cc-binaries/0106eeea-0b67-4a72-84ac-22520e8fd084"
+    },
+    {
+      "file": "025845b02e1e1c6a.xlsx",
+      "sha256": "025845b02e1e1c6a361126ab54a4c0493ed0eb57b272e121b7392a07bf820e26",
+      "bytes": 21290,
+      "formula_cells": 269,
+      "source": "cc-binaries/0a9d6768-48af-4744-944d-b28878dd0c0a"
+    },
+    {
+      "file": "025bc8f1977505cf.xlsx",
+      "sha256": "025bc8f1977505cf85ae2636e9c03a247754805e9958ab0b8f73d0f1f597f2e3",
+      "bytes": 27551,
+      "formula_cells": 39,
+      "source": "cc-binaries/160bc5f0-f2f2-48b9-ba7f-9f7af200318e"
+    },
+    {
+      "file": "02740d6b2d4b61c5.xlsx",
+      "sha256": "02740d6b2d4b61c5d1917bbc40daab5f991fb5de9fae161c08c2ba1face44f9f",
+      "bytes": 93984,
+      "formula_cells": 691,
+      "source": "cc-binaries/e72383d8-7ce9-4fbb-a87c-1af9fc7f05b0"
+    },
+    {
+      "file": "0274f8843bdee775.xlsx",
+      "sha256": "0274f8843bdee7757fd58dd09508505483055848df0012a56cf893a8bf9901c7",
+      "bytes": 44954,
+      "formula_cells": 154,
+      "source": "cc-binaries/2e8747e6-13dc-48eb-92c9-10258a847dd3"
+    },
+    {
+      "file": "0285a9e1924a230d.xlsx",
+      "sha256": "0285a9e1924a230d92f55005eb0dff579f5c3608eb3eef59a98c5d73e8ae0d83",
+      "bytes": 315529,
+      "formula_cells": 6050,
+      "source": "cc-binaries/4e1dab11-a300-47f7-a084-4dacf7fe4517"
+    },
+    {
+      "file": "028d203cbdaa569d.xlsx",
+      "sha256": "028d203cbdaa569d5ed10ecf05300c32d6e2ae639d0b9629967f91ab17859c0a",
+      "bytes": 622541,
+      "formula_cells": 14786,
+      "source": "cc-binaries/3b5784a6-95f9-4b0a-8a94-78b8e1f86c71"
+    },
+    {
+      "file": "0291bf89b8379c57.xlsx",
+      "sha256": "0291bf89b8379c573401ee08691281f295ed92705aa5fda551bd2278f5012a2e",
+      "bytes": 16163,
+      "formula_cells": 77,
+      "source": "cc-binaries/02dc4f62-192d-42c0-aa99-9fe42f99bce0"
+    },
+    {
+      "file": "02a9edc5e867d67f.xlsx",
+      "sha256": "02a9edc5e867d67fab422ffe92ef1a227d0a4a16fa15f0cb28c6522e23e22549",
+      "bytes": 107580,
+      "formula_cells": 40,
+      "source": "cc-binaries/05f4773a-a1b5-47eb-a9e7-9596fc4daab1"
+    },
+    {
+      "file": "02b0c1da83207055.xlsx",
+      "sha256": "02b0c1da832070553e87d38e0101ce9f11b98babd858f1087738c790c2737e30",
+      "bytes": 42187,
+      "formula_cells": 494,
+      "source": "cc-binaries/06edb440-d621-44a8-a42b-d2f54e7197f4"
+    },
+    {
+      "file": "02ee78a9d7ac4560.xlsx",
+      "sha256": "02ee78a9d7ac4560d7a56d7da6de450f4831a9fec2f50afa4ccc654f3a795c7b",
+      "bytes": 799499,
+      "formula_cells": 423,
+      "source": "cc-binaries/db7847ee-ee1c-4304-8908-683b842cf962"
+    },
+    {
+      "file": "034fe57ec9ae34ed.xlsx",
+      "sha256": "034fe57ec9ae34ed1aff30cbbb15abc663d73e06249dc23fd9887ec7eb59dc28",
+      "bytes": 138681,
+      "formula_cells": 10,
+      "source": "cc-binaries/dfe094a7-1bef-4874-8fc1-7571edcaf3ef"
+    },
+    {
+      "file": "0381ee2372c85285.xlsx",
+      "sha256": "0381ee2372c85285d8d56766a929147d1470d6c19dc68ea958cad39ace17f1d4",
+      "bytes": 151986,
+      "formula_cells": 241,
+      "source": "cc-binaries/2412bfef-dbb3-4ceb-833b-2f4a053c9381"
+    },
+    {
+      "file": "03baf844a2c56ff1.xlsx",
+      "sha256": "03baf844a2c56ff1bc4ec86807dfdfac55734532b8214ddcaf8b7267b2f3e46c",
+      "bytes": 360801,
+      "formula_cells": 11018,
+      "source": "cc-binaries/03daefc8-9c11-4cce-bccf-d6f5b0138fa9"
+    },
+    {
+      "file": "03d3db844bf6afc1.xlsx",
+      "sha256": "03d3db844bf6afc158068799410600c0c91deb59ab88b9e6f71fec68116e2e1b",
+      "bytes": 654505,
+      "formula_cells": 244,
+      "source": "cc-binaries/366464a5-c532-4dd2-976b-8c27774e0952"
+    },
+    {
+      "file": "03f1a17dc36cd637.xlsx",
+      "sha256": "03f1a17dc36cd637882c4219f1f0644f5628888640d9f908a91fdb5f2668c118",
+      "bytes": 15839,
+      "formula_cells": 14,
+      "source": "cc-binaries/02c417b6-ccdd-4059-8016-2e7cf6c48037"
+    },
+    {
+      "file": "03f44a7644920afe.xlsx",
+      "sha256": "03f44a7644920afe72d22ac1e6f1feb301f8a403f8e838c78dbc16457d97c0e2",
+      "bytes": 132923,
+      "formula_cells": 47,
+      "source": "cc-binaries/05a80bc4-5535-48d5-899e-25d2b3abd1f7"
+    },
+    {
+      "file": "04005700de5ccbb6.xlsx",
+      "sha256": "04005700de5ccbb6b4947bf7bb3eaaf340cad974b2fa2b77989dda8d04c4fa94",
+      "bytes": 14462,
+      "formula_cells": 53,
+      "source": "cc-binaries/a05c97bd-cfa4-4f20-a81e-ed74f6747975"
+    },
+    {
+      "file": "04068a9a95044073.xlsx",
+      "sha256": "04068a9a950440735e8b918d05206183efca1eacbbb04e25804801dbc1b4eb30",
+      "bytes": 687115,
+      "formula_cells": 24484,
+      "source": "cc-binaries/f775c25b-dea7-4a81-82c5-38d6c6e4ea18"
+    },
+    {
+      "file": "0426bf237fe65201.xlsx",
+      "sha256": "0426bf237fe65201968371bcf95be0e34c840eb670dc2c9f4dc05008d666af1d",
+      "bytes": 32274,
+      "formula_cells": 14,
+      "source": "cc-binaries/3067d729-97a5-4108-be9a-cd73d48b523f"
+    },
+    {
+      "file": "04423c94ad7c48c3.xlsx",
+      "sha256": "04423c94ad7c48c345db27a88b19341f08854454fae3390c8273813e9c9ed672",
+      "bytes": 43408,
+      "formula_cells": 38,
+      "source": "cc-binaries/4e25da01-cf40-4cd3-a36a-e972b0565989"
+    },
+    {
+      "file": "044559df91b87761.xlsx",
+      "sha256": "044559df91b87761de17930ead9172adb243e471becbecce1fdd308c593bc0db",
+      "bytes": 13385,
+      "formula_cells": 64,
+      "source": "cc-binaries/a210595a-9eb3-4130-9e0c-2815c494f705"
+    },
+    {
+      "file": "04492fb39063f0a5.xlsx",
+      "sha256": "04492fb39063f0a5f5af36de46e43b507d6b8caca012e60b56e64e7fc4cf9096",
+      "bytes": 37904,
+      "formula_cells": 67,
+      "source": "cc-binaries/01fcaddb-a264-4524-8517-47143348e004"
+    },
+    {
+      "file": "046f28afa06ca075.xlsx",
+      "sha256": "046f28afa06ca075ed93ed33686fc621964f1245f19cea97583862127463e6fa",
+      "bytes": 133421,
+      "formula_cells": 151,
+      "source": "cc-binaries/37fdf648-dacf-4fab-a5ac-07c2a733e3e8"
+    },
+    {
+      "file": "04755a4d02e7f2bf.xlsx",
+      "sha256": "04755a4d02e7f2bf17c66094a145a0d8fd323a3031d1058fd3f8726faa6aa84c",
+      "bytes": 25110,
+      "formula_cells": 33,
+      "source": "cc-binaries/26c52f84-7a40-4daa-a3d2-29be9a7c7963"
+    },
+    {
+      "file": "048f208130755b5a.xlsx",
+      "sha256": "048f208130755b5ac844f92898b7e588088478cad1294445bc2f31277b0e4f81",
+      "bytes": 50544,
+      "formula_cells": 275,
+      "source": "cc-binaries/82ba04ef-8b84-4d50-a7f8-3240a872b5ea"
+    },
+    {
+      "file": "049647864c3bf811.xlsx",
+      "sha256": "049647864c3bf81177dbbb46d93f59e0095af8337a65d00de748f9becc58ce0d",
+      "bytes": 23061,
+      "formula_cells": 24,
+      "source": "cc-binaries/11694423-aa5c-4a2e-9c00-a110b3e03eb6"
+    },
+    {
+      "file": "04b71252f3894a84.xlsx",
+      "sha256": "04b71252f3894a841ebd632f94b913f875d0012b074240ff46589a8d99ab1e7e",
+      "bytes": 35941,
+      "formula_cells": 72,
+      "source": "cc-binaries/0ca92f4d-de87-4115-8397-e0c6351b871e"
+    },
+    {
+      "file": "04c02218cfc1b0c7.xlsx",
+      "sha256": "04c02218cfc1b0c761f28c2ce679379a2bea86bd6d58afd944e4382afe941004",
+      "bytes": 413762,
+      "formula_cells": 101,
+      "source": "cc-binaries/01a05b0b-64a5-4f77-8966-1f4e5fa4fb3d"
+    },
+    {
+      "file": "04d48c7823c24468.xlsx",
+      "sha256": "04d48c7823c24468a2d7f8c94ac8bcffcb435a327eea896dd20134efbdcffdbf",
+      "bytes": 7220,
+      "formula_cells": 60,
+      "source": "cc-binaries/b8806f1e-7b10-4314-bea6-bd4c74a23516"
+    },
+    {
+      "file": "04d58ac737bd4f4f.xlsx",
+      "sha256": "04d58ac737bd4f4fb3ca7f7b546871920f1b18e78202de0d519debf3a17b33c3",
+      "bytes": 171333,
+      "formula_cells": 2879,
+      "source": "cc-binaries/1cf1e84c-56f4-45bf-86a1-3aa52c8dae68"
+    },
+    {
+      "file": "04f15476a1330ad0.xlsx",
+      "sha256": "04f15476a1330ad067d65e690a7800a20a8c847f4873861cfe5f1d72bd5bb224",
+      "bytes": 91464,
+      "formula_cells": 193,
+      "source": "cc-binaries/3b5d7d14-338c-4763-a9f4-e39826d1a65d"
+    },
+    {
+      "file": "050197e2112ed7ff.xlsx",
+      "sha256": "050197e2112ed7ffd4e7e5ed915fe5230bd1c860dd4cc32e687faf1bbadbbfdb",
+      "bytes": 53613,
+      "formula_cells": 231,
+      "source": "cc-binaries/19f586e5-687a-4a18-b553-8ba07499331f"
+    },
+    {
+      "file": "050e46ad7a2ac061.xlsx",
+      "sha256": "050e46ad7a2ac0617c1fb0447c726b88c24fc397359200d1b19d55ab61e3cb3c",
+      "bytes": 127567,
+      "formula_cells": 679,
+      "source": "cc-binaries/251ea124-ae04-48a9-a03a-624be6774d7f"
+    },
+    {
+      "file": "056dd904b5eed1d1.xlsx",
+      "sha256": "056dd904b5eed1d1fe26d7f4c1721248f40d0bf00b14c3a25faf01f76ce8593b",
+      "bytes": 13496,
+      "formula_cells": 10,
+      "source": "cc-binaries/16da5263-29fe-44fc-9c6d-4c8c0d24684c"
+    },
+    {
+      "file": "059db98011e31460.xlsx",
+      "sha256": "059db98011e31460d07ebdc5cfa407012f0e6eebe5b853e6d952d66e31288ceb",
+      "bytes": 42388,
+      "formula_cells": 534,
+      "source": "cc-binaries/02820b98-26fe-457c-b8c1-1a7b6a636561"
+    },
+    {
+      "file": "059fb740b36e1497.xlsx",
+      "sha256": "059fb740b36e1497e349a0768f3379c76f4da8cb2d95b901aea462a6ceaaed4d",
+      "bytes": 31590,
+      "formula_cells": 34,
+      "source": "cc-binaries/b958a8df-7651-486c-b71b-333b5be5912c"
+    },
+    {
+      "file": "05c84f524587a492.xlsx",
+      "sha256": "05c84f524587a492115093285892bf69e5aaf9115c8fce891f4052801e09d7b4",
+      "bytes": 368650,
+      "formula_cells": 437,
+      "source": "cc-binaries/0208db61-e963-43b7-98f3-67ad452ae351"
+    },
+    {
+      "file": "05ca226ac15c0b2d.xlsx",
+      "sha256": "05ca226ac15c0b2dc1d74c5662f9831f4bfe478fd8da690418c728d93f202063",
+      "bytes": 805706,
+      "formula_cells": 17803,
+      "source": "cc-binaries/6263c4bb-6cb5-46d8-a66c-471cd878254d"
+    },
+    {
+      "file": "05d8046fc5a67d9b.xlsx",
+      "sha256": "05d8046fc5a67d9b50bfd916c8d9cb756aeb593f37501737dd57fa45dc83bf3d",
+      "bytes": 25542,
+      "formula_cells": 136,
+      "source": "cc-binaries/391837ac-2d26-45be-ab87-1d836c07a396"
+    },
+    {
+      "file": "05ecc0f1a155ab6b.xlsx",
+      "sha256": "05ecc0f1a155ab6b638c5a35ee9ea9c01000631fcdb6c65a4645fee17211f407",
+      "bytes": 16821,
+      "formula_cells": 154,
+      "source": "cc-binaries/014d6e07-2c8e-4b81-9942-bc8a2e828642"
+    },
+    {
+      "file": "05fc24254bc97b4f.xlsx",
+      "sha256": "05fc24254bc97b4fa3872e9fbcef7243c7f25cc3e964c2160d6c0c81c7590a9b",
+      "bytes": 52575,
+      "formula_cells": 30,
+      "source": "cc-binaries/24aa9f70-a3a1-4cf1-8fee-bdb57455d807"
+    },
+    {
+      "file": "05fdaf4a330841c9.xlsx",
+      "sha256": "05fdaf4a330841c9a9dd7bd89293ffb4a313c47af9010d890e3ae8fa91dfdb59",
+      "bytes": 26471,
+      "formula_cells": 72,
+      "source": "cc-binaries/df041e07-8251-41ac-b79b-2aa8bcb5a51d"
+    },
+    {
+      "file": "0600d55fda0e1587.xlsx",
+      "sha256": "0600d55fda0e15878cce65d31ee2e35b8a48522221b36227fea5a88ac4c8a4f6",
+      "bytes": 1000588,
+      "formula_cells": 3144,
+      "source": "cc-binaries/81d09999-3736-4e6d-abaf-f7bfccbfb6f3"
+    },
+    {
+      "file": "061204050c996b00.xlsx",
+      "sha256": "061204050c996b0027ae59fb836b4a235ef7ae3079d4771fe968ae6a5a1f061a",
+      "bytes": 14977,
+      "formula_cells": 13,
+      "source": "cc-binaries/031780e8-163b-4501-88e5-231d89391a26"
+    },
+    {
+      "file": "0624940a4fa741f4.xlsx",
+      "sha256": "0624940a4fa741f43975bc3cac68f449294e9e22ad3638d5a27a7cf1540c3bc9",
+      "bytes": 20578,
+      "formula_cells": 65,
+      "source": "cc-binaries/1ffbf7c7-0efd-4791-ab63-7b485eb225e6"
+    },
+    {
+      "file": "0630ecb48f7c46c7.xlsx",
+      "sha256": "0630ecb48f7c46c7d50e92253ace925f6926e44d6b4c941494542136e4098645",
+      "bytes": 75646,
+      "formula_cells": 683,
+      "source": "cc-binaries/3eeadfa2-9c09-48af-9357-b8bf4231449f"
+    },
+    {
+      "file": "063a501c2b04b8ae.xlsx",
+      "sha256": "063a501c2b04b8aeb5ebcfa6e5b8f847846753904a283e7bf3b3f31ae88f0a35",
+      "bytes": 60249,
+      "formula_cells": 586,
+      "source": "cc-binaries/041d257f-f5a9-4ca5-b431-641572128420"
+    },
+    {
+      "file": "0672a8a8b14cffe9.xlsx",
+      "sha256": "0672a8a8b14cffe9572a003cf116621c7562c96cf4192e551e606a3733fde9ee",
+      "bytes": 75756,
+      "formula_cells": 218,
+      "source": "cc-binaries/08e36881-2a58-40a2-9a01-984406c04983"
+    },
+    {
+      "file": "06a366bc179c9f4a.xlsx",
+      "sha256": "06a366bc179c9f4aac0ed56fca31ce0b148dcf662ec7b433b0644092243e9c0e",
+      "bytes": 256598,
+      "formula_cells": 567,
+      "source": "cc-binaries/08c04032-0b6c-47b3-b038-6fa840d65f8a"
+    },
+    {
+      "file": "06a8920b5956cf51.xlsx",
+      "sha256": "06a8920b5956cf518bcad7e59fb0487d8e7fbffdd218c781e828722ef655e74a",
+      "bytes": 294650,
+      "formula_cells": 2025,
+      "source": "cc-binaries/f6e04841-56d8-4a96-9a1f-8462b4f968ac"
+    },
+    {
+      "file": "06cb9acac1d71910.xlsx",
+      "sha256": "06cb9acac1d719102b0770dceda02eab3bfc10ea99f91685e37609c8060020d5",
+      "bytes": 88704,
+      "formula_cells": 1809,
+      "source": "cc-binaries/03c4f140-a3e4-41bc-8f33-b721362f8fef"
+    },
+    {
+      "file": "06cdbed3d5935205.xlsx",
+      "sha256": "06cdbed3d593520577ad465a8c157e2154df27cb9eae2cdcaca67497acff566b",
+      "bytes": 51576,
+      "formula_cells": 12,
+      "source": "cc-binaries/04988f0f-083a-43d2-b779-66209634b4c6"
+    },
+    {
+      "file": "06da62afc00478f1.xlsx",
+      "sha256": "06da62afc00478f127023a9ec4f53e25ff6ad86193a10aecbdc1ed591b2d034d",
+      "bytes": 439348,
+      "formula_cells": 3322,
+      "source": "cc-binaries/5604ab4f-d153-40f5-890e-85bede41380f"
+    },
+    {
+      "file": "06f30731f19bdef0.xlsx",
+      "sha256": "06f30731f19bdef038f2133778e95777a15c9d8f0d21fcc9fa92e018d2b0673a",
+      "bytes": 52773,
+      "formula_cells": 21,
+      "source": "cc-binaries/18cac5fa-3901-407a-adc8-079e7d607e86"
+    },
+    {
+      "file": "0715ee04b95b55d3.xlsx",
+      "sha256": "0715ee04b95b55d30275e3fb4f431c25f90cdaed6269e5d42f0d026e67a4416d",
+      "bytes": 49560,
+      "formula_cells": 40,
+      "source": "cc-binaries/a5265094-148d-4962-a196-d02a66d4ec3a"
+    },
+    {
+      "file": "0719cc0eb920e17d.xlsx",
+      "sha256": "0719cc0eb920e17d65e05e5c6567a732c747f667f209bc92c3c6f53cca0614a2",
+      "bytes": 53336,
+      "formula_cells": 40,
+      "source": "cc-binaries/92c9906f-9223-44d9-a334-61362b0c8742"
+    },
+    {
+      "file": "078043fa31dba199.xlsx",
+      "sha256": "078043fa31dba199f267a998f2f9075df770f8c3e5004c0232d9093ae046eda7",
+      "bytes": 97268,
+      "formula_cells": 1511,
+      "source": "cc-binaries/16e7c0e2-7675-455a-b546-e4723a4a0513"
+    },
+    {
+      "file": "0785256fcb58aae2.xlsx",
+      "sha256": "0785256fcb58aae264dc15f4503135bdf2f1ffe259ae1bf329e6ba2226bf7193",
+      "bytes": 24785,
+      "formula_cells": 187,
+      "source": "cc-binaries/1f9a58ac-cb6b-447d-bc27-5be1149d0c56"
+    },
+    {
+      "file": "0791f53520f6d1e8.xlsx",
+      "sha256": "0791f53520f6d1e880e617e70870706ebcde508aea84aaa8c715afcdfbe6fe17",
+      "bytes": 104601,
+      "formula_cells": 6101,
+      "source": "cc-binaries/6e6f2cea-a866-4fdc-aa3f-ebb5ad3e8302"
+    },
+    {
+      "file": "07a8be57057439ae.xlsx",
+      "sha256": "07a8be57057439aefb73fe849007bf13fd6a1e6c529e624e6e8fae2fbc11e6b4",
+      "bytes": 14740,
+      "formula_cells": 50,
+      "source": "cc-binaries/cba10d1b-1859-4d11-bc1d-54781af3e168"
+    },
+    {
+      "file": "07b7d981677e62f1.xlsx",
+      "sha256": "07b7d981677e62f1213a9c98dff6bfb4a6b7ca1f7490f7ddf73c5e4b6ebb5580",
+      "bytes": 104346,
+      "formula_cells": 57,
+      "source": "cc-binaries/1b09c658-948a-4184-a432-a3c62bd9d0a4"
+    },
+    {
+      "file": "07cb9cb03b0a6073.xlsx",
+      "sha256": "07cb9cb03b0a60732ac7daea082b7c0b2924dc2f82710347d1dc163c86a83caa",
+      "bytes": 94768,
+      "formula_cells": 28,
+      "source": "cc-binaries/5a577dab-98bc-4243-96b8-e714857de29d"
+    },
+    {
+      "file": "07ccf20cb45066a4.xlsx",
+      "sha256": "07ccf20cb45066a46e62bc21757878567f6c0d6ba31d200d92c6ddd7e1c8ad41",
+      "bytes": 41970,
+      "formula_cells": 494,
+      "source": "cc-binaries/0090a1a5-1ea8-4370-8659-ac30a7cce9bb"
+    },
+    {
+      "file": "07e1ec8cecd1d486.xlsx",
+      "sha256": "07e1ec8cecd1d486ebc51fb091e01d11085975e2e0bfefb69d3a9cf2064ebf39",
+      "bytes": 765347,
+      "formula_cells": 2994,
+      "source": "cc-binaries/0268e56d-5d3b-4893-8a66-beaa9a99bb88"
+    },
+    {
+      "file": "08043ad59756e41e.xlsx",
+      "sha256": "08043ad59756e41eadc6091bc4c1da33771c762efe8fe4ab335e4ba22c309b0a",
+      "bytes": 110320,
+      "formula_cells": 1057,
+      "source": "cc-binaries/01d5e329-958b-4bc5-a877-8aefc3bf9283"
+    },
+    {
+      "file": "080e766009020190.xlsx",
+      "sha256": "080e766009020190dcc68e23403508850e607cc4268fcf278d814e660fd0ea32",
+      "bytes": 13224,
+      "formula_cells": 32,
+      "source": "cc-binaries/d4cffaa9-0a6d-4913-b15c-01b8f4cc74ec"
+    },
+    {
+      "file": "08246048c23fe370.xlsx",
+      "sha256": "08246048c23fe370fd02c7477272ddae9df38037f58c08c98bd2ed0bea4c0b63",
+      "bytes": 133015,
+      "formula_cells": 62,
+      "source": "cc-binaries/0d123a7b-0f13-417a-a31d-8fc74d08a1b0"
+    },
+    {
+      "file": "084c9c11d4ff7b5d.xlsx",
+      "sha256": "084c9c11d4ff7b5d0718593104ea0790dfbd88a884bf20190571bd139e882df7",
+      "bytes": 46545,
+      "formula_cells": 1492,
+      "source": "cc-binaries/2178f5b4-aefa-4ffb-8b17-3bfab9415330"
+    },
+    {
+      "file": "0855bc2768828081.xlsx",
+      "sha256": "0855bc2768828081d2b60961d312263e43b9ac0356c7b1ed8ec5bcafffc6d881",
+      "bytes": 17548,
+      "formula_cells": 10,
+      "source": "cc-binaries/014cb81f-21c8-41d8-960b-9861369162f6"
+    },
+    {
+      "file": "0872a29835bf050b.xlsx",
+      "sha256": "0872a29835bf050b5c4afb308f309cd1e8fcfb9e8fbf96e71ce3cb817d02b478",
+      "bytes": 61017,
+      "formula_cells": 38,
+      "source": "cc-binaries/2b48cb43-e4a2-4128-b00c-c82753b00466"
+    },
+    {
+      "file": "08878a637a1a9338.xlsx",
+      "sha256": "08878a637a1a93384f6cdc7b5c9cc664a0ee1ef39b66062297b7022de3d8f683",
+      "bytes": 20731,
+      "formula_cells": 18,
+      "source": "cc-binaries/23f527f9-2b65-40e7-9fc8-d427687cebbd"
+    },
+    {
+      "file": "088beb21a105f500.xlsx",
+      "sha256": "088beb21a105f500d7d1d47890a614a30e5ff6060ad8299c71cd227138ae088f",
+      "bytes": 17429,
+      "formula_cells": 99,
+      "source": "cc-binaries/0bfb5133-2aa4-4027-8729-db673baa8930"
+    },
+    {
+      "file": "08cc6c4c9261dd12.xlsx",
+      "sha256": "08cc6c4c9261dd12eed7d29f3e6b436e9cf26b593691c5ebfe03477da492a0a7",
+      "bytes": 37958,
+      "formula_cells": 13,
+      "source": "cc-binaries/3bdfc34c-fdf4-4599-b424-0bfcd3a3f196"
+    },
+    {
+      "file": "08d43add51ce57b4.xlsx",
+      "sha256": "08d43add51ce57b4b61df841e2fff146b067c182b48fc217d1ee528527733b16",
+      "bytes": 80054,
+      "formula_cells": 2645,
+      "source": "cc-binaries/2a35af6b-1067-4f05-be77-7807411e806f"
+    },
+    {
+      "file": "08e1467e1e693b8b.xlsx",
+      "sha256": "08e1467e1e693b8b42c2179990626c4fd03de7bea69b47e4d381449e5015b372",
+      "bytes": 53478,
+      "formula_cells": 197,
+      "source": "cc-binaries/35d1174b-cafc-4e89-900c-ca3a55157f3f"
+    },
+    {
+      "file": "090a05c03b6b3a44.xlsx",
+      "sha256": "090a05c03b6b3a44bb5deb2b055f74a60a25d320546a4c858b191d96909f339d",
+      "bytes": 33278,
+      "formula_cells": 241,
+      "source": "cc-binaries/03715367-03f0-454e-b179-b5ffa498f54b"
+    },
+    {
+      "file": "091f059212cc7201.xlsx",
+      "sha256": "091f059212cc7201bd375513d3c733530b05f9e09a26c8233b56d39c8f481203",
+      "bytes": 46709,
+      "formula_cells": 271,
+      "source": "cc-binaries/62c64769-21fa-4960-90fa-13efb10b47cd"
+    },
+    {
+      "file": "09453885a9363e2c.xlsx",
+      "sha256": "09453885a9363e2c94352a1be657633e5f28b8ac24abe7007477f5a4b64e21f2",
+      "bytes": 30224,
+      "formula_cells": 73,
+      "source": "cc-binaries/e6e2660a-24e1-4fcc-8ef1-24ca1bc18603"
+    },
+    {
+      "file": "0947fb9752032b99.xlsx",
+      "sha256": "0947fb9752032b9944b235fc04272bdb6c732283cf744b0f43b7ba23a97e16f7",
+      "bytes": 46808,
+      "formula_cells": 119,
+      "source": "cc-binaries/0c0b425c-b4e3-4638-bc9e-5976487b60ea"
+    },
+    {
+      "file": "0950084ee8372e36.xlsx",
+      "sha256": "0950084ee8372e36c7818c515a2fce3077b0ddbc36221f9bd8aefced02dff501",
+      "bytes": 212464,
+      "formula_cells": 172,
+      "source": "cc-binaries/355f3cec-8981-4877-8ba1-35a5c9797dc8"
+    },
+    {
+      "file": "0970257ef4358d86.xlsx",
+      "sha256": "0970257ef4358d86cfe81c701f813d651a1f67ad96c87a39220d8de281d9da26",
+      "bytes": 29246,
+      "formula_cells": 331,
+      "source": "cc-binaries/6df01878-7687-4eef-a618-309ec8887d48"
+    },
+    {
+      "file": "09765549283fb0a7.xlsx",
+      "sha256": "09765549283fb0a79c51ae493859e03ca4c6514c6b643e2dc03030765151c3e8",
+      "bytes": 334153,
+      "formula_cells": 4037,
+      "source": "cc-binaries/09e6a2e2-2356-4f26-b5a7-d165817acf12"
+    },
+    {
+      "file": "097de7ee5732f9d9.xlsx",
+      "sha256": "097de7ee5732f9d92215068eb78436adef7d580016b4b004013a2b914a14779e",
+      "bytes": 20103,
+      "formula_cells": 73,
+      "source": "cc-binaries/7e43e4cf-3564-4c86-940c-33a21ed5c8b3"
+    },
+    {
+      "file": "09a211a87218f25f.xlsx",
+      "sha256": "09a211a87218f25f26477dc4fe63691dd4f4f84ac13927fe30317e26e93b626b",
+      "bytes": 178806,
+      "formula_cells": 130,
+      "source": "cc-binaries/18ea3d94-45e5-4414-be39-06c985d4e826"
+    },
+    {
+      "file": "09f15629a9ad3c39.xlsx",
+      "sha256": "09f15629a9ad3c392fee506797196ca598909b3121fdaa7631486540a094eee0",
+      "bytes": 18190,
+      "formula_cells": 76,
+      "source": "cc-binaries/2f55f4a3-d3b1-432f-8d68-b15bd77cbd0e"
+    },
+    {
+      "file": "0a01dcc3cc0fd78f.xlsx",
+      "sha256": "0a01dcc3cc0fd78f587c6869ff1e031f25ed153213b8502b324bc946a4b06605",
+      "bytes": 37251,
+      "formula_cells": 147,
+      "source": "cc-binaries/2a774c25-2726-4696-a00c-acb6accf18fa"
+    },
+    {
+      "file": "0a07a0e2bcfef4be.xlsx",
+      "sha256": "0a07a0e2bcfef4be26269c5d854dc4717ac76335e9e07a59165fe42f94b42f78",
+      "bytes": 61101,
+      "formula_cells": 65,
+      "source": "cc-binaries/0dd97f25-fb77-4cc2-a7d3-0631445fb21e"
+    },
+    {
+      "file": "0a151649be570d20.xlsx",
+      "sha256": "0a151649be570d20d307928f21f0e2f31c75b5606de76cdd3887ace4d37d02f9",
+      "bytes": 17776,
+      "formula_cells": 13,
+      "source": "cc-binaries/3fb78503-da90-4649-b314-fc1bbf60cbf6"
+    },
+    {
+      "file": "0a17e6559a828bcd.xlsx",
+      "sha256": "0a17e6559a828bcd1553ab2e094b9286afbc80b3e048d8db8ed1f406f27fa425",
+      "bytes": 75140,
+      "formula_cells": 806,
+      "source": "cc-binaries/8baff9ba-3f6d-4a47-9a5c-e9805c62bed7"
+    },
+    {
+      "file": "0a37f1d8ec4649c1.xlsx",
+      "sha256": "0a37f1d8ec4649c1bb4b677f6f17511d3c17f60ef79bbda6af36cbc94a72676e",
+      "bytes": 211720,
+      "formula_cells": 16,
+      "source": "cc-binaries/772e41ec-2515-40a6-9c3b-a0f161e8a5f9"
+    },
+    {
+      "file": "0a3937881ae93e30.xlsx",
+      "sha256": "0a3937881ae93e306c1796ad43f034f35104e35a4e88eee5f0ef2170649ec321",
+      "bytes": 17943,
+      "formula_cells": 10,
+      "source": "cc-binaries/03eaf881-5759-441b-9cd3-0c11ec998221"
+    },
+    {
+      "file": "0a39daf8bc164228.xlsx",
+      "sha256": "0a39daf8bc1642287cb13f781abeaa1e540cea7eda46201275648f41027bca3c",
+      "bytes": 15487,
+      "formula_cells": 202,
+      "source": "cc-binaries/02c77ab4-e21d-4b58-804c-3a2cbd2390ab"
+    },
+    {
+      "file": "0a3b13ee833629ee.xlsx",
+      "sha256": "0a3b13ee833629eef30fe84d3f984f35b83bcada5461b95c76b5ae0b4717235b",
+      "bytes": 833033,
+      "formula_cells": 26301,
+      "source": "cc-binaries/8ad43ea5-8f2c-4042-824b-a0f9534971e9"
+    },
+    {
+      "file": "0a455dfc98e149bc.xlsx",
+      "sha256": "0a455dfc98e149bca7f26d6259f3f1db3331c1bd067b9dbbc4183df53beb56bc",
+      "bytes": 256562,
+      "formula_cells": 1202,
+      "source": "cc-binaries/613451ab-348a-4932-b143-2c3e10964aed"
+    },
+    {
+      "file": "0a680f7a9c9aa97a.xlsx",
+      "sha256": "0a680f7a9c9aa97ab4817c49689a96f2ecb83c663ac03d3849d5749e618f24a6",
+      "bytes": 25214,
+      "formula_cells": 12,
+      "source": "cc-binaries/bfc6a571-6f76-4769-973f-577a25618c89"
+    },
+    {
+      "file": "0aa900baa9f94af3.xlsx",
+      "sha256": "0aa900baa9f94af3accdd5babf03a20c54508758035a331afb90b39f53515003",
+      "bytes": 15881,
+      "formula_cells": 30,
+      "source": "cc-binaries/4507d5df-cf0f-4c4c-abcc-79a3a81e7df6"
+    },
+    {
+      "file": "0aaed845c7ea6e34.xlsx",
+      "sha256": "0aaed845c7ea6e34eff3bf340d4bbe128cedcf598384694f89c09319efbb9f1a",
+      "bytes": 150392,
+      "formula_cells": 346,
+      "source": "cc-binaries/11d3be53-a70b-4cfc-a4df-e15dc30ed672"
+    },
+    {
+      "file": "0ac0187b1c4b90ec.xlsx",
+      "sha256": "0ac0187b1c4b90ec4ee743b6ae3b8029b8ffb95230cbdc2e1713b416ed529fac",
+      "bytes": 20346,
+      "formula_cells": 141,
+      "source": "cc-binaries/c929221b-260f-446e-857a-b7be3bc64493"
+    },
+    {
+      "file": "0ac5afab95726b58.xlsx",
+      "sha256": "0ac5afab95726b5821c3b819055464ceb3c952ec49351ec229c8c8d47002f732",
+      "bytes": 154628,
+      "formula_cells": 450,
+      "source": "cc-binaries/7af4b320-23f0-4f59-bf6a-90fac742efde"
+    },
+    {
+      "file": "0ade5898a71f70cb.xlsx",
+      "sha256": "0ade5898a71f70cb68224ec619f37f22a9847720d294d087d55d27f7f73c1c9e",
+      "bytes": 116225,
+      "formula_cells": 10,
+      "source": "cc-binaries/1b302f33-e2ce-45a4-a2cc-e15fff778a5b"
+    },
+    {
+      "file": "0ae10c1fbc151d92.xlsx",
+      "sha256": "0ae10c1fbc151d92090ad04b2944dcc67ba1defb946a459a5be76effaf3c1dc3",
+      "bytes": 670042,
+      "formula_cells": 347,
+      "source": "cc-binaries/1e6cce0b-2348-4966-bb3f-8a6a81c01091"
+    },
+    {
+      "file": "0aef5b3d699dcce1.xlsx",
+      "sha256": "0aef5b3d699dcce1c307dc18fe0a5246bded71c7cc628883f1d83e3b3e4f65fd",
+      "bytes": 22145,
+      "formula_cells": 10,
+      "source": "cc-binaries/c3e23a25-2f72-49c7-9b3b-a97f7e23c9e2"
+    },
+    {
+      "file": "0af771f0b00e617e.xlsx",
+      "sha256": "0af771f0b00e617e32274e7b1d0d7e4ccaca77192f56c4a55e3adff9a19126dc",
+      "bytes": 62510,
+      "formula_cells": 46,
+      "source": "cc-binaries/01d93c69-5e6c-4dbc-becd-f9d3219ac6f9"
+    },
+    {
+      "file": "0b1e95422cdd00a1.xlsx",
+      "sha256": "0b1e95422cdd00a154ddd420305d5ae0c79df4d50753c5805649f12678262111",
+      "bytes": 152309,
+      "formula_cells": 136,
+      "source": "cc-binaries/0be6ca37-e4c3-4134-a1d8-f1188797f119"
+    },
+    {
+      "file": "0b30866f2595ede1.xlsx",
+      "sha256": "0b30866f2595ede1ad5e63b2d79084ba3a9d237dd3525acc3c2662231a7aef4a",
+      "bytes": 23863,
+      "formula_cells": 222,
+      "source": "cc-binaries/1071ac1d-21c0-40b1-b36f-a598fe2f9eb1"
+    },
+    {
+      "file": "0b3257c1d36fcc8b.xlsx",
+      "sha256": "0b3257c1d36fcc8be1dc9e11c4967546b3383a753b66e8340071b3ea5f2903af",
+      "bytes": 94685,
+      "formula_cells": 120,
+      "source": "cc-binaries/4e4db589-1419-40a7-927a-72a49f91c8b5"
+    },
+    {
+      "file": "0b36399a29648ff6.xlsx",
+      "sha256": "0b36399a29648ff63405148a9a98c597d7dc56f47d5c3ca7dd75005f320b8781",
+      "bytes": 37391,
+      "formula_cells": 293,
+      "source": "cc-binaries/087380e7-8589-4e38-bafc-4408d896c780"
+    },
+    {
+      "file": "0b3ad1ce8e39686d.xlsx",
+      "sha256": "0b3ad1ce8e39686d9b88459f4a529373b978c2ad1b4200056df3eccb845b00ad",
+      "bytes": 40383,
+      "formula_cells": 544,
+      "source": "cc-binaries/b385e506-7083-4aa0-b723-77f7a7ca978d"
+    },
+    {
+      "file": "0b47605be0fb70a2.xlsx",
+      "sha256": "0b47605be0fb70a2102665ce16f04c22542be9d6487694b580de50090dddb2b1",
+      "bytes": 94245,
+      "formula_cells": 1227,
+      "source": "cc-binaries/2c326c5a-a188-4acb-b196-3b01fb62f56c"
+    },
+    {
+      "file": "0b5ebf2ad945be26.xlsx",
+      "sha256": "0b5ebf2ad945be26c0830c362a443c5a6d85cfa64c9d17e8974defb4935b75f6",
+      "bytes": 15348,
+      "formula_cells": 36,
+      "source": "cc-binaries/663519ee-e3b0-4a8f-be23-5aafc19da1a2"
+    },
+    {
+      "file": "0b6a62ca812e63d5.xlsx",
+      "sha256": "0b6a62ca812e63d59061d9b06489f610f730677ea94f33a3d97ed7d0c813946d",
+      "bytes": 42606,
+      "formula_cells": 546,
+      "source": "cc-binaries/0187c951-5a06-488d-8d33-58d47045b99f"
+    },
+    {
+      "file": "0b929f8f461e8a73.xlsx",
+      "sha256": "0b929f8f461e8a73e688d42255818850ba02e966f63f816f48e9d0c9a03fad01",
+      "bytes": 33255,
+      "formula_cells": 16,
+      "source": "cc-binaries/5a17d9a8-3ec4-4781-bac9-d7405952ea96"
+    },
+    {
+      "file": "0b9d0cca1bc3198b.xlsx",
+      "sha256": "0b9d0cca1bc3198bbe7affae2ea9c7670a723c091bbc7db70ec2d3b7a4e0f257",
+      "bytes": 14753,
+      "formula_cells": 14,
+      "source": "cc-binaries/0b276d95-9dc3-4b31-ba16-3a005af6073e"
+    },
+    {
+      "file": "0b9db1c1453f1fdd.xlsx",
+      "sha256": "0b9db1c1453f1fdd45453dfbff82a2bdc17a5803116ecf611a0a0ad69e8cc9b7",
+      "bytes": 20323,
+      "formula_cells": 93,
+      "source": "cc-binaries/36736cb3-abe1-4138-b976-918e9bf7c588"
+    },
+    {
+      "file": "0bb5875866561ad7.xlsx",
+      "sha256": "0bb5875866561ad7160480c0715e45bdb143003498a2e5bf59adf1d6b6651daa",
+      "bytes": 57741,
+      "formula_cells": 10,
+      "source": "cc-binaries/2e5aeae7-3b6a-450d-9224-8b29267c2489"
+    },
+    {
+      "file": "0bf09670605f44d2.xlsx",
+      "sha256": "0bf09670605f44d2c55469ffea325cbf45b289d174c40e68e5b14e12b0521c6d",
+      "bytes": 37252,
+      "formula_cells": 82,
+      "source": "cc-binaries/0fa3416d-66a9-4ca7-aa39-545a61be32d6"
+    },
+    {
+      "file": "0c0eb8afb553be84.xlsx",
+      "sha256": "0c0eb8afb553be8495d394aece2d3b9f95cf1cff253b418d22644a236aeafa07",
+      "bytes": 32829,
+      "formula_cells": 13,
+      "source": "cc-binaries/0a37f002-cf04-4d18-b42c-f9e9a3e99693"
+    },
+    {
+      "file": "0c18cf8db9482b63.xlsx",
+      "sha256": "0c18cf8db9482b63ab6abc85cc8e326be48d3b604a93f44eb25f66d0fb271afe",
+      "bytes": 976579,
+      "formula_cells": 1193,
+      "source": "cc-binaries/1afec53f-749a-4d13-a981-11e6c4b33ec6"
+    },
+    {
+      "file": "0c414fb0b06fdb1c.xlsx",
+      "sha256": "0c414fb0b06fdb1c7f568e46ca36b793345cfbe18ff0d611cdd50f73cc7c1406",
+      "bytes": 20310,
+      "formula_cells": 266,
+      "source": "cc-binaries/0e87110a-3edd-40ce-b151-3c6508879a67"
+    },
+    {
+      "file": "0c46f3745175a888.xlsx",
+      "sha256": "0c46f3745175a888da4587e31921a08a8b0612a900d3b6065b20265c0d27735c",
+      "bytes": 33700,
+      "formula_cells": 44,
+      "source": "cc-binaries/2e926044-a012-4b17-b5c0-f14389d3c2f0"
+    },
+    {
+      "file": "0c6bdf4c2472838b.xlsx",
+      "sha256": "0c6bdf4c2472838b6225369e6717fbae4109180ce877e37885a42d34391d26c7",
+      "bytes": 117792,
+      "formula_cells": 2897,
+      "source": "cc-binaries/181fd2d5-b923-45f2-ba3d-dbbd79badfa3"
+    },
+    {
+      "file": "0c885e2f1b6f1d96.xlsx",
+      "sha256": "0c885e2f1b6f1d96bd5a57bb3a185f94c3dd49b60d69e67092a6e4922a8fc8db",
+      "bytes": 23321,
+      "formula_cells": 23,
+      "source": "cc-binaries/1a4b01a3-563a-45b2-85e0-745512735028"
+    },
+    {
+      "file": "0cb2327a7ec49dc2.xlsx",
+      "sha256": "0cb2327a7ec49dc267252ceed75c97756dda3cc77dea825bdb79f963343b82ae",
+      "bytes": 40461,
+      "formula_cells": 256,
+      "source": "cc-binaries/09829d16-e6fc-49f5-8351-48745304e5c9"
+    },
+    {
+      "file": "0cc18c3d85fa844a.xlsx",
+      "sha256": "0cc18c3d85fa844a75c2881c2c1df026e27189ea2314e0e50c4c2ab61fbb0c15",
+      "bytes": 137698,
+      "formula_cells": 34,
+      "source": "cc-binaries/09347cc7-a635-4970-909c-b3cc01600484"
+    },
+    {
+      "file": "0cc28765f1434570.xlsx",
+      "sha256": "0cc28765f1434570e203d78712e13260523126fd3c25b9ea12a25b45ef6a0786",
+      "bytes": 25663,
+      "formula_cells": 102,
+      "source": "cc-binaries/764b1129-3e61-43ec-9481-b0082c4bc402"
+    },
+    {
+      "file": "0cd10e83cf504848.xlsx",
+      "sha256": "0cd10e83cf50484826ab52e0b74bad313abdd9b71d1838320f1d8b344f20ac0e",
+      "bytes": 28625,
+      "formula_cells": 50,
+      "source": "cc-binaries/01420107-dd31-4d36-85dd-93ee9ed1d57e"
+    },
+    {
+      "file": "0cd4e7ba23f026ec.xlsx",
+      "sha256": "0cd4e7ba23f026ec94ec8752bf637f5a3a061ed1c920b9daf29f71e021b6624a",
+      "bytes": 26900,
+      "formula_cells": 14,
+      "source": "cc-binaries/03e9b854-4b7f-48b7-aa9d-195407c1891e"
+    },
+    {
+      "file": "0cd806638aaee59d.xlsx",
+      "sha256": "0cd806638aaee59d4bedac47ec988295fdfe2749b336ca7a9a6ad167cac7faad",
+      "bytes": 106981,
+      "formula_cells": 16,
+      "source": "cc-binaries/a66fb966-5658-4ef1-a145-688fb08763a1"
+    },
+    {
+      "file": "0ce3c39c1fd6d44b.xlsx",
+      "sha256": "0ce3c39c1fd6d44bd2eb379a47f5e00c59db7d6d3ad837e5d818646fa6b59968",
+      "bytes": 264775,
+      "formula_cells": 8904,
+      "source": "cc-binaries/1364d387-3504-4681-a05e-076ee2ab9424"
+    },
+    {
+      "file": "0ce44a1dc04279d8.xlsx",
+      "sha256": "0ce44a1dc04279d880206314064843c0c963b06a51a056f82d631c995e7780d1",
+      "bytes": 46413,
+      "formula_cells": 1492,
+      "source": "cc-binaries/4aa1e5bc-7670-45e7-9ebf-1dbd82a34d54"
+    },
+    {
+      "file": "0d075cdc631355b9.xlsx",
+      "sha256": "0d075cdc631355b9d18c47293ebe3f66da1ebed98b82170a89e6be0aad28c769",
+      "bytes": 216963,
+      "formula_cells": 1730,
+      "source": "cc-binaries/36e094e6-33e1-4537-aa7e-fbbbad37c953"
+    },
+    {
+      "file": "0d31b6784acaad6a.xlsx",
+      "sha256": "0d31b6784acaad6afc07e5fa69ba672f59399849f2a0ccdd06989cf05cf6d6e7",
+      "bytes": 23079,
+      "formula_cells": 74,
+      "source": "cc-binaries/4fc07765-f65b-4abf-a976-53006c1fa3cc"
+    },
+    {
+      "file": "0d32906691685fc5.xlsx",
+      "sha256": "0d32906691685fc56625684759ba64963986bd9082410077ce5b80be41ecf3a3",
+      "bytes": 67618,
+      "formula_cells": 55,
+      "source": "cc-binaries/19a25403-f00a-4f85-913c-024c0d67fcc5"
+    },
+    {
+      "file": "0d445c0ed2979858.xlsx",
+      "sha256": "0d445c0ed2979858113716e8db53f4513e5bf7808a51de98d7fc75a65af22da4",
+      "bytes": 955615,
+      "formula_cells": 1047,
+      "source": "cc-binaries/2654294d-265a-4fa3-844b-21e7d6c1cc4d"
+    },
+    {
+      "file": "0d5374f5031acf53.xlsx",
+      "sha256": "0d5374f5031acf53c7ab869f0c773a5cf1b36df49bfd51627f376510c92353b8",
+      "bytes": 112554,
+      "formula_cells": 529,
+      "source": "cc-binaries/073220c1-9795-4aad-8d58-9e2a678b9ce2"
+    },
+    {
+      "file": "0d7eee805ac307ad.xlsx",
+      "sha256": "0d7eee805ac307ad2636e076bb54651b6f72c3e1f8c22e9ddabd28a5b7023e59",
+      "bytes": 148194,
+      "formula_cells": 6530,
+      "source": "cc-binaries/e7051b1c-6284-45ae-823d-b0cb74d55a9e"
+    },
+    {
+      "file": "0d9099eff74bbd5f.xlsx",
+      "sha256": "0d9099eff74bbd5fe30b59adbfd012b8179dd4cbb31d2627f842438e1ee03a8a",
+      "bytes": 42281,
+      "formula_cells": 510,
+      "source": "cc-binaries/04331522-11e5-4914-b776-b087d4b6b492"
+    },
+    {
+      "file": "0d9e24354d1d8f89.xlsx",
+      "sha256": "0d9e24354d1d8f89ede600c263b2538f804202d75b13672314fdab3103a463d4",
+      "bytes": 14416,
+      "formula_cells": 15,
+      "source": "cc-binaries/020a089c-0c7b-4e35-8038-f2a80ce0c504"
+    },
+    {
+      "file": "0da74c496c1de50f.xlsx",
+      "sha256": "0da74c496c1de50f0d95caaaa23dcd5d8b52cbf70b1c92b60f0a72a2250bf6e4",
+      "bytes": 16589,
+      "formula_cells": 40,
+      "source": "cc-binaries/088e7474-cbb6-4379-8750-2ba891a9070f"
+    },
+    {
+      "file": "0dc50dc6ebdbcffa.xlsx",
+      "sha256": "0dc50dc6ebdbcffa7468a97719ae8058584bae0792fa15dddcf34c0241e56aaa",
+      "bytes": 42410,
+      "formula_cells": 494,
+      "source": "cc-binaries/0b7dd09e-4a20-480e-a8d3-17965f0db3c9"
+    },
+    {
+      "file": "0dd2769a0c270028.xlsx",
+      "sha256": "0dd2769a0c27002836ea63918facb5d2eb0ec8374e8ff54608ee2a3fba0e5882",
+      "bytes": 130194,
+      "formula_cells": 375,
+      "source": "cc-binaries/0f1f7833-0537-44d1-a158-126a5c6b18b8"
+    },
+    {
+      "file": "0ddd8fa9b19e4402.xlsx",
+      "sha256": "0ddd8fa9b19e4402f9b1a95e3404935017a73af78e57882c02dcfbecba881ee9",
+      "bytes": 16128,
+      "formula_cells": 11,
+      "source": "cc-binaries/1bcb10b8-faec-4dd2-a006-646fece2ed7e"
+    },
+    {
+      "file": "0de52d561ad30ffc.xlsx",
+      "sha256": "0de52d561ad30ffcbb2a73ca8abc61dba1a0c4861ca678fc37c5d01ebbdf1fde",
+      "bytes": 54826,
+      "formula_cells": 77,
+      "source": "cc-binaries/01cac78d-b256-441f-b722-eca84fc35830"
+    },
+    {
+      "file": "0e21f28cfd6b2102.xlsx",
+      "sha256": "0e21f28cfd6b21028aaa241724f5968861eb6ab624a599324728797dbcf4f897",
+      "bytes": 520525,
+      "formula_cells": 95,
+      "source": "cc-binaries/622d9230-f6e0-4c49-bd0f-dda6968017ec"
+    },
+    {
+      "file": "0e4bec431100c82d.xlsx",
+      "sha256": "0e4bec431100c82da75e0bd20137814958c81eb01c08059014b4a55e9ba7394f",
+      "bytes": 55314,
+      "formula_cells": 221,
+      "source": "cc-binaries/031cd13b-44d6-4096-a608-26f9a21dd508"
+    },
+    {
+      "file": "0e4d60bc48c3a8c9.xlsx",
+      "sha256": "0e4d60bc48c3a8c91e48b5b178b7a19e42343cd21a2a6992f278ed0d87620684",
+      "bytes": 302162,
+      "formula_cells": 8381,
+      "source": "cc-binaries/05b1e175-7154-4716-884f-37c652bf2f65"
+    },
+    {
+      "file": "0e7c96d906c86898.xlsx",
+      "sha256": "0e7c96d906c86898834a3f35192226f78b9a7db0de3b954858d68f014d528abc",
+      "bytes": 262599,
+      "formula_cells": 405,
+      "source": "cc-binaries/3926533a-5d79-477f-8f91-7b0b6c7530f6"
+    },
+    {
+      "file": "0e8e41db82c975cd.xlsx",
+      "sha256": "0e8e41db82c975cdf95e5a764828923075b93e085db32fe3c272658438a0233f",
+      "bytes": 18646,
+      "formula_cells": 24,
+      "source": "cc-binaries/0e079c89-ff94-4fe2-a489-8910d7bccbd0"
+    },
+    {
+      "file": "0e92e0d9739d6817.xlsx",
+      "sha256": "0e92e0d9739d68175bfef6eaf3931e1992a7fc182b9c1afa894dad6433ae518f",
+      "bytes": 208429,
+      "formula_cells": 6757,
+      "source": "cc-binaries/0a895535-929c-4486-a447-f3ee55844f1c"
+    },
+    {
+      "file": "0ea29e2b26f2f1ae.xlsx",
+      "sha256": "0ea29e2b26f2f1ae08cd600053d35ce61307c5708a1bda954bb0eefe1baa3981",
+      "bytes": 643431,
+      "formula_cells": 16250,
+      "source": "cc-binaries/c73315b5-2362-4768-8d64-eea83c61c352"
+    },
+    {
+      "file": "0ebc7e8357866b4f.xlsx",
+      "sha256": "0ebc7e8357866b4f13b87156243672f9d41f05d50c5474fb862ec7d2c675a2dd",
+      "bytes": 68021,
+      "formula_cells": 195,
+      "source": "cc-binaries/d7aa63b1-f0a3-4c5e-b59e-f7f67fa564f2"
+    },
+    {
+      "file": "0eef19c482807c21.xlsx",
+      "sha256": "0eef19c482807c21af40c30ad312aaf0869b05dd2f9ee41955baeea33afbdd02",
+      "bytes": 38553,
+      "formula_cells": 69,
+      "source": "cc-binaries/2ae1ce8d-4347-48ae-a7e1-518cccbb86a6"
+    },
+    {
+      "file": "0efb7644ac13ede4.xlsx",
+      "sha256": "0efb7644ac13ede47837ac533e13c427b69238f1cb58e20a586c5f0e2ae383e8",
+      "bytes": 35162,
+      "formula_cells": 114,
+      "source": "cc-binaries/2a5dce3b-4105-4f36-aec5-b3ab746d069d"
+    },
+    {
+      "file": "0f0024bfbe4b4a1e.xlsx",
+      "sha256": "0f0024bfbe4b4a1e3d474eb508d42db9488333a1f8f64faf4375c27c43000e02",
+      "bytes": 617327,
+      "formula_cells": 32913,
+      "source": "cc-binaries/d8d07c32-b979-42e6-b4f8-3c6b1bc4c8d9"
+    },
+    {
+      "file": "0f03f527cb7cab51.xlsx",
+      "sha256": "0f03f527cb7cab519a36a4a66be9d137674866473dde194ce66f661a06920b90",
+      "bytes": 22450,
+      "formula_cells": 10,
+      "source": "cc-binaries/0f640582-a6bf-4654-bf34-396f83763952"
+    },
+    {
+      "file": "0f0813f5347fba20.xlsx",
+      "sha256": "0f0813f5347fba20fd795eb0f5bc2a11432ab8849770a42fa59ad97ed255315f",
+      "bytes": 56085,
+      "formula_cells": 215,
+      "source": "cc-binaries/7bbc2626-fed8-4e9f-9927-62df89820d48"
+    },
+    {
+      "file": "0f1a9db34cec78e6.xlsx",
+      "sha256": "0f1a9db34cec78e617c65dc0378888e7735fe7b32aa5a11091ef148f5ad8d51f",
+      "bytes": 35300,
+      "formula_cells": 288,
+      "source": "cc-binaries/0eccff11-602d-461e-8d27-95c2dfe913c0"
+    },
+    {
+      "file": "0f1d2a9fb5860611.xlsx",
+      "sha256": "0f1d2a9fb586061173fab00b6b9d2d91b3474f082ef747d073b3ab2ab104561e",
+      "bytes": 64487,
+      "formula_cells": 2965,
+      "source": "cc-binaries/3493c6e1-585a-4b82-8168-aeb31fae389a"
+    },
+    {
+      "file": "0f203c7924b0ede7.xlsx",
+      "sha256": "0f203c7924b0ede74e8a4e22e4499a0586f2fcd51c50b7dab38b1b4bd9aeaaf2",
+      "bytes": 23142,
+      "formula_cells": 35,
+      "source": "cc-binaries/2ddfd5f5-bad5-4a9f-a8e0-4fbe71d94009"
+    },
+    {
+      "file": "0f22afaa5c6c2d77.xlsx",
+      "sha256": "0f22afaa5c6c2d777a339309e41deecef57dc0baeaa448d51bfe5bd9b4f89063",
+      "bytes": 15292,
+      "formula_cells": 100,
+      "source": "cc-binaries/3bb5aaeb-56f6-4926-99bc-0ed0d9c53c69"
+    },
+    {
+      "file": "0f26e303ec1f1b5b.xlsx",
+      "sha256": "0f26e303ec1f1b5b9eeb78fe3cb592c96e968d5eb3a6e1a3f9193ac2e8d7b058",
+      "bytes": 75645,
+      "formula_cells": 683,
+      "source": "cc-binaries/09cca9bf-2e0f-4bc9-b8c2-1d6bd3a9d2d9"
+    },
+    {
+      "file": "0f2712969c64d15c.xlsx",
+      "sha256": "0f2712969c64d15c1da7ab2550c6a1d0b79c3fd9e0884a256227724a83299aa0",
+      "bytes": 38072,
+      "formula_cells": 45,
+      "source": "cc-binaries/a414776d-492b-4253-9452-c93fcf46225e"
+    },
+    {
+      "file": "0f2dbd4734b3953f.xlsx",
+      "sha256": "0f2dbd4734b3953fd41293f0e1c80f79913984f5006fa2f0e1dd7161d92b6c2e",
+      "bytes": 10293,
+      "formula_cells": 147,
+      "source": "cc-binaries/f000ba96-15a7-45e4-8133-a8380440cbf5"
+    },
+    {
+      "file": "0f2ebde8cd2942cf.xlsx",
+      "sha256": "0f2ebde8cd2942cff80c0b83aa2aafc7a62e184a932c31d680a68c332e415ca5",
+      "bytes": 16706,
+      "formula_cells": 37,
+      "source": "cc-binaries/1d8f4543-f933-479b-8110-ea0642144a9b"
+    },
+    {
+      "file": "0f3bc937794e7b9a.xlsx",
+      "sha256": "0f3bc937794e7b9af325d3efa7d17239207a8bcfc33585b4fe1e9caeff42c225",
+      "bytes": 46735,
+      "formula_cells": 143,
+      "source": "cc-binaries/30236755-1152-4c4e-ad84-d76bf0965369"
+    },
+    {
+      "file": "0f4945202680a36b.xlsx",
+      "sha256": "0f4945202680a36b621fe7fce132a510142e34d415abaf7ca0a715bd2e648d11",
+      "bytes": 174368,
+      "formula_cells": 235,
+      "source": "cc-binaries/0fb636fc-59d7-4ca7-b5ab-bf7227ab9a63"
+    },
+    {
+      "file": "0f6a90aef512978d.xlsx",
+      "sha256": "0f6a90aef512978dd5fbb50d82eddfdb353efc0bed9624f50424885fff79d33a",
+      "bytes": 66801,
+      "formula_cells": 769,
+      "source": "cc-binaries/6daaab6f-075d-4753-b84c-815396a3397d"
+    },
+    {
+      "file": "0f79dba8b628c961.xlsx",
+      "sha256": "0f79dba8b628c961acd198898bc39e7e97e608b3f3aae84c00dd0e0183c4c185",
+      "bytes": 381871,
+      "formula_cells": 1079,
+      "source": "cc-binaries/1ee096b7-a687-4983-8fc0-52e565813128"
+    },
+    {
+      "file": "0f94b06e6f5d167f.xlsx",
+      "sha256": "0f94b06e6f5d167f2c693d1ee7587eb956171bbe6e49d62f3f8a1ecbe923c6b6",
+      "bytes": 12847,
+      "formula_cells": 36,
+      "source": "cc-binaries/29a4ab0d-8396-4562-b3d2-6ce37510d1bf"
+    },
+    {
+      "file": "0faaebc94ce1cac4.xlsx",
+      "sha256": "0faaebc94ce1cac414fc623db227bce37edbbae8cbe714f4c7d970b98187fb22",
+      "bytes": 70441,
+      "formula_cells": 17,
+      "source": "cc-binaries/8760a3f5-12b4-4e52-b039-25b1f41c9a9b"
+    },
+    {
+      "file": "0fc7eccfefe9133a.xlsx",
+      "sha256": "0fc7eccfefe9133a2036d5946bbc816a828735c6f9d58af98fc3033652f32c12",
+      "bytes": 97203,
+      "formula_cells": 1735,
+      "source": "cc-binaries/c8bebb58-780f-4713-a074-4687242196be"
+    },
+    {
+      "file": "0fcfe1f5d961d1a4.xlsx",
+      "sha256": "0fcfe1f5d961d1a4e549669bcd2ec0869892c27acdc094cc7b619568d5f39f30",
+      "bytes": 13655,
+      "formula_cells": 20,
+      "source": "cc-binaries/e3f41203-7aef-48fc-81dd-fe13a493ed87"
+    },
+    {
+      "file": "10079ff9d67cb53c.xlsx",
+      "sha256": "10079ff9d67cb53ce07cadd6b7cb9861574e02d1a96240ac57c2dd3af9feddcb",
+      "bytes": 42925,
+      "formula_cells": 516,
+      "source": "cc-binaries/4df02c65-7cd9-49d4-9e1d-3d9c0d7046a1"
+    },
+    {
+      "file": "10187285729100f1.xlsx",
+      "sha256": "10187285729100f18f5ff584660504c67e7b1205f518813ffe1056234205ca35",
+      "bytes": 3729,
+      "formula_cells": 16,
+      "source": "cc-binaries/b1f44ad8-18af-4f52-b5b8-0916f72e7d97"
+    },
+    {
+      "file": "1022a4e8a71e438e.xlsx",
+      "sha256": "1022a4e8a71e438e53838849bbe5e1e39cd181268ca9092ab2e4806422497071",
+      "bytes": 545035,
+      "formula_cells": 8053,
+      "source": "cc-binaries/7164d4ed-2dca-4deb-a9f2-2fd079999486"
+    },
+    {
+      "file": "103a3b46e4352f3d.xlsx",
+      "sha256": "103a3b46e4352f3da8243fd8bd7b01d452f278fa8654ab96f8718ca82e12d58b",
+      "bytes": 52906,
+      "formula_cells": 617,
+      "source": "cc-binaries/00f54016-354b-457b-b950-4544fb1daf24"
+    },
+    {
+      "file": "1048a6f5e4bf4252.xlsx",
+      "sha256": "1048a6f5e4bf4252dc77fa375b270d1239713ed39f3b618529aa9227dd32450c",
+      "bytes": 676196,
+      "formula_cells": 41376,
+      "source": "cc-binaries/163f3c28-0331-453e-a897-09c147612c75"
+    },
+    {
+      "file": "106230a616fc4409.xlsx",
+      "sha256": "106230a616fc440972aca7d1263c9240caba839ef2ee94c46623daeb3b2d12a0",
+      "bytes": 42654,
+      "formula_cells": 494,
+      "source": "cc-binaries/0571400b-6fda-4258-a93d-4ae7570abad7"
+    },
+    {
+      "file": "106834e2406939c3.xlsx",
+      "sha256": "106834e2406939c362aa6327dc88750b55a49f260266dc4a882146b230d412ed",
+      "bytes": 15671,
+      "formula_cells": 22,
+      "source": "cc-binaries/0967cb35-f7c4-401c-bfe6-584ced981ed9"
+    },
+    {
+      "file": "106989b88b77cee8.xlsx",
+      "sha256": "106989b88b77cee8dcc807523e92671dc186b97f15edd803dd87f6cbc79cf105",
+      "bytes": 76256,
+      "formula_cells": 63,
+      "source": "cc-binaries/1335b527-f2f7-4a98-80e8-94b94c7cab57"
+    },
+    {
+      "file": "107df35b2de4b5ce.xlsx",
+      "sha256": "107df35b2de4b5ce9be24bfa21345dfdab30511b405adbd2d5097e5ed008b099",
+      "bytes": 42885,
+      "formula_cells": 550,
+      "source": "cc-binaries/45349a26-7cbf-4152-907a-696f19e84678"
+    },
+    {
+      "file": "107f5b69e1917caa.xlsx",
+      "sha256": "107f5b69e1917caa1b732bd9bba4ef443b8a55667807e8a338ebbcc88989c354",
+      "bytes": 67925,
+      "formula_cells": 263,
+      "source": "cc-binaries/03fa736f-0aff-4733-b16f-850300a453ac"
+    },
+    {
+      "file": "109666cb63d43a5b.xlsx",
+      "sha256": "109666cb63d43a5b71d13cc2f55c3a6105dd64f96b9b37e0e09cc88cebbd6a56",
+      "bytes": 32937,
+      "formula_cells": 63,
+      "source": "cc-binaries/3d676b59-11a1-4339-a251-331e0d30dd12"
+    },
+    {
+      "file": "10ae082d7186b6bc.xlsx",
+      "sha256": "10ae082d7186b6bc6156ab9f19771242da5818e3f9fec7465a4b9eef3de6dd58",
+      "bytes": 107266,
+      "formula_cells": 492,
+      "source": "cc-binaries/a12b4a2d-8647-4607-ad68-d583dec496a1"
+    },
+    {
+      "file": "10cc1f7c92c624d8.xlsx",
+      "sha256": "10cc1f7c92c624d8e5e18a1ff47ac4022b8176b086b6073ec7d7e45cd52780cb",
+      "bytes": 130817,
+      "formula_cells": 60,
+      "source": "cc-binaries/10d0ce28-410a-4eda-a1f0-aec8e0d567a0"
+    },
+    {
+      "file": "10e34fd5c2614ed7.xlsx",
+      "sha256": "10e34fd5c2614ed74d677f91b586a50819b731944d4fb96240e0d7787a299d61",
+      "bytes": 47676,
+      "formula_cells": 522,
+      "source": "cc-binaries/368eb37c-7fac-4c9b-b56b-5568ae228bfe"
+    },
+    {
+      "file": "10ea7c302631cfd8.xlsx",
+      "sha256": "10ea7c302631cfd8e9cb9956d78470015590b199320b9f0e9a00ee439b38e7bc",
+      "bytes": 24745,
+      "formula_cells": 15,
+      "source": "cc-binaries/06a6ef22-fb0f-4e27-bb2d-0a2ede54784a"
+    },
+    {
+      "file": "10eeebd7364c3650.xlsx",
+      "sha256": "10eeebd7364c3650e36ef537d9a07289fa1c7d94721059535ddf1a5600270f72",
+      "bytes": 28609,
+      "formula_cells": 299,
+      "source": "cc-binaries/52d26a91-5e1e-4e23-9d93-90d6fec646e3"
+    },
+    {
+      "file": "1120d6f5f894685d.xlsx",
+      "sha256": "1120d6f5f894685d2f8e3db76beed2c105bc92663fb2b3b787f6b981b6d15b80",
+      "bytes": 15020,
+      "formula_cells": 50,
+      "source": "cc-binaries/c9f8632b-7b4d-457d-85af-e561edebf9a0"
+    },
+    {
+      "file": "112788975da05259.xlsx",
+      "sha256": "112788975da052594064adeda64bd130c51a5ff538f8f8ff82f8ef594da6b713",
+      "bytes": 17023,
+      "formula_cells": 63,
+      "source": "cc-binaries/32f42d0f-3972-4e0c-b8f3-fcf9b03af32c"
+    },
+    {
+      "file": "11550e77e1ad99e9.xlsx",
+      "sha256": "11550e77e1ad99e95934a56d55b96ec279e40f2cbcb22754f8498b2b9fbdae97",
+      "bytes": 494972,
+      "formula_cells": 490,
+      "source": "cc-binaries/05fe99ce-2e3e-4653-8480-92c54b45c2f3"
+    },
+    {
+      "file": "11717f0d725d0fba.xlsx",
+      "sha256": "11717f0d725d0fba4ca9c7d88f427651dc8c29a575bf7a9b255e5edf40a5154f",
+      "bytes": 25185,
+      "formula_cells": 43,
+      "source": "cc-binaries/504f0fa9-404e-47c2-b2d2-f0b95b4d0f4f"
+    },
+    {
+      "file": "11920b48f00f25f1.xlsx",
+      "sha256": "11920b48f00f25f1152a69d944a4a99522b363976b5cb08170a187ba09449dc6",
+      "bytes": 58634,
+      "formula_cells": 253,
+      "source": "cc-binaries/5f0c6689-f8a3-4e33-a213-c77fc5567dfc"
+    },
+    {
+      "file": "11943ff6661d158b.xlsx",
+      "sha256": "11943ff6661d158b518ab9408a8f61efbe6b357942fe4d4f1febd87fd2876184",
+      "bytes": 678670,
+      "formula_cells": 24060,
+      "source": "cc-binaries/7634997a-fa7a-4cf9-b328-28661511b78a"
+    },
+    {
+      "file": "11954ca4e8a6fd6e.xlsx",
+      "sha256": "11954ca4e8a6fd6e2035d130fdd36bf0a5faf9062d40140b65d9b7fea225852b",
+      "bytes": 25402,
+      "formula_cells": 100,
+      "source": "cc-binaries/2663cf4b-d165-4939-8809-4359058a6c20"
+    },
+    {
+      "file": "11b127cda5c89902.xlsx",
+      "sha256": "11b127cda5c8990203180b4c111a71dc1a7927972150e3b46bbaeb33f5cfb217",
+      "bytes": 112225,
+      "formula_cells": 455,
+      "source": "cc-binaries/072e835f-7f76-4f3d-aabc-960214bb4195"
+    },
+    {
+      "file": "11b85bd692059e8e.xlsx",
+      "sha256": "11b85bd692059e8e9c0841344d06d53f3de5f63caa28dcdf84b69cfb7fca076e",
+      "bytes": 19661,
+      "formula_cells": 114,
+      "source": "cc-binaries/05b2d086-0bca-4274-99ce-cdfb821f1bac"
+    },
+    {
+      "file": "11d986ede1db9c57.xlsx",
+      "sha256": "11d986ede1db9c57f802e1d75c8fd8a4938360d47eb3207c65151636396d2396",
+      "bytes": 58542,
+      "formula_cells": 396,
+      "source": "cc-binaries/0c6a392a-a6ba-47e3-a555-c2215e2f554c"
+    },
+    {
+      "file": "120852f8d9d2080a.xlsx",
+      "sha256": "120852f8d9d2080ad0ca8dacf24f2362d09b14b64c74eaa24a3a31df29e3782c",
+      "bytes": 438282,
+      "formula_cells": 3322,
+      "source": "cc-binaries/8101371b-f214-47f1-aaf4-8ca78a55cd49"
+    },
+    {
+      "file": "12171945f21eda8e.xlsx",
+      "sha256": "12171945f21eda8efdd7f14e49003df47df9b354a5e4c3caf56eaaeaa5a7ca88",
+      "bytes": 13566,
+      "formula_cells": 18,
+      "source": "cc-binaries/113d0044-3f07-42ba-905d-cb2e56e48313"
+    },
+    {
+      "file": "122300f2e147c123.xlsx",
+      "sha256": "122300f2e147c1232b4b324a3e0c67edfd6f2157f4f55f529b3cfc24fb1ce0ae",
+      "bytes": 60541,
+      "formula_cells": 531,
+      "source": "cc-binaries/a0bc42b5-4699-4053-9a5d-75f19161248b"
+    },
+    {
+      "file": "1235efa0fdb29d0f.xlsx",
+      "sha256": "1235efa0fdb29d0f419a5c0d0a1bf87f8585dcbcb8eadbc63f141c0b8a3b046e",
+      "bytes": 65702,
+      "formula_cells": 2965,
+      "source": "cc-binaries/c7ccfc8a-68ce-45b7-bdb7-53a23e6d34ac"
+    },
+    {
+      "file": "1235f98a62bfe981.xlsx",
+      "sha256": "1235f98a62bfe9815926532c07cc0b55d02897e5b6d7c33a06a8abc2f54cee70",
+      "bytes": 57161,
+      "formula_cells": 528,
+      "source": "cc-binaries/00e6f493-7c67-44a1-99ed-258706c3076e"
+    },
+    {
+      "file": "1250d0151dd18e18.xlsx",
+      "sha256": "1250d0151dd18e18e663d3d40679e897c79001b00e76077bf8f164ac7d6153ba",
+      "bytes": 27386,
+      "formula_cells": 16,
+      "source": "cc-binaries/457911c6-6b3d-47d7-8e01-1d4a32db024a"
+    },
+    {
+      "file": "12544b8789475955.xlsx",
+      "sha256": "12544b8789475955a21fc0d92b13a12c96c86831f57d0b440e8291f459c8483e",
+      "bytes": 51745,
+      "formula_cells": 413,
+      "source": "cc-binaries/00392780-4072-453a-8779-b44b615bb5e1"
+    },
+    {
+      "file": "1279e421e3075231.xlsx",
+      "sha256": "1279e421e307523101921bb55bac615846a08f7ef4f4fe5b6278340dbf90d284",
+      "bytes": 124691,
+      "formula_cells": 270,
+      "source": "cc-binaries/09ef0d6c-78eb-4f96-b181-dcb67ab0b2e6"
+    },
+    {
+      "file": "12aa5e3ad151aa47.xlsx",
+      "sha256": "12aa5e3ad151aa4762fe8f28f6725b20adfe7670fea41587fe0d213861372cf2",
+      "bytes": 156918,
+      "formula_cells": 41,
+      "source": "cc-binaries/0fd794aa-9343-4f57-bbf4-49c5801b8e23"
+    },
+    {
+      "file": "12def742999ae137.xlsx",
+      "sha256": "12def742999ae137d842ca906ac6ed501cfdd919436666b124a0517ccc01f60f",
+      "bytes": 293614,
+      "formula_cells": 2544,
+      "source": "cc-binaries/0188a75f-b329-449f-8bd5-62e62104b5c6"
+    },
+    {
+      "file": "130336a3c4aac503.xlsx",
+      "sha256": "130336a3c4aac5034d24105c37a37e3dce9fe1bd41c566c3fdb396e60f760f29",
+      "bytes": 103781,
+      "formula_cells": 3697,
+      "source": "cc-binaries/c3557edb-0d53-452a-a25b-31cfaefa3571"
+    },
+    {
+      "file": "1305bdf4cf7f0993.xlsx",
+      "sha256": "1305bdf4cf7f0993b13675a50f33ea17bfd7711e74d51d2d0bd79a4840dfe49f",
+      "bytes": 47169,
+      "formula_cells": 817,
+      "source": "cc-binaries/0ba15669-3f6f-46dc-be0c-4e8a1bb8bb50"
+    },
+    {
+      "file": "13064361156986ab.xlsx",
+      "sha256": "13064361156986ab31f8ce771f96b9a694b8f511e5f56bcca719bf7d3d1c422a",
+      "bytes": 42412,
+      "formula_cells": 521,
+      "source": "cc-binaries/006aecd6-6b30-4611-866d-b8f018f2d33c"
+    },
+    {
+      "file": "1314576790467cc2.xlsx",
+      "sha256": "1314576790467cc22cc1235b88d5f656a7d6034628f1f808c4f6401cd284eabf",
+      "bytes": 16118,
+      "formula_cells": 11,
+      "source": "cc-binaries/57945441-9812-4719-bcc6-ffc1ec36d924"
+    },
+    {
+      "file": "133f024af54506a1.xlsx",
+      "sha256": "133f024af54506a1ebf3768c8d55d26055486dc984a635bf22e060bdb42a4714",
+      "bytes": 302283,
+      "formula_cells": 3159,
+      "source": "cc-binaries/04de7c86-1f43-402e-970f-3b08b18ab5b0"
+    },
+    {
+      "file": "138ce708c1aa0c94.xlsx",
+      "sha256": "138ce708c1aa0c945bb64c223d78ffa9817f2ce49741a80d8493df510ac750bc",
+      "bytes": 25626,
+      "formula_cells": 83,
+      "source": "cc-binaries/6c7ba7a7-67b8-4945-a91d-63084e2ebe68"
+    },
+    {
+      "file": "1390d985d9073fc7.xlsx",
+      "sha256": "1390d985d9073fc7ca87374dce0a56aedbbd521702b89ac0f4057c76a6a6a720",
+      "bytes": 606625,
+      "formula_cells": 21482,
+      "source": "cc-binaries/68ea738d-b795-4743-8739-336da0bdc775"
+    },
+    {
+      "file": "13e1f1dcd347df81.xlsx",
+      "sha256": "13e1f1dcd347df81391dd05982f5bc828ccf4260d2cac6e0fc8bf3581746df94",
+      "bytes": 44560,
+      "formula_cells": 447,
+      "source": "cc-binaries/05f8ee71-f8fd-404e-aa56-c24e5ee8d169"
+    },
+    {
+      "file": "13e3a939d8cc2190.xlsx",
+      "sha256": "13e3a939d8cc2190da0c0fee9bb8e5de940f79e734bc2b29e9a173d48f90dff8",
+      "bytes": 174619,
+      "formula_cells": 116,
+      "source": "cc-binaries/989354dc-c204-4643-839c-52baf9e8a393"
+    },
+    {
+      "file": "143416fa70d5cef1.xlsx",
+      "sha256": "143416fa70d5cef1148ba06c3c56d9d87cf5b34c17137099d7f7943c3ddc92ac",
+      "bytes": 22869,
+      "formula_cells": 105,
+      "source": "cc-binaries/8668ac93-51d1-47b3-989c-0e50d0eaecee"
+    },
+    {
+      "file": "143b51819b32b318.xlsx",
+      "sha256": "143b51819b32b318ac0b74d8aa91462ff86dc460b5936eef91d906221df6a927",
+      "bytes": 20351,
+      "formula_cells": 115,
+      "source": "cc-binaries/090a6d44-1cae-447e-a8aa-db31cd7aa3d3"
+    },
+    {
+      "file": "1443ce0dcb0774c6.xlsx",
+      "sha256": "1443ce0dcb0774c62aa533a3b9b74768c61a53a31085f764e7eff9a874bae465",
+      "bytes": 45959,
+      "formula_cells": 566,
+      "source": "cc-binaries/02f09f28-a7ec-42c7-a829-48701024a712"
+    },
+    {
+      "file": "1444d3df3994e769.xlsx",
+      "sha256": "1444d3df3994e76942c72a7fd5cb8f052ccd05ce2756df4b23e588a71ffc217b",
+      "bytes": 136279,
+      "formula_cells": 2314,
+      "source": "cc-binaries/c11a33cb-d27e-4073-878e-66b222fd2f13"
+    },
+    {
+      "file": "14790387760c67a5.xlsx",
+      "sha256": "14790387760c67a5594b9db05357b5d8e8ae1f9b7d5589528a982c92b44c10cb",
+      "bytes": 19099,
+      "formula_cells": 148,
+      "source": "cc-binaries/1816b04b-aedb-4719-a83b-bfae94146778"
+    },
+    {
+      "file": "1483c87e52f6426b.xlsx",
+      "sha256": "1483c87e52f6426b6fd65d6020087ca4223d4b388c2f209b75562c3aaa1abf0d",
+      "bytes": 24550,
+      "formula_cells": 10,
+      "source": "cc-binaries/0058b382-bdc8-497a-ac83-b75d1ca0d91d"
+    },
+    {
+      "file": "1486df0b22a0b591.xlsx",
+      "sha256": "1486df0b22a0b59119a33c89878d2a9021d187c4c948bc88f05ae03befb8cb21",
+      "bytes": 195467,
+      "formula_cells": 1240,
+      "source": "cc-binaries/a73beb78-6ea2-410d-be48-0c4c1f579a51"
+    },
+    {
+      "file": "1496fe18ba1cf891.xlsx",
+      "sha256": "1496fe18ba1cf891f9b7fe1b3cdac4a15ac86e4dcd7facaedb2d55db944496a5",
+      "bytes": 34518,
+      "formula_cells": 494,
+      "source": "cc-binaries/219d08a7-8b94-437e-be92-08e668d0e449"
+    },
+    {
+      "file": "14b79186c2074f61.xlsx",
+      "sha256": "14b79186c2074f61080a26b414b45649f472a7089a99ee8e7be96dad8d25a505",
+      "bytes": 26275,
+      "formula_cells": 100,
+      "source": "cc-binaries/33355a17-b47a-44ab-bcf6-6e9599b44023"
+    },
+    {
+      "file": "14c3e5060d96d19b.xlsx",
+      "sha256": "14c3e5060d96d19b6bbf58a3a6e26fe754f15612dfc9e9b029d32b138d883aa9",
+      "bytes": 412357,
+      "formula_cells": 247,
+      "source": "cc-binaries/09c15591-0197-4d21-bc2a-ac9f10f7527a"
+    },
+    {
+      "file": "14c9e9b37a1bdab8.xlsx",
+      "sha256": "14c9e9b37a1bdab892b1e593b1b3e6ec8d8cc45435a68691a63b7eb7ab1f5ca6",
+      "bytes": 15661,
+      "formula_cells": 105,
+      "source": "cc-binaries/0a84235a-66ad-4130-9189-58d73178801e"
+    },
+    {
+      "file": "14cb699a4f2c3053.xlsx",
+      "sha256": "14cb699a4f2c30532da095abf0073cebfb8257a412030c37c3a877f3963c9f43",
+      "bytes": 21606,
+      "formula_cells": 304,
+      "source": "cc-binaries/1095f497-2c1e-4710-b213-6d92ecb6f5c9"
+    },
+    {
+      "file": "14d0c5220fa1545c.xlsx",
+      "sha256": "14d0c5220fa1545cc2e99c9d0b5839b2ebd645c39dd0ea001b104ea074463bf7",
+      "bytes": 130169,
+      "formula_cells": 41,
+      "source": "cc-binaries/452f3f73-80a8-4f25-beaa-2ee043b95a4b"
+    },
+    {
+      "file": "14d101215750af56.xlsx",
+      "sha256": "14d101215750af5692c580fb1f15e9833df53790580afe8c9c457063180cd954",
+      "bytes": 31445,
+      "formula_cells": 69,
+      "source": "cc-binaries/0df45eef-ac77-49b1-8753-945298ca65d0"
+    },
+    {
+      "file": "14e6655bbfce3a1c.xlsx",
+      "sha256": "14e6655bbfce3a1c77a5b5f67b766bdeaaa25f286883e9794934e7dc4f560a49",
+      "bytes": 128409,
+      "formula_cells": 517,
+      "source": "cc-binaries/03658d81-94f4-414c-a6d8-415312bef439"
+    },
+    {
+      "file": "14f0654d29ab7f89.xlsx",
+      "sha256": "14f0654d29ab7f89b53ba09745e0befa790a39794dad896ac81bbfb3812854dc",
+      "bytes": 63790,
+      "formula_cells": 45,
+      "source": "cc-binaries/1778c61a-6703-4f89-b334-d074997d8e78"
+    },
+    {
+      "file": "151474031b779d93.xlsx",
+      "sha256": "151474031b779d936005777f7d2b3ed2e69d292ae1c9447772e1ec6b4747af7a",
+      "bytes": 261386,
+      "formula_cells": 36,
+      "source": "cc-binaries/083f9688-5cf9-4440-ae5a-8bdb9deab66e"
+    },
+    {
+      "file": "155b47bc818826c6.xlsx",
+      "sha256": "155b47bc818826c6b30d8079ad63b25d1e62a3a2fed37a169786bd7ca902b7d8",
+      "bytes": 34976,
+      "formula_cells": 172,
+      "source": "cc-binaries/326ffb09-4022-4415-85bf-87f9c98b27dd"
+    },
+    {
+      "file": "15606a05e8d4e594.xlsx",
+      "sha256": "15606a05e8d4e594bb3550835f1238d42f7945f27e3a48e467eef91450a68bd3",
+      "bytes": 104041,
+      "formula_cells": 301,
+      "source": "cc-binaries/1305aee5-2454-4427-9c7f-1ae08e992ba0"
+    },
+    {
+      "file": "1576e987f9a43ce8.xlsx",
+      "sha256": "1576e987f9a43ce855f2225519dd6ee4a3b88eaea3160f8b4ee15f4078a37fe1",
+      "bytes": 23799,
+      "formula_cells": 10,
+      "source": "cc-binaries/087c6bb6-5878-45bd-b560-baca7eea54df"
+    },
+    {
+      "file": "159ff65c6d6b9f88.xlsx",
+      "sha256": "159ff65c6d6b9f889fc524a05493d5e9b3a8c3c11810c792c3e8211382eb8ba5",
+      "bytes": 28405,
+      "formula_cells": 14,
+      "source": "cc-binaries/355ae2f8-4b39-4c49-96ea-156d89ec112c"
+    },
+    {
+      "file": "15ad99280c105eff.xlsx",
+      "sha256": "15ad99280c105effc50ccf9a74fa1553d2bdeb6a470de013376b122c76155629",
+      "bytes": 369602,
+      "formula_cells": 36,
+      "source": "cc-binaries/12fec4dd-e919-4f80-913c-54598e071180"
+    },
+    {
+      "file": "15b8ca7e1b5899e3.xlsx",
+      "sha256": "15b8ca7e1b5899e3ebf10ac09ef74df25b798b485bfde20c2236d6ade4d2ae36",
+      "bytes": 538110,
+      "formula_cells": 19861,
+      "source": "cc-binaries/d2553ff6-0651-496c-aa35-67a3dff84815"
+    },
+    {
+      "file": "15dd37efb0f8e76d.xlsx",
+      "sha256": "15dd37efb0f8e76d8c7d58820dea3545f644eeafd4386dc1ff45645ed428f229",
+      "bytes": 105931,
+      "formula_cells": 12,
+      "source": "cc-binaries/1ef50df9-fd95-4868-9812-e00d22eb4d07"
+    },
+    {
+      "file": "15e19eb904f4d9fe.xlsx",
+      "sha256": "15e19eb904f4d9feb752fe839d70b0345cb135275def26fcceb88a81b1701cd4",
+      "bytes": 41959,
+      "formula_cells": 494,
+      "source": "cc-binaries/1d6ea695-3d9e-44be-bb42-aba7d3e5fd55"
+    },
+    {
+      "file": "15f13f3a6388d9a9.xlsx",
+      "sha256": "15f13f3a6388d9a950db16f77aa7be4355a1666a69e991ea58babe905f370618",
+      "bytes": 162560,
+      "formula_cells": 260,
+      "source": "cc-binaries/306f9f05-1efb-41d4-9c15-e0281c69651d"
+    },
+    {
+      "file": "160318705d019e1f.xlsx",
+      "sha256": "160318705d019e1ff96dee35f26ea691f9c8149f967e643909e2bf340c1fd26b",
+      "bytes": 19349,
+      "formula_cells": 32,
+      "source": "cc-binaries/09905008-5e92-4396-ba5e-a57eb6f6952e"
+    },
+    {
+      "file": "16503058d5dadf7b.xlsx",
+      "sha256": "16503058d5dadf7bffcd799df4ebda8a37637d81f68e76fdc9d070c2970ca22e",
+      "bytes": 46409,
+      "formula_cells": 1492,
+      "source": "cc-binaries/80982056-c24e-4803-89e8-d313ff9623a0"
+    },
+    {
+      "file": "16589175d8fecc12.xlsx",
+      "sha256": "16589175d8fecc128d405716e2a073686462bc7ab0a2fc3c36cecb6f7a52e6f9",
+      "bytes": 48082,
+      "formula_cells": 177,
+      "source": "cc-binaries/52bcec1a-9ca6-4f6f-b823-25154e514e62"
+    },
+    {
+      "file": "1661c9aa0b83d707.xlsx",
+      "sha256": "1661c9aa0b83d707b3886825510f8b48ae0e04fe470b43413b95ac15aa48f87c",
+      "bytes": 20385,
+      "formula_cells": 53,
+      "source": "cc-binaries/25dde9a5-d840-46a0-a6da-c1c03a65720a"
+    },
+    {
+      "file": "1669512d7c51e93b.xlsx",
+      "sha256": "1669512d7c51e93be4f28c7f89649cd01430e8832928127323e9f97df609311e",
+      "bytes": 23970,
+      "formula_cells": 222,
+      "source": "cc-binaries/00f2555a-9490-484b-8f68-356c8d7e6f48"
+    },
+    {
+      "file": "1677af47d6b7569c.xlsx",
+      "sha256": "1677af47d6b7569c695dc78e925f26a40a5a0d0d5548e0139df5250b476f0fb3",
+      "bytes": 115305,
+      "formula_cells": 53,
+      "source": "cc-binaries/01aba8ac-b876-4ff1-b27d-d4e28919c2e3"
+    },
+    {
+      "file": "16a5d46f7b1ef4c7.xlsx",
+      "sha256": "16a5d46f7b1ef4c7ebf44ba0a8b3b5d43d26841eeb867daf87198373e7c4c380",
+      "bytes": 210729,
+      "formula_cells": 2579,
+      "source": "cc-binaries/0c02401f-9990-4e6a-9b74-5f2618b35a6c"
+    },
+    {
+      "file": "16a80d86412ebc3b.xlsx",
+      "sha256": "16a80d86412ebc3b3876d33ea7fa46f3c8a08e027f4aff788c299451e4980b5e",
+      "bytes": 29584,
+      "formula_cells": 568,
+      "source": "cc-binaries/026fe03d-9b48-43be-9b50-1ad9ea574145"
+    },
+    {
+      "file": "16b0f7198ead5573.xlsx",
+      "sha256": "16b0f7198ead55732dc2f83a0ea3dfdc4f82307fb5b1e621bc64b65652a8b83d",
+      "bytes": 72640,
+      "formula_cells": 683,
+      "source": "cc-binaries/6be47786-b1c1-4b08-a3a3-ce0269b14352"
+    },
+    {
+      "file": "16b3f1f39f33bd1b.xlsx",
+      "sha256": "16b3f1f39f33bd1b505903cd70979d35fd909228ffa4af0aa9b7920baae98c68",
+      "bytes": 68217,
+      "formula_cells": 244,
+      "source": "cc-binaries/7f44bb3f-9e86-4dd3-87ff-6ceefec4bd81"
+    },
+    {
+      "file": "16e7435205af6687.xlsx",
+      "sha256": "16e7435205af66872d50b6a3f9ce98b1d9927c44c0069e81230f8f5b6f5ab75c",
+      "bytes": 40801,
+      "formula_cells": 722,
+      "source": "cc-binaries/e24db52b-3a00-4241-8656-32223d22ce1f"
+    },
+    {
+      "file": "171e228531941e95.xlsx",
+      "sha256": "171e228531941e9526836bde7abec4ef9e117c84af31fadb6ededc352d2526dd",
+      "bytes": 18805,
+      "formula_cells": 282,
+      "source": "cc-binaries/1e159a54-9875-4e33-a175-c588ed6edfbf"
+    },
+    {
+      "file": "1797ef703c86a878.xlsx",
+      "sha256": "1797ef703c86a8787e1bdd4902a0860d93c8ba0dab2392e30bf9549d89b734d3",
+      "bytes": 242009,
+      "formula_cells": 4835,
+      "source": "cc-binaries/15eeee22-a2d2-49c5-a6e3-95cf22d74731"
+    },
+    {
+      "file": "179d06289c9c7986.xlsx",
+      "sha256": "179d06289c9c7986ee98f5ed18b72a8961e088d31dcab8818fb03c2120d58724",
+      "bytes": 45988,
+      "formula_cells": 275,
+      "source": "cc-binaries/32aebf95-a4c2-44e9-84a5-bb85af8edd7e"
+    },
+    {
+      "file": "17a2392c390af907.xlsx",
+      "sha256": "17a2392c390af9073194b4e4d0266faddd78e44c7e688a492b611843914ae0b5",
+      "bytes": 110717,
+      "formula_cells": 380,
+      "source": "cc-binaries/a98cd881-812f-4f80-b708-c8a6fdcca686"
+    },
+    {
+      "file": "17d77ee9a32698ee.xlsx",
+      "sha256": "17d77ee9a32698ee29a6faf335ce8864bb04373e96fa7d0ec6ba81b0f1224b6e",
+      "bytes": 13308,
+      "formula_cells": 62,
+      "source": "cc-binaries/0833e800-6293-4dd1-8afe-44ade2bcf08b"
+    },
+    {
+      "file": "17e8224ebdbca578.xlsx",
+      "sha256": "17e8224ebdbca5788e8735623f57874e6d678046e7f4653b89044be232ea706d",
+      "bytes": 257350,
+      "formula_cells": 780,
+      "source": "cc-binaries/fa6c4e0a-c7d4-4b90-a413-a0cb37f19f72"
+    },
+    {
+      "file": "17e8a64e9b361966.xlsx",
+      "sha256": "17e8a64e9b361966e6d98b88398dd789be9acba42040c9939535f5b30740e7a5",
+      "bytes": 67456,
+      "formula_cells": 3060,
+      "source": "cc-binaries/2f144b0e-1d6c-4a24-8c2f-2a138e65dc59"
+    },
+    {
+      "file": "181b53ed3e89c6fe.xlsx",
+      "sha256": "181b53ed3e89c6fe43740aba658a192f8b0897e84010893bf9a7ebaafa6582b0",
+      "bytes": 27838,
+      "formula_cells": 11,
+      "source": "cc-binaries/4a10f655-b53f-4283-a045-f881b02bd080"
+    },
+    {
+      "file": "183a846c76025c2d.xlsx",
+      "sha256": "183a846c76025c2de4006913cdc078ac2cfca2b5ff72070c0aa30e62dc8e3480",
+      "bytes": 283176,
+      "formula_cells": 3740,
+      "source": "cc-binaries/3da76fb2-116d-40b4-8cd6-b7b104fd8e63"
+    },
+    {
+      "file": "18463af06c5fcffb.xlsx",
+      "sha256": "18463af06c5fcffb2503f54039bc8a5f5f5604663e4b2ebbc9aadb257d944bef",
+      "bytes": 183791,
+      "formula_cells": 427,
+      "source": "cc-binaries/00e6a559-d336-41c0-8265-e20a5df3e2f5"
+    },
+    {
+      "file": "184b26011cfa1793.xlsx",
+      "sha256": "184b26011cfa17931d04f9e7722a79af0345ade98b46ce9072e72da138cb404d",
+      "bytes": 522258,
+      "formula_cells": 25666,
+      "source": "cc-binaries/44b49163-54b3-4522-bd3b-96caade6c83c"
+    },
+    {
+      "file": "187e8b290c3823b5.xlsx",
+      "sha256": "187e8b290c3823b5be0d39457a1560e531829a30edf60c4f9280660a4ce83bdb",
+      "bytes": 24787,
+      "formula_cells": 10,
+      "source": "cc-binaries/225c7c64-e4db-4d5d-8b8e-88feba8f4d05"
+    },
+    {
+      "file": "18817b1db9a713b4.xlsx",
+      "sha256": "18817b1db9a713b4f20bd5e5e3adff12c6e27792d303c6bafec011763e4d198f",
+      "bytes": 34469,
+      "formula_cells": 46,
+      "source": "cc-binaries/07b32efb-3296-4f61-9794-620a1f600f5f"
+    },
+    {
+      "file": "188999057f18b8e4.xlsx",
+      "sha256": "188999057f18b8e46e89d22e4b268361efe1fe8e6774758698945e9bcada5e6c",
+      "bytes": 131412,
+      "formula_cells": 548,
+      "source": "cc-binaries/0a10ff46-5cc6-4649-a96b-7930f51a4c6e"
+    },
+    {
+      "file": "18b0650edebed998.xlsx",
+      "sha256": "18b0650edebed9980ac0c8f3c896d4ea41205106f85909cfc3cd0fa5073d5b0b",
+      "bytes": 160449,
+      "formula_cells": 506,
+      "source": "cc-binaries/0b7fab03-9505-4bdd-958a-306dda2168e4"
+    },
+    {
+      "file": "18dc98eb5e7ef667.xlsx",
+      "sha256": "18dc98eb5e7ef667818d1a3552531e3c9826daa8b2bd509b418e6d993f075655",
+      "bytes": 50089,
+      "formula_cells": 152,
+      "source": "cc-binaries/57c14e08-7009-4335-817f-7b572625e0ac"
+    },
+    {
+      "file": "1900a8472636d12b.xlsx",
+      "sha256": "1900a8472636d12b61b7698e649d5a12e31a09b5f19096ea11e4fca8c28a92b4",
+      "bytes": 48951,
+      "formula_cells": 92,
+      "source": "cc-binaries/0901c355-d156-4006-a7a8-89311497ff88"
+    },
+    {
+      "file": "19028816b55d6f3b.xlsx",
+      "sha256": "19028816b55d6f3bbe11e03d963b658761716dc7c3936ad445f603dd38466894",
+      "bytes": 58734,
+      "formula_cells": 4464,
+      "source": "cc-binaries/a28d82ae-dec8-4c26-a1bf-7034ffa91078"
+    },
+    {
+      "file": "19088dcddfc70eee.xlsx",
+      "sha256": "19088dcddfc70eee6789bc43af678e85b66402086095b1d6a67f36b3749a981f",
+      "bytes": 228900,
+      "formula_cells": 46,
+      "source": "cc-binaries/19b20ab1-9bc5-4a82-81b0-45c8b45923ea"
+    },
+    {
+      "file": "19145067cc55f9a6.xlsx",
+      "sha256": "19145067cc55f9a68c355229767461b06f5ff483317f3edbb343e77b585af6f5",
+      "bytes": 41327,
+      "formula_cells": 126,
+      "source": "cc-binaries/98d6ffd4-ed08-4fff-9347-0a532eec6cea"
+    },
+    {
+      "file": "191740c622ffc92b.xlsx",
+      "sha256": "191740c622ffc92be080848393b46d1b83ea59c5231d418bbde0d4c34b407306",
+      "bytes": 56148,
+      "formula_cells": 40,
+      "source": "cc-binaries/2d2dbd14-ad53-4394-8385-a2d597bd3b98"
+    },
+    {
+      "file": "193561892c785c36.xlsx",
+      "sha256": "193561892c785c36910b4fe2c7aaa2a5efabc3bc4541064fcb3292e8e185003d",
+      "bytes": 328828,
+      "formula_cells": 1716,
+      "source": "cc-binaries/0879a46c-491b-4431-8f7b-042407999fba"
+    },
+    {
+      "file": "1935fe1c017333fb.xlsx",
+      "sha256": "1935fe1c017333fb04c9824a3753053527d76902206b5bad1cfb6a4e855a9da8",
+      "bytes": 589709,
+      "formula_cells": 8322,
+      "source": "cc-binaries/c7269238-4702-4702-86a7-71e902c291cc"
+    },
+    {
+      "file": "19421ce94eeb960d.xlsx",
+      "sha256": "19421ce94eeb960d899a227d64b909470b3c05bf93abaebf5fc3a45df93d9749",
+      "bytes": 74796,
+      "formula_cells": 583,
+      "source": "cc-binaries/2c0da7ea-c4c3-4dbb-9b62-13c9182e8c28"
+    },
+    {
+      "file": "19462f0153a6f916.xlsx",
+      "sha256": "19462f0153a6f9168453ead4bf76d7fc3c69913717c3684f305ece8fa3f405b9",
+      "bytes": 36525,
+      "formula_cells": 426,
+      "source": "cc-binaries/0524bf14-724a-4431-858f-e46f37862499"
+    },
+    {
+      "file": "195033ab0f0dc1d8.xlsx",
+      "sha256": "195033ab0f0dc1d8629fdba373aa28c96fff1daa3c167e8383ccf1a4de71da37",
+      "bytes": 97589,
+      "formula_cells": 16,
+      "source": "cc-binaries/41657ae0-afe6-4cdd-a3c4-8f035bab3da3"
+    },
+    {
+      "file": "195ab029dfa0525f.xlsx",
+      "sha256": "195ab029dfa0525f5b95c14c0ebc9ee5a1c7e7c2c3c74a30b6b6ea76c478efe5",
+      "bytes": 38422,
+      "formula_cells": 72,
+      "source": "cc-binaries/115da12c-2041-4a8d-96a0-9224a299d4bf"
+    },
+    {
+      "file": "196dec8623b3b8e6.xlsx",
+      "sha256": "196dec8623b3b8e6842d8e4526b71f8fcb116a5df5bc9c922bc25ef78b307c5f",
+      "bytes": 29533,
+      "formula_cells": 554,
+      "source": "cc-binaries/072f9f26-602b-4d85-bae5-41998ab55c9d"
+    },
+    {
+      "file": "198e98d20702f49e.xlsx",
+      "sha256": "198e98d20702f49e3e3c307a5393cfe8d731df72fe42cb5687e5ed785ba486e4",
+      "bytes": 10058,
+      "formula_cells": 14,
+      "source": "cc-binaries/3fafb975-44d7-476d-9341-17acdecf6311"
+    },
+    {
+      "file": "19a76e1b5a7364a3.xlsx",
+      "sha256": "19a76e1b5a7364a31dee38fc2818e353ba938eedc62bd4d6dcf2982fc10a15cc",
+      "bytes": 54309,
+      "formula_cells": 578,
+      "source": "cc-binaries/13830fa7-d81c-4990-82d2-38a2fd7cd6f2"
+    },
+    {
+      "file": "19b57cc4245fcde7.xlsx",
+      "sha256": "19b57cc4245fcde7704081dc4b05e7ff972403dd19529bf082ad240c8433b766",
+      "bytes": 129255,
+      "formula_cells": 47,
+      "source": "cc-binaries/80440440-29a5-470e-ae7a-5c70a9f9fa25"
+    },
+    {
+      "file": "19c6fed2b8011703.xlsx",
+      "sha256": "19c6fed2b8011703bc8d4c8dfc4d1ccb9a6ba954df89758237c9a9cd3e630b58",
+      "bytes": 191274,
+      "formula_cells": 2210,
+      "source": "cc-binaries/89d88509-532b-40ce-928f-4a358ca37327"
+    },
+    {
+      "file": "19ce45489f9c13ae.xlsx",
+      "sha256": "19ce45489f9c13ae998664fbbefa823c3ef5b270a6c99660fbb9d7fc36c04fc1",
+      "bytes": 86579,
+      "formula_cells": 501,
+      "source": "cc-binaries/08689feb-93b6-48eb-be01-36157d99634d"
+    },
+    {
+      "file": "19ce645004a90709.xlsx",
+      "sha256": "19ce645004a907091f186584aed1c9b992994ea9f66d5a250e6aaa1044b7646d",
+      "bytes": 36650,
+      "formula_cells": 196,
+      "source": "cc-binaries/06ac31b2-f2e2-44d9-b433-09f1e3920a8b"
+    },
+    {
+      "file": "19d2716f01030720.xlsx",
+      "sha256": "19d2716f01030720366d5f3f7cc8ae7ef3c88693dd2291ad90d1b1ade78aa2e9",
+      "bytes": 78448,
+      "formula_cells": 982,
+      "source": "cc-binaries/2d033730-d514-44e0-b978-7894c5797a54"
+    },
+    {
+      "file": "19e3fe954cd25dd8.xlsx",
+      "sha256": "19e3fe954cd25dd8973fc34a2753d0084102485e288ab787eeb477dc39c85099",
+      "bytes": 435729,
+      "formula_cells": 64,
+      "source": "cc-binaries/050e1df9-ab24-4c95-9980-7e0102936046"
+    },
+    {
+      "file": "19e75371af7ec0a9.xlsx",
+      "sha256": "19e75371af7ec0a92ee131d34a475e1b2909e60d59a89f36d82d62df914db6af",
+      "bytes": 254536,
+      "formula_cells": 51,
+      "source": "cc-binaries/0bae6706-f527-4f77-a0b6-3b761d77f0da"
+    },
+    {
+      "file": "19f5a7e608de7718.xlsx",
+      "sha256": "19f5a7e608de7718ef512377f0c8348fd5292d7ef12b9100f019124286398a99",
+      "bytes": 211742,
+      "formula_cells": 4267,
+      "source": "cc-binaries/15ce5775-daba-45ed-8ef8-76b96054f3f2"
+    },
+    {
+      "file": "1a49ed830173cd80.xlsx",
+      "sha256": "1a49ed830173cd800284f6f5150f1af1b825d7e7c407f722fc2dab1d15d60190",
+      "bytes": 87613,
+      "formula_cells": 128,
+      "source": "cc-binaries/76556c14-4bb9-4f69-b133-d735e577e25a"
+    },
+    {
+      "file": "1a4b1e4ed9265587.xlsx",
+      "sha256": "1a4b1e4ed9265587ec4a4bf1155ad9fafcd9e2c49db471b91da61a0a56faafaf",
+      "bytes": 49137,
+      "formula_cells": 1492,
+      "source": "cc-binaries/9af89097-a028-4a35-9be5-685e0c3781bb"
+    },
+    {
+      "file": "1a84bad2c4b9161c.xlsx",
+      "sha256": "1a84bad2c4b9161c6a0add98679ab60f19a86b0956e32569107bfddddd3b8714",
+      "bytes": 27339,
+      "formula_cells": 14,
+      "source": "cc-binaries/332dccd5-901a-44e3-8e42-322e544bb563"
+    },
+    {
+      "file": "1a8a26641c1073c1.xlsx",
+      "sha256": "1a8a26641c1073c12370c2b412e2ce16516c796da7e0a7a227bdf87b74ddbaee",
+      "bytes": 24492,
+      "formula_cells": 265,
+      "source": "cc-binaries/10f947cd-9667-4333-bac8-f251ef6428cc"
+    },
+    {
+      "file": "1aa954551267ecd1.xlsx",
+      "sha256": "1aa954551267ecd19e6d9abb2e08853b1b0edc14c553b05feda261601a5eb7d7",
+      "bytes": 332543,
+      "formula_cells": 3392,
+      "source": "cc-binaries/08e5587b-18b8-4f9e-8964-2c3158002c3e"
+    },
+    {
+      "file": "1aac13c01c675238.xlsx",
+      "sha256": "1aac13c01c675238c5f29f15db2a8af869125c2ae0024fcf8859f5d6d0655ada",
+      "bytes": 15085,
+      "formula_cells": 19,
+      "source": "cc-binaries/74b23ec6-c013-4af2-9e4f-bca1962be0e3"
+    },
+    {
+      "file": "1abb4c8fec5802b9.xlsx",
+      "sha256": "1abb4c8fec5802b9355171ee6b81662130d5948cd5498cd7422ef4f9089a1fb7",
+      "bytes": 30698,
+      "formula_cells": 24,
+      "source": "cc-binaries/0321a413-3be0-4d27-a768-4f6419525ce2"
+    },
+    {
+      "file": "1abbb9ed01071f5d.xlsx",
+      "sha256": "1abbb9ed01071f5d165366abaae610c79aa02187857782274194b8af9c47ec79",
+      "bytes": 40851,
+      "formula_cells": 319,
+      "source": "cc-binaries/20981bb5-f646-43e2-9557-e8fc06a049e7"
+    },
+    {
+      "file": "1abf50f161647b5b.xlsx",
+      "sha256": "1abf50f161647b5bf894e2c87f1548221476cc4215466253c3806f1d2bf211e6",
+      "bytes": 819117,
+      "formula_cells": 58389,
+      "source": "cc-binaries/8b6c50f8-dccc-48c8-ba7d-506e329d28d6"
+    },
+    {
+      "file": "1ac7a52aedf4c797.xlsx",
+      "sha256": "1ac7a52aedf4c79784f2041472d97631b09ce7d95b263ed7fc6ff8fb1527df39",
+      "bytes": 155338,
+      "formula_cells": 328,
+      "source": "cc-binaries/0adb3446-659b-4c1f-8ed2-2e2f96411ebc"
+    },
+    {
+      "file": "1ad64b2c9d24ad07.xlsx",
+      "sha256": "1ad64b2c9d24ad07fadf61534eba8dc74e89bf4aeded363eba9780e64576ca5c",
+      "bytes": 186532,
+      "formula_cells": 834,
+      "source": "cc-binaries/0293789a-41ac-490a-9f14-6c5d27ffed2f"
+    },
+    {
+      "file": "1ad7da6bbf255e02.xlsx",
+      "sha256": "1ad7da6bbf255e02e417a91d6311a6a5e4bdcb16337028ac5bbd4122d9c62e77",
+      "bytes": 105377,
+      "formula_cells": 3385,
+      "source": "cc-binaries/b90d4a16-e0fa-45a6-a3a9-a24a300183c4"
+    },
+    {
+      "file": "1af9687c5f39ad96.xlsx",
+      "sha256": "1af9687c5f39ad961a303e49cc0fc5da391cabd4457f469dddc45c4461ef4916",
+      "bytes": 43244,
+      "formula_cells": 506,
+      "source": "cc-binaries/22642939-d120-4cd9-af91-80bc42f0e885"
+    },
+    {
+      "file": "1b001bbe16c64209.xlsx",
+      "sha256": "1b001bbe16c64209e02266fd6efbcdf77878ebd11922c3260cb81c2fe48b8d67",
+      "bytes": 222476,
+      "formula_cells": 2039,
+      "source": "cc-binaries/0d9b62ff-7ea7-4f8c-9fde-dbb76d86aca2"
+    },
+    {
+      "file": "1b06d4d5ea6e7cb2.xlsx",
+      "sha256": "1b06d4d5ea6e7cb2686e202b4f856efa857f473c5c2a99241e737c3a00adc289",
+      "bytes": 195796,
+      "formula_cells": 1091,
+      "source": "cc-binaries/9d9ef6e9-8174-4e6d-a491-2278646c9994"
+    },
+    {
+      "file": "1b0fc94ffe9beee5.xlsx",
+      "sha256": "1b0fc94ffe9beee538299f0c42fe7dbd4eb04181d2f4da3b2d82a95b79c9ffc0",
+      "bytes": 50848,
+      "formula_cells": 275,
+      "source": "cc-binaries/2909ac6e-6d37-492f-868f-0df067e66c8e"
+    },
+    {
+      "file": "1b21fe29808ba184.xlsx",
+      "sha256": "1b21fe29808ba1849044353939db366a8bf455a0ea1050fb16d5bcb9da64c074",
+      "bytes": 23491,
+      "formula_cells": 13,
+      "source": "cc-binaries/1fa5b890-2b74-4e59-bda0-0360326e0ecd"
+    },
+    {
+      "file": "1b59a74220623ad8.xlsx",
+      "sha256": "1b59a74220623ad8537ee0a511949786e855b3641f7a15b908ae78f7359ee34b",
+      "bytes": 46323,
+      "formula_cells": 275,
+      "source": "cc-binaries/0e25c77a-0724-4298-ad7c-a8c6f80ae3e1"
+    },
+    {
+      "file": "1b81dc730e90aba3.xlsx",
+      "sha256": "1b81dc730e90aba38f7145d433620603ae1610872cb245d3f524a1216aadac6e",
+      "bytes": 31911,
+      "formula_cells": 114,
+      "source": "cc-binaries/0a839a3a-bd66-47a3-b8a6-29ebf392205d"
+    },
+    {
+      "file": "1bf911d72a6b2b28.xlsx",
+      "sha256": "1bf911d72a6b2b28a7a1b18222d48c0ebf0ec817a76408b9fb24959a85b9eca7",
+      "bytes": 42103,
+      "formula_cells": 494,
+      "source": "cc-binaries/22bb9766-9041-4e0f-9654-526200c45200"
+    },
+    {
+      "file": "1bff2619b33a84c2.xlsx",
+      "sha256": "1bff2619b33a84c2886e32a2a11b7d53bb941fcd477961d822192fbf33d16e26",
+      "bytes": 57331,
+      "formula_cells": 222,
+      "source": "cc-binaries/0be7c83d-95f2-4814-aa58-e0897876ab84"
+    },
+    {
+      "file": "1c061a037323664b.xlsx",
+      "sha256": "1c061a037323664bb10638a9d0e82b148bc30e126da89af74e430637445fc2b0",
+      "bytes": 72028,
+      "formula_cells": 20,
+      "source": "cc-binaries/618333f1-05b0-443b-9fd7-72150c010cd2"
+    },
+    {
+      "file": "1c0b279392ae7db1.xlsx",
+      "sha256": "1c0b279392ae7db1553ed88d8b5b1122715630d6e70ebfcbb747cabe148467b2",
+      "bytes": 618390,
+      "formula_cells": 26694,
+      "source": "cc-binaries/045dc4ce-bacb-46a2-9e65-dc85f55467d3"
+    },
+    {
+      "file": "1c1904d0f575b7f4.xlsx",
+      "sha256": "1c1904d0f575b7f498b6de89e297918a7bfbf5bb1471bd946ef5bfe351c7b8c0",
+      "bytes": 19294,
+      "formula_cells": 26,
+      "source": "cc-binaries/0d68d722-1fa3-4b33-8c8e-d377c89b1ebc"
+    },
+    {
+      "file": "1c24f251216c994a.xlsx",
+      "sha256": "1c24f251216c994a78773194a3aac2234ce5a97f75c89c651f4c09ee071017f8",
+      "bytes": 41956,
+      "formula_cells": 21,
+      "source": "cc-binaries/37968b5f-7970-4067-81f9-d493c8b4b430"
+    },
+    {
+      "file": "1c379a43e94ec569.xlsx",
+      "sha256": "1c379a43e94ec569e55fd02bf99c6162eec0ad77ce5506c21fa6af3eb4bb16d9",
+      "bytes": 80522,
+      "formula_cells": 1043,
+      "source": "cc-binaries/81d42c74-cf75-48ff-b65e-fcdb5ca95f5e"
+    },
+    {
+      "file": "1c4ec5a0098864de.xlsx",
+      "sha256": "1c4ec5a0098864de316af57f3162e98d03d9611ffdc70f14868d0a3bbabff07a",
+      "bytes": 16979,
+      "formula_cells": 48,
+      "source": "cc-binaries/0d46e4a1-a1c1-4561-b2d9-4c42850ab904"
+    },
+    {
+      "file": "1c667ffc0c532e82.xlsx",
+      "sha256": "1c667ffc0c532e829da0495c0d4bb6fb7f274b45e3244334d911012e9159256f",
+      "bytes": 604933,
+      "formula_cells": 21427,
+      "source": "cc-binaries/5645d9f7-4ac4-44ac-802b-80c3a368200a"
+    },
+    {
+      "file": "1c6dd646511a9a8f.xlsx",
+      "sha256": "1c6dd646511a9a8f3e03072f1b23f616b2f8960e67c7b14590ca0364519f8325",
+      "bytes": 100214,
+      "formula_cells": 232,
+      "source": "cc-binaries/58525c7f-5fa6-4afe-8ad8-c352e016abe0"
+    },
+    {
+      "file": "1c82d0a952493e55.xlsx",
+      "sha256": "1c82d0a952493e558858cee7f0232d28f88de49336fac0c5276ee61684d98419",
+      "bytes": 39102,
+      "formula_cells": 10,
+      "source": "cc-binaries/00637df4-d7f9-45e5-b5dc-662d9ad3c881"
+    },
+    {
+      "file": "1c86fb2b208e0867.xlsx",
+      "sha256": "1c86fb2b208e086758026952e4982a234bcd0bdc264658de8196330352bae9c3",
+      "bytes": 481999,
+      "formula_cells": 1102,
+      "source": "cc-binaries/04ee76f2-efdb-4fc8-a540-8bde2dc353f7"
+    },
+    {
+      "file": "1c9a2827e4426934.xlsx",
+      "sha256": "1c9a2827e4426934d38e82a206f1578fc06c2af8f93fad23315fd1afc6d3d95e",
+      "bytes": 20752,
+      "formula_cells": 184,
+      "source": "cc-binaries/0b573ce3-b436-4ba8-aac6-0abf6041b206"
+    },
+    {
+      "file": "1c9f45dc03948ce5.xlsx",
+      "sha256": "1c9f45dc03948ce504ee2fd1d6b0b2214b15d232e0fbb82e3873e4f3d7dfd682",
+      "bytes": 511006,
+      "formula_cells": 18764,
+      "source": "cc-binaries/4a7116d4-630c-4642-a4cd-7d9d43376ff6"
+    },
+    {
+      "file": "1ce9db26c84aa0af.xlsx",
+      "sha256": "1ce9db26c84aa0af6e33a8059f656e6dfb348a71d69181bbae25fd0610eaf5e2",
+      "bytes": 69493,
+      "formula_cells": 178,
+      "source": "cc-binaries/0e30daf1-5d56-45c4-aa73-8c45f5a05b6e"
+    },
+    {
+      "file": "1cf9b4b331802097.xlsx",
+      "sha256": "1cf9b4b3318020979cd7d0e7fc1898978bd932f0edac1018af9241e350a1346e",
+      "bytes": 682712,
+      "formula_cells": 22858,
+      "source": "cc-binaries/b9f9a5d3-4df1-49be-abe7-bb20ee4dc1dd"
+    },
+    {
+      "file": "1d17266eff96059f.xlsx",
+      "sha256": "1d17266eff96059ff861c2ca55ba543b02675208e79932f9bb0a81018a3e1a96",
+      "bytes": 202118,
+      "formula_cells": 5740,
+      "source": "cc-binaries/d80c6aa2-1159-4ad2-8405-dd1dc7f81004"
+    },
+    {
+      "file": "1d2152af46e0ad60.xlsx",
+      "sha256": "1d2152af46e0ad6088b3672f74fa717b05a387c2cd01015e039d9c83fc7e46fe",
+      "bytes": 34423,
+      "formula_cells": 502,
+      "source": "cc-binaries/4c5a159d-622d-4152-ac0c-4b0e93c573d0"
+    },
+    {
+      "file": "1d33daf9c1464711.xlsx",
+      "sha256": "1d33daf9c14647111ac0975cc39a9cf4d93438539c9c4289418d74a442640bee",
+      "bytes": 65514,
+      "formula_cells": 392,
+      "source": "cc-binaries/00c94881-2b15-48f5-8385-d81afbc02384"
+    },
+    {
+      "file": "1d51978face497e1.xlsx",
+      "sha256": "1d51978face497e1764634ed9ee6255286fdf6d28a4defd4ee5cc19f72602a36",
+      "bytes": 40691,
+      "formula_cells": 28,
+      "source": "cc-binaries/0090f0d7-682c-4fa5-bb20-9afb6369198b"
+    },
+    {
+      "file": "1d5e813ef6c6a6ec.xlsx",
+      "sha256": "1d5e813ef6c6a6ec566b16400b66c3e319fc150dd5e7f855a0b8b8112c6bf234",
+      "bytes": 372855,
+      "formula_cells": 18,
+      "source": "cc-binaries/4f1af8bc-f38e-4d35-a6f6-cc2350798b7b"
+    },
+    {
+      "file": "1d663fb79b00597c.xlsx",
+      "sha256": "1d663fb79b00597c0eba183992a9753adaa26e724129acd3eda637c3ef7eb897",
+      "bytes": 35538,
+      "formula_cells": 29,
+      "source": "cc-binaries/2a47350f-e0fb-4888-a0bd-da2b81c206d6"
+    },
+    {
+      "file": "1d7dff6b2588c4d1.xlsx",
+      "sha256": "1d7dff6b2588c4d1671df74a06a8c0709076f5a3b0a6967a405d683ea5a6de8e",
+      "bytes": 12562,
+      "formula_cells": 10,
+      "source": "cc-binaries/86f6dd61-b5ce-48db-9041-506615e0654f"
+    },
+    {
+      "file": "1d9900dea73795b4.xlsx",
+      "sha256": "1d9900dea73795b4c99e371cac3cac172cadaf8ab062b5601a3b16134e823922",
+      "bytes": 59930,
+      "formula_cells": 11,
+      "source": "cc-binaries/14b3d360-b240-4401-8ff3-909933a42055"
+    },
+    {
+      "file": "1db3613ebaa26379.xlsx",
+      "sha256": "1db3613ebaa263794fefb311803b083e3944eabd9479c4841cdb2a62080b52c7",
+      "bytes": 81851,
+      "formula_cells": 210,
+      "source": "cc-binaries/7fe40ac8-4b71-425f-a4ee-8f303ad1435a"
+    },
+    {
+      "file": "1db6f7978a979b97.xlsx",
+      "sha256": "1db6f7978a979b97ec60793b96b0ca45ac1a5f752eeaf6e5aa4f50f943ae316c",
+      "bytes": 112147,
+      "formula_cells": 806,
+      "source": "cc-binaries/0241bcd6-4040-433e-aaf2-08a5e85292ec"
+    },
+    {
+      "file": "1db87aa96e063712.xlsx",
+      "sha256": "1db87aa96e063712d88ba9f6d716eac736b03dd8089fb43527599bfe268a0d5a",
+      "bytes": 29207,
+      "formula_cells": 50,
+      "source": "cc-binaries/1e7f81f1-224e-48e5-8ce0-458ec91b87fc"
+    },
+    {
+      "file": "1e0fc4eb4cecb1a7.xlsx",
+      "sha256": "1e0fc4eb4cecb1a7b4f286e4e726020afa7b62ec06927eef5d7f6993cc1c61a6",
+      "bytes": 22425,
+      "formula_cells": 106,
+      "source": "cc-binaries/16b86522-02a3-427f-9cde-7b8e3b8b5b64"
+    },
+    {
+      "file": "1e10ee2b799b9ef7.xlsx",
+      "sha256": "1e10ee2b799b9ef7f6fe95725b8d14aa8c09cf9a2af4e149c50a70771c5c9611",
+      "bytes": 67127,
+      "formula_cells": 37,
+      "source": "cc-binaries/018edca4-dd41-4e48-b3ba-636358754f08"
+    },
+    {
+      "file": "1e2e81dd4f5059e1.xlsx",
+      "sha256": "1e2e81dd4f5059e1ef964aad117260d85016c0785fbc948a2ed6d9a15db36862",
+      "bytes": 145368,
+      "formula_cells": 96,
+      "source": "cc-binaries/c08a861b-6323-41b9-bc2d-cb9ea777e794"
+    },
+    {
+      "file": "1e33885cad597017.xlsx",
+      "sha256": "1e33885cad597017afff58cda210a6f8e49e0adf3eb6813de7f787e131ee8e3b",
+      "bytes": 23940,
+      "formula_cells": 17,
+      "source": "cc-binaries/0209a2c3-cf75-4f8a-9f26-94c5cb340433"
+    },
+    {
+      "file": "1e4cfd1a29f74765.xlsx",
+      "sha256": "1e4cfd1a29f747657cabd010d505f12aa9abc42ea1a2bae19e2bd919e8044b18",
+      "bytes": 16915,
+      "formula_cells": 155,
+      "source": "cc-binaries/31afb424-68f3-4690-a05b-5dbbb25cc187"
+    },
+    {
+      "file": "1e63e49e820c65aa.xlsx",
+      "sha256": "1e63e49e820c65aacbeb39bc8d3cd306f741d54892a6ee20d485bb8fd0f001eb",
+      "bytes": 65147,
+      "formula_cells": 2965,
+      "source": "cc-binaries/ac85d63e-acb6-4b7e-a069-8a563d7e1bb5"
+    },
+    {
+      "file": "1e64a637ff772249.xlsx",
+      "sha256": "1e64a637ff772249c6991c810aa1188e831d403d4b762b59833407d46af4a934",
+      "bytes": 184760,
+      "formula_cells": 982,
+      "source": "cc-binaries/1f7df3c1-ca37-4456-b394-b5b43ffa6166"
+    },
+    {
+      "file": "1e6820d463f6c907.xlsx",
+      "sha256": "1e6820d463f6c907a02c53dc2f2b443c7f3817644068d823b42e53231211f36a",
+      "bytes": 39738,
+      "formula_cells": 1014,
+      "source": "cc-binaries/0d49979c-2b71-463f-bd93-709d88d90f0e"
+    },
+    {
+      "file": "1e7f34857d4d3b9e.xlsx",
+      "sha256": "1e7f34857d4d3b9e8c243c719b8297dac1519da233c5d1f2eada1c7201acfb7f",
+      "bytes": 89181,
+      "formula_cells": 110,
+      "source": "cc-binaries/2eccda29-c6ca-4073-93a6-2558926ca68c"
+    },
+    {
+      "file": "1e889e1a5616b46b.xlsx",
+      "sha256": "1e889e1a5616b46bf32eae3b3637bc9dd4254d59d9e84ad3b9931e6c285b10b8",
+      "bytes": 22691,
+      "formula_cells": 19,
+      "source": "cc-binaries/f2661372-1fd8-40f6-a20b-e092e4412f4b"
+    },
+    {
+      "file": "1e8a0b536846980a.xlsx",
+      "sha256": "1e8a0b536846980a653433e3f7a55103c754c41040dcd823d81e0cbf6186b633",
+      "bytes": 122871,
+      "formula_cells": 99,
+      "source": "cc-binaries/3db55337-8cb0-412a-8089-15221b59d69b"
+    },
+    {
+      "file": "1eb77c97ff6f010a.xlsx",
+      "sha256": "1eb77c97ff6f010a164cb8df55863804c1207ba338c8d597774dde44544d690a",
+      "bytes": 98894,
+      "formula_cells": 104,
+      "source": "cc-binaries/c951bc57-99dd-43fe-ba5e-367ab9e7ed84"
+    },
+    {
+      "file": "1f0fffd66b6df83e.xlsx",
+      "sha256": "1f0fffd66b6df83ef89f0dd46ff3e5caf53506ffb477489cbb59af8d0bc9c29b",
+      "bytes": 508119,
+      "formula_cells": 25123,
+      "source": "cc-binaries/293c27c0-7771-451f-87d9-1104393fa716"
+    },
+    {
+      "file": "1f19076a7d128b46.xlsx",
+      "sha256": "1f19076a7d128b46492e9f72cf8d6c58974b44450e68aeafc5267aa5396a6b6d",
+      "bytes": 594401,
+      "formula_cells": 2477,
+      "source": "cc-binaries/0aec4bcf-38b7-4e16-8e9b-3d6e6d14890a"
+    },
+    {
+      "file": "1f24449ff9d0b8ca.xlsx",
+      "sha256": "1f24449ff9d0b8ca26f336bc6a71074f935881662bd73288adcd372dd5fb041c",
+      "bytes": 87355,
+      "formula_cells": 14,
+      "source": "cc-binaries/2d1e9608-c593-498c-83f5-d2a2dbc75145"
+    },
+    {
+      "file": "1f3f0059dd8d9f9d.xlsx",
+      "sha256": "1f3f0059dd8d9f9d3659e12f11cc6716f3d6a59927aaaded17b250e14f71572d",
+      "bytes": 58014,
+      "formula_cells": 548,
+      "source": "cc-binaries/1bd9e53f-339a-479b-9c45-50590b4ba719"
+    },
+    {
+      "file": "1f52aa6458fe19c5.xlsx",
+      "sha256": "1f52aa6458fe19c524af329b7d2dbc151e606be698802a78060d105039f7ee88",
+      "bytes": 30363,
+      "formula_cells": 24,
+      "source": "cc-binaries/036ebcbd-9892-49b7-a0fd-8fe74a290ea3"
+    },
+    {
+      "file": "1f8e276f31b8e025.xlsx",
+      "sha256": "1f8e276f31b8e025bbd906b830e87eea17a22cf5f30cc2d272f1732d4fde36ef",
+      "bytes": 460961,
+      "formula_cells": 4123,
+      "source": "cc-binaries/acf98f3e-764d-4e1c-9b9c-4ee3414aa915"
+    },
+    {
+      "file": "1f9075ecb76fa547.xlsx",
+      "sha256": "1f9075ecb76fa547124be9212ff6d1b3678ab1e79591f09bac6554d888b1113c",
+      "bytes": 26552,
+      "formula_cells": 564,
+      "source": "cc-binaries/0e18296d-e8fe-4923-8474-9b5ae055f4d5"
+    },
+    {
+      "file": "1fbcb9d12f114116.xlsx",
+      "sha256": "1fbcb9d12f114116d7bda80db4c149293804df1b0145f6bc3be037c3fd7f0125",
+      "bytes": 19078,
+      "formula_cells": 12,
+      "source": "cc-binaries/2328b08e-b8b8-446e-b9d3-881422ff35e7"
+    },
+    {
+      "file": "1fc7ad10c3533103.xlsx",
+      "sha256": "1fc7ad10c35331038f53e34e93fed0b875f207a80d155744e0b6cb4f44cef1d6",
+      "bytes": 106099,
+      "formula_cells": 914,
+      "source": "cc-binaries/009f3837-c49c-4b19-ad74-4539b5310835"
+    },
+    {
+      "file": "1fc7e17a855d817a.xlsx",
+      "sha256": "1fc7e17a855d817a3e4fb68563431bd50883c665908c0280cc804a92c77f6494",
+      "bytes": 146182,
+      "formula_cells": 2835,
+      "source": "cc-binaries/2e83ce66-7071-4f5f-9719-e3fe25e387d1"
+    },
+    {
+      "file": "1fdd52df5da7c5fc.xlsx",
+      "sha256": "1fdd52df5da7c5fcacefcf28c0cef4aa62352f4fcde6c4a6750e6062be29be3a",
+      "bytes": 345132,
+      "formula_cells": 173,
+      "source": "cc-binaries/0f5d1feb-673f-48ff-af58-740d1807e773"
+    },
+    {
+      "file": "1ff23dde6e536255.xlsx",
+      "sha256": "1ff23dde6e536255dd8c4c9e1e3444b2f012650af60d2de01acd18e901cb60bb",
+      "bytes": 91226,
+      "formula_cells": 30,
+      "source": "cc-binaries/0e766e77-276a-40f1-ae96-f01cf2cf0c24"
+    },
+    {
+      "file": "202c0be7ecbc27b3.xlsx",
+      "sha256": "202c0be7ecbc27b3d0120fac074edc5936aad562ebbe28ebfd20e6a565ec5c3c",
+      "bytes": 47088,
+      "formula_cells": 271,
+      "source": "cc-binaries/382ca1ff-dc1f-4eba-a809-2b29c43c9779"
+    },
+    {
+      "file": "203055cf4829993c.xlsx",
+      "sha256": "203055cf4829993c278a80ee83da7503ab5603d79e95a5806b8e3c3dfe00b348",
+      "bytes": 23960,
+      "formula_cells": 355,
+      "source": "cc-binaries/3e3dbc9a-250a-4b79-9353-f03987739d49"
+    },
+    {
+      "file": "204bf21162433a86.xlsx",
+      "sha256": "204bf21162433a86578ca8d3bbfce29e4f4bea3e1d64db35bd074d241df4d8ca",
+      "bytes": 34040,
+      "formula_cells": 42,
+      "source": "cc-binaries/0b90ddcd-362c-4a5d-8516-7a6d7a0cf6f0"
+    },
+    {
+      "file": "205088788bba8ee6.xlsx",
+      "sha256": "205088788bba8ee6a5c4cdc9596b9481d0d900a406160b83a9332ed2ddc5fbc0",
+      "bytes": 243090,
+      "formula_cells": 1714,
+      "source": "cc-binaries/16576474-b68c-4d66-a241-d0ecc93ae4ea"
+    },
+    {
+      "file": "20510f53cbe93937.xlsx",
+      "sha256": "20510f53cbe9393714befb1414f17d1660d770e69231615b42c4121e036389db",
+      "bytes": 345965,
+      "formula_cells": 3720,
+      "source": "cc-binaries/c4ca4d6f-ae20-4a23-87ad-2d170ec567a4"
+    },
+    {
+      "file": "2056867d570f4b6e.xlsx",
+      "sha256": "2056867d570f4b6e9113d0aff5bc49c62fe98ee4b9ee74715fb2a017f2a4f94e",
+      "bytes": 25899,
+      "formula_cells": 256,
+      "source": "cc-binaries/287312e4-f2d4-4329-bdf5-b64b97497b3c"
+    },
+    {
+      "file": "205ede021a7384c4.xlsx",
+      "sha256": "205ede021a7384c4ec6bbc59852839260d0e4487255b87e8323cbd149148f7d0",
+      "bytes": 165200,
+      "formula_cells": 2835,
+      "source": "cc-binaries/016d8775-52d6-4ce8-b897-1577ce645e6f"
+    },
+    {
+      "file": "2068f8c7c81a0adf.xlsx",
+      "sha256": "2068f8c7c81a0adfafcd1c8a09f6f4c05c535a0d0ad438eec1b079e3fca35a9f",
+      "bytes": 175459,
+      "formula_cells": 566,
+      "source": "cc-binaries/0ca2d36a-314a-4d50-b2dd-898833674ade"
+    },
+    {
+      "file": "20828528d666571d.xlsx",
+      "sha256": "20828528d666571dd85099b37cb614613d3c7625b6060415e366e56ee59996d1",
+      "bytes": 44539,
+      "formula_cells": 520,
+      "source": "cc-binaries/01abb403-fcb9-4164-b73c-b5bef330f058"
+    },
+    {
+      "file": "20c058638d3398c0.xlsx",
+      "sha256": "20c058638d3398c00902c66d4a84c1d2bdbbd208d7342c07dad374c923188c81",
+      "bytes": 30319,
+      "formula_cells": 45,
+      "source": "cc-binaries/0efe4c9a-a215-4782-88a6-fe7576ebf05a"
+    },
+    {
+      "file": "2101dd2d0e53d217.xlsx",
+      "sha256": "2101dd2d0e53d2175b2d6173bd615ca95dc76c0fc0709ba1ef06648b4eec83a7",
+      "bytes": 40542,
+      "formula_cells": 28,
+      "source": "cc-binaries/1d46b692-b333-4d38-b0f8-8036ebc9f86e"
+    },
+    {
+      "file": "2127ef6e3dd9116e.xlsx",
+      "sha256": "2127ef6e3dd9116ec2d0eadd02467246240d69fe17ccc5f38e384116cd374acc",
+      "bytes": 12727,
+      "formula_cells": 28,
+      "source": "cc-binaries/048a9bc1-2973-4acf-9644-17e5a8729d59"
+    },
+    {
+      "file": "212ed8dfd58e7664.xlsx",
+      "sha256": "212ed8dfd58e7664775cdcbc4d78196b837a9ba1c9ea185a5afc8b0adad2d80b",
+      "bytes": 27320,
+      "formula_cells": 14,
+      "source": "cc-binaries/13841a5a-0e78-4a99-99d3-fbd74cb99f6c"
+    },
+    {
+      "file": "2153468853ff6c37.xlsx",
+      "sha256": "2153468853ff6c37af4780afabddfe6c49d4b470e1e0d927de1ef46afbc768c9",
+      "bytes": 54398,
+      "formula_cells": 38,
+      "source": "cc-binaries/03521272-89bf-4849-9718-a35a9154914b"
+    },
+    {
+      "file": "21699474e35927c5.xlsx",
+      "sha256": "21699474e35927c51ce0b9383c46ebdc11cd6c8cc13ba711bd7d2ca6f3688f53",
+      "bytes": 35851,
+      "formula_cells": 162,
+      "source": "cc-binaries/004031b1-3015-4e02-a209-246457997c2e"
+    },
+    {
+      "file": "21921a70c3038e35.xlsx",
+      "sha256": "21921a70c3038e35a4762b7ed23edc8be104a75094ad2855f2ead8d92132a054",
+      "bytes": 17290,
+      "formula_cells": 51,
+      "source": "cc-binaries/30d19e5c-cb21-443f-bb91-17047d47a6bd"
+    },
+    {
+      "file": "21985c3919307af0.xlsx",
+      "sha256": "21985c3919307af08b4e461139d55b3d2c08009a98ad170a3bc160e1a18d5146",
+      "bytes": 511893,
+      "formula_cells": 115,
+      "source": "cc-binaries/0573e495-84c1-4d0e-b025-2cd05b9abca2"
+    },
+    {
+      "file": "21a6be183db17db4.xlsx",
+      "sha256": "21a6be183db17db4d8dd9ca5e11b2ac6e7911428b755e8757cdbcb889789c134",
+      "bytes": 63466,
+      "formula_cells": 34,
+      "source": "cc-binaries/102d7d57-7756-4fce-b65c-293d70a06fe7"
+    },
+    {
+      "file": "21abc33a839ff234.xlsx",
+      "sha256": "21abc33a839ff23428fd6c8adc1c363b7f9e68c9b3b13e1d8406daf25a88e1db",
+      "bytes": 65420,
+      "formula_cells": 171,
+      "source": "cc-binaries/e29af379-f527-47ff-8072-c2b34aedce61"
+    },
+    {
+      "file": "21bc41f5704d58ff.xlsx",
+      "sha256": "21bc41f5704d58ffd32606fb2abb426669ac01767b25b6030fdbcf4f9bac867b",
+      "bytes": 45395,
+      "formula_cells": 1070,
+      "source": "cc-binaries/5e5be423-293a-4474-9dbd-f6d1dc336d16"
+    },
+    {
+      "file": "21c87c74f15cc6b5.xlsx",
+      "sha256": "21c87c74f15cc6b5f3bc9a7a2cefdb29a308a5e46903aa35eed2714815fb4001",
+      "bytes": 43093,
+      "formula_cells": 494,
+      "source": "cc-binaries/056e4f00-48eb-4be1-bfdf-4f24ff6ac93d"
+    },
+    {
+      "file": "21d5fa1f90e9d4fd.xlsx",
+      "sha256": "21d5fa1f90e9d4fdce3d1cd5a07a22d850d39da82e312f11e03bf9a729483752",
+      "bytes": 44431,
+      "formula_cells": 349,
+      "source": "cc-binaries/0914e045-00f2-455b-bd45-a70583375d83"
+    },
+    {
+      "file": "21de3bd297fe0c67.xlsx",
+      "sha256": "21de3bd297fe0c671fcf0cf8c1af60405fc033cb3a7bb61eb65e57bad4e0626e",
+      "bytes": 534705,
+      "formula_cells": 5094,
+      "source": "cc-binaries/c006e96b-c9aa-4558-95b6-98263cb4e54e"
+    },
+    {
+      "file": "21e3ba67fac0469f.xlsx",
+      "sha256": "21e3ba67fac0469fccd9ceec2d0a8ddfd7050717ac9372702cb20ac416a1e0d7",
+      "bytes": 28563,
+      "formula_cells": 49,
+      "source": "cc-binaries/2c78f34c-1ee7-4f7e-a233-1931071543d9"
+    },
+    {
+      "file": "2207446a7ade1e5f.xlsx",
+      "sha256": "2207446a7ade1e5fb75a3d7ae7a92660d9c668b2786219ca703daf69cd4f45c9",
+      "bytes": 27821,
+      "formula_cells": 27,
+      "source": "cc-binaries/092ba483-c07e-4dac-9a56-7caa6652bd44"
+    },
+    {
+      "file": "2209bfa34efa7cc3.xlsx",
+      "sha256": "2209bfa34efa7cc375083479b10d1f6a91956e8fd7ec78141bd9e77ce813ab66",
+      "bytes": 1034607,
+      "formula_cells": 97,
+      "source": "cc-binaries/114036e5-27a6-4f7b-a125-6d5d8b5c375c"
+    },
+    {
+      "file": "2239f8951c714c34.xlsx",
+      "sha256": "2239f8951c714c340cea8ef21f2ae1f08a7edb8fa59395ceb1cab319adabab26",
+      "bytes": 15360,
+      "formula_cells": 15,
+      "source": "cc-binaries/028fe43d-d94b-4ed7-8b77-d2fcd547725f"
+    },
+    {
+      "file": "2243f53de5e869c0.xlsx",
+      "sha256": "2243f53de5e869c09df213cfa190108f59d2fcaff353f6d3022e2a87b3ffe54d",
+      "bytes": 215723,
+      "formula_cells": 4699,
+      "source": "cc-binaries/06eaadfe-640d-45a6-b956-968da352fade"
+    },
+    {
+      "file": "22482103a2c69ef8.xlsx",
+      "sha256": "22482103a2c69ef8babed04617a6806474828cbb0cd2f32307689b911442d08d",
+      "bytes": 16520,
+      "formula_cells": 25,
+      "source": "cc-binaries/0f5d47a4-5346-43f8-9502-a7fd463c1dbf"
+    },
+    {
+      "file": "224da5009c94f396.xlsx",
+      "sha256": "224da5009c94f3960412537210c07675391877ade2989b3bec1e72593267e32a",
+      "bytes": 64628,
+      "formula_cells": 2965,
+      "source": "cc-binaries/a9553674-2d8e-40e3-bc3c-f7eb0f7a17d9"
+    },
+    {
+      "file": "22731e87b820075a.xlsx",
+      "sha256": "22731e87b820075a4f53a8a2df8ca2e8fdc5876d9f263f921ad2620a63b2d0a4",
+      "bytes": 57416,
+      "formula_cells": 998,
+      "source": "cc-binaries/2f926099-9f7a-4e18-8578-64a11ea4d860"
+    },
+    {
+      "file": "228b59cb75d70146.xlsx",
+      "sha256": "228b59cb75d7014694059c4d44bb7d5009d95466adbedb044fcc9fe3e899e318",
+      "bytes": 18543,
+      "formula_cells": 11,
+      "source": "cc-binaries/557e91cd-0eb4-4b7d-a833-17fa9eecfc00"
+    },
+    {
+      "file": "22994c6e2383d632.xlsx",
+      "sha256": "22994c6e2383d6322bc6552adacf77fb41c781743159b093487621ae1090c80a",
+      "bytes": 44551,
+      "formula_cells": 1119,
+      "source": "cc-binaries/ac2b9db4-490d-43f8-a6b6-e2457c790c4c"
+    },
+    {
+      "file": "22c79cfae073e814.xlsx",
+      "sha256": "22c79cfae073e814331afb87484cdbba5043e73d27588165c4ee751ecc92ca3d",
+      "bytes": 45726,
+      "formula_cells": 134,
+      "source": "cc-binaries/1f6eed42-5f85-419c-839f-4497ecc0b32d"
+    },
+    {
+      "file": "22f0a02e2986af43.xlsx",
+      "sha256": "22f0a02e2986af432d0a3d47df6864645f3d31260745f12f562222308181b13b",
+      "bytes": 65493,
+      "formula_cells": 2965,
+      "source": "cc-binaries/7eba0059-e400-41c5-ac5c-437721c3bc9d"
+    },
+    {
+      "file": "22f105688d8aefa1.xlsx",
+      "sha256": "22f105688d8aefa1a736979ff74fa71ffce59d1e4f177b14f1608293c7a5117a",
+      "bytes": 20623,
+      "formula_cells": 100,
+      "source": "cc-binaries/108fca17-1806-416f-b23e-e1ae222afcb7"
+    },
+    {
+      "file": "2319d7e7fe0ef092.xlsx",
+      "sha256": "2319d7e7fe0ef092f8147b882e00d1311e2583a990e5a8d3520c32e0a6734dd3",
+      "bytes": 28221,
+      "formula_cells": 90,
+      "source": "cc-binaries/15c350ad-fddc-4bf1-8969-346a93a2d9dd"
+    },
+    {
+      "file": "232522f8abb088fc.xlsx",
+      "sha256": "232522f8abb088fcd54b25ddc3e16bac6cd4c7309901de9f4039ef9d58077599",
+      "bytes": 280404,
+      "formula_cells": 3201,
+      "source": "cc-binaries/4dbdaa9d-6c6d-452d-af53-27712d8bb285"
+    },
+    {
+      "file": "2333c98373422e9e.xlsx",
+      "sha256": "2333c98373422e9e40ed4273561b2a09ba35e20cc0b4d9bdc6199e5645701290",
+      "bytes": 79147,
+      "formula_cells": 396,
+      "source": "cc-binaries/b5257669-ae72-4854-b756-29e6ddc61c7c"
+    },
+    {
+      "file": "2334bf46f88a660b.xlsx",
+      "sha256": "2334bf46f88a660ba8c0a07688777fa9bcfd91ac5092e9a04cb5eb107a33e99b",
+      "bytes": 60449,
+      "formula_cells": 587,
+      "source": "cc-binaries/6314aa3a-748c-4eae-b591-7d72acab39c4"
+    },
+    {
+      "file": "23397847a7aace7a.xlsx",
+      "sha256": "23397847a7aace7ac88e46d970b87432a2112ecd2b3464c8e2954ed03ed439d1",
+      "bytes": 43218,
+      "formula_cells": 518,
+      "source": "cc-binaries/08656319-3e39-435b-a615-256de65f6886"
+    },
+    {
+      "file": "2398df97a5d6177d.xlsx",
+      "sha256": "2398df97a5d6177dfdac057610c903adab98d368927e0d04ab41580bef930c12",
+      "bytes": 29777,
+      "formula_cells": 47,
+      "source": "cc-binaries/3d3d67ec-dc8b-4bca-bb53-cb87e3353483"
+    },
+    {
+      "file": "23ac25d5dd64c644.xlsx",
+      "sha256": "23ac25d5dd64c644ca2436d8d067fc9398695c653d5fdb5047bbbf8aa4777216",
+      "bytes": 186619,
+      "formula_cells": 2660,
+      "source": "cc-binaries/115bff29-c4b6-475e-8c7b-a6240791d684"
+    },
+    {
+      "file": "24003a371101e76a.xlsx",
+      "sha256": "24003a371101e76a702e4f4fb48656291b83cc3df9a9acbce43db98bb55001a4",
+      "bytes": 307789,
+      "formula_cells": 1646,
+      "source": "cc-binaries/005fc5a2-e8e1-4a44-9576-6770cb6d7bdf"
+    },
+    {
+      "file": "2411413c35424374.xlsx",
+      "sha256": "2411413c35424374ab03753cf3b6eddb0f4b013da91f4a89632861c7449a38c3",
+      "bytes": 43503,
+      "formula_cells": 294,
+      "source": "cc-binaries/39ecd008-1de2-4e29-9340-8085f0a08dce"
+    },
+    {
+      "file": "2439d87afc4ab555.xlsx",
+      "sha256": "2439d87afc4ab5550ef3a772107df35bca4697e677768fa01fd1262788f920fe",
+      "bytes": 83098,
+      "formula_cells": 1678,
+      "source": "cc-binaries/11dda59d-37ce-49c0-b235-6b5c54b1f00c"
+    },
+    {
+      "file": "248623c5fa8b7a30.xlsx",
+      "sha256": "248623c5fa8b7a300a94ca1dbba3e76c8f7799da4cdcc4a23af02b7123c7f60a",
+      "bytes": 24365,
+      "formula_cells": 24,
+      "source": "cc-binaries/05e7874e-bfef-445e-b2c3-b538eace5839"
+    },
+    {
+      "file": "24a763c82d536bce.xlsx",
+      "sha256": "24a763c82d536bceedaa1af17b4fbcbc1b1c4b4bfe78250da47e8961e2e2c30e",
+      "bytes": 39458,
+      "formula_cells": 20,
+      "source": "cc-binaries/0bfa01f0-656d-433c-bdbf-d2e5e88245d9"
+    },
+    {
+      "file": "24c384354088fcb8.xlsx",
+      "sha256": "24c384354088fcb8f4b03a0e2533a90a11726847791378a50b4d909dbf517566",
+      "bytes": 42235,
+      "formula_cells": 31,
+      "source": "cc-binaries/0f92affa-ea4c-4b88-9294-c33c78e5b60c"
+    },
+    {
+      "file": "24d51fb45400e157.xlsx",
+      "sha256": "24d51fb45400e1578c11dded4007a0c2556e7a12dbd2915cef68cf6793660fd0",
+      "bytes": 64311,
+      "formula_cells": 2965,
+      "source": "cc-binaries/002f0b4f-8777-4f96-a483-fc1f0888bb4d"
+    },
+    {
+      "file": "24e292694fd06ea8.xlsx",
+      "sha256": "24e292694fd06ea86bb761d79460602da8fc99e9dbe737945e16c244e6fe4381",
+      "bytes": 42469,
+      "formula_cells": 426,
+      "source": "cc-binaries/0a849468-b3f2-412c-a0b3-6ea795021c65"
+    },
+    {
+      "file": "24fac61920a9e99f.xlsx",
+      "sha256": "24fac61920a9e99fd2429fad83b28616d801dee7683cf9d5f8ac7cf80c03a29f",
+      "bytes": 50594,
+      "formula_cells": 64,
+      "source": "cc-binaries/7dc4f851-2044-488c-a76f-3f08b1f5d6bd"
+    },
+    {
+      "file": "2502b87f89bad801.xlsx",
+      "sha256": "2502b87f89bad801e8c495d655ebbbdd62262b5d529e5516e51741927dd756b1",
+      "bytes": 36726,
+      "formula_cells": 16,
+      "source": "cc-binaries/0f27515c-f582-42ef-8228-a636eeb792ca"
+    },
+    {
+      "file": "253f80360b12f392.xlsx",
+      "sha256": "253f80360b12f3922727240e714e98178aa34407bdeb14f324173f08c999649b",
+      "bytes": 133891,
+      "formula_cells": 4917,
+      "source": "cc-binaries/93c3c8b0-c243-4b0e-9a6d-e6a294490ed8"
+    },
+    {
+      "file": "2544dd29b4bbefa3.xlsx",
+      "sha256": "2544dd29b4bbefa353eae4f27bdc0155867e80c17c75362858c5e9ef6c1b365b",
+      "bytes": 53646,
+      "formula_cells": 468,
+      "source": "cc-binaries/1a3bf92d-5367-41f7-84f6-30ef8575b3f3"
+    },
+    {
+      "file": "256b85706a98f054.xlsx",
+      "sha256": "256b85706a98f0542f42cef35c818ce692fb6cf8f8f00d85eedc56970a428b87",
+      "bytes": 17666,
+      "formula_cells": 28,
+      "source": "cc-binaries/01c8e005-5e7b-4ff0-8ecd-298bdee6c06a"
+    },
+    {
+      "file": "25714873eb278925.xlsx",
+      "sha256": "25714873eb27892516502715f54c5354be524901da14928ba2d0ba879daf448e",
+      "bytes": 452335,
+      "formula_cells": 13006,
+      "source": "cc-binaries/11a177d5-5f98-45f2-bfe1-b64228f60bec"
+    },
+    {
+      "file": "257df0565a587e73.xlsx",
+      "sha256": "257df0565a587e73d00eede9b4f3c242d1042bbd7f8f1898b964888393f042d8",
+      "bytes": 32375,
+      "formula_cells": 626,
+      "source": "cc-binaries/5f0d2b2a-ddaf-4c4a-b210-c9d7931b65b5"
+    },
+    {
+      "file": "258a9acd54dfd1ac.xlsx",
+      "sha256": "258a9acd54dfd1acb5fa90e8f05a013843eac35d7a46c4574078a48a04d593e8",
+      "bytes": 42319,
+      "formula_cells": 494,
+      "source": "cc-binaries/4564940c-996b-45cb-8070-5399efba8226"
+    },
+    {
+      "file": "25a2f70e49bd4910.xlsx",
+      "sha256": "25a2f70e49bd4910e63c6b33d6305dfec3f9b1e380671885df9ed13d4d5f9a77",
+      "bytes": 34211,
+      "formula_cells": 42,
+      "source": "cc-binaries/140b4217-d929-4ac7-add2-1da72eb4c13f"
+    },
+    {
+      "file": "25b6bb06278debba.xlsx",
+      "sha256": "25b6bb06278debba168368cd53a6e22c38bcc2f26e26322fb7f5492785f7786a",
+      "bytes": 19174,
+      "formula_cells": 78,
+      "source": "cc-binaries/0c27fc27-0e60-4b61-9a82-78de310a6fe2"
+    },
+    {
+      "file": "25ba5be33938900c.xlsx",
+      "sha256": "25ba5be33938900c1d31fe1a07f318f84a1a57420718363d0449e220c6b9cfc3",
+      "bytes": 12569,
+      "formula_cells": 14,
+      "source": "cc-binaries/8eb23f4a-3b80-4b51-9932-7860d5afce5c"
+    },
+    {
+      "file": "25d44f3fb4fe6650.xlsx",
+      "sha256": "25d44f3fb4fe665036ec9b390401d4fd0cb40733f4e06ff6d98a716071c34079",
+      "bytes": 68223,
+      "formula_cells": 14,
+      "source": "cc-binaries/e98c05cd-61b1-400c-8ab0-29b05632ac51"
+    },
+    {
+      "file": "25ed66beda411d15.xlsx",
+      "sha256": "25ed66beda411d15554c717bccb6b206788dcddeec0e30f88b17769bcb36b0df",
+      "bytes": 66764,
+      "formula_cells": 1338,
+      "source": "cc-binaries/089f9eb7-4b26-4672-a46c-6211ba6d0f8f"
+    },
+    {
+      "file": "2601356fcfb46580.xlsx",
+      "sha256": "2601356fcfb46580226dcd60cdd286ab1f4588133fb08d0a8f4e7d3035bfb6bc",
+      "bytes": 45284,
+      "formula_cells": 131,
+      "source": "cc-binaries/224c5509-8782-422c-abc5-2256233e6345"
+    },
+    {
+      "file": "2609043c029b0a20.xlsx",
+      "sha256": "2609043c029b0a20b9bb148cc5cde12bf161030c76b08b075c894e5df1b5de6a",
+      "bytes": 23050,
+      "formula_cells": 18,
+      "source": "cc-binaries/0308101a-9ee1-4874-b696-2b3b4193895a"
+    },
+    {
+      "file": "2609f021636701b6.xlsx",
+      "sha256": "2609f021636701b6887c8e4c281b2f2e8074efdbdb32601ab2a754f08a390417",
+      "bytes": 39515,
+      "formula_cells": 52,
+      "source": "cc-binaries/3c7f51cf-6e01-4861-80db-8b2b609ab8f2"
+    },
+    {
+      "file": "260b8eec238ed1f5.xlsx",
+      "sha256": "260b8eec238ed1f5a6c3add78fe02c4409d184db65eb65c66eec17d07d6c6b12",
+      "bytes": 527287,
+      "formula_cells": 3490,
+      "source": "cc-binaries/b30d4e46-12bd-4609-858d-1e39fa2429fb"
+    },
+    {
+      "file": "26517fe159e72173.xlsx",
+      "sha256": "26517fe159e72173eaed998622f7820dda3d43a67f2c3d18d17eaf288d663ef9",
+      "bytes": 30209,
+      "formula_cells": 420,
+      "source": "cc-binaries/4a35737b-4423-4fd0-8aac-7dd684f1b0d3"
+    },
+    {
+      "file": "26673f97447365f5.xlsx",
+      "sha256": "26673f97447365f5ceb2195fe116e509b8e3bb0b986c5655f5232c39800ef515",
+      "bytes": 46473,
+      "formula_cells": 1416,
+      "source": "cc-binaries/52aefeaa-22e0-415a-a79b-7c0954a7b368"
+    },
+    {
+      "file": "2671d8aaff0b5abf.xlsx",
+      "sha256": "2671d8aaff0b5abf3e863060ca515aa45fa32e5d14cca92a38b4689800b36161",
+      "bytes": 61227,
+      "formula_cells": 20,
+      "source": "cc-binaries/05b675c8-f7d3-41fb-b9d1-317df3213dbd"
+    },
+    {
+      "file": "269c1c7572abfe7f.xlsx",
+      "sha256": "269c1c7572abfe7f471f76cc7598fd85c2275215db5ecb02d13d492620904216",
+      "bytes": 29489,
+      "formula_cells": 502,
+      "source": "cc-binaries/6a1188cf-8921-4646-9b5a-e25cc3d742cb"
+    },
+    {
+      "file": "26c67f3f3790f16e.xlsx",
+      "sha256": "26c67f3f3790f16eb81dd90b3922f45674e029222928ca5e0a3dcf2a2c2df672",
+      "bytes": 239597,
+      "formula_cells": 8769,
+      "source": "cc-binaries/0f7ed0c1-9224-499f-bb82-35f9e88280b5"
+    },
+    {
+      "file": "26d2926032b410ad.xlsx",
+      "sha256": "26d2926032b410ad51dd42121db38ff0fb9803558e5322b04df1c7da0b0d26cc",
+      "bytes": 69307,
+      "formula_cells": 55,
+      "source": "cc-binaries/ada6062b-c14d-4ab1-88f0-05cd1919433f"
+    },
+    {
+      "file": "26e890c679878f9f.xlsx",
+      "sha256": "26e890c679878f9f2eab487c490d37bc91a89ec43845daf7a25a5d949e0c29c6",
+      "bytes": 19471,
+      "formula_cells": 68,
+      "source": "cc-binaries/0adf50da-c844-4f5b-be97-88d14d87ee27"
+    },
+    {
+      "file": "26eee6e50e58a844.xlsx",
+      "sha256": "26eee6e50e58a8443df0749efb05542b8719a3da41384bd0ba60580ff2edc4a5",
+      "bytes": 46666,
+      "formula_cells": 1492,
+      "source": "cc-binaries/1b5803ba-d399-4ec6-81ba-00b1ac90b71e"
+    },
+    {
+      "file": "27141561e3443d84.xlsx",
+      "sha256": "27141561e3443d84abed4993458e59e472c026e8c539437f1b8ae5a968736792",
+      "bytes": 29733,
+      "formula_cells": 12,
+      "source": "cc-binaries/87df182e-979a-4d03-b6ff-5b21b1fe27a0"
+    },
+    {
+      "file": "2728ad942adf2daf.xlsx",
+      "sha256": "2728ad942adf2daf2ae6935ddc1287773a19237863930e30e4cdef7a270f12af",
+      "bytes": 91713,
+      "formula_cells": 261,
+      "source": "cc-binaries/06c7ea65-b56f-44c9-a416-1aea0d9252f7"
+    },
+    {
+      "file": "273139ab3f75f0a0.xlsx",
+      "sha256": "273139ab3f75f0a0e91156e2aa23ef8a13a5b03e3b994f26d3c37b5c0fdf53bf",
+      "bytes": 26046,
+      "formula_cells": 25,
+      "source": "cc-binaries/08d59864-bc15-434f-9768-b19db72842d6"
+    },
+    {
+      "file": "27594533c4f56650.xlsx",
+      "sha256": "27594533c4f5665040599e7788519577834f7e2d9f719c1a1a8bf6216a54ae21",
+      "bytes": 55845,
+      "formula_cells": 98,
+      "source": "cc-binaries/2c56a8bc-7787-4487-961a-68887877308c"
+    },
+    {
+      "file": "2765534cd33b4d53.xlsx",
+      "sha256": "2765534cd33b4d53a060309b3fcbc65fe41ffa9ba00a2d0948fa513754bb883b",
+      "bytes": 172588,
+      "formula_cells": 799,
+      "source": "cc-binaries/d5695270-d080-4846-b003-6139620352c1"
+    },
+    {
+      "file": "27784572e0ec91be.xlsx",
+      "sha256": "27784572e0ec91bec1ec29fe2d414cb0f8820c4817902717d3a904ea72003c2c",
+      "bytes": 37194,
+      "formula_cells": 147,
+      "source": "cc-binaries/c8d92dc7-0742-4010-9591-64cd7bbd2c33"
+    },
+    {
+      "file": "27905c2f28d4ca91.xlsx",
+      "sha256": "27905c2f28d4ca91e7f56e82a5c9272b5d824db484ada8fe6bcca4e8314a2c5b",
+      "bytes": 954073,
+      "formula_cells": 22026,
+      "source": "cc-binaries/e682f581-b707-4e56-8843-4a7ff4f5490c"
+    },
+    {
+      "file": "27b54803205a1625.xlsx",
+      "sha256": "27b54803205a1625db8eccd062700e0f4b979da52022f61ac72b287fa524a5c9",
+      "bytes": 49697,
+      "formula_cells": 54,
+      "source": "cc-binaries/5622b511-c8ac-448f-a0c8-213ef05ffa8e"
+    },
+    {
+      "file": "27c0c278429b4f11.xlsx",
+      "sha256": "27c0c278429b4f114d5b65191a9e06d22456ed0e4c5b8ff81c13b03be63130a7",
+      "bytes": 104851,
+      "formula_cells": 12,
+      "source": "cc-binaries/246d3e9c-b78b-47d1-8bdd-b473e322fcf2"
+    },
+    {
+      "file": "27c32678ac67ca6f.xlsx",
+      "sha256": "27c32678ac67ca6f12add79aa8b21ef05998a21725c09a46a963a0c31b58a3c6",
+      "bytes": 50281,
+      "formula_cells": 58,
+      "source": "cc-binaries/b1b210b4-636a-487e-8d36-4eff79507d5a"
+    },
+    {
+      "file": "280c5f1516ebe220.xlsx",
+      "sha256": "280c5f1516ebe220c79b5876f8cd7555e47881aff17c55066e8b542c36e9874a",
+      "bytes": 249095,
+      "formula_cells": 200,
+      "source": "cc-binaries/23cedc20-2eac-4b73-b193-cefcba2733bf"
+    },
+    {
+      "file": "2814572398bddad9.xlsx",
+      "sha256": "2814572398bddad969d9978862415ac0c2a8a9d2e942b70f79d23e09c2c19f0e",
+      "bytes": 132253,
+      "formula_cells": 82,
+      "source": "cc-binaries/42e53d86-5179-42b5-9490-0c31faaf2cef"
+    },
+    {
+      "file": "281cac38027e180a.xlsx",
+      "sha256": "281cac38027e180af6cc17bfb045b1afea730874613c256d90c352728e8b616f",
+      "bytes": 32874,
+      "formula_cells": 260,
+      "source": "cc-binaries/92e96d57-0008-4e39-8c90-db4a31e6b358"
+    },
+    {
+      "file": "282c3edec06a25cb.xlsx",
+      "sha256": "282c3edec06a25cbd569b33a324356395b7a0fc2a1d979ed71d574d026c230b5",
+      "bytes": 16818,
+      "formula_cells": 63,
+      "source": "cc-binaries/06898a69-fa2b-490d-8273-99e3ca937763"
+    },
+    {
+      "file": "2831426babcd9ef1.xlsx",
+      "sha256": "2831426babcd9ef1fc9010367167baf7067b08956572d82c418863ce6c6c0ef7",
+      "bytes": 15771,
+      "formula_cells": 45,
+      "source": "cc-binaries/22c54a69-07d5-4a48-b122-3578473ee3f6"
+    },
+    {
+      "file": "283ccb27f3df63ee.xlsx",
+      "sha256": "283ccb27f3df63ee0c9c9ddf78c5556397450590b165747a68afab23900563df",
+      "bytes": 50145,
+      "formula_cells": 647,
+      "source": "cc-binaries/15a08586-d5ea-40a0-bd50-1272c8da25e3"
+    },
+    {
+      "file": "2840ce6aaee96f51.xlsx",
+      "sha256": "2840ce6aaee96f5136fde526a978461c53238b19a5eead519439694343cb4044",
+      "bytes": 72852,
+      "formula_cells": 2525,
+      "source": "cc-binaries/0ba6ca1d-0ec2-490d-8679-fdfd347b1451"
+    },
+    {
+      "file": "284cf288228e0115.xlsx",
+      "sha256": "284cf288228e01152846dd8730fe6dd15c8994b25422ab9f13c4836b9f0be587",
+      "bytes": 46496,
+      "formula_cells": 447,
+      "source": "cc-binaries/05ee7089-0a60-454e-83e2-0c95b7f42c5c"
+    },
+    {
+      "file": "289675d44ffeaab2.xlsx",
+      "sha256": "289675d44ffeaab20885c6b2bb1b854dcfd22661857f5d5a861d72b42b45d2f1",
+      "bytes": 665935,
+      "formula_cells": 23820,
+      "source": "cc-binaries/b139d0f6-cc97-47a4-a4b2-f046dfe542e9"
+    },
+    {
+      "file": "289ca84d9a35fa72.xlsx",
+      "sha256": "289ca84d9a35fa723fa2995cc925eb5dab81bfbaa8efdbbbf8ae5a498099c55b",
+      "bytes": 14971,
+      "formula_cells": 19,
+      "source": "cc-binaries/0f792beb-a8a6-46e7-a588-2315dcc64520"
+    },
+    {
+      "file": "28b914cc53944161.xlsx",
+      "sha256": "28b914cc53944161dc031e265a5c079342a553ad309e2653adec4c172bbee64f",
+      "bytes": 66514,
+      "formula_cells": 1330,
+      "source": "cc-binaries/00c886ae-971a-47e0-b8b2-8192478ba44c"
+    },
+    {
+      "file": "28e286f4ebfb8b4e.xlsx",
+      "sha256": "28e286f4ebfb8b4e0ce1836853bad64df0475d8b4e358701b6c0d89832e23855",
+      "bytes": 16070,
+      "formula_cells": 30,
+      "source": "cc-binaries/00cd5722-2c84-4b31-9da7-17d187c4f162"
+    },
+    {
+      "file": "28ef896a65594d98.xlsx",
+      "sha256": "28ef896a65594d98d37d964dc6fb7296c40ab900f900b6dbeaba8c6ac7fcdff2",
+      "bytes": 591722,
+      "formula_cells": 15433,
+      "source": "cc-binaries/05a32bfd-b279-4832-aa15-8146ccfc07a4"
+    },
+    {
+      "file": "290640d7c71156ce.xlsx",
+      "sha256": "290640d7c71156ced1fef90fb89a4019fc1ac036a879863471712bcfc816a315",
+      "bytes": 30190,
+      "formula_cells": 420,
+      "source": "cc-binaries/28b01b46-e55d-4e88-9240-db7de2630ba8"
+    },
+    {
+      "file": "2908c3ec3a31c75d.xlsx",
+      "sha256": "2908c3ec3a31c75d619073970d2bdfc28bcd4a46ad6e61cd31b408307763b644",
+      "bytes": 545271,
+      "formula_cells": 59,
+      "source": "cc-binaries/1f6ec711-fd14-40c4-9db4-7684fdfda407"
+    },
+    {
+      "file": "29394835c8926a13.xlsx",
+      "sha256": "29394835c8926a13899004ad7c5326896fa6570b3fe9c9557d01b20834dcee7c",
+      "bytes": 12254,
+      "formula_cells": 69,
+      "source": "cc-binaries/076651a4-9e47-4b16-b50c-d5edff10edce"
+    },
+    {
+      "file": "296351b61c4a63fb.xlsx",
+      "sha256": "296351b61c4a63fba902cbc79b6e4161da40c491188ba88a334f8dc076ed8d0c",
+      "bytes": 41767,
+      "formula_cells": 157,
+      "source": "cc-binaries/dc5006db-fc11-4b28-8347-fa5045b0a27c"
+    },
+    {
+      "file": "296918f7aa8be144.xlsx",
+      "sha256": "296918f7aa8be1448855d6c4a9e56b458143cd7b6b4b9033148ebc4c76252d00",
+      "bytes": 27079,
+      "formula_cells": 11,
+      "source": "cc-binaries/07836723-2930-40a5-958d-23bd018bd209"
+    },
+    {
+      "file": "29d743c3a7463537.xlsx",
+      "sha256": "29d743c3a7463537152049769fe99b2fd8003e2ecbc44c1001d853f92a3f3f9d",
+      "bytes": 48338,
+      "formula_cells": 37,
+      "source": "cc-binaries/1eb80a2c-6a05-4f4a-8179-88c9fd95cd8f"
+    },
+    {
+      "file": "2a0064c8df55ebbf.xlsx",
+      "sha256": "2a0064c8df55ebbff1d7f61d35a129675acb387a47c19424f5d5bf80ac188be2",
+      "bytes": 94125,
+      "formula_cells": 1843,
+      "source": "cc-binaries/021f93da-b686-4c6d-9ae4-941790291710"
+    },
+    {
+      "file": "2a058640d2d72092.xlsx",
+      "sha256": "2a058640d2d72092ac37ba6167005823ddb0783a2c3578177700e251c1b2a913",
+      "bytes": 60362,
+      "formula_cells": 531,
+      "source": "cc-binaries/217d242c-9529-421a-afc9-53e38d0d7bff"
+    },
+    {
+      "file": "2a06b1507192a8c1.xlsx",
+      "sha256": "2a06b1507192a8c1c7ad2303578bf29030a27115c8004d311262903d246ba8a9",
+      "bytes": 92544,
+      "formula_cells": 167,
+      "source": "cc-binaries/0589e894-8918-49f3-ae90-d2a9f5020e19"
+    },
+    {
+      "file": "2a0f444046a680ec.xlsx",
+      "sha256": "2a0f444046a680ec65e8e37bb643e3a2f67baca652257ba67cbee8b355fa6aeb",
+      "bytes": 61136,
+      "formula_cells": 65,
+      "source": "cc-binaries/333d7f91-4ce1-4fd6-b4e1-4217aca94d0e"
+    },
+    {
+      "file": "2a1739f7b069954c.xlsx",
+      "sha256": "2a1739f7b069954c107b7863ec941de0222c36eb52b7f699fc922894b366f931",
+      "bytes": 76556,
+      "formula_cells": 296,
+      "source": "cc-binaries/033d305d-cff9-418e-ab1e-33c6d7c1f9be"
+    },
+    {
+      "file": "2a18beb367afff34.xlsx",
+      "sha256": "2a18beb367afff34e425f78eb428c0eb5d94c8186ea053a621ce16022e08ff04",
+      "bytes": 50686,
+      "formula_cells": 275,
+      "source": "cc-binaries/2170a3ea-69b9-4fcf-aa01-2c9d86470a3a"
+    }
+  ]
+}

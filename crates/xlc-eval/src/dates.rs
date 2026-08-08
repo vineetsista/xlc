@@ -7,6 +7,7 @@
 //!   - serial 60 is fictitious; DAY(60)=29, MONTH(60)=2, YEAR(60)=1900
 //!   - serials >= 61 are offset by one day vs. the proleptic calendar
 //!   - DATE(1900,3,1) = 61
+//!
 //! The 1904 system (workbook flag) has no bug: serial 0 = 1904-01-01.
 
 /// Days in month, honoring real Gregorian leap years.
