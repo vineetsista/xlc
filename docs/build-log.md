@@ -3,6 +3,25 @@
 Dated entries written for a human reader; the Phase 9 engineering essay is
 assembled from these.
 
+## 2026-08-09 — Phase 4 complete: the product runs in a browser tab
+
+The whole engine — parser, evaluator, receipt, detectors — compiles to an
+817 KB wasm module (410 KB over the wire) and runs entirely inside the
+browser tab. The page is the §9 aesthetic: near-black, JetBrains Mono,
+diagnostic colors, and exactly three acts — compiled 58,389 formulas,
+receipt green (that workbook re-derives 100.00% bit-exact in-browser),
+findings as compiler diagnostics with an [intentional] button whose
+suppressions persist keyed by workbook hash. Thirteen headless-Chromium
+checks drive the real page against a clean fixture and a planted
+slipped-reference bug. Getting there forced one real refactor — ingest
+and the per-cell receipt moved to a shared crate consumed by CLI and
+wasm, with a drift check proving the committed gate-3 artifact reproduces
+number-for-number — and one dependency surprise: the zip crate's default
+features drag in a C zstd library that wasm can't build, and xlsx never
+needed anything but deflate anyway. Native and browser speeds published
+separately, as the constitution demands: 0.52s native, 4.19s
+single-threaded wasm.
+
 ## 2026-08-09 (early) — Three detectors ship, and the audit earns its keep
 
 Gate 4's numeric checks pass: ref-error at 200/200, range-off-by-one at
