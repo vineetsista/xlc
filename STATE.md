@@ -8,8 +8,8 @@ Phase: 0 — Bootstrap and corpus          Gate: FAILING: subset not yet built (
   (FUSE md5 verified vs Zenodo, our sha256 4f9126bd… pinned; SB 9cf7228b…),
   corpus-filter/subset/verify smoke-tested end-to-end, census subcommand +
   7 unit tests + projection.py ready for Phase 1, first tests/cases entry.
-- In flight: FUSE extraction (fuse.zip → 140-part split 7z → py7zr venv),
-  detached `make -C corpus extract`, monitored. ~4.4 GB extracted so far.
+- In flight: fuse-cc-binaries.tar.gz extraction (detached tar, monitored) — the 7z held one more layer with the actual 249k files. Then: filter → subset → gate0 → census → gate1.
+
 - Blocked: none (extraction is a wait, not a blocker; census tooling was
   built during the wait per Never-Stall rung 6).
 
