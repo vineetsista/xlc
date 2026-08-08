@@ -26,14 +26,14 @@ cells in a later pass. Recorded in methodology.md.
 
 ## 2026-08-08 — Criteria equality coerces numeric-looking text (corpus-verified)
 COUNTIF/SUMIF-family equality criteria match numeric-looking text cells:
-criteria "003607" matches text \'003607\', text \'3607\', and the number 3607
+criteria "003607" matches text '003607', text '3607', and the number 3607
 (27905c2f…: 4,400 cells flipped from fail to pass). Ordering comparisons
 (>, <, >=, <=) remain strict-numeric until the corpus shows otherwise.
 VLOOKUP/MATCH exact mode is the opposite: same-family equality only, text
 never matches numbers (06a8920b…).
 
 ## 2026-08-08 — ROUND is decimal-faithful
-Excel ROUND decides on the value\'s 15-significant-digit DECIMAL rendering,
+Excel ROUND decides on the value's 15-significant-digit DECIMAL rendering,
 not its binary value: the f64 nearest 1.275 sits just below it, yet
 ROUND(x,2)=1.28. Implemented by string-rounding the {:.14e} rendering.
 Discovered via ROUND(MEDIAN(...)) cells over a 3D 57-sheet span.

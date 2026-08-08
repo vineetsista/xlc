@@ -27,6 +27,24 @@ recalc-on-load default is "Never recalculate" and there is no CLI flag).
 - Corpus runs skip unreadable files and report the skip rate; a corpus
   drawn from the web contains garbage and the skip rate is itself a metric.
 
+## The oracle's noise floor
+
+The receipt's oracle — Excel's own cached values — is imperfect in two
+measured ways, discovered on the first full subset runs:
+
+- **Stale caches.** Files saved after inputs changed without recalculation
+  keep old cached values (observed with `calcMode="auto"`, so the workbook
+  itself does not confess). XLC's recomputation is then *right* and the
+  oracle *wrong*, but per-cell this is indistinguishable from an XLC bug.
+- **Display-rounded caches.** Some writers store the formatted display
+  value as the cache (`D199/C199` cached as exactly `1004.97`).
+
+Both classes cap the measured pass rate below 100% through no fault of the
+engine. Disputed cells are adjudicated by the secondary oracle (LibreOffice
+via UNO with an explicit `calculateAll()`), and the receipt's ULP policy —
+bit-identical, 1 ULP, or equality at 15 significant decimal digits (the
+precision at which caches are written) — is printed on every artifact.
+
 ## What XLC cannot tell you
 
 - **Whether your model is *right*.** XLC proves it recomputes what Excel

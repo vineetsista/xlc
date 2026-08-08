@@ -3,6 +3,28 @@
 Dated entries written for a human reader; the Phase 9 engineering essay is
 assembled from these.
 
+## 2026-08-08 (late night) — The receipt learns what Excel actually does
+
+From 71.96% to 99.35% of verifiable cells in one sitting, and every point of
+it was a lesson delivered by real workbooks. The function grind (nine
+builtins to about seventy-five, ordered strictly by blocked-cell count from
+the census) did the bulk. But the last few points were the interesting ones.
+A file full of `SUM(IF(ISBLANK(...)...))` taught the interpreter array
+semantics — stored as plain formulas, no CSE marker, yet cached with
+elementwise results, exactly how modern dynamic-array Excel evaluates them.
+A 57-sheet workbook of `ROUND(MEDIAN('1:57'!F46),2)` cells proved Excel's
+ROUND operates on the 15-digit decimal rendering, not the binary value: the
+f64 nearest 1.275 sits below it, and Excel still says 1.28. A sheet of
+`SUMIF` keyed on leading-zero IDs like '003607' showed the criteria
+language coerces numeric-looking text on both sides — 4,400 cells flipped
+with a five-line fix — while VLOOKUP's exact mode does the precise
+opposite. And the receipt found the oracle's own noise floor: workbooks
+saved with stale caches (the stored inputs contradict the stored results)
+and writers that cache display-rounded values. The engine's remaining
+mismatch list is now mostly Excel being wrong about itself, which is a
+sentence that only a corpus of 16,000 real files lets you write with a
+straight face.
+
 ## 2026-08-08 (night) — Three gates in one day, and the corpus writes the bug reports
 
 Gate 2 fell the same evening: 99.9970% of 7,003,444 real-world formulas now
