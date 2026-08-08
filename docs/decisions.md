@@ -21,6 +21,17 @@ repeated-slip findings (the uniqueness guard belongs to the generic class
 only). v4 adds guards d/e/f for the three v2 classes. Every rejected
 version's samples are preserved in docs/precision/.
 
+## 2026-08-09 — Bytes-moved accounting: DRAM model with a residency witness
+Gate 6's bytes-per-scenario metric models DRAM traffic under the tiling
+schedule: each cone value is written once (8B) and inputs read once;
+consumer reads hit tile-resident buffers and are counted as free ONLY
+when the measured peak live set (buffers held by the refcount pool ×
+tile × 8B) fits a stated cache budget (8 MB). If the live set exceeds
+the budget, full stream reads are counted instead. Both the peak-live
+witness and the per-(consumer,dep) stream-read total are recorded in the
+artifact, so nobody has to trust the model to audit the claim. Amended
+in gate6.sh BEFORE the gate is claimed.
+
 ## 2026-08-08 — Receipt denominator: verifiable cells, exclusions always visible
 The receipt pass rate is measured over VERIFIABLE cells: formula cells whose
 oracle exists and which XLC compiles. Excluded and separately reported, per

@@ -7,3 +7,8 @@ license.workspace = true
 rust-version.workspace = true
 
 [dependencies]
+pulp.workspace = true
+rayon.workspace = true
+xlc-parse.workspace = true
+xlc-eval.workspace = true
+xlc-ir.workspace = true

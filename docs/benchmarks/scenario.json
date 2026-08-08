@@ -1,0 +1,84 @@
+{
+  "n1_oracle": {
+    "cells": 21047,
+    "mismatches": 0
+  },
+  "deterministic_mean": {
+    "exact": true,
+    "scenarios": 10000
+  },
+  "moments": {
+    "normal": {
+      "mean": 2.9984502959701174,
+      "mean_expected": 3.0,
+      "mean_sigmas": 0.7748520149413185,
+      "var": 3.9934597230687032,
+      "var_expected": 4.0,
+      "var_sigmas": 0.9440076617147228
+    },
+    "lognormal": {
+      "mean": 1.3832195787870658,
+      "mean_expected": 1.3840306459807514,
+      "mean_sigmas": 1.0995944162400513,
+      "var": 0.5425936857804563,
+      "var_expected": 0.5440622821430534,
+      "var_sigmas": 1.5584511794063378
+    },
+    "uniform": {
+      "mean": 1.998646572112812,
+      "mean_expected": 2.0,
+      "mean_sigmas": 0.7814019549967748,
+      "var": 2.9965799951781484,
+      "var_expected": 3.0,
+      "var_sigmas": 0.6581802348419394
+    },
+    "triangular": {
+      "mean": 5.331476926252635,
+      "mean_expected": 5.333333333333333,
+      "mean_sigmas": 0.8861269052668745,
+      "var": 4.3813517943186895,
+      "var_expected": 4.388888888888889,
+      "var_sigmas": 0.9914909420534855
+    },
+    "pert": {
+      "mean": 4.665112760701028,
+      "mean_expected": 4.666666666666667,
+      "mean_sigmas": 0.8531430666188125,
+      "var": 3.3134715988211916,
+      "var_expected": 3.317460317460318,
+      "var_sigmas": 0.6941719145518993
+    }
+  },
+  "reproducibility": {
+    "exact": true
+  },
+  "bytes_moved": {
+    "measured_per_scenario": 3128.0,
+    "theoretical_min_per_scenario": 3128.0,
+    "peak_live_bytes": 2523136,
+    "residency_budget_bytes": 8388608,
+    "stream_reads_counted": false,
+    "stream_reads_per_scenario_8B_units": 1140.0
+  },
+  "throughput": {
+    "workbook": "corpus/work/fuse-bins/cc-binaries/56cbca12-9c02-49e5-a064-53129669df80",
+    "cone_cells": 390,
+    "scenarios": 10000,
+    "elapsed_s": 8.601239253,
+    "native_cells_x_scenarios_per_s": 453423.0342028599,
+    "fast_path_cells": 0,
+    "scalar_path_cells": 3900,
+    "machine": "12th Gen Intel(R) Core(TM) i7-1250U",
+    "tile": 1024
+  },
+  "synthetic_supplementary": {
+    "label": "synthetic 20-column x 2000-row arithmetic chain (fast-path showcase, NOT the public-workbook claim)",
+    "cone_cells": 1000,
+    "scenarios": 10000,
+    "elapsed_s": 0.068947354,
+    "cells_x_scenarios_per_s": 145038198.27516514,
+    "fast_path_cells": 10000,
+    "scalar_path_cells": 0
+  },
+  "accounting": "DRAM model: measured = 8B x (cone writes + input reads) per scenario when the peak live buffer set provably fits the 8MB residency budget (witness recorded); otherwise full stream reads are counted. Stream-read totals recorded either way."
+}

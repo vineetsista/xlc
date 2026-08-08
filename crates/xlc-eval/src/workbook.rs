@@ -7,7 +7,7 @@ use crate::interp::{Ctx, SheetId};
 use crate::value::Value;
 use xlc_parse::ast::Expr;
 
-#[derive(Default)]
+#[derive(Default, Clone)]
 pub struct Sheet {
     pub name: String,
     /// (row, col) → cached value (Excel's last computed value).
@@ -22,7 +22,7 @@ pub struct Sheet {
     pub array_cells: HashSet<(u32, u32)>,
 }
 
-#[derive(Default)]
+#[derive(Default, Clone)]
 pub struct Workbook {
     pub sheets: Vec<Sheet>,
     by_name: HashMap<String, SheetId>,

@@ -376,6 +376,15 @@ impl Family {
     }
 }
 
+/// Public rebase surface for the scenario engine.
+pub fn rebase_pub(area: &Area, dr: i64, dc: i64) -> Option<Area> {
+    rebase(area, dr, dc)
+}
+
+pub fn rebase_expr_pub(e: &Expr, dr: i64, dc: i64) -> Expr {
+    rebase_expr(e, dr, dc)
+}
+
 /// Bit-level value equality (NaN-safe: compares f64 bit patterns).
 pub fn bit_equal(a: &Value, b: &Value) -> bool {
     match (a, b) {

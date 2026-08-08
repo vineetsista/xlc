@@ -62,6 +62,15 @@ ratio = bm["measured_per_scenario"] / max(bm["theoretical_min_per_scenario"], 1)
 print(f"gate(6): bytes/scenario {bm['measured_per_scenario']:.0f} vs min {bm['theoretical_min_per_scenario']:.0f} ({ratio:.2f}x)")
 if ratio > 3.0:
     print("gate(6): FAIL: bytes moved beyond 3x theoretical minimum"); bad = 1
+# The DRAM-traffic claim requires the cache-residency witness: peak live
+# tile buffers must fit the stated budget, else stream reads must have
+# been counted in full (docs/decisions.md, bytes-accounting definition).
+if "peak_live_bytes" not in bm or "residency_budget_bytes" not in bm:
+    print("gate(6): FAIL: cache-residency witness absent"); bad = 1
+elif bm["peak_live_bytes"] > bm["residency_budget_bytes"] and not bm.get("stream_reads_counted", False):
+    print("gate(6): FAIL: live set exceeds budget but stream reads not counted"); bad = 1
+else:
+    print(f"gate(6): residency witness: peak live {bm['peak_live_bytes']/1e6:.1f} MB vs budget {bm['residency_budget_bytes']/1e6:.0f} MB")
 
 tp = a["throughput"]
 if not (tp.get("native_cells_x_scenarios_per_s", 0) > 0 and tp.get("workbook") and tp.get("machine")):

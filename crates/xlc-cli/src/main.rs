@@ -6,6 +6,7 @@
 mod census;
 mod check;
 mod ir_verify;
+mod monte_verify;
 mod parse_corpus;
 mod receipt;
 mod corpus;
@@ -22,6 +23,7 @@ fn main() {
         Some("check") => check::check_cmd(&args[1..]),
         Some("lint-corpus") => check::lint_corpus_cmd(&args[1..]),
         Some("ir-verify") => ir_verify::ir_verify_cmd(&args[1..]),
+        Some("monte-verify") => monte_verify::monte_verify_cmd(&args[1..]),
         Some(cmd) => {
             eprintln!("xlc: unknown or not-yet-implemented command `{cmd}`");
             2
