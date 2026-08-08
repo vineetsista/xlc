@@ -3,6 +3,27 @@
 Dated entries written for a human reader; the Phase 9 engineering essay is
 assembled from these.
 
+## 2026-08-08 (night) — Three gates in one day, and the corpus writes the bug reports
+
+Gate 2 fell the same evening: 99.9970% of 7,003,444 real-world formulas now
+parse and print back byte-identical, at 253,000 formulas a second. The first
+full-corpus run scored 94.85%, and the failure log — aggregated by formula
+text, sorted by count — diagnosed itself: 360,131 of 360,762 mismatches were
+pure whitespace, because stored xlsx files keep every space the user ever
+typed around an operator. So the AST grew trivia fields (the intersection
+operator now literally stores its own whitespace run, since in Excel the
+space IS an operator), booleans keep their lexeme because real files contain
+lowercase `false`, and the 212 formulas still failing turn out to contain
+curly quotes pasted from Word — broken in Excel too. Then the receipt drew
+first blood on real data: a subset workbook whose dimension record claims
+all 17 billion cells sent calamine's dense range reader after a 512 GiB
+allocation. The fix — the streaming cell reader — is also the API that
+hands us cached value and formula in one pass. Baseline receipt with nine
+functions implemented: 73.90% of 921,095 verifiable cells bit-match Excel,
+every miss classified, zero panics. The remaining gap is mostly a ranked
+to-do list of functions, which is exactly the shape of work this build
+was designed around.
+
 ## 2026-08-08 (evening) — Gates 0 and 1 fall, and the census kills Kill Risk 2
 
 The corpus pipeline is real: 249,376 Common Crawl files filtered to 10,703

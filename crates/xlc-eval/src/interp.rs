@@ -73,9 +73,13 @@ impl<'a, C: Ctx> Interp<'a, C> {
     }
 
     /// Evaluate a formula to its final scalar value (the cell's value).
+    /// A formula result is never Blank: `=A1` with A1 empty yields 0.
     pub fn eval_formula(&self, e: &Expr) -> Value {
         let op = self.eval(e);
-        self.deref_scalar(op)
+        match self.deref_scalar(op) {
+            Value::Blank => Value::Num(0.0),
+            v => v,
+        }
     }
 
     fn eval(&self, e: &Expr) -> Operand {

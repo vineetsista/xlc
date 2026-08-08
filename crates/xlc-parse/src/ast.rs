@@ -466,6 +466,50 @@ impl Expr {
         self.print(&mut s);
         s
     }
+
+    /// Visit this node and every sub-expression.
+    pub fn walk(&self, f: &mut impl FnMut(&Expr)) {
+        f(self);
+        match self {
+            Expr::Call { args, .. } => {
+                for a in args {
+                    if let Some(e) = &a.expr {
+                        e.walk(f);
+                    }
+                }
+            }
+            Expr::Binary { lhs, rhs, .. } => {
+                lhs.walk(f);
+                rhs.walk(f);
+            }
+            Expr::Unary { expr, .. } => expr.walk(f),
+            Expr::Paren { inner, .. } => inner.walk(f),
+            Expr::ArrayLit(rows) => {
+                for row in rows {
+                    for e in row {
+                        e.expr.walk(f);
+                    }
+                }
+            }
+            _ => {}
+        }
+    }
+
+    /// Does any sub-expression reference another workbook? Those cells are
+    /// excluded from compilation (Law 9): their cached values came from a
+    /// file we cannot see.
+    pub fn has_external_ref(&self) -> bool {
+        let mut found = false;
+        self.walk(&mut |e| match e {
+            Expr::Ref(RefExpr::Area { sheet: Some(sp), .. }) if sp.workbook.is_some() => {
+                found = true;
+            }
+            Expr::Ref(RefExpr::Table(t)) if t.workbook.is_some() => found = true,
+            Expr::Name { sheet: Some(sp), .. } if sp.workbook.is_some() => found = true,
+            _ => {}
+        });
+        found
+    }
 }
 
 #[cfg(test)]

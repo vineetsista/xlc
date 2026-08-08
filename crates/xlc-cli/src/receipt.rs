@@ -96,6 +96,8 @@ struct Counts {
     ulp1: usize, // passes under policy, tracked separately
     excluded_unimplemented: usize,
     excluded_parse: usize,
+    excluded_external: usize,
+    no_cached_value: usize,
     mismatch_numeric: usize,
     mismatch_type: usize,
     mismatch_error: usize,
@@ -246,6 +248,16 @@ pub fn receipt_cmd(args: &[String]) -> i32 {
                             continue;
                         }
                     };
+                    if parsed.expr.has_external_ref() {
+                        t.excluded_external += 1;
+                        continue;
+                    }
+                    let expected = sheet.values.get(&(row, col)).cloned().unwrap_or(Value::Blank);
+                    if matches!(expected, Value::Blank) {
+                        // Excel stored no cached value — nothing to verify.
+                        t.no_cached_value += 1;
+                        continue;
+                    }
                     let origin = Origin { sheet: sid as u32, row, col };
                     let got = match panic::catch_unwind(AssertUnwindSafe(|| {
                         Interp::new(&wb, origin).eval_formula(&parsed.expr)
@@ -256,7 +268,6 @@ pub fn receipt_cmd(args: &[String]) -> i32 {
                             continue;
                         }
                     };
-                    let expected = sheet.values.get(&(row, col)).cloned().unwrap_or(Value::Blank);
                     // Unimplemented functions surface as #NAME? where Excel
                     // cached something else: that's an exclusion (Law 9),
                     // not a semantic failure.
@@ -316,6 +327,8 @@ pub fn receipt_cmd(args: &[String]) -> i32 {
             ulp1: a.ulp1 + b.ulp1,
             excluded_unimplemented: a.excluded_unimplemented + b.excluded_unimplemented,
             excluded_parse: a.excluded_parse + b.excluded_parse,
+            excluded_external: a.excluded_external + b.excluded_external,
+            no_cached_value: a.no_cached_value + b.no_cached_value,
             mismatch_numeric: a.mismatch_numeric + b.mismatch_numeric,
             mismatch_type: a.mismatch_type + b.mismatch_type,
             mismatch_error: a.mismatch_error + b.mismatch_error,
@@ -338,12 +351,14 @@ pub fn receipt_cmd(args: &[String]) -> i32 {
     let artifact = serde_json::json!({
         "mode": "per-cell (cached-neighbor context)",
         "ulp_policy": "pass iff bit-identical or within 1 ULP (same sign); ulp1 tracked separately",
-        "cells_total": totals.cells,
+        "cells_total": totals.cells - totals.no_cached_value,
         "cells_pass": totals.pass,
+        "no_cached_value": totals.no_cached_value,
         "pass_ulp1": totals.ulp1,
         "excluded": {
             "unimplemented_function": totals.excluded_unimplemented,
             "parse": totals.excluded_parse,
+            "external_ref": totals.excluded_external,
         },
         "mismatch_classes": {
             "numeric": totals.mismatch_numeric,
@@ -372,18 +387,17 @@ pub fn receipt_cmd(args: &[String]) -> i32 {
         fs::write(p, out).ok();
     }
 
-    let rate = if totals.cells > 0 {
-        totals.pass as f64 / totals.cells as f64
-    } else {
-        0.0
-    };
+    let denom = totals.cells - totals.no_cached_value;
+    let rate = if denom > 0 { totals.pass as f64 / denom as f64 } else { 0.0 };
     println!(
-        "receipt: {}/{} pass ({:.2}%) | excluded: {} unimpl, {} parse | mismatches: {} num, {} type, {} err | {} panics",
+        "receipt: {}/{} pass ({:.2}%) | excluded: {} unimpl, {} parse, {} extref | {} no-cached | mismatches: {} num, {} type, {} err | {} panics",
         totals.pass,
-        totals.cells,
+        denom,
         rate * 100.0,
         totals.excluded_unimplemented,
         totals.excluded_parse,
+        totals.excluded_external,
+        totals.no_cached_value,
         totals.mismatch_numeric,
         totals.mismatch_type,
         totals.mismatch_error,
