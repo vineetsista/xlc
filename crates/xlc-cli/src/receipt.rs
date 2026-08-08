@@ -53,28 +53,35 @@ fn lower_cell_error(e: &calamine::CellErrorType) -> ExcelError {
     }
 }
 
-/// Load one workbook into the model: cached values + formula texts, with
-/// range-start offsets applied (used_cells coordinates are range-relative).
+/// Load one workbook into the model via the STREAMING cells reader.
+///
+/// Never use `worksheet_range` here: it materializes a dense
+/// width x height grid from the sheet's declared dimension, and real
+/// corpus files lie about their dimension — one subset workbook declared
+/// A1:XFD1048576 and the dense path attempted a 512 GiB allocation.
+/// The cell reader streams each present cell with absolute coordinates
+/// and hands us cached value + expanded formula in one pass.
+/// (Shared-formula cells whose anchor was not yet seen in stream order
+/// come back with formula=None; counted as value-only cells.)
 pub fn ingest(path: &Path) -> Result<Workbook, String> {
     let mut xl = open_workbook::<Xlsx<_>, _>(path).map_err(|e| e.to_string())?;
     let mut wb = Workbook::default();
     let sheet_names = xl.sheet_names();
     for name in &sheet_names {
         let id = wb.add_sheet(name);
-        if let Ok(range) = xl.worksheet_range(name) {
-            let (r0, c0) = range.start().unwrap_or((0, 0));
-            for (r, c, d) in range.used_cells() {
-                let v = lower_cached(d);
-                if !matches!(v, Value::Blank) {
-                    wb.set_value(id, r0 + r as u32, c0 + c as u32, v);
-                }
+        let mut reader = match xl.worksheet_cells_reader(name) {
+            Ok(r) => r,
+            Err(_) => continue,
+        };
+        while let Some(cell) = reader.next_cell_with_formula().map_err(|e| e.to_string())? {
+            let (row, col) = cell.pos;
+            let v = lower_cached(&Data::from(cell.value));
+            if !matches!(v, Value::Blank) {
+                wb.set_value(id, row, col, v);
             }
-        }
-        if let Ok(range) = xl.worksheet_formula(name) {
-            let (r0, c0) = range.start().unwrap_or((0, 0));
-            for (r, c, f) in range.used_cells() {
+            if let Some(f) = cell.formula {
                 if !f.is_empty() {
-                    wb.set_formula(id, r0 + r as u32, c0 + c as u32, f.clone());
+                    wb.set_formula(id, row, col, f);
                 }
             }
         }

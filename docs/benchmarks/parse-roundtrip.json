@@ -1,11 +1,11 @@
 {
   "formulas_total": 7003444,
-  "parsed": 7003143,
-  "roundtrip_ok": 6642682,
+  "parsed": 7003232,
+  "roundtrip_ok": 7003232,
   "panics": 0,
-  "distinct_failures": 67173,
-  "throughput_formulas_per_s": 210577,
-  "elapsed_s": 33.258344147,
+  "distinct_failures": 103,
+  "throughput_formulas_per_s": 252985,
+  "elapsed_s": 27.683208173,
   "machine": "12th Gen Intel(R) Core(TM) i7-1250U",
   "threads": 12,
   "failures_log": "docs/benchmarks/parse-failures.jsonl"
