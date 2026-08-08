@@ -573,7 +573,7 @@ impl<C: Ctx> Interp<'_, C> {
             Ok(o) => o != 0.0,
             Err(e) => return Value::Err(e),
         };
-        if !xs.iter().any(|&v| v == x) {
+        if !xs.contains(&x) {
             return Value::Err(ExcelError::NA);
         }
         let rank = 1 + xs

@@ -3,6 +3,23 @@
 Dated entries written for a human reader; the Phase 9 engineering essay is
 assembled from these.
 
+## 2026-08-09 — Gate 5: the compiler gets its IR, and a lesson about what "family" means
+
+Six gates green. The typed IR lowers 930,372 subset formula cells into
+83,095 vector nodes — an 11.2× coarsening, the number the whole scenario
+engine will stand on — and its evaluation matches the scalar interpreter
+bit-for-bit on every single cell. The invariant held partly by
+construction (the IR calls the same operand-level primitives the scalar
+interpreter uses; there is one implementation of Excel semantics, not
+two) and partly by a bug the verifier caught in its first run: function
+calls lowered as lazy black boxes carried the exemplar's AST, so every
+lane of SUM(D12:D18) returned the exemplar's sum. The fix is the
+definition of a copied family made literal — an exemplar expression plus
+a per-lane offset, applied by rebasing every relative reference axis.
+CSE turned out to be worth less than a percent inside real formulas
+(they're mostly single calls); the coarsening is where the leverage
+lives. Next: the hard one — the scenario axis.
+
 ## 2026-08-09 — Phase 4 complete: the product runs in a browser tab
 
 The whole engine — parser, evaluator, receipt, detectors — compiles to an

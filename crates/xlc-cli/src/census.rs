@@ -173,57 +173,6 @@ fn census_workbook(root: &Path, source: &str, path: &Path) -> Option<WorkbookRep
     Some(rep)
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    fn funcs(f: &str) -> Vec<String> {
-        let mut s = BTreeSet::new();
-        extract_functions(f, &mut s);
-        s.into_iter().collect()
-    }
-
-    #[test]
-    fn nested_and_operators() {
-        assert_eq!(funcs("IF(SUM(A1:A2)>0,MAX(B:B),0)"), ["IF", "MAX", "SUM"]);
-    }
-
-    #[test]
-    fn xlfn_prefix_stripped() {
-        assert_eq!(funcs("_xlfn.XLOOKUP(A1,B:B,C:C)"), ["XLOOKUP"]);
-        assert_eq!(funcs("_xlfn._xlws.FILTER(A:A,B:B)"), ["FILTER"]);
-    }
-
-    #[test]
-    fn string_literal_not_a_call() {
-        assert_eq!(funcs("\"SUM(\"&A1"), Vec::<String>::new());
-        assert_eq!(funcs("CONCAT(\"IF(\",A1)"), ["CONCAT"]);
-    }
-
-    #[test]
-    fn quoted_sheet_not_a_call() {
-        assert_eq!(funcs("'MAX(no)'!A1+SUM(B:B)"), ["SUM"]);
-    }
-
-    #[test]
-    fn external_ref_marked() {
-        assert_eq!(funcs("[1]Sheet1!A1*2"), [EXTREF]);
-        assert_eq!(funcs("SUM([3]Data!A1:A9)"), ["SUM", EXTREF]);
-    }
-
-    #[test]
-    fn table_ref_not_external() {
-        assert_eq!(funcs("SUM(Table1[Amount])"), ["SUM"]);
-        assert_eq!(funcs("Table1[[#Headers],[Col]]"), Vec::<String>::new());
-    }
-
-    #[test]
-    fn ref_followed_by_paren_is_not_a_call() {
-        // A1(…) can't occur in valid formulas, but `IF (` with space can.
-        assert_eq!(funcs("IF (A1>0,1,0)"), ["IF"]);
-    }
-}
-
 fn walk(dir: &Path, out: &mut Vec<PathBuf>) {
     let Ok(entries) = fs::read_dir(dir) else { return };
     for entry in entries.flatten() {
@@ -389,4 +338,55 @@ pub fn census_cmd(args: &[String]) -> i32 {
         ranked.len()
     );
     0
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn funcs(f: &str) -> Vec<String> {
+        let mut s = BTreeSet::new();
+        extract_functions(f, &mut s);
+        s.into_iter().collect()
+    }
+
+    #[test]
+    fn nested_and_operators() {
+        assert_eq!(funcs("IF(SUM(A1:A2)>0,MAX(B:B),0)"), ["IF", "MAX", "SUM"]);
+    }
+
+    #[test]
+    fn xlfn_prefix_stripped() {
+        assert_eq!(funcs("_xlfn.XLOOKUP(A1,B:B,C:C)"), ["XLOOKUP"]);
+        assert_eq!(funcs("_xlfn._xlws.FILTER(A:A,B:B)"), ["FILTER"]);
+    }
+
+    #[test]
+    fn string_literal_not_a_call() {
+        assert_eq!(funcs("\"SUM(\"&A1"), Vec::<String>::new());
+        assert_eq!(funcs("CONCAT(\"IF(\",A1)"), ["CONCAT"]);
+    }
+
+    #[test]
+    fn quoted_sheet_not_a_call() {
+        assert_eq!(funcs("'MAX(no)'!A1+SUM(B:B)"), ["SUM"]);
+    }
+
+    #[test]
+    fn external_ref_marked() {
+        assert_eq!(funcs("[1]Sheet1!A1*2"), [EXTREF]);
+        assert_eq!(funcs("SUM([3]Data!A1:A9)"), ["SUM", EXTREF]);
+    }
+
+    #[test]
+    fn table_ref_not_external() {
+        assert_eq!(funcs("SUM(Table1[Amount])"), ["SUM"]);
+        assert_eq!(funcs("Table1[[#Headers],[Col]]"), Vec::<String>::new());
+    }
+
+    #[test]
+    fn ref_followed_by_paren_is_not_a_call() {
+        // A1(…) can't occur in valid formulas, but `IF (` with space can.
+        assert_eq!(funcs("IF (A1>0,1,0)"), ["IF"]);
+    }
 }
