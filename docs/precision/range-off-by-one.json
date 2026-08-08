@@ -1,319 +1,88 @@
 {
- "detector": "range-off-by-one",
- "findings_total": 34,
- "sampled": 34,
- "samples": [
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/44b49163-54b3-4522-bd3b-96caade6c83c",
-   "sheet": "Worksheet",
-   "cell": "FZ15",
-   "formula": "SUM(C15:FY15)",
-   "proof": "Worksheet!FZ13:FZ29: 16 of 17 cells use the pattern of FZ13 = SUM(C13:FX13); FZ15 = SUM(C15:FY15) \u2014 its range spans RC[-179]:RC[-1] where siblings span RC[-179]:RC[-2] (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "latent: extra col FY currently 0"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/c929221b-260f-446e-857a-b7be3bc64493",
-   "sheet": "Temp Help (IH)",
-   "cell": "I25",
-   "formula": "SUM(I21:I23)+I18",
-   "proof": "Temp Help (IH)!B25:R25: 16 of 17 cells use the pattern of B25 = SUM(B21:B24)+B18; I25 = SUM(I21:I23)+I18 \u2014 its range spans R[-4]C:R[-2]C where siblings span R[-4]C:R[-1]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "latent: excluded row 24 currently 0"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/99ae44b0-8fbe-449c-8768-2eb6a7fa8e7d",
-   "sheet": "Software",
-   "cell": "P47",
-   "formula": "SUM(P4:P46)",
-   "proof": "Software!G47:X47: 17 of 18 cells use the pattern of G47 = SUM(G5:G46); P47 = SUM(P4:P46) \u2014 its range spans R[-43]C:R[-1]C where siblings span R[-42]C:R[-1]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "tp: includes text header 'Total Cost' row 4"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/0d627491-db24-4b02-8472-6c73520302ea",
-   "sheet": "all",
-   "cell": "N130",
-   "formula": "SUM(N125:N129)",
-   "proof": "all!B130:O130: 13 of 14 cells use the pattern of B130 = SUM(B126:B129); N130 = SUM(N125:N129) \u2014 its range spans R[-5]C:R[-1]C where siblings span R[-4]C:R[-1]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "tp: includes 'Total' label row"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/01ed9755-6133-4e48-b3c3-e7a299c14f1b",
-   "sheet": "2010.11 SUBSCRIPTIONS",
-   "cell": "L37",
-   "formula": "SUM(B37:K37)",
-   "proof": "2010.11 SUBSCRIPTIONS!L35:L61: 26 of 27 cells use the pattern of L35 = SUM(C35:K35); L37 = SUM(B37:K37) \u2014 its range spans RC[-10]:RC[-1] where siblings span RC[-9]:RC[-1] (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "consequential: includes populated col B (4875)"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/995e6936-412e-4292-85ba-44588c45d8ad",
-   "sheet": "tipurile de vize",
-   "cell": "M12",
-   "formula": "SUM(I12:L12)",
-   "proof": "tipurile de vize!M9:M16: 7 of 8 cells use the pattern of M9 = SUM(H9:L9); M12 = SUM(I12:L12) \u2014 its range spans RC[-4]:RC[-1] where siblings span RC[-5]:RC[-1] (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "consequential: excludes populated H12 (43)"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/cfe50542-ad70-4778-aae5-a042dde28029",
-   "sheet": "Temp Help (IH)",
-   "cell": "I25",
-   "formula": "SUM(I21:I23)+I18",
-   "proof": "Temp Help (IH)!B25:R25: 16 of 17 cells use the pattern of B25 = SUM(B21:B24)+B18; I25 = SUM(I21:I23)+I18 \u2014 its range spans R[-4]C:R[-2]C where siblings span R[-4]C:R[-1]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "latent: dup family of [1]"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/5cdf2564-6fae-4f01-827c-b1945b65b50c",
-   "sheet": "20 Year Plan",
-   "cell": "H2462",
-   "formula": "SUM(H2459:H2461)",
-   "proof": "20 Year Plan!G2462:L2462: 5 of 6 cells use the pattern of G2462 = SUM(G2460:G2461); H2462 = SUM(H2459:H2461) \u2014 its range spans R[-3]C:R[-1]C where siblings span R[-2]C:R[-1]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "consequential: includes populated H2459 (1490)"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/4445fe5f-61c7-494c-9168-08899020cdd9",
-   "sheet": "School Improvement",
-   "cell": "O25",
-   "formula": "SUM(O12:O24)",
-   "proof": "School Improvement!D25:W25: 19 of 20 cells use the pattern of D25 = SUM(D11:D24); O25 = SUM(O12:O24) \u2014 its range spans R[-13]C:R[-1]C where siblings span R[-14]C:R[-1]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "latent: excluded row 11 blank"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/0d627491-db24-4b02-8472-6c73520302ea",
-   "sheet": "Evaluate Instruction",
-   "cell": "N17",
-   "formula": "SUM(N12:N16)",
-   "proof": "Evaluate Instruction!B17:O17: 13 of 14 cells use the pattern of B17 = SUM(B13:B16); N17 = SUM(N12:N16) \u2014 its range spans R[-5]C:R[-1]C where siblings span R[-4]C:R[-1]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "tp: includes 'Total' label row"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/c1125fb5-b8d9-49f5-925c-80cfd56ea852",
-   "sheet": "\u0e15.\u0e04",
-   "cell": "DY5",
-   "formula": "SUM(F5:DX5)",
-   "proof": "\u0e15.\u0e04!DY3:DY18: 15 of 16 cells use the pattern of DY3 = SUM(E3:DX3); DY5 = SUM(F5:DX5) \u2014 its range spans RC[-123]:RC[-1] where siblings span RC[-124]:RC[-1] (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "consequential: excludes populated E5 (20)"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/e6e2660a-24e1-4fcc-8ef1-24ca1bc18603",
-   "sheet": "Form",
-   "cell": "G34",
-   "formula": "SUM(G26:G32)",
-   "proof": "Form!B34:H34: 6 of 7 cells use the pattern of B34 = SUM(B26:B33); G34 = SUM(G26:G32) \u2014 its range spans R[-8]C:R[-2]C where siblings span R[-8]C:R[-1]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "latent: excluded row 33 currently 0"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/090a6d44-1cae-447e-a8aa-db31cd7aa3d3",
-   "sheet": "Pro-rating Cost Allocation",
-   "cell": "L24",
-   "formula": "SUM(L17:L23)",
-   "proof": "Pro-rating Cost Allocation!I24:N24: 5 of 6 cells use the pattern of I24 = SUM(I16:I23); L24 = SUM(L17:L23) \u2014 its range spans R[-7]C:R[-1]C where siblings span R[-8]C:R[-1]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "consequential: excludes populated L16 (39)"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/10f1c5b6-7fe1-45ac-85d4-5e6eb2690a25",
-   "sheet": "(F) Tuit Fee Discounts",
-   "cell": "I32",
-   "formula": "SUM(I8:I31)",
-   "proof": "(F) Tuit Fee Discounts!C32:J32: 7 of 8 cells use the pattern of C32 = SUM(C8:C30); I32 = SUM(I8:I31) \u2014 its range spans R[-24]C:R[-1]C where siblings span R[-24]C:R[-2]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "consequential: includes populated I31 (22)"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/04c5044e-be32-4206-a3f4-0955324ef5da",
-   "sheet": "APR 13",
-   "cell": "AF19",
-   "formula": "SUM(C19:AE19)",
-   "proof": "APR 13!AF6:AF67: 61 of 62 cells use the pattern of AF6 = SUM(B6:AE6); AF19 = SUM(C19:AE19) \u2014 its range spans RC[-29]:RC[-1] where siblings span RC[-30]:RC[-1] (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "latent: excluded B19 is text ' '"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/058907ad-200a-4360-87ff-79ac9494d8e5",
-   "sheet": "Worksheet",
-   "cell": "FZ15",
-   "formula": "SUM(C15:FY15)",
-   "proof": "Worksheet!FZ13:FZ29: 16 of 17 cells use the pattern of FZ13 = SUM(C13:FX13); FZ15 = SUM(C15:FY15) \u2014 its range spans RC[-179]:RC[-1] where siblings span RC[-179]:RC[-2] (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "latent: dup family of [0]"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/01ed9755-6133-4e48-b3c3-e7a299c14f1b",
-   "sheet": "2010.11 SUBSCRIPTIONS",
-   "cell": "L174",
-   "formula": "SUM(B174:K174)",
-   "proof": "2010.11 SUBSCRIPTIONS!L162:L204: 42 of 43 cells use the pattern of L162 = SUM(C162:K162); L174 = SUM(B174:K174) \u2014 its range spans RC[-10]:RC[-1] where siblings span RC[-9]:RC[-1] (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "consequential: includes populated B174 (590.75)"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/004c19f2-6f98-4959-afbd-5cfe0591f2f0",
-   "sheet": "Temp Help (IH)",
-   "cell": "I25",
-   "formula": "SUM(I21:I23)+I18",
-   "proof": "Temp Help (IH)!B25:R25: 16 of 17 cells use the pattern of B25 = SUM(B21:B24)+B18; I25 = SUM(I21:I23)+I18 \u2014 its range spans R[-4]C:R[-2]C where siblings span R[-4]C:R[-1]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "latent: dup family of [1]"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/4445fe5f-61c7-494c-9168-08899020cdd9",
-   "sheet": "School Improvement",
-   "cell": "P25",
-   "formula": "SUM(P12:P24)",
-   "proof": "School Improvement!D25:W25: 19 of 20 cells use the pattern of D25 = SUM(D11:D24); P25 = SUM(P12:P24) \u2014 its range spans R[-13]C:R[-1]C where siblings span R[-14]C:R[-1]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "latent: excluded row 11 blank"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/090a6d44-1cae-447e-a8aa-db31cd7aa3d3",
-   "sheet": "Pro-rating Cost Allocation",
-   "cell": "T24",
-   "formula": "SUM(T17:T23)",
-   "proof": "Pro-rating Cost Allocation!P24:U24: 5 of 6 cells use the pattern of P24 = SUM(P17:P22); T24 = SUM(T17:T23) \u2014 its range spans R[-7]C:R[-1]C where siblings span R[-7]C:R[-2]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "consequential: includes populated T23 (46)"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/0d627491-db24-4b02-8472-6c73520302ea",
-   "sheet": "Obj Emp ",
-   "cell": "N25",
-   "formula": "SUM(N21:N24)",
-   "proof": "Obj Emp !B25:O25: 13 of 14 cells use the pattern of B25 = SUM(B22:B24); N25 = SUM(N21:N24) \u2014 its range spans R[-4]C:R[-1]C where siblings span R[-3]C:R[-1]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "tp: includes 'Total' label row"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/01655fa4-4d0f-48a7-a5da-e90de9d574dd",
-   "sheet": "CPL SPREADSHEET",
-   "cell": "H9",
-   "formula": "SUM(E9:G9)",
-   "proof": "CPL SPREADSHEET!H5:H89: 84 of 85 cells use the pattern of H5 = SUM(F5:G5); H9 = SUM(E9:G9) \u2014 its range spans RC[-3]:RC[-1] where siblings span RC[-2]:RC[-1] (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "latent: extra col E blank"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/01ed9755-6133-4e48-b3c3-e7a299c14f1b",
-   "sheet": "2010.1011 price quotes",
-   "cell": "K149",
-   "formula": "SUM(C149:J149)",
-   "proof": "2010.1011 price quotes!K148:K170: 22 of 23 cells use the pattern of K150 = SUM(B150:J150); K149 = SUM(C149:J149) \u2014 its range spans RC[-8]:RC[-1] where siblings span RC[-9]:RC[-1] (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "consequential: excludes populated B149 (9666.75)"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/0583fdbb-7309-41eb-b242-2dcfeb8b99c4",
-   "sheet": "all",
-   "cell": "N78",
-   "formula": "SUM(N74:N77)",
-   "proof": "all!B78:O78: 13 of 14 cells use the pattern of B78 = SUM(B75:B77); N78 = SUM(N74:N77) \u2014 its range spans R[-4]C:R[-1]C where siblings span R[-3]C:R[-1]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "tp: includes 'Total' label row"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/0d627491-db24-4b02-8472-6c73520302ea",
-   "sheet": "all",
-   "cell": "N73",
-   "formula": "SUM(N69:N72)",
-   "proof": "all!B73:O73: 13 of 14 cells use the pattern of B73 = SUM(B70:B72); N73 = SUM(N69:N72) \u2014 its range spans R[-4]C:R[-1]C where siblings span R[-3]C:R[-1]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "tp: includes 'Total' label row"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/4445fe5f-61c7-494c-9168-08899020cdd9",
-   "sheet": "Prevention Integration Grant",
-   "cell": "D13",
-   "formula": "SUM(F13:W13)",
-   "proof": "Prevention Integration Grant!D11:D21: 10 of 11 cells use the pattern of D11 = SUM(F11:V11); D13 = SUM(F13:W13) \u2014 its range spans RC[2]:RC[19] where siblings span RC[2]:RC[18] (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "consequential: includes populated W13 (3022)"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/0c1f4102-6b35-44f4-852b-428f6e0a9765",
-   "sheet": "M101INF",
-   "cell": "U33",
-   "formula": "SUM(U28:U32)",
-   "proof": "M101INF!O33:V33: 7 of 8 cells use the pattern of O33 = SUM(O27:O32); U33 = SUM(U28:U32) \u2014 its range spans R[-5]C:R[-1]C where siblings span R[-6]C:R[-1]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "latent: excluded row 27 currently 0"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/3e0495be-c307-4df7-8b49-b8ca0ae395a8",
-   "sheet": "SUMMARY-ALL YEARS",
-   "cell": "E108",
-   "formula": "SUM(E83:E105)",
-   "proof": "SUMMARY-ALL YEARS!D108:P108: 12 of 13 cells use the pattern of F108 = SUM(F83:F106); E108 = SUM(E83:E105) \u2014 its range spans R[-25]C:R[-3]C where siblings span R[-25]C:R[-2]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "latent: excluded row 106 currently 0"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/0c1f4102-6b35-44f4-852b-428f6e0a9765",
-   "sheet": "M200OPR",
-   "cell": "U33",
-   "formula": "SUM(U28:U32)",
-   "proof": "M200OPR!O33:V33: 7 of 8 cells use the pattern of O33 = SUM(O27:O32); U33 = SUM(U28:U32) \u2014 its range spans R[-5]C:R[-1]C where siblings span R[-6]C:R[-1]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "consequential: excludes populated U27 (59384)"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/0c1f4102-6b35-44f4-852b-428f6e0a9765",
-   "sheet": "M101INF",
-   "cell": "R33",
-   "formula": "SUM(R28:R32)",
-   "proof": "M101INF!O33:V33: 7 of 8 cells use the pattern of O33 = SUM(O27:O32); R33 = SUM(R28:R32) \u2014 its range spans R[-5]C:R[-1]C where siblings span R[-6]C:R[-1]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "latent: zeros family"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/4644d944-db97-4fad-880a-94f7d3c23a5b",
-   "sheet": "20 Year Plan",
-   "cell": "H2462",
-   "formula": "SUM(H2459:H2461)",
-   "proof": "20 Year Plan!G2462:L2462: 5 of 6 cells use the pattern of G2462 = SUM(G2460:G2461); H2462 = SUM(H2459:H2461) \u2014 its range spans R[-3]C:R[-1]C where siblings span R[-2]C:R[-1]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "consequential: includes populated H2459 (1513)"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/39ecd008-1de2-4e29-9340-8085f0a08dce",
-   "sheet": "Cash Flow",
-   "cell": "C44",
-   "formula": "SUM(C21:C43)",
-   "proof": "Cash Flow!B44:O44: 13 of 14 cells use the pattern of D44 = SUM(D22:D43); C44 = SUM(C21:C43) \u2014 its range spans R[-23]C:R[-1]C where siblings span R[-22]C:R[-1]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "latent: extra row 21 is text ' '"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/0583fdbb-7309-41eb-b242-2dcfeb8b99c4",
-   "sheet": "all",
-   "cell": "N134",
-   "formula": "SUM(N129:N133)",
-   "proof": "all!B134:O134: 13 of 14 cells use the pattern of B134 = SUM(B130:B133); N134 = SUM(N129:N133) \u2014 its range spans R[-5]C:R[-1]C where siblings span R[-4]C:R[-1]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "tp: includes 'Total' label row"
-  },
-  {
-   "file": "corpus/work/fuse-bins/cc-binaries/1b378282-0384-434e-92f7-e21eb6167287",
-   "sheet": "2011-12 Part B LEA awards",
-   "cell": "N371",
-   "formula": "SUM(N362:N369)",
-   "proof": "2011-12 Part B LEA awards!J371:Q371: 7 of 8 cells use the pattern of J371 = SUM(J362:J370); N371 = SUM(N362:N369) \u2014 its range spans R[-9]C:R[-2]C where siblings span R[-9]C:R[-1]C (one boundary short/long by one)",
-   "verdict": "tp",
-   "note": "consequential: excludes populated N370 (23)"
-  }
- ],
- "audit": {
-  "standard": "tp = an unintended deviation from the copied family that a reviewer should fix: either consequential today (disputed boundary cell holds a number) or latent structural drift (boundary currently blank/zero/text \u2014 silently diverges when data arrives). fp = evidence of deliberate variation (alternating pattern, differing column semantics, subtotal boundary). Full population audited (34 findings corpus-wide < 200 sample floor).",
-  "auditor": "agent audit over boundary-cell evidence (scripts/audit_dump.py); per-sample notes recorded for re-adjudication",
-  "date": "2026-08-08"
- },
- "precision": 1.0
+  "detector": "range-off-by-one",
+  "findings_total": 9,
+  "sampled": 9,
+  "samples": [
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/c929221b-260f-446e-857a-b7be3bc64493",
+      "sheet": "Temp Help (IH)",
+      "cell": "I25",
+      "formula": "SUM(I21:I23)+I18",
+      "proof": "Temp Help (IH)!B25:R25: 16 of 17 cells use the pattern of B25 = SUM(B21:B24)+B18; I25 = SUM(I21:I23)+I18 — its range spans R[-4]C:R[-2]C where siblings span R[-4]C:R[-1]C (one boundary short/long by one)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/99ae44b0-8fbe-449c-8768-2eb6a7fa8e7d",
+      "sheet": "Software",
+      "cell": "P47",
+      "formula": "SUM(P4:P46)",
+      "proof": "Software!G47:X47: 17 of 18 cells use the pattern of G47 = SUM(G5:G46); P47 = SUM(P4:P46) — its range spans R[-43]C:R[-1]C where siblings span R[-42]C:R[-1]C (one boundary short/long by one)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/cfe50542-ad70-4778-aae5-a042dde28029",
+      "sheet": "Temp Help (IH)",
+      "cell": "I25",
+      "formula": "SUM(I21:I23)+I18",
+      "proof": "Temp Help (IH)!B25:R25: 16 of 17 cells use the pattern of B25 = SUM(B21:B24)+B18; I25 = SUM(I21:I23)+I18 — its range spans R[-4]C:R[-2]C where siblings span R[-4]C:R[-1]C (one boundary short/long by one)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/c1125fb5-b8d9-49f5-925c-80cfd56ea852",
+      "sheet": "ต.ค",
+      "cell": "DY5",
+      "formula": "SUM(F5:DX5)",
+      "proof": "ต.ค!DY3:DY18: 15 of 16 cells use the pattern of DY3 = SUM(E3:DX3); DY5 = SUM(F5:DX5) — its range spans RC[-123]:RC[-1] where siblings span RC[-124]:RC[-1] (one boundary short/long by one)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/e6e2660a-24e1-4fcc-8ef1-24ca1bc18603",
+      "sheet": "Form",
+      "cell": "G34",
+      "formula": "SUM(G26:G32)",
+      "proof": "Form!B34:H34: 6 of 7 cells use the pattern of B34 = SUM(B26:B33); G34 = SUM(G26:G32) — its range spans R[-8]C:R[-2]C where siblings span R[-8]C:R[-1]C (one boundary short/long by one)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/04c5044e-be32-4206-a3f4-0955324ef5da",
+      "sheet": "APR 13",
+      "cell": "AF19",
+      "formula": "SUM(C19:AE19)",
+      "proof": "APR 13!AF6:AF67: 61 of 62 cells use the pattern of AF6 = SUM(B6:AE6); AF19 = SUM(C19:AE19) — its range spans RC[-29]:RC[-1] where siblings span RC[-30]:RC[-1] (one boundary short/long by one)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/004c19f2-6f98-4959-afbd-5cfe0591f2f0",
+      "sheet": "Temp Help (IH)",
+      "cell": "I25",
+      "formula": "SUM(I21:I23)+I18",
+      "proof": "Temp Help (IH)!B25:R25: 16 of 17 cells use the pattern of B25 = SUM(B21:B24)+B18; I25 = SUM(I21:I23)+I18 — its range spans R[-4]C:R[-2]C where siblings span R[-4]C:R[-1]C (one boundary short/long by one)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/01655fa4-4d0f-48a7-a5da-e90de9d574dd",
+      "sheet": "CPL SPREADSHEET",
+      "cell": "H9",
+      "formula": "SUM(E9:G9)",
+      "proof": "CPL SPREADSHEET!H5:H89: 84 of 85 cells use the pattern of H5 = SUM(F5:G5); H9 = SUM(E9:G9) — its range spans RC[-3]:RC[-1] where siblings span RC[-2]:RC[-1] (one boundary short/long by one)",
+      "verdict": null,
+      "note": null
+    },
+    {
+      "file": "corpus/work/fuse-bins/cc-binaries/4445fe5f-61c7-494c-9168-08899020cdd9",
+      "sheet": "Prevention Integration Grant",
+      "cell": "D13",
+      "formula": "SUM(F13:W13)",
+      "proof": "Prevention Integration Grant!D11:D21: 10 of 11 cells use the pattern of D11 = SUM(F11:V11); D13 = SUM(F13:W13) — its range spans RC[2]:RC[19] where siblings span RC[2]:RC[18] (one boundary short/long by one)",
+      "verdict": null,
+      "note": null
+    }
+  ]
 }

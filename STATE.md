@@ -16,16 +16,17 @@ Phase: 4 — The analyzer, first launchable product          Gate: UNWRITTEN (wr
 - Blocked: none.
 
 ## Next action
-Corpus-wide lint run in flight (detached, monitored). When it lands:
-AUDIT the 200 samples per detector in docs/precision/*.json (verdict
-tp/fp per sample, evidence-based), then `make gate-4`'s precision checks.
-Remaining for gate 4 after audit: web drag-and-drop surface (xlc-wasm +
-web/) with the three-act sequence. Timing artifact done: 58,389 formulas
-in 0.51s. Phase 5 note: full-recompute receipt is the IR invariant.
+v2 lint sweep in flight (tightened slipped-reference detector; v1 was
+REJECTED by its own audit at ~25-30% — docs/precision/inconsistent-region-v1.md).
+When it lands: audit fresh inconsistent-region samples + re-verify
+off-by-one population (34/34 tp recorded) + ref-error (200/200 recorded).
+Then: amend gate4 for full-population audits (<200 findings), run gate-4
+precision checks. Remaining after: web drag-and-drop surface (xlc-wasm).
+Timing artifact done: 58,389 formulas in 0.51s.
 
 ## Numbers of Record
 corpus workbooks: 16167 (6682 with formulas; 7003444 formula cells) | parse rate: 99.9970% | receipt pass rate: 99.35% subset / 98.81% full (verifiable) | functions implemented: ~75
-detectors built: 3 (audit pending) | precision per detector: audit pending | refusal rate: 5.7% | partial-compile rate: 14.1%
+detectors: ref-error 100% (200/200) · range-off-by-one 100% (34/34, full population) · inconsistent-region v2 audit pending (v1 rejected ~27%) | refusal rate: 5.7% | partial-compile rate: 14.1%
 99th-percentile function cut-off: 75 (top-75 = 99% of cell-mentions)
 parse throughput: 253k formulas/s | receipt full-corpus: 0 panics
 scenario throughput native: — | browser: — | bytes moved per scenario: —
