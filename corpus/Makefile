@@ -83,6 +83,12 @@ extract: fetch verify-raw
 		$(WORK)/venv/bin/python -c "import py7zr; py7zr.SevenZipFile('$(WORK)/FUSE.7z').extractall('$(WORK)/fuse.partial')"; \
 		mv $(WORK)/fuse.partial $(WORK)/fuse; \
 	fi
+	@if [ ! -d $(WORK)/fuse-bins ]; then \
+		echo "extracting fuse-cc-binaries.tar.gz (the actual 249k spreadsheets)..."; \
+		mkdir -p $(WORK)/fuse-bins.partial; \
+		tar xzf $(WORK)/fuse/fuse-cc-binaries.tar.gz -C $(WORK)/fuse-bins.partial; \
+		mv $(WORK)/fuse-bins.partial $(WORK)/fuse-bins; \
+	fi
 	@if [ ! -d $(WORK)/spreadsheetbench ]; then \
 		mkdir -p $(WORK)/spreadsheetbench; \
 		tar xzf $(SB_TAR) -C $(WORK)/spreadsheetbench; \
@@ -93,7 +99,7 @@ extract: fetch verify-raw
 # formula-cell count, and load status. Implemented by `xlc corpus-filter`.
 filter: extract
 	cargo build --release -p xlc-cli
-	../target/release/xlc corpus-filter $(WORK)/fuse --out $(WORK)/filtered.json
+	../target/release/xlc corpus-filter $(WORK)/fuse-bins --out $(WORK)/filtered.json
 
 # Deterministic 500-workbook regression subset: valid + >=10 formula cells,
 # ordered by content sha256 ascending, first 500. See docs/decisions.md.
