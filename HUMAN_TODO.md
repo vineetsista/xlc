@@ -5,19 +5,18 @@ posting. Everything else has been done — the demo is live, hosting is
 one click, the secondary oracle is installed user-space (no sudo needed
 after all) and its adjudication runs automatically.
 
-## 1. Share or host the product (pick either; both are prepared)
+## 1. Hosting — DONE (verify, optionally add a domain)
 
-- **Zero-effort demo (already live, private until you share):**
+- Public repo: https://github.com/vineetsista/xlc (created + pushed).
+- GitHub Pages enabled via API; the site deploys from `main` to
+  **https://vineetsista.github.io/xlc/** on every push. Verify it loads
+  and drop an .xlsx.
+- Also live as a private-until-shared artifact:
   https://claude.ai/code/artifact/02d27d90-befe-44db-8195-d2e8525e6595
-  Open it, drop an .xlsx, use the page's share menu when satisfied.
-- **Real hosting (one click, pick one):**
-  - GitHub Pages: push the repo to GitHub → Settings → Pages → Source
-    "GitHub Actions". `.github/workflows/deploy-pages.yml` does the rest.
-  - Netlify/Cloudflare Pages: drag-and-drop `xlc-site.zip` — the built
-    `web/dist` site zipped (already built;
-    regenerate anytime with `make deploy-package`). COOP/COEP headers are
-    preconfigured in `web/netlify.toml` and `web/public/_headers`.
-  - Optionally buy a domain and point it at the host.
+- Optional: buy a custom domain and point it at either host (alternate
+  one-click hosts preconfigured: `xlc-site.zip` for Netlify/CF drop,
+  regenerate with `make deploy-package`; the `web/dist` build output is
+  what every host serves).
 
 ## 2. Post the launches (posting is yours alone)
 

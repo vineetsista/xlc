@@ -1,5 +1,7 @@
 # xlc — an optimizing compiler for Excel
 
+**Repo:** https://github.com/vineetsista/xlc · **Live demo:** https://vineetsista.github.io/xlc/ (deploys from `main`)
+
 Excel is the most widely used programming language on Earth, and it is the
 only one with no compiler, no type checker, no linter, no test framework,
 and no CI. xlc is that missing toolchain: it parses a `.xlsx` into a typed
@@ -37,6 +39,7 @@ cannot tell you."
 ## Build and run
 
 ```
+git clone https://github.com/vineetsista/xlc && cd xlc
 cargo test --workspace          # 96 tests
 cargo build --release -p xlc-cli
 
