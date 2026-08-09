@@ -41,7 +41,9 @@ fn cell_a1(row: u32, col: u32) -> String {
 }
 
 fn walk(dir: &Path, out: &mut Vec<PathBuf>) {
-    let Ok(entries) = fs::read_dir(dir) else { return };
+    let Ok(entries) = fs::read_dir(dir) else {
+        return;
+    };
     for entry in entries.flatten() {
         let p = entry.path();
         if p.is_dir() {
@@ -53,7 +55,10 @@ fn walk(dir: &Path, out: &mut Vec<PathBuf>) {
 }
 
 fn arg_value<'a>(args: &'a [String], flag: &str) -> Option<&'a str> {
-    args.iter().position(|a| a == flag).and_then(|i| args.get(i + 1)).map(String::as_str)
+    args.iter()
+        .position(|a| a == flag)
+        .and_then(|i| args.get(i + 1))
+        .map(String::as_str)
 }
 
 pub fn receipt_cmd(args: &[String]) -> i32 {
@@ -64,7 +69,9 @@ pub fn receipt_cmd(args: &[String]) -> i32 {
     }
     let out_path = arg_value(args, "--out");
     let failures_path = arg_value(args, "--failures");
-    let limit: usize = arg_value(args, "--limit").and_then(|v| v.parse().ok()).unwrap_or(usize::MAX);
+    let limit: usize = arg_value(args, "--limit")
+        .and_then(|v| v.parse().ok())
+        .unwrap_or(usize::MAX);
 
     let mut files = Vec::new();
     for target in &targets {
@@ -78,8 +85,10 @@ pub fn receipt_cmd(args: &[String]) -> i32 {
     files.sort();
     files.retain(|p| {
         let mut magic = [0u8; 2];
-        matches!(fs::File::open(p).and_then(|mut f| f.read_exact(&mut magic)), Ok(()))
-            && &magic == b"PK"
+        matches!(
+            fs::File::open(p).and_then(|mut f| f.read_exact(&mut magic)),
+            Ok(())
+        ) && &magic == b"PK"
     });
     files.truncate(limit);
     eprintln!("receipt: {} workbooks", files.len());
@@ -225,7 +234,11 @@ pub fn receipt_cmd(args: &[String]) -> i32 {
     }
 
     let denom = totals.cells - totals.no_cached;
-    let rate = if denom > 0 { totals.pass as f64 / denom as f64 } else { 0.0 };
+    let rate = if denom > 0 {
+        totals.pass as f64 / denom as f64
+    } else {
+        0.0
+    };
     println!(
         "receipt: {}/{} pass ({:.2}%) | excluded: {} unimpl, {} parse, {} extref, {} volatile, {} array | {} no-cached | mismatches: {} num, {} type, {} err | {} panics",
         totals.pass,

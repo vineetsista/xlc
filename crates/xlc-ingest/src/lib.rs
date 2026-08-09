@@ -58,8 +58,7 @@ pub fn ingest_path(path: &Path) -> Result<Workbook, String> {
 /// Load a workbook from in-memory bytes (the browser path).
 pub fn ingest_bytes(bytes: &[u8]) -> Result<Workbook, String> {
     let array_map = sniff_array_cells(Cursor::new(bytes));
-    let xl =
-        open_workbook_from_rs::<Xlsx<_>, _>(Cursor::new(bytes)).map_err(|e| e.to_string())?;
+    let xl = open_workbook_from_rs::<Xlsx<_>, _>(Cursor::new(bytes)).map_err(|e| e.to_string())?;
     build(xl, array_map)
 }
 
@@ -111,14 +110,18 @@ fn build<RS: Read + Seek>(
 /// not expose the array attribute, so we sniff the worksheet XML directly.
 pub fn sniff_array_cells<RS: Read + Seek>(rs: RS) -> HashMap<String, HashSet<(u32, u32)>> {
     let mut out: HashMap<String, HashSet<(u32, u32)>> = HashMap::new();
-    let Ok(mut z) = zip::ZipArchive::new(rs) else { return out };
+    let Ok(mut z) = zip::ZipArchive::new(rs) else {
+        return out;
+    };
 
     fn read_str<RS: Read + Seek>(z: &mut zip::ZipArchive<RS>, name: &str) -> Option<String> {
         let mut s = String::new();
         z.by_name(name).ok()?.read_to_string(&mut s).ok()?;
         Some(s)
     }
-    let Some(workbook_xml) = read_str(&mut z, "xl/workbook.xml") else { return out };
+    let Some(workbook_xml) = read_str(&mut z, "xl/workbook.xml") else {
+        return out;
+    };
     let rels_xml = read_str(&mut z, "xl/_rels/workbook.xml.rels").unwrap_or_default();
 
     let mut rid_to_path: HashMap<String, String> = HashMap::new();
@@ -139,8 +142,12 @@ pub fn sniff_array_cells<RS: Read + Seek>(rs: RS) -> HashMap<String, HashSet<(u3
         }
     }
     for (name, rid) in sheets {
-        let Some(sheet_path) = rid_to_path.get(&rid) else { continue };
-        let Some(xml) = read_str(&mut z, sheet_path) else { continue };
+        let Some(sheet_path) = rid_to_path.get(&rid) else {
+            continue;
+        };
+        let Some(xml) = read_str(&mut z, sheet_path) else {
+            continue;
+        };
         let mut cells = HashSet::new();
         let mut from = 0usize;
         while let Some(hit) = xml[from..].find("t=\"array\"") {
@@ -282,12 +289,20 @@ pub fn run_receipt(wb: &Workbook, mut on_cell: impl FnMut(&CellReport)) -> Recei
                 report(Value::Blank, None, Outcome::Excluded("volatile"));
                 continue;
             }
-            let expected = sheet.values.get(&(row, col)).cloned().unwrap_or(Value::Blank);
+            let expected = sheet
+                .values
+                .get(&(row, col))
+                .cloned()
+                .unwrap_or(Value::Blank);
             if matches!(expected, Value::Blank) {
                 report(Value::Blank, None, Outcome::NoCachedValue);
                 continue;
             }
-            let origin = Origin { sheet: sid as u32, row, col };
+            let origin = Origin {
+                sheet: sid as u32,
+                row,
+                col,
+            };
             let got = Interp::new(wb, origin).eval_formula(&parsed.expr);
             if got == Value::Err(ExcelError::Name) && expected != Value::Err(ExcelError::Name) {
                 report(expected, Some(got), Outcome::Excluded("unimplemented"));

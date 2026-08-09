@@ -75,8 +75,9 @@ pub fn extract_functions(formula: &str, out: &mut BTreeSet<String>) {
             }
             if j < b.len() && b[j] == b'(' {
                 let mut name = cleaned[start..i].to_ascii_uppercase();
-                while let Some(rest) =
-                    name.strip_prefix("_XLFN.").or_else(|| name.strip_prefix("_XLWS."))
+                while let Some(rest) = name
+                    .strip_prefix("_XLFN.")
+                    .or_else(|| name.strip_prefix("_XLWS."))
                 {
                     name = rest.to_string();
                 }

@@ -8,7 +8,10 @@ use xlc_scenario::dist::Dist;
 use xlc_scenario::engine::{CellKey, Engine, ScenarioSpec};
 
 fn arg_value<'a>(args: &'a [String], flag: &str) -> Option<&'a str> {
-    args.iter().position(|a| a == flag).and_then(|i| args.get(i + 1)).map(String::as_str)
+    args.iter()
+        .position(|a| a == flag)
+        .and_then(|i| args.get(i + 1))
+        .map(String::as_str)
 }
 
 fn arg_values<'a>(args: &'a [String], flag: &str) -> Vec<&'a str> {
@@ -39,15 +42,28 @@ fn parse_dist(s: &str) -> Option<Dist> {
         .split(',')
         .map(|t| t.trim().parse().ok())
         .collect::<Option<_>>()?;
-    Some(match (name.trim().to_ascii_lowercase().as_str(), nums.as_slice()) {
-        ("normal", [m, s]) => Dist::Normal { mean: *m, sd: *s },
-        ("lognormal", [mu, sg]) => Dist::LogNormal { mu: *mu, sigma: *sg },
-        ("uniform", [a, b]) => Dist::Uniform { a: *a, b: *b },
-        ("triangular", [a, m, b]) => Dist::Triangular { a: *a, m: *m, b: *b },
-        ("pert", [a, m, b]) => Dist::Pert { a: *a, m: *m, b: *b },
-        ("point", [v]) => Dist::Point { value: *v },
-        _ => return None,
-    })
+    Some(
+        match (name.trim().to_ascii_lowercase().as_str(), nums.as_slice()) {
+            ("normal", [m, s]) => Dist::Normal { mean: *m, sd: *s },
+            ("lognormal", [mu, sg]) => Dist::LogNormal {
+                mu: *mu,
+                sigma: *sg,
+            },
+            ("uniform", [a, b]) => Dist::Uniform { a: *a, b: *b },
+            ("triangular", [a, m, b]) => Dist::Triangular {
+                a: *a,
+                m: *m,
+                b: *b,
+            },
+            ("pert", [a, m, b]) => Dist::Pert {
+                a: *a,
+                m: *m,
+                b: *b,
+            },
+            ("point", [v]) => Dist::Point { value: *v },
+            _ => return None,
+        },
+    )
 }
 
 fn cell_name(wb: &Workbook, k: CellKey) -> String {
@@ -64,8 +80,12 @@ pub fn monte_cmd(args: &[String]) -> i32 {
         eprintln!("usage: xlc monte <file> --scenarios N [--seed S] --input \"Sheet!A1=normal(50,5)\" [--watch \"Sheet!B10\"]");
         return 2;
     };
-    let n: u32 = arg_value(args, "--scenarios").and_then(|v| v.parse().ok()).unwrap_or(100_000);
-    let seed: u64 = arg_value(args, "--seed").and_then(|v| v.parse().ok()).unwrap_or(42);
+    let n: u32 = arg_value(args, "--scenarios")
+        .and_then(|v| v.parse().ok())
+        .unwrap_or(100_000);
+    let seed: u64 = arg_value(args, "--seed")
+        .and_then(|v| v.parse().ok())
+        .unwrap_or(42);
 
     let wb = match xlc_ingest::ingest_path(Path::new(target.as_str())) {
         Ok(wb) => wb,
@@ -96,8 +116,10 @@ pub fn monte_cmd(args: &[String]) -> i32 {
         return 1;
     }
     let watch: Vec<CellKey> = {
-        let named: Vec<CellKey> =
-            arg_values(args, "--watch").iter().filter_map(|w| parse_cell(&wb, w)).collect();
+        let named: Vec<CellKey> = arg_values(args, "--watch")
+            .iter()
+            .filter_map(|w| parse_cell(&wb, w))
+            .collect();
         if named.is_empty() {
             vec![*engine.cone_keys().last().unwrap()]
         } else {
@@ -149,7 +171,9 @@ pub fn diff_cmd(args: &[String]) -> i32 {
         eprintln!("usage: xlc diff <a.xlsx> <b.xlsx> --output \"Sheet!Cell\" [--input \"Sheet!A1=normal(..)\"] [--scenarios N]");
         return 2;
     }
-    let n: u32 = arg_value(args, "--scenarios").and_then(|v| v.parse().ok()).unwrap_or(10_000);
+    let n: u32 = arg_value(args, "--scenarios")
+        .and_then(|v| v.parse().ok())
+        .unwrap_or(10_000);
     let (wa, wbk) = match (
         xlc_ingest::ingest_path(Path::new(files[0].as_str())),
         xlc_ingest::ingest_path(Path::new(files[1].as_str())),
@@ -166,7 +190,9 @@ pub fn diff_cmd(args: &[String]) -> i32 {
     };
     let mut inputs = Vec::new();
     for spec in arg_values(args, "--input") {
-        let Some((cell, dist)) = spec.split_once('=') else { continue };
+        let Some((cell, dist)) = spec.split_once('=') else {
+            continue;
+        };
         if let (Some(key), Some(d)) = (parse_cell(&wa, cell), parse_dist(dist)) {
             inputs.push((key, d));
         }
@@ -188,7 +214,10 @@ pub fn diff_cmd(args: &[String]) -> i32 {
                     if same_in_b {
                         inputs.push((
                             (sid as u32, r, c),
-                            Dist::Normal { mean: *x, sd: x.abs() * 0.1 + 1e-9 },
+                            Dist::Normal {
+                                mean: *x,
+                                sd: x.abs() * 0.1 + 1e-9,
+                            },
                         ));
                     }
                 }
@@ -197,7 +226,10 @@ pub fn diff_cmd(args: &[String]) -> i32 {
         inputs.sort_by_key(|(k, _)| *k);
         inputs.truncate(64);
     }
-    let spec = ScenarioSpec { seed: 20_26, inputs };
+    let spec = ScenarioSpec {
+        seed: 20_26,
+        inputs,
+    };
     let rep = xlc_diff::diff_output(&wa, &wbk, &spec, output, n);
     println!(
         "diff: {}/{} sampled scenarios diverge on {}",
@@ -211,7 +243,12 @@ pub fn diff_cmd(args: &[String]) -> i32 {
             for (k, v) in &w.inputs {
                 println!("    {} = {v:.6}", cell_name(&wa, *k));
             }
-            println!("    {}: v1 = {:?}   v2 = {:?}", cell_name(&wa, output), w.v1_output, w.v2_output);
+            println!(
+                "    {}: v1 = {:?}   v2 = {:?}",
+                cell_name(&wa, output),
+                w.v1_output,
+                w.v2_output
+            );
             1 // divergence found: non-zero for CI use
         }
         None => {

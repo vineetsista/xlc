@@ -42,7 +42,10 @@ impl Workbook {
 
     pub fn add_sheet(&mut self, name: &str) -> SheetId {
         let id = self.sheets.len() as SheetId;
-        self.sheets.push(Sheet { name: name.to_string(), ..Default::default() });
+        self.sheets.push(Sheet {
+            name: name.to_string(),
+            ..Default::default()
+        });
         // Sheet-name lookup is case-insensitive in Excel.
         self.by_name.insert(name.to_lowercase(), id);
         id
@@ -74,11 +77,16 @@ impl Ctx for Workbook {
     }
 
     fn used_extent(&self, sheet: SheetId) -> (u32, u32) {
-        self.sheets.get(sheet as usize).map(|s| s.extent).unwrap_or((0, 0))
+        self.sheets
+            .get(sheet as usize)
+            .map(|s| s.extent)
+            .unwrap_or((0, 0))
     }
 
     fn defined_name(&self, name: &str) -> Option<&Expr> {
-        self.names.get(&name.to_uppercase()).or_else(|| self.names.get(name))
+        self.names
+            .get(&name.to_uppercase())
+            .or_else(|| self.names.get(name))
     }
 
     fn epoch_1904(&self) -> bool {

@@ -56,10 +56,7 @@ pub fn uniform2(addr: DrawAddr) -> (f64, f64) {
     let u0 = (((out[0] as u64) << 21) ^ (out[1] as u64)) & ((1u64 << 53) - 1);
     let u1 = (((out[2] as u64) << 21) ^ (out[3] as u64)) & ((1u64 << 53) - 1);
     let scale = 1.0 / (1u64 << 53) as f64;
-    (
-        ((u0 as f64) + 0.5) * scale,
-        ((u1 as f64) + 0.5) * scale,
-    )
+    (((u0 as f64) + 0.5) * scale, ((u1 as f64) + 0.5) * scale)
 }
 
 /// One uniform double in (0,1).
@@ -73,11 +70,20 @@ mod tests {
 
     #[test]
     fn deterministic_and_stateless() {
-        let a = DrawAddr { seed: 42, cell: 7, scenario: 123_456, draw: 0, attempt: 0 };
+        let a = DrawAddr {
+            seed: 42,
+            cell: 7,
+            scenario: 123_456,
+            draw: 0,
+            attempt: 0,
+        };
         assert_eq!(uniform(a), uniform(a));
         // Different scenario, cell, draw, seed all decorrelate.
         for delta in [
-            DrawAddr { scenario: 123_457, ..a },
+            DrawAddr {
+                scenario: 123_457,
+                ..a
+            },
             DrawAddr { cell: 8, ..a },
             DrawAddr { draw: 1, ..a },
             DrawAddr { seed: 43, ..a },
@@ -93,7 +99,13 @@ mod tests {
         let mut sum = 0.0;
         let mut sumsq = 0.0;
         for k in 0..n {
-            let u = uniform(DrawAddr { seed: 1, cell: 0, scenario: k, draw: 0, attempt: 0 });
+            let u = uniform(DrawAddr {
+                seed: 1,
+                cell: 0,
+                scenario: k,
+                draw: 0,
+                attempt: 0,
+            });
             assert!(u > 0.0 && u < 1.0);
             sum += u;
             sumsq += u * u;
@@ -101,7 +113,10 @@ mod tests {
         let mean = sum / n as f64;
         let var = sumsq / n as f64 - mean * mean;
         // mean se = sqrt(1/12/n) ~ 0.00065; allow 5 sigma.
-        assert!((mean - 0.5).abs() < 5.0 * (1.0 / 12.0f64 / n as f64).sqrt(), "mean {mean}");
+        assert!(
+            (mean - 0.5).abs() < 5.0 * (1.0 / 12.0f64 / n as f64).sqrt(),
+            "mean {mean}"
+        );
         assert!((var - 1.0 / 12.0).abs() < 0.001, "var {var}");
     }
 

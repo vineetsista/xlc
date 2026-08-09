@@ -12,7 +12,6 @@
 
 use std::collections::HashMap;
 
-use crate::dist::Dist;
 use crate::engine::{CellKey, Engine};
 use crate::rng::DrawAddr;
 use xlc_eval::Value;
@@ -92,13 +91,18 @@ impl Engine<'_> {
                 }
             }
         }
-        Some(Gradient { d_inputs, structural_cells: structural, output_value })
+        Some(Gradient {
+            d_inputs,
+            structural_cells: structural,
+            output_value,
+        })
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::dist::Dist;
     use crate::engine::ScenarioSpec;
     use xlc_eval::workbook::Workbook;
 
@@ -140,7 +144,14 @@ mod tests {
         let spec = ScenarioSpec {
             seed: 2,
             inputs: (0..3)
-                .map(|r| ((0u32, r, 0u32), Dist::Point { value: 1.0 + r as f64 }))
+                .map(|r| {
+                    (
+                        (0u32, r, 0u32),
+                        Dist::Point {
+                            value: 1.0 + r as f64,
+                        },
+                    )
+                })
                 .collect(),
         };
         let engine = Engine::new(&wb, spec);

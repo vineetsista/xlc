@@ -34,7 +34,9 @@ struct FailureEntry {
 }
 
 fn walk(dir: &Path, out: &mut Vec<PathBuf>) {
-    let Ok(entries) = fs::read_dir(dir) else { return };
+    let Ok(entries) = fs::read_dir(dir) else {
+        return;
+    };
     for entry in entries.flatten() {
         let p = entry.path();
         if p.is_dir() {
@@ -54,7 +56,10 @@ fn is_zip(path: &Path) -> bool {
 }
 
 fn arg_value<'a>(args: &'a [String], flag: &str) -> Option<&'a str> {
-    args.iter().position(|a| a == flag).and_then(|i| args.get(i + 1)).map(String::as_str)
+    args.iter()
+        .position(|a| a == flag)
+        .and_then(|i| args.get(i + 1))
+        .map(String::as_str)
 }
 
 fn cpu_model() -> String {
@@ -71,7 +76,9 @@ fn cpu_model() -> String {
 pub fn parse_corpus_cmd(args: &[String]) -> i32 {
     let dirs: Vec<&String> = args.iter().take_while(|a| !a.starts_with("--")).collect();
     if dirs.is_empty() {
-        eprintln!("usage: xlc parse-corpus <dir>... --out <artifact.json> --failures <failures.jsonl>");
+        eprintln!(
+            "usage: xlc parse-corpus <dir>... --out <artifact.json> --failures <failures.jsonl>"
+        );
         return 2;
     }
     let out_path = arg_value(args, "--out").unwrap_or("docs/benchmarks/parse-roundtrip.json");
@@ -101,7 +108,9 @@ pub fn parse_corpus_cmd(args: &[String]) -> i32 {
             };
             let names = wb.sheet_names();
             for name in &names {
-                let Ok(range) = wb.worksheet_formula(name) else { continue };
+                let Ok(range) = wb.worksheet_formula(name) else {
+                    continue;
+                };
                 for (_, _, f) in range.used_cells() {
                     if f.is_empty() {
                         continue;
@@ -152,7 +161,11 @@ pub fn parse_corpus_cmd(args: &[String]) -> i32 {
     let secs = start.elapsed().as_secs_f64();
 
     let mut fails: Vec<FailureEntry> = failures.into_inner().unwrap().into_values().collect();
-    fails.sort_by(|a, b| b.count.cmp(&a.count).then_with(|| a.formula.cmp(&b.formula)));
+    fails.sort_by(|a, b| {
+        b.count
+            .cmp(&a.count)
+            .then_with(|| a.formula.cmp(&b.formula))
+    });
     {
         let mut out = String::new();
         for f in fails.iter().take(100_000) {

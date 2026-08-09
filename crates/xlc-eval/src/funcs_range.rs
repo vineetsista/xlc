@@ -84,7 +84,11 @@ impl<C: Ctx> Interp<'_, C> {
             Err(e) => return Value::Err(e),
         };
         let vertical = rect.c0 == rect.c1;
-        let lanes = if vertical { rect.r1 - rect.r0 + 1 } else { rect.c1 - rect.c0 + 1 };
+        let lanes = if vertical {
+            rect.r1 - rect.r0 + 1
+        } else {
+            rect.c1 - rect.c0 + 1
+        };
         let get = |lane: u32| -> Value {
             if vertical {
                 self.rect_get(&rect, lane, 0)
@@ -109,7 +113,10 @@ impl<C: Ctx> Interp<'_, C> {
             for lane in 0..lanes {
                 let v = get(lane);
                 if same_family(&key, &v)
-                    && matches!(compare(&v, &key), Ok(Ordering::Greater) | Ok(Ordering::Equal))
+                    && matches!(
+                        compare(&v, &key),
+                        Ok(Ordering::Greater) | Ok(Ordering::Equal)
+                    )
                 {
                     best = Some(lane);
                 } else if best.is_some() {
@@ -165,7 +172,13 @@ impl<C: Ctx> Interp<'_, C> {
         } else {
             (rect.c0 + col_i as u32 - 1, rect.c0 + col_i as u32 - 1)
         };
-        Operand::Ref(vec![Rect { sheet: rect.sheet, r0, c0, r1, c1 }])
+        Operand::Ref(vec![Rect {
+            sheet: rect.sheet,
+            r0,
+            c0,
+            r1,
+            c1,
+        }])
     }
 
     /// LOOKUP vector form (and array form reduced to its vectors).
@@ -179,7 +192,11 @@ impl<C: Ctx> Interp<'_, C> {
             Err(e) => return Value::Err(e),
         };
         let vertical = (lookup.r1 - lookup.r0) >= (lookup.c1 - lookup.c0);
-        let lanes = if vertical { lookup.r1 - lookup.r0 + 1 } else { lookup.c1 - lookup.c0 + 1 };
+        let lanes = if vertical {
+            lookup.r1 - lookup.r0 + 1
+        } else {
+            lookup.c1 - lookup.c0 + 1
+        };
         let get_l = |lane: u32| -> Value {
             if vertical {
                 self.rect_get(&lookup, lane, 0)
@@ -196,7 +213,9 @@ impl<C: Ctx> Interp<'_, C> {
                 best = Some(lane);
             }
         }
-        let Some(lane) = best else { return Value::Err(ExcelError::NA) };
+        let Some(lane) = best else {
+            return Value::Err(ExcelError::NA);
+        };
         match self.arg(args, 2) {
             None => {
                 // Array form: result from the last column/row of the range.
@@ -294,7 +313,8 @@ impl<C: Ctx> Interp<'_, C> {
         let mut i = first_pair;
         while i < args.len() {
             let rect = self.arg_rect(args, i)?;
-            if (rect.r1 - rect.r0) != (base.r1 - base.r0) || (rect.c1 - rect.c0) != (base.c1 - base.c0)
+            if (rect.r1 - rect.r0) != (base.r1 - base.r0)
+                || (rect.c1 - rect.c0) != (base.c1 - base.c0)
             {
                 return Err(ExcelError::Value);
             }
@@ -461,7 +481,9 @@ impl<C: Ctx> Interp<'_, C> {
                 }
             }
         }
-        let Some(first) = rects.first() else { return Value::Err(ExcelError::Value) };
+        let Some(first) = rects.first() else {
+            return Value::Err(ExcelError::Value);
+        };
         let shape = (first.r1 - first.r0, first.c1 - first.c0);
         if rects.iter().any(|r| (r.r1 - r.r0, r.c1 - r.c0) != shape) {
             return Value::Err(ExcelError::Value);
@@ -519,7 +541,11 @@ impl<C: Ctx> Interp<'_, C> {
             return Value::Err(ExcelError::Num);
         }
         xs.sort_by(|a, b| a.partial_cmp(b).unwrap_or(Ordering::Equal));
-        let idx = if large { xs.len() - k as usize } else { k as usize - 1 };
+        let idx = if large {
+            xs.len() - k as usize
+        } else {
+            k as usize - 1
+        };
         Value::Num(xs[idx])
     }
 

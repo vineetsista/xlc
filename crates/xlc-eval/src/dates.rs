@@ -125,10 +125,19 @@ mod tests {
     #[test]
     fn date_rollover() {
         // DATE(2020,13,1) = DATE(2021,1,1); DATE(2020,1,32) = DATE(2020,2,1).
-        assert_eq!(ymd_to_serial_1900(2020, 13, 1), ymd_to_serial_1900(2021, 1, 1));
-        assert_eq!(ymd_to_serial_1900(2020, 1, 32), ymd_to_serial_1900(2020, 2, 1));
+        assert_eq!(
+            ymd_to_serial_1900(2020, 13, 1),
+            ymd_to_serial_1900(2021, 1, 1)
+        );
+        assert_eq!(
+            ymd_to_serial_1900(2020, 1, 32),
+            ymd_to_serial_1900(2020, 2, 1)
+        );
         // DATE(2020,0,5) = DATE(2019,12,5).
-        assert_eq!(ymd_to_serial_1900(2020, 0, 5), ymd_to_serial_1900(2019, 12, 5));
+        assert_eq!(
+            ymd_to_serial_1900(2020, 0, 5),
+            ymd_to_serial_1900(2019, 12, 5)
+        );
     }
 
     #[test]

@@ -174,7 +174,9 @@ pub fn wildcard_prefix_match(pattern: &str, text: &str) -> bool {
 impl Criteria {
     pub fn matches(&self, v: &Value) -> bool {
         match self {
-            Criteria::Blank => matches!(v, Value::Blank) || matches!(v, Value::Text(s) if s.is_empty()),
+            Criteria::Blank => {
+                matches!(v, Value::Blank) || matches!(v, Value::Text(s) if s.is_empty())
+            }
             Criteria::NonBlank => !matches!(v, Value::Blank),
             Criteria::CmpNum(op, rhs) => match v {
                 Value::Num(x) => cmp_holds(x.partial_cmp(rhs), *op),

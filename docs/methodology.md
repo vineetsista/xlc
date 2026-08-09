@@ -40,10 +40,23 @@ measured ways, discovered on the first full subset runs:
   value as the cache (`D199/C199` cached as exactly `1004.97`).
 
 Both classes cap the measured pass rate below 100% through no fault of the
-engine. Disputed cells are adjudicated by the secondary oracle (LibreOffice
-via UNO with an explicit `calculateAll()`), and the receipt's ULP policy —
-bit-identical, 1 ULP, or equality at 15 significant decimal digits (the
-precision at which caches are written) — is printed on every artifact.
+engine. We measured this: every one of the 5,194 disputed subset cells was
+adjudicated by the secondary oracle (LibreOffice 26.2.5 headless via UNO
+with an explicit `calculateAll()` — never `--convert-to`, which silently
+emits cached values). Verdicts (docs/benchmarks/oracle-adjudication.json):
+
+- **2,575 cells (49.6%): LibreOffice agrees with XLC**, not the cache —
+  confirmed stale/display-rounded caches; the oracle was wrong, not us.
+- **2,156 cells (41.5%): LibreOffice agrees with the cache** — real XLC
+  gaps (dominated by the `^`-chain precision class), 0.27% of verifiable
+  cells, tracked for the function-precision backlog.
+- **463 cells (8.9%): three-way disagreement** — Excel, XLC, and
+  LibreOffice each produce different values; these chains are sensitive
+  enough that the two independent engines disagree with each other too.
+
+The receipt's ULP policy — bit-identical, 1 ULP, or equality at 15
+significant decimal digits (the precision at which caches are written) —
+is printed on every artifact.
 
 ## What XLC cannot tell you
 

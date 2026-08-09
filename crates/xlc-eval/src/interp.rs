@@ -291,7 +291,9 @@ impl<'a, C: Ctx> Interp<'a, C> {
         let (Operand::Ref(ra), Operand::Ref(rb)) = (&a, &b) else {
             // Range op over non-refs (e.g. INDEX(..):A1) needs ref-valued
             // function returns — not yet modeled; error out clearly.
-            let e = first_error(&a).or_else(|| first_error(&b)).unwrap_or(ExcelError::Value);
+            let e = first_error(&a)
+                .or_else(|| first_error(&b))
+                .unwrap_or(ExcelError::Value);
             return Operand::Val(Value::Err(e));
         };
         match op {
@@ -322,7 +324,13 @@ impl<'a, C: Ctx> Interp<'a, C> {
                         let c0 = x.c0.max(y.c0);
                         let c1 = x.c1.min(y.c1);
                         if r0 <= r1 && c0 <= c1 {
-                            out.push(Rect { sheet: x.sheet, r0, c0, r1, c1 });
+                            out.push(Rect {
+                                sheet: x.sheet,
+                                r0,
+                                c0,
+                                r1,
+                                c1,
+                            });
                         }
                     }
                 }
@@ -363,8 +371,10 @@ impl<'a, C: Ctx> Interp<'a, C> {
                     [r] => {
                         let h = r.r1 - r.r0 + 1;
                         let w = r.c1 - r.c0 + 1;
-                        let vals =
-                            r.cells().map(|(row, col)| self.ctx.cell(r.sheet, row, col)).collect();
+                        let vals = r
+                            .cells()
+                            .map(|(row, col)| self.ctx.cell(r.sheet, row, col))
+                            .collect();
                         ArrOrScalar::Arr { h, w, vals }
                     }
                     _ => {
@@ -394,9 +404,7 @@ impl<'a, C: Ctx> Interp<'a, C> {
                 let b = self.eval_array(rhs);
                 broadcast2(&a, &b, |x, y| apply_scalar_binop(*op, x, y))
             }
-            Expr::Unary { op, expr, .. }
-                if matches!(op, UnOp::Neg | UnOp::Pos | UnOp::Percent) =>
-            {
+            Expr::Unary { op, expr, .. } if matches!(op, UnOp::Neg | UnOp::Pos | UnOp::Percent) => {
                 let a = self.eval_array(expr);
                 map1(&a, |v| match op {
                     UnOp::Neg => value::neg(v),
@@ -588,7 +596,9 @@ impl<'a, C: Ctx> Interp<'a, C> {
     /// Argument i as a single rectangular area (lookup tables, criteria
     /// ranges). Errors with #VALUE! if it is not exactly one rect.
     pub(crate) fn arg_rect(&self, args: &[CallArg], i: usize) -> Result<Rect, ExcelError> {
-        let Some(e) = self.arg(args, i) else { return Err(ExcelError::Value) };
+        let Some(e) = self.arg(args, i) else {
+            return Err(ExcelError::Value);
+        };
         match self.eval(e) {
             Operand::Ref(rects) if rects.len() == 1 => Ok(rects[0]),
             Operand::Val(Value::Err(err)) => Err(err),
@@ -969,7 +979,11 @@ impl<'a, C: Ctx> Interp<'a, C> {
             Some(Some(e)) => self.eval(e),
             // Omitted branch: IF(TRUE,,5) → 0; IF(FALSE,1) → FALSE.
             Some(None) => Operand::Val(Value::Num(0.0)),
-            None => Operand::Val(if b { Value::Num(0.0) } else { Value::Bool(false) }),
+            None => Operand::Val(if b {
+                Value::Num(0.0)
+            } else {
+                Value::Bool(false)
+            }),
         }
     }
 
@@ -1029,7 +1043,11 @@ pub fn round_half_away(x: f64, digits: i32) -> f64 {
     let s = format!("{:.14e}", x.abs());
     let (mant, exp) = s.split_once('e').expect("scientific format");
     let exp: i32 = exp.parse().expect("exponent");
-    let digits15: Vec<u8> = mant.bytes().filter(u8::is_ascii_digit).map(|b| b - b'0').collect();
+    let digits15: Vec<u8> = mant
+        .bytes()
+        .filter(u8::is_ascii_digit)
+        .map(|b| b - b'0')
+        .collect();
     debug_assert_eq!(digits15.len(), 15);
     // Value = 0.digits15 * 10^(exp+1). Keep k leading digits where
     // k = exp + 1 + digits: rounding at 10^-digits.
@@ -1042,7 +1060,11 @@ pub fn round_half_away(x: f64, digits: i32) -> f64 {
         // ROUND(0.005, 2) = 0.01 — the leading digit alone decides.
         return if digits15[0] >= 5 {
             let v = 10f64.powi(-digits);
-            if neg { -v } else { v }
+            if neg {
+                -v
+            } else {
+                v
+            }
         } else if neg {
             -0.0
         } else {
@@ -1074,10 +1096,7 @@ pub fn round_half_away(x: f64, digits: i32) -> f64 {
     let carried = kept.len() > k;
     let mant_str: String = kept.iter().map(|d| (d + b'0') as char).collect();
     let new_exp = exp + if carried { 1 } else { 0 };
-    let rebuilt = format!(
-        "0.{mant_str}e{}",
-        new_exp + 1
-    );
+    let rebuilt = format!("0.{mant_str}e{}", new_exp + 1);
     let v: f64 = rebuilt.parse().expect("rebuilt decimal");
     if neg {
         -v
@@ -1135,8 +1154,16 @@ fn broadcast2(
             let vals = (0..n)
                 .map(|i| {
                     f(
-                        if a.shape().is_some() { a.get(i) } else { a.get(0) },
-                        if b.shape().is_some() { b.get(i) } else { b.get(0) },
+                        if a.shape().is_some() {
+                            a.get(i)
+                        } else {
+                            a.get(0)
+                        },
+                        if b.shape().is_some() {
+                            b.get(i)
+                        } else {
+                            b.get(0)
+                        },
                     )
                 })
                 .collect();
@@ -1156,8 +1183,16 @@ fn broadcast3(
         Ok(None) => ArrOrScalar::Scalar(f(a.get(0), b.get(0), c.get(0))),
         Ok(Some((h, w))) => {
             let n = (h * w) as usize;
-            let pick = |x: &ArrOrScalar, i: usize| if x.shape().is_some() { x.get(i).clone() } else { x.get(0).clone() };
-            let vals = (0..n).map(|i| f(&pick(a, i), &pick(b, i), &pick(c, i))).collect();
+            let pick = |x: &ArrOrScalar, i: usize| {
+                if x.shape().is_some() {
+                    x.get(i).clone()
+                } else {
+                    x.get(0).clone()
+                }
+            };
+            let vals = (0..n)
+                .map(|i| f(&pick(a, i), &pick(b, i), &pick(c, i)))
+                .collect();
             ArrOrScalar::Arr { h, w, vals }
         }
     }
@@ -1209,7 +1244,10 @@ fn first_error(op: &Operand) -> Option<ExcelError> {
 /// the original spelling; only dispatch normalizes).
 fn canonical_fn_name(name: &str) -> String {
     let mut n = name.to_ascii_uppercase();
-    while let Some(rest) = n.strip_prefix("_XLFN.").or_else(|| n.strip_prefix("_XLWS.")) {
+    while let Some(rest) = n
+        .strip_prefix("_XLFN.")
+        .or_else(|| n.strip_prefix("_XLWS."))
+    {
         n = rest.to_string();
     }
     n
@@ -1217,7 +1255,13 @@ fn canonical_fn_name(name: &str) -> String {
 
 pub fn area_to_rect(area: &Area, sheet: SheetId, ctx: &dyn Ctx) -> Option<Rect> {
     Some(match area {
-        Area::Cell(c) => Rect { sheet, r0: c.row, c0: c.col, r1: c.row, c1: c.col },
+        Area::Cell(c) => Rect {
+            sheet,
+            r0: c.row,
+            c0: c.col,
+            r1: c.row,
+            c1: c.col,
+        },
         Area::CellRange(a, b) => rect_from_coords(sheet, a, b),
         Area::Cols { first, last, .. } => {
             let (max_row, _) = ctx.used_extent(sheet);
@@ -1293,7 +1337,10 @@ mod tests {
 
     impl Ctx for MockWb {
         fn cell(&self, sheet: SheetId, row: u32, col: u32) -> Value {
-            self.cells.get(&(sheet, row, col)).cloned().unwrap_or(Value::Blank)
+            self.cells
+                .get(&(sheet, row, col))
+                .cloned()
+                .unwrap_or(Value::Blank)
         }
         fn resolve_sheet(&self, name: &str) -> Option<SheetId> {
             (name == "Sheet1").then_some(0)
@@ -1308,7 +1355,15 @@ mod tests {
 
     fn eval_at(wb: &MockWb, origin: (u32, u32), formula: &str) -> Value {
         let e = xlc_parse::parse_formula(formula).unwrap();
-        Interp::new(wb, Origin { sheet: 0, row: origin.0, col: origin.1 }).eval_formula(&e.expr)
+        Interp::new(
+            wb,
+            Origin {
+                sheet: 0,
+                row: origin.0,
+                col: origin.1,
+            },
+        )
+        .eval_formula(&e.expr)
     }
 
     fn eval(wb: &MockWb, formula: &str) -> Value {
@@ -1348,7 +1403,10 @@ mod tests {
     #[test]
     fn if_with_omitted_args() {
         let wb = MockWb::new(&[((0, 0), 1.0)]);
-        assert_eq!(eval(&wb, "IF(A1>0,\"yes\",\"no\")"), Value::Text("yes".into()));
+        assert_eq!(
+            eval(&wb, "IF(A1>0,\"yes\",\"no\")"),
+            Value::Text("yes".into())
+        );
         assert_eq!(eval(&wb, "IF(A1>0,,5)"), Value::Num(0.0));
         assert_eq!(eval(&wb, "IF(A1<0,5)"), Value::Bool(false));
     }
@@ -1387,7 +1445,10 @@ mod tests {
         assert_eq!(eval_at(&wb, (2, 5), "A1:A5*2"), Value::Num(60.0));
         assert_eq!(eval_at(&wb, (2, 5), "@A1:A5"), Value::Num(30.0));
         // Outside the range's rows → #VALUE!.
-        assert_eq!(eval_at(&wb, (9, 5), "A1:A5*2"), Value::Err(ExcelError::Value));
+        assert_eq!(
+            eval_at(&wb, (9, 5), "A1:A5*2"),
+            Value::Err(ExcelError::Value)
+        );
     }
 
     #[test]
@@ -1403,7 +1464,10 @@ mod tests {
     fn unknown_function_is_name_error() {
         let wb = MockWb::new(&[]);
         assert_eq!(eval(&wb, "NOTAREALFN(1)"), Value::Err(ExcelError::Name));
-        assert_eq!(eval(&wb, "_xlfn.XLOOKUP(1,A1:A2,B1:B2)"), Value::Err(ExcelError::Name));
+        assert_eq!(
+            eval(&wb, "_xlfn.XLOOKUP(1,A1:A2,B1:B2)"),
+            Value::Err(ExcelError::Name)
+        );
     }
 
     #[test]
@@ -1418,7 +1482,10 @@ mod tests {
             eval(&wb, "SUM(IF(NOT(ISBLANK(B1:B3)),C1:C3,\"\"))"),
             Value::Num(0.1 + 0.34)
         );
-        assert_eq!(eval(&wb, "SUM(IF(ISBLANK(B1:B3),C1:C3,0))"), Value::Num(99.0));
+        assert_eq!(
+            eval(&wb, "SUM(IF(ISBLANK(B1:B3),C1:C3,0))"),
+            Value::Num(99.0)
+        );
         // Range arithmetic in array context.
         assert_eq!(eval(&wb, "SUM(C1:C3*2)"), Value::Num(198.88));
     }

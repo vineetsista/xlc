@@ -148,7 +148,9 @@ mod tests {
     fn scc_deep_chain_no_stack_overflow() {
         // 300k-deep chain: must not blow the thread stack.
         let n = 300_000u32;
-        let mut adj: Adj = (0..n).map(|i| if i + 1 < n { vec![i + 1] } else { vec![] }).collect();
+        let mut adj: Adj = (0..n)
+            .map(|i| if i + 1 < n { vec![i + 1] } else { vec![] })
+            .collect();
         adj[0].push(1); // duplicate edge for good measure
         let comps = schedule(&adj);
         assert_eq!(comps.len(), n as usize);

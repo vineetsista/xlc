@@ -13,7 +13,10 @@ use serde::Serialize;
 use xlc_lint::Finding;
 
 fn arg_value<'a>(args: &'a [String], flag: &str) -> Option<&'a str> {
-    args.iter().position(|a| a == flag).and_then(|i| args.get(i + 1)).map(String::as_str)
+    args.iter()
+        .position(|a| a == flag)
+        .and_then(|i| args.get(i + 1))
+        .map(String::as_str)
 }
 
 pub fn check_cmd(args: &[String]) -> i32 {
@@ -46,7 +49,10 @@ pub fn check_cmd(args: &[String]) -> i32 {
     );
 
     // Compiler-diagnostic output (§9): file, cell, rule, evidence.
-    println!("checking {target}: {formula_cells} formulas across {} sheets", wb.sheets.len());
+    println!(
+        "checking {target}: {formula_cells} formulas across {} sheets",
+        wb.sheets.len()
+    );
     for f in &findings {
         println!("warning[{}]: {}!{}", f.detector, f.sheet, f.cell);
         println!("  --> {}", f.formula);
@@ -76,8 +82,10 @@ pub fn check_cmd(args: &[String]) -> i32 {
         .unwrap_or_default()
         .into_iter()
         .collect();
-    let new_findings =
-        findings.iter().filter(|f| !baseline.contains(&finding_key(f))).count();
+    let new_findings = findings
+        .iter()
+        .filter(|f| !baseline.contains(&finding_key(f)))
+        .count();
 
     if let Some(out) = timing_out {
         let machine = fs::read_to_string("/proc/cpuinfo")
@@ -132,7 +140,9 @@ pub fn lint_corpus_cmd(args: &[String]) -> i32 {
         return 2;
     }
     let samples_dir = arg_value(args, "--samples-dir").unwrap_or("docs/precision");
-    let n: usize = arg_value(args, "--n").and_then(|v| v.parse().ok()).unwrap_or(200);
+    let n: usize = arg_value(args, "--n")
+        .and_then(|v| v.parse().ok())
+        .unwrap_or(200);
     let stats_out = arg_value(args, "--stats");
 
     let mut files = Vec::new();
@@ -142,8 +152,10 @@ pub fn lint_corpus_cmd(args: &[String]) -> i32 {
     files.sort();
     files.retain(|p| {
         let mut magic = [0u8; 2];
-        matches!(fs::File::open(p).and_then(|mut f| f.read_exact(&mut magic)), Ok(()))
-            && &magic == b"PK"
+        matches!(
+            fs::File::open(p).and_then(|mut f| f.read_exact(&mut magic)),
+            Ok(())
+        ) && &magic == b"PK"
     });
     eprintln!("lint-corpus: {} candidate workbooks", files.len());
 
@@ -197,11 +209,18 @@ pub fn lint_corpus_cmd(args: &[String]) -> i32 {
         });
         let path = format!("{samples_dir}/{det}.json");
         fs::write(&path, serde_json::to_vec_pretty(&doc).unwrap()).ok();
-        println!("lint-corpus: {det}: {total} findings, {} sampled -> {path}", n.min(total));
+        println!(
+            "lint-corpus: {det}: {total} findings, {} sampled -> {path}",
+            n.min(total)
+        );
         stats.insert(det, serde_json::json!(total));
     }
     if let Some(out) = stats_out {
-        fs::write(out, serde_json::to_vec_pretty(&serde_json::Value::Object(stats)).unwrap()).ok();
+        fs::write(
+            out,
+            serde_json::to_vec_pretty(&serde_json::Value::Object(stats)).unwrap(),
+        )
+        .ok();
     }
     0
 }
@@ -216,7 +235,9 @@ fn fnv(s: &str) -> u64 {
 }
 
 fn walk(dir: &Path, out: &mut Vec<PathBuf>) {
-    let Ok(entries) = fs::read_dir(dir) else { return };
+    let Ok(entries) = fs::read_dir(dir) else {
+        return;
+    };
     for entry in entries.flatten() {
         let p = entry.path();
         if p.is_dir() {

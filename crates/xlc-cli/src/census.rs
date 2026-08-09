@@ -10,20 +10,28 @@
 //! then be evaluated exactly, offline, without rescanning the corpus.
 
 use std::collections::{BTreeMap, BTreeSet};
-pub(crate) use xlc_parse::scan::{extract_functions, EXTREF};
 use std::fs;
 use std::io::{BufWriter, Read, Write as _};
 use std::panic::{self, AssertUnwindSafe};
 use std::path::{Path, PathBuf};
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Mutex;
+pub(crate) use xlc_parse::scan::{extract_functions, EXTREF};
 
 use calamine::{open_workbook, Reader, Xlsx};
 use rayon::prelude::*;
 use serde::Serialize;
 
 const VOLATILE: &[&str] = &[
-    "NOW", "TODAY", "RAND", "RANDBETWEEN", "RANDARRAY", "OFFSET", "INDIRECT", "CELL", "INFO",
+    "NOW",
+    "TODAY",
+    "RAND",
+    "RANDBETWEEN",
+    "RANDARRAY",
+    "OFFSET",
+    "INDIRECT",
+    "CELL",
+    "INFO",
 ];
 
 #[derive(Serialize)]
@@ -95,7 +103,11 @@ fn sniff_zip(path: &Path) -> Result<ZipFeatures, String> {
 }
 
 fn census_workbook(root: &Path, source: &str, path: &Path) -> Option<WorkbookReport> {
-    let rel = path.strip_prefix(root).unwrap_or(path).to_string_lossy().into_owned();
+    let rel = path
+        .strip_prefix(root)
+        .unwrap_or(path)
+        .to_string_lossy()
+        .into_owned();
     // Cheap zip-magic pre-filter.
     let mut magic = [0u8; 2];
     match fs::File::open(path).and_then(|mut f| f.read_exact(&mut magic)) {
@@ -167,14 +179,19 @@ fn census_workbook(root: &Path, source: &str, path: &Path) -> Option<WorkbookRep
     rep.volatile = volatile.into_iter().collect();
     rep.combos = combo_counts
         .into_iter()
-        .map(|(funcs, cells)| ComboCount { funcs: funcs.into_iter().collect(), cells })
+        .map(|(funcs, cells)| ComboCount {
+            funcs: funcs.into_iter().collect(),
+            cells,
+        })
         .collect();
     rep.status = "ok".into();
     Some(rep)
 }
 
 fn walk(dir: &Path, out: &mut Vec<PathBuf>) {
-    let Ok(entries) = fs::read_dir(dir) else { return };
+    let Ok(entries) = fs::read_dir(dir) else {
+        return;
+    };
     for entry in entries.flatten() {
         let p = entry.path();
         if p.is_dir() {
@@ -186,7 +203,10 @@ fn walk(dir: &Path, out: &mut Vec<PathBuf>) {
 }
 
 fn arg_value<'a>(args: &'a [String], flag: &str) -> Option<&'a str> {
-    args.iter().position(|a| a == flag).and_then(|i| args.get(i + 1)).map(String::as_str)
+    args.iter()
+        .position(|a| a == flag)
+        .and_then(|i| args.get(i + 1))
+        .map(String::as_str)
 }
 
 pub fn census_cmd(args: &[String]) -> i32 {
@@ -197,7 +217,9 @@ pub fn census_cmd(args: &[String]) -> i32 {
         .filter_map(|a| a.split_once('='))
         .collect();
     if sources.is_empty() {
-        eprintln!("usage: xlc census <name>=<dir>... --out census.json --per-workbook reports.jsonl");
+        eprintln!(
+            "usage: xlc census <name>=<dir>... --out census.json --per-workbook reports.jsonl"
+        );
         return 2;
     }
     let out_path = arg_value(args, "--out").unwrap_or("census.json");
@@ -209,7 +231,10 @@ pub fn census_cmd(args: &[String]) -> i32 {
         let mut fs_ = Vec::new();
         walk(&root, &mut fs_);
         eprintln!("census: {} files under {name}={dir}", fs_.len());
-        files.extend(fs_.into_iter().map(|p| ((*name).to_string(), root.clone(), p)));
+        files.extend(
+            fs_.into_iter()
+                .map(|p| ((*name).to_string(), root.clone(), p)),
+        );
     }
     files.sort();
 
@@ -230,7 +255,11 @@ pub fn census_cmd(args: &[String]) -> i32 {
             let r = panic::catch_unwind(AssertUnwindSafe(|| census_workbook(root, source, path)))
                 .unwrap_or_else(|_| {
                     Some(WorkbookReport {
-                        path: path.strip_prefix(root).unwrap_or(path).to_string_lossy().into_owned(),
+                        path: path
+                            .strip_prefix(root)
+                            .unwrap_or(path)
+                            .to_string_lossy()
+                            .into_owned(),
                         source: source.clone(),
                         status: "panic".into(),
                         error: None,

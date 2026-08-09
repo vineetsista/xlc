@@ -5,13 +5,13 @@
 
 mod census;
 mod check;
+mod corpus;
 mod ir_verify;
 mod monte_verify;
+mod parse_corpus;
 mod phase7_verify;
 mod product;
-mod parse_corpus;
 mod receipt;
-mod corpus;
 
 fn main() {
     let args: Vec<String> = std::env::args().skip(1).collect();

@@ -62,11 +62,24 @@ struct FastPlan {
 enum FastInst {
     Const(f64),
     /// Load a single cell rebased per lane (row/col deltas applied).
-    Load { sheet: SheetId, row: i64, col: i64, row_abs: bool, col_abs: bool },
+    Load {
+        sheet: SheetId,
+        row: i64,
+        col: i64,
+        row_abs: bool,
+        col_abs: bool,
+    },
     /// SUM over one rectangular range (range semantics: text/bool ignored,
     /// blanks zero; any error or non-numeric dirty dep falls back).
-    SumRange { sheet: SheetId, area: xlc_parse::ast::Area },
-    Bin { op: BinOp, a: u32, b: u32 },
+    SumRange {
+        sheet: SheetId,
+        area: xlc_parse::ast::Area,
+    },
+    Bin {
+        op: BinOp,
+        a: u32,
+        b: u32,
+    },
     Neg(u32),
 }
 
@@ -87,8 +100,12 @@ pub struct SweepResult {
 impl<'wb> Engine<'wb> {
     pub fn new(wb: &'wb Workbook, spec: ScenarioSpec) -> Self {
         let module = xlc_ir::lower(wb);
-        let input_index: HashMap<CellKey, usize> =
-            spec.inputs.iter().enumerate().map(|(i, (k, _))| (*k, i)).collect();
+        let input_index: HashMap<CellKey, usize> = spec
+            .inputs
+            .iter()
+            .enumerate()
+            .map(|(i, (k, _))| (*k, i))
+            .collect();
 
         // Per (family, lane): dep rects, computed once.
         let mut lane_deps: Vec<Vec<Vec<Rect>>> = Vec::with_capacity(module.families.len());
@@ -112,9 +129,9 @@ impl<'wb> Engine<'wb> {
                     if dirty.contains(&key) {
                         continue;
                     }
-                    let hit = lane_deps[fi][li].iter().any(|r| {
-                        rect_hits(r, &inputs_set) || rect_hits(r, &dirty)
-                    });
+                    let hit = lane_deps[fi][li]
+                        .iter()
+                        .any(|r| rect_hits(r, &inputs_set) || rect_hits(r, &dirty));
                     if hit {
                         dirty.insert(key);
                         changed = true;
@@ -253,12 +270,15 @@ impl<'wb> Engine<'wb> {
         let mut vals: Vec<f64> = Vec::with_capacity(plan.insts.len());
         let mut grads: Vec<std::collections::HashMap<Source, f64>> =
             Vec::with_capacity(plan.insts.len());
-        let mut source_of = |sheet: SheetId, rr: u32, cc: u32| -> (f64, Option<Source>) {
+        let source_of = |sheet: SheetId, rr: u32, cc: u32| -> (f64, Option<Source>) {
             let key = (sheet, rr, cc);
             if let Some(&ii) = self.input_index.get(&key) {
                 (inputs[ii], Some(Source::Input(ii)))
             } else if let Some(&p) = self.dirty_index.get(&key) {
-                (value_of.get(&key).copied().unwrap_or(f64::NAN), Some(Source::Cone(p)))
+                (
+                    value_of.get(&key).copied().unwrap_or(f64::NAN),
+                    Some(Source::Cone(p)),
+                )
             } else {
                 match self.wb.sheets[sheet as usize].values.get(&(rr, cc)) {
                     Some(Value::Num(x)) => (*x, None),
@@ -271,7 +291,13 @@ impl<'wb> Engine<'wb> {
         for inst in &plan.insts {
             let (v, g) = match inst {
                 FastInst::Const(x) => (*x, std::collections::HashMap::new()),
-                FastInst::Load { sheet, row: r, col: c, row_abs, col_abs } => {
+                FastInst::Load {
+                    sheet,
+                    row: r,
+                    col: c,
+                    row_abs,
+                    col_abs,
+                } => {
                     let rr = u32::try_from(if *row_abs { *r } else { *r + dr }).ok()?;
                     let cc = u32::try_from(if *col_abs { *c } else { *c + dc }).ok()?;
                     let (v, src) = source_of(*sheet, rr, cc);
@@ -286,7 +312,14 @@ impl<'wb> Engine<'wb> {
                 }
                 FastInst::SumRange { sheet, area } => {
                     let a2 = xlc_ir::rebase_pub(area, dr, dc)?;
-                    let interp = Interp::new(self.wb, Origin { sheet: *sheet, row, col });
+                    let interp = Interp::new(
+                        self.wb,
+                        Origin {
+                            sheet: *sheet,
+                            row,
+                            col,
+                        },
+                    );
                     let Operand::Ref(rects) = interp.resolve_area(&[*sheet], &a2) else {
                         return None;
                     };
@@ -354,7 +387,12 @@ impl<'wb> Engine<'wb> {
             vals.push(v);
             grads.push(g);
         }
-        Some(grads[plan.result as usize].iter().map(|(s, d)| (*s, *d)).collect())
+        Some(
+            grads[plan.result as usize]
+                .iter()
+                .map(|(s, d)| (*s, *d))
+                .collect(),
+        )
     }
 
     pub fn cone_keys(&self) -> Vec<CellKey> {
@@ -384,7 +422,9 @@ impl<'wb> Engine<'wb> {
         for pos in 0..self.schedule.len() {
             let (sheet, row, col) = self.key_of(pos);
             let src = wb2.sheets[sheet as usize].formulas[&(row, col)].clone();
-            let Ok(parsed) = xlc_parse::parse_formula(&src) else { continue };
+            let Ok(parsed) = xlc_parse::parse_formula(&src) else {
+                continue;
+            };
             let v = Interp::new(&wb2, Origin { sheet, row, col }).eval_formula(&parsed.expr);
             wb2.set_value(sheet, row, col, v.clone());
             cells += 1;
@@ -445,13 +485,7 @@ impl<'wb> Engine<'wb> {
             .collect()
     }
 
-    fn run_tile(
-        &self,
-        s0: u32,
-        t: u32,
-        watch: &HashSet<CellKey>,
-        out: &mut SweepResult,
-    ) {
+    fn run_tile(&self, s0: u32, t: u32, watch: &HashSet<CellKey>, out: &mut SweepResult) {
         let tl = t as usize;
         // Input sample buffers for this tile.
         let mut input_bufs: Vec<Vec<f64>> = Vec::with_capacity(self.spec.inputs.len());
@@ -508,7 +542,10 @@ impl<'wb> Engine<'wb> {
 
             let key = (fam.sheet, fam.lanes[li].0, fam.lanes[li].1);
             if watch.contains(&key) {
-                out.watched.get_mut(&key).unwrap().extend(buf.iter().cloned());
+                out.watched
+                    .get_mut(&key)
+                    .unwrap()
+                    .extend(buf.iter().cloned());
             }
             bufs[pos] = Some(buf);
             let live = bufs.iter().filter(|b| b.is_some()).count();
@@ -535,17 +572,20 @@ impl<'wb> Engine<'wb> {
     /// Vectorized fast path. Returns false (buffer untouched) when the
     /// family is not fast-eligible or an operand/result leaves the pure
     /// numeric domain.
+    #[allow(clippy::too_many_arguments)]
     fn try_fast(
         &self,
         fi: usize,
         li: usize,
-        s0: u32,
+        _s0: u32,
         t: u32,
         input_bufs: &[Vec<f64>],
         bufs: &[Option<Vec<Value>>],
         out_buf: &mut Vec<Value>,
     ) -> bool {
-        let Some(plan) = &self.fast[fi] else { return false };
+        let Some(plan) = &self.fast[fi] else {
+            return false;
+        };
         let fam = &self.module.families[fi];
         let (row, col) = fam.lanes[li];
         let (er, ec) = fam.lanes[0];
@@ -564,7 +604,13 @@ impl<'wb> Engine<'wb> {
         for inst in &plan.insts {
             let src = match inst {
                 FastInst::Const(x) => Src::Broadcast(*x),
-                FastInst::Load { sheet, row: r, col: c, row_abs, col_abs } => {
+                FastInst::Load {
+                    sheet,
+                    row: r,
+                    col: c,
+                    row_abs,
+                    col_abs,
+                } => {
                     let rr = if *row_abs { *r } else { *r + dr };
                     let cc = if *col_abs { *c } else { *c + dc };
                     let (Ok(rr), Ok(cc)) = (u32::try_from(rr), u32::try_from(cc)) else {
@@ -611,8 +657,17 @@ impl<'wb> Engine<'wb> {
                     }
                 },
                 FastInst::SumRange { sheet, area } => {
-                    let Some(a2) = xlc_ir::rebase_pub(area, dr, dc) else { return false };
-                    let interp = Interp::new(self.wb, Origin { sheet: *sheet, row, col });
+                    let Some(a2) = xlc_ir::rebase_pub(area, dr, dc) else {
+                        return false;
+                    };
+                    let interp = Interp::new(
+                        self.wb,
+                        Origin {
+                            sheet: *sheet,
+                            row,
+                            col,
+                        },
+                    );
                     let Operand::Ref(rects) = interp.resolve_area(&[*sheet], &a2) else {
                         return false;
                     };
@@ -714,41 +769,41 @@ impl<'wb> Engine<'wb> {
 /// pulp-dispatched elementwise arithmetic. Division by zero bails so the
 /// scalar path can produce the proper #DIV/0!.
 fn vector_binop(op: BinOp, x: &[f64], y: &[f64], out: &mut [f64]) -> bool {
-    if matches!(op, BinOp::Div) && y.iter().any(|&v| v == 0.0) {
+    if matches!(op, BinOp::Div) && y.contains(&0.0) {
         return false;
     }
     let arch = pulp::Arch::new();
-    arch.dispatch(|| {
-        match op {
-            BinOp::Add => {
-                for i in 0..out.len() {
-                    out[i] = x[i] + y[i];
-                }
+    arch.dispatch(|| match op {
+        BinOp::Add => {
+            for i in 0..out.len() {
+                out[i] = x[i] + y[i];
             }
-            BinOp::Sub => {
-                for i in 0..out.len() {
-                    out[i] = x[i] - y[i];
-                }
-            }
-            BinOp::Mul => {
-                for i in 0..out.len() {
-                    out[i] = x[i] * y[i];
-                }
-            }
-            BinOp::Div => {
-                for i in 0..out.len() {
-                    out[i] = x[i] / y[i];
-                }
-            }
-            _ => {}
         }
+        BinOp::Sub => {
+            for i in 0..out.len() {
+                out[i] = x[i] - y[i];
+            }
+        }
+        BinOp::Mul => {
+            for i in 0..out.len() {
+                out[i] = x[i] * y[i];
+            }
+        }
+        BinOp::Div => {
+            for i in 0..out.len() {
+                out[i] = x[i] / y[i];
+            }
+        }
+        _ => {}
     });
     matches!(op, BinOp::Add | BinOp::Sub | BinOp::Mul | BinOp::Div)
 }
 
 /// Recognize `SUM(<one area ref>)` opaque nodes (the dominant aggregate).
 fn sum_range_of(ast: &Expr) -> Option<(Vec<SheetId>, xlc_parse::ast::Area)> {
-    let Expr::Call { name, args } = ast else { return None };
+    let Expr::Call { name, args } = ast else {
+        return None;
+    };
     let mut n = name.to_ascii_uppercase();
     while let Some(rest) = n.strip_prefix("_XLFN.") {
         n = rest.to_string();
@@ -761,7 +816,9 @@ fn sum_range_of(ast: &Expr) -> Option<(Vec<SheetId>, xlc_parse::ast::Area)> {
         Expr::Paren { inner, .. } => inner.as_ref(),
         e => e,
     };
-    let Expr::Ref(xlc_parse::ast::RefExpr::Area { sheet, area }) = inner else { return None };
+    let Expr::Ref(xlc_parse::ast::RefExpr::Area { sheet, area }) = inner else {
+        return None;
+    };
     if matches!(area, xlc_parse::ast::Area::RefError) {
         return None;
     }
@@ -795,19 +852,29 @@ fn fast_plan(fam: &Family) -> Option<FastPlan> {
                 }
             }
             Inst::Binary { op, a, b } => match op {
-                BinOp::Add | BinOp::Sub | BinOp::Mul | BinOp::Div => {
-                    FastInst::Bin { op: *op, a: *a, b: *b }
-                }
+                BinOp::Add | BinOp::Sub | BinOp::Mul | BinOp::Div => FastInst::Bin {
+                    op: *op,
+                    a: *a,
+                    b: *b,
+                },
                 _ => return None,
             },
             Inst::Unary { op, a } => match op {
                 UnOp::Neg => FastInst::Neg(*a),
-                UnOp::Pos => FastInst::Bin { op: BinOp::Add, a: *a, b: *a }, // placeholder
+                UnOp::Pos => FastInst::Bin {
+                    op: BinOp::Add,
+                    a: *a,
+                    b: *a,
+                }, // placeholder
                 _ => return None,
             },
             Inst::Opaque { ast } => match sum_range_of(ast) {
                 Some((sheets, area)) => {
-                    let sheet = if sheets == [u32::MAX] { fam.sheet } else { sheets[0] };
+                    let sheet = if sheets == [u32::MAX] {
+                        fam.sheet
+                    } else {
+                        sheets[0]
+                    };
                     FastInst::SumRange { sheet, area }
                 }
                 None => return None,
@@ -820,7 +887,10 @@ fn fast_plan(fam: &Family) -> Option<FastPlan> {
         }
         insts.push(fi);
     }
-    Some(FastPlan { insts, result: fam.result })
+    Some(FastPlan {
+        insts,
+        result: fam.result,
+    })
 }
 
 /// Public wrapper for input auto-selection in the CLI.
@@ -832,7 +902,14 @@ pub fn family_dep_rects_pub(wb: &Workbook, fam: &Family, lane: usize) -> Vec<Rec
 /// evaluation machinery: every Ref/Name operand the expression can touch.
 fn family_dep_rects(wb: &Workbook, fam: &Family, lane: usize) -> Vec<Rect> {
     let (row, col) = fam.lanes[lane];
-    let interp = Interp::new(wb, Origin { sheet: fam.sheet, row, col });
+    let interp = Interp::new(
+        wb,
+        Origin {
+            sheet: fam.sheet,
+            row,
+            col,
+        },
+    );
     let mut rects = Vec::new();
     let (er, ec) = fam.lanes[0];
     let (dr, dc) = (row as i64 - er as i64, col as i64 - ec as i64);
@@ -876,9 +953,11 @@ fn collect_expr_refs(interp: &Interp<Workbook>, e: &Expr, rects: &mut Vec<Rect>,
 fn rect_hits(r: &Rect, set: &HashSet<CellKey>) -> bool {
     let area = (r.r1 - r.r0 + 1) as u64 * (r.c1 - r.c0 + 1) as u64;
     if area <= set.len() as u64 {
-        r.cells().any(|(row, col)| set.contains(&(r.sheet, row, col)))
+        r.cells()
+            .any(|(row, col)| set.contains(&(r.sheet, row, col)))
     } else {
-        set.iter().any(|&(s, row, col)| s == r.sheet && r.contains(row, col))
+        set.iter()
+            .any(|&(s, row, col)| s == r.sheet && r.contains(row, col))
     }
 }
 
@@ -985,8 +1064,15 @@ mod tests {
             let parsed = xlc_parse::parse_formula(&src).unwrap();
             // Scalar receipt semantics need computed B values as we walk
             // down (full recompute): evaluate in order and write back.
-            let v = Interp::new(&wb2, Origin { sheet: 0, row: r, col: 1 })
-                .eval_formula(&parsed.expr);
+            let v = Interp::new(
+                &wb2,
+                Origin {
+                    sheet: 0,
+                    row: r,
+                    col: 1,
+                },
+            )
+            .eval_formula(&parsed.expr);
             wb2.set_value(0, r, 1, v.clone());
             let got = &res.watched[&(0, r, 1)][0];
             assert!(
@@ -1008,7 +1094,10 @@ mod tests {
         let vals = &res.watched[&(0, 9, 1)];
         assert_eq!(vals.len(), 10_000);
         let first = &vals[0];
-        assert!(vals.iter().all(|v| xlc_ir::bit_equal(v, first)), "all identical");
+        assert!(
+            vals.iter().all(|v| xlc_ir::bit_equal(v, first)),
+            "all identical"
+        );
     }
 
     #[test]

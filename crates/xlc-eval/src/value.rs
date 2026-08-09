@@ -212,7 +212,13 @@ pub fn mul(a: &Value, b: &Value) -> Value {
 }
 
 pub fn div(a: &Value, b: &Value) -> Value {
-    numeric_binop(a, b, |x, y| if y == 0.0 { Err(ExcelError::Div0) } else { Ok(x / y) })
+    numeric_binop(a, b, |x, y| {
+        if y == 0.0 {
+            Err(ExcelError::Div0)
+        } else {
+            Ok(x / y)
+        }
+    })
 }
 
 /// Excel `^`: 0^0 is #NUM!, negative^non-integer is #NUM!.
@@ -338,27 +344,57 @@ mod tests {
     #[test]
     fn arithmetic_coercion() {
         // "2"+1 = 3: text coerces in arithmetic.
-        assert_eq!(add(&Value::Text("2".into()), &Value::Num(1.0)), Value::Num(3.0));
+        assert_eq!(
+            add(&Value::Text("2".into()), &Value::Num(1.0)),
+            Value::Num(3.0)
+        );
         // TRUE+1 = 2.
         assert_eq!(add(&Value::Bool(true), &Value::Num(1.0)), Value::Num(2.0));
         // Blank+1 = 1.
         assert_eq!(add(&Value::Blank, &Value::Num(1.0)), Value::Num(1.0));
         // "abc"+1 = #VALUE!.
-        assert_eq!(add(&Value::Text("abc".into()), &Value::Num(1.0)), Value::Err(ExcelError::Value));
+        assert_eq!(
+            add(&Value::Text("abc".into()), &Value::Num(1.0)),
+            Value::Err(ExcelError::Value)
+        );
         // " 2.5 "+0 parses with whitespace; "50%"+0 = 0.5; "$3"+0 = 3;
         // "1,234"+0 = 1234.
-        assert_eq!(add(&Value::Text(" 2.5 ".into()), &Value::Num(0.0)), Value::Num(2.5));
-        assert_eq!(add(&Value::Text("50%".into()), &Value::Num(0.0)), Value::Num(0.5));
-        assert_eq!(add(&Value::Text("$3".into()), &Value::Num(0.0)), Value::Num(3.0));
-        assert_eq!(add(&Value::Text("1,234".into()), &Value::Num(0.0)), Value::Num(1234.0));
+        assert_eq!(
+            add(&Value::Text(" 2.5 ".into()), &Value::Num(0.0)),
+            Value::Num(2.5)
+        );
+        assert_eq!(
+            add(&Value::Text("50%".into()), &Value::Num(0.0)),
+            Value::Num(0.5)
+        );
+        assert_eq!(
+            add(&Value::Text("$3".into()), &Value::Num(0.0)),
+            Value::Num(3.0)
+        );
+        assert_eq!(
+            add(&Value::Text("1,234".into()), &Value::Num(0.0)),
+            Value::Num(1234.0)
+        );
     }
 
     #[test]
     fn division_and_pow_errors() {
-        assert_eq!(div(&Value::Num(1.0), &Value::Num(0.0)), Value::Err(ExcelError::Div0));
-        assert_eq!(div(&Value::Num(1.0), &Value::Blank), Value::Err(ExcelError::Div0));
-        assert_eq!(pow(&Value::Num(0.0), &Value::Num(0.0)), Value::Err(ExcelError::Num));
-        assert_eq!(pow(&Value::Num(-8.0), &Value::Num(0.5)), Value::Err(ExcelError::Num));
+        assert_eq!(
+            div(&Value::Num(1.0), &Value::Num(0.0)),
+            Value::Err(ExcelError::Div0)
+        );
+        assert_eq!(
+            div(&Value::Num(1.0), &Value::Blank),
+            Value::Err(ExcelError::Div0)
+        );
+        assert_eq!(
+            pow(&Value::Num(0.0), &Value::Num(0.0)),
+            Value::Err(ExcelError::Num)
+        );
+        assert_eq!(
+            pow(&Value::Num(-8.0), &Value::Num(0.5)),
+            Value::Err(ExcelError::Num)
+        );
         assert_eq!(pow(&Value::Num(-8.0), &Value::Num(2.0)), Value::Num(64.0));
     }
 
@@ -394,11 +430,23 @@ mod tests {
 
     #[test]
     fn blank_equals_zero_and_empty_string() {
-        assert_eq!(compare(&Value::Blank, &Value::Num(0.0)).unwrap(), Ordering::Equal);
-        assert_eq!(compare(&Value::Blank, &Value::Text(String::new())).unwrap(), Ordering::Equal);
-        assert_eq!(compare(&Value::Blank, &Value::Bool(false)).unwrap(), Ordering::Equal);
+        assert_eq!(
+            compare(&Value::Blank, &Value::Num(0.0)).unwrap(),
+            Ordering::Equal
+        );
+        assert_eq!(
+            compare(&Value::Blank, &Value::Text(String::new())).unwrap(),
+            Ordering::Equal
+        );
+        assert_eq!(
+            compare(&Value::Blank, &Value::Bool(false)).unwrap(),
+            Ordering::Equal
+        );
         // But Blank is NOT equal to "0"-as-text.
-        assert_eq!(compare(&Value::Blank, &Value::Text("0".into())).unwrap(), Ordering::Less);
+        assert_eq!(
+            compare(&Value::Blank, &Value::Text("0".into())).unwrap(),
+            Ordering::Less
+        );
     }
 
     #[test]
@@ -407,13 +455,19 @@ mod tests {
             concat(&Value::Num(1.0), &Value::Text("x".into())),
             Value::Text("1x".into())
         );
-        assert_eq!(concat(&Value::Blank, &Value::Text("x".into())), Value::Text("x".into()));
+        assert_eq!(
+            concat(&Value::Blank, &Value::Text("x".into())),
+            Value::Text("x".into())
+        );
         assert_eq!(
             concat(&Value::Bool(true), &Value::Blank),
             Value::Text("TRUE".into())
         );
         // 0.1 concats as "0.1", not "0.1000000000000000055…".
-        assert_eq!(concat(&Value::Num(0.1), &Value::Blank), Value::Text("0.1".into()));
+        assert_eq!(
+            concat(&Value::Num(0.1), &Value::Blank),
+            Value::Text("0.1".into())
+        );
     }
 
     #[test]

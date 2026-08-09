@@ -11,14 +11,20 @@ use xlc_scenario::dist::Dist;
 use xlc_scenario::engine::{CellKey, Engine, ScenarioSpec};
 
 fn arg_value<'a>(args: &'a [String], flag: &str) -> Option<&'a str> {
-    args.iter().position(|a| a == flag).and_then(|i| args.get(i + 1)).map(String::as_str)
+    args.iter()
+        .position(|a| a == flag)
+        .and_then(|i| args.get(i + 1))
+        .map(String::as_str)
 }
 
 /// Deterministic tiny PRNG for model generation (not the engine RNG).
 struct Lcg(u64);
 impl Lcg {
     fn next(&mut self) -> u64 {
-        self.0 = self.0.wrapping_mul(6364136223846793005).wrapping_add(1442695040888963407);
+        self.0 = self
+            .0
+            .wrapping_mul(6364136223846793005)
+            .wrapping_add(1442695040888963407);
         self.0 >> 11
     }
     fn f64(&mut self) -> f64 {
@@ -94,7 +100,13 @@ pub fn phase7_verify_cmd(args: &[String]) -> i32 {
         }
         let spec = ScenarioSpec {
             seed: 4242,
-            inputs: vec![((0, 1000, 0), Dist::Normal { mean: 50.0, sd: 5.0 })],
+            inputs: vec![(
+                (0, 1000, 0),
+                Dist::Normal {
+                    mean: 50.0,
+                    sd: 5.0,
+                },
+            )],
         };
         let build0 = Instant::now();
         let engine = Engine::new(&wb, spec);
@@ -131,10 +143,12 @@ pub fn phase7_verify_cmd(args: &[String]) -> i32 {
             let (wb, inputs, out) = random_smooth_model(seed);
             let point: Vec<f64> = inputs
                 .iter()
-                .map(|&(s, r, c)| match wb.sheets[s as usize].values.get(&(r, c)) {
-                    Some(Value::Num(x)) => *x,
-                    _ => 1.0,
-                })
+                .map(
+                    |&(s, r, c)| match wb.sheets[s as usize].values.get(&(r, c)) {
+                        Some(Value::Num(x)) => *x,
+                        _ => 1.0,
+                    },
+                )
                 .collect();
             let spec = ScenarioSpec {
                 seed: 7,
@@ -145,7 +159,9 @@ pub fn phase7_verify_cmd(args: &[String]) -> i32 {
                     .collect(),
             };
             let engine = Engine::new(&wb, spec);
-            let Some(g) = engine.gradient(out, 0) else { continue };
+            let Some(g) = engine.gradient(out, 0) else {
+                continue;
+            };
             if !g.structural_cells.is_empty() {
                 continue; // only smooth models count toward the oracle
             }
@@ -215,7 +231,13 @@ pub fn phase7_verify_cmd(args: &[String]) -> i32 {
         let wb2 = build(1.17);
         let spec = ScenarioSpec {
             seed: 314,
-            inputs: vec![((0, 25, 0), Dist::Normal { mean: 26.0, sd: 4.0 })],
+            inputs: vec![(
+                (0, 25, 0),
+                Dist::Normal {
+                    mean: 26.0,
+                    sd: 4.0,
+                },
+            )],
         };
         let out = (0u32, 39u32, 1u32);
         let rep = xlc_diff::diff_output(&wb1, &wb2, &spec, out, 10_000);

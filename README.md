@@ -26,6 +26,7 @@ stamped into every artifact in `docs/benchmarks/`.
 | incremental recompute (one input, 40k-formula model, N=10⁵) | 12.6 ms | `phase7.json` |
 | reverse-mode AD vs central differences (50 smooth models) | max rel err 8.0×10⁻⁷ | `phase7.json` |
 | vectorized fast path (synthetic chain) | 1.45×10⁸ cell-scenarios/s | `scenario.json` |
+| secondary-oracle adjudication of every disputed cell (LibreOffice via UNO) | 49.6% of residual mismatches are stale-cache oracle noise (LO sides with xlc); 41.5% real gaps = 0.27% of verifiable cells | `oracle-adjudication.json` |
 
 Exclusions are always printed beside every rate, never hidden: external-
 workbook refs (their oracle lives in files we don't have), nondeterministic
@@ -70,7 +71,19 @@ Browser build: `wasm-pack build crates/xlc-wasm --target web --release
 Everything runs locally. The only server this product will ever have is a
 CDN serving static files.
 
-## License
+## Live demo
 
-MIT. Corpus sources: FUSE (CC-BY-4.0), SpreadsheetBench (CC-BY-SA-4.0,
-testing only, never vendored).
+Drop a workbook at the hosted page (nothing uploads — the engine runs in
+your tab). Build your own from source: `make deploy-package` produces a
+static site zip; `.github/workflows/deploy-pages.yml` deploys to GitHub
+Pages on push.
+
+## License and attribution
+
+Code: MIT (see LICENSE). The committed 500-workbook regression subset in
+`corpus/subset/` is derived from the **FUSE corpus** (Barik, Lubick,
+Smith, Slankas, Murphy-Hill — "FUSE: A Reproducible, Extendable, Internet-
+Scale Corpus of Spreadsheets", MSR 2015; DOI 10.5281/zenodo.581678),
+licensed **CC-BY-4.0**; redistribution here with attribution per that
+license. SpreadsheetBench (CC-BY-SA-4.0) is used for testing only and is
+never vendored into this repository or any shipped artifact.

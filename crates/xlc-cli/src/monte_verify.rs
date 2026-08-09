@@ -14,7 +14,10 @@ use xlc_scenario::engine::{CellKey, Engine, ScenarioSpec};
 use xlc_scenario::rng::DrawAddr;
 
 fn arg_value<'a>(args: &'a [String], flag: &str) -> Option<&'a str> {
-    args.iter().position(|a| a == flag).and_then(|i| args.get(i + 1)).map(String::as_str)
+    args.iter()
+        .position(|a| a == flag)
+        .and_then(|i| args.get(i + 1))
+        .map(String::as_str)
 }
 
 /// Choose up to `k` uncertain inputs for a workbook: static numeric cells
@@ -47,7 +50,11 @@ fn auto_inputs(wb: &xlc_eval::workbook::Workbook, k: usize) -> Vec<(CellKey, f64
     }
     let mut ranked: Vec<(CellKey, (usize, f64))> = counts.into_iter().collect();
     ranked.sort_by(|a, b| b.1 .0.cmp(&a.1 .0).then(a.0.cmp(&b.0)));
-    ranked.into_iter().take(k).map(|(key, (_, x))| (key, x)).collect()
+    ranked
+        .into_iter()
+        .take(k)
+        .map(|(key, (_, x))| (key, x))
+        .collect()
 }
 
 pub fn monte_verify_cmd(args: &[String]) -> i32 {
@@ -58,12 +65,15 @@ pub fn monte_verify_cmd(args: &[String]) -> i32 {
     // ---- 1. N=1 oracle over fixtures + a deterministic corpus sample ----
     let mut n1_cells = 0usize;
     let mut n1_mism = 0usize;
-    let mut sample_paths: Vec<std::path::PathBuf> =
-        fs::read_dir("corpus/subset").map(|rd| rd.flatten().map(|e| e.path()).collect()).unwrap_or_default();
+    let mut sample_paths: Vec<std::path::PathBuf> = fs::read_dir("corpus/subset")
+        .map(|rd| rd.flatten().map(|e| e.path()).collect())
+        .unwrap_or_default();
     sample_paths.sort();
     let sample: Vec<_> = sample_paths.iter().step_by(7).take(40).collect();
     for path in sample {
-        let Ok(wb) = xlc_ingest::ingest_path(path) else { continue };
+        let Ok(wb) = xlc_ingest::ingest_path(path) else {
+            continue;
+        };
         let inputs = auto_inputs(&wb, 8);
         if inputs.is_empty() {
             continue;
@@ -88,7 +98,11 @@ pub fn monte_verify_cmd(args: &[String]) -> i32 {
         let id = wb.add_sheet("S");
         for r in 0..10u32 {
             wb.set_value(id, r, 0, Value::Num((r + 1) as f64 * 1.1));
-            let f = if r == 0 { "A1*2".into() } else { format!("A{}*2+B{}", r + 1, r) };
+            let f = if r == 0 {
+                "A1*2".into()
+            } else {
+                format!("A{}*2+B{}", r + 1, r)
+            };
             wb.set_formula(id, r, 1, f);
         }
         let spec = ScenarioSpec {
@@ -107,16 +121,42 @@ pub fn monte_verify_cmd(args: &[String]) -> i32 {
     let mut moments = serde_json::Map::new();
     for (name, d) in [
         ("normal", Dist::Normal { mean: 3.0, sd: 2.0 }),
-        ("lognormal", Dist::LogNormal { mu: 0.2, sigma: 0.5 }),
+        (
+            "lognormal",
+            Dist::LogNormal {
+                mu: 0.2,
+                sigma: 0.5,
+            },
+        ),
         ("uniform", Dist::Uniform { a: -1.0, b: 5.0 }),
-        ("triangular", Dist::Triangular { a: 1.0, m: 4.0, b: 11.0 }),
-        ("pert", Dist::Pert { a: 1.0, m: 4.0, b: 11.0 }),
+        (
+            "triangular",
+            Dist::Triangular {
+                a: 1.0,
+                m: 4.0,
+                b: 11.0,
+            },
+        ),
+        (
+            "pert",
+            Dist::Pert {
+                a: 1.0,
+                m: 4.0,
+                b: 11.0,
+            },
+        ),
     ] {
         let n = 1_000_000u32;
         let mut sum = 0.0;
         let mut sumsq = 0.0;
         for k2 in 0..n {
-            let x = d.sample(DrawAddr { seed: 21, cell: 2, scenario: k2, draw: 0, attempt: 0 });
+            let x = d.sample(DrawAddr {
+                seed: 21,
+                cell: 2,
+                scenario: k2,
+                draw: 0,
+                attempt: 0,
+            });
             sum += x;
             sumsq += x * x;
         }
@@ -147,7 +187,13 @@ pub fn monte_verify_cmd(args: &[String]) -> i32 {
             inputs: inputs
                 .iter()
                 .map(|&(k, x)| {
-                    (k, Dist::Normal { mean: x, sd: x.abs() * 0.1 + 1.0 })
+                    (
+                        k,
+                        Dist::Normal {
+                            mean: x,
+                            sd: x.abs() * 0.1 + 1.0,
+                        },
+                    )
                 })
                 .collect(),
         };
@@ -245,7 +291,15 @@ pub fn monte_verify_cmd(args: &[String]) -> i32 {
             seed: 42,
             inputs: (0..rows)
                 .step_by(40)
-                .map(|r| ((0u32, r, 0u32), Dist::Normal { mean: 50.0, sd: 5.0 }))
+                .map(|r| {
+                    (
+                        (0u32, r, 0u32),
+                        Dist::Normal {
+                            mean: 50.0,
+                            sd: 5.0,
+                        },
+                    )
+                })
                 .collect(),
         };
         let engine = Engine::new(&wb, spec);

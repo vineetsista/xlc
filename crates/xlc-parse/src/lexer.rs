@@ -97,7 +97,10 @@ pub fn lex(src: &str) -> Result<Vec<Tok>, LexError> {
                 let mut s = String::new();
                 loop {
                     if i >= n {
-                        return Err(LexError { pos: i, msg: "unterminated string".into() });
+                        return Err(LexError {
+                            pos: i,
+                            msg: "unterminated string".into(),
+                        });
                     }
                     if chars[i] == '"' {
                         if i + 1 < n && chars[i + 1] == '"' {
@@ -119,7 +122,10 @@ pub fn lex(src: &str) -> Result<Vec<Tok>, LexError> {
                 let mut s = String::new();
                 loop {
                     if i >= n {
-                        return Err(LexError { pos: i, msg: "unterminated quoted name".into() });
+                        return Err(LexError {
+                            pos: i,
+                            msg: "unterminated quoted name".into(),
+                        });
                     }
                     if chars[i] == '\'' {
                         if i + 1 < n && chars[i + 1] == '\'' {
@@ -143,7 +149,10 @@ pub fn lex(src: &str) -> Result<Vec<Tok>, LexError> {
                 let mut depth = 0usize;
                 loop {
                     if i >= n {
-                        return Err(LexError { pos: start, msg: "unterminated bracket".into() });
+                        return Err(LexError {
+                            pos: start,
+                            msg: "unterminated bracket".into(),
+                        });
                     }
                     match chars[i] {
                         '\'' if i + 1 < n => i += 2, // escape next char
@@ -280,7 +289,10 @@ pub fn lex(src: &str) -> Result<Vec<Tok>, LexError> {
                 toks.push(Tok::Ident(chars[start..i].iter().collect()));
             }
             _ => {
-                return Err(LexError { pos: i, msg: format!("unexpected character {c:?}") });
+                return Err(LexError {
+                    pos: i,
+                    msg: format!("unexpected character {c:?}"),
+                });
             }
         }
     }
@@ -357,7 +369,11 @@ mod tests {
     fn quoted_sheet() {
         assert_eq!(
             lex("'My Sheet'!A1").unwrap(),
-            vec![Tok::Quoted("My Sheet".into()), Tok::Bang, Tok::Ident("A1".into())]
+            vec![
+                Tok::Quoted("My Sheet".into()),
+                Tok::Bang,
+                Tok::Ident("A1".into())
+            ]
         );
         assert_eq!(lex("'It''s'!B2").unwrap()[0], Tok::Quoted("It's".into()));
     }
@@ -367,14 +383,20 @@ mod tests {
         assert_eq!(lex("#DIV/0!").unwrap(), vec![Tok::Error(ErrorLit::Div0)]);
         assert_eq!(lex("#N/A").unwrap(), vec![Tok::Error(ErrorLit::NA)]);
         // Spill postfix: A1# lexes as ident + hash.
-        assert_eq!(lex("A1#").unwrap(), vec![Tok::Ident("A1".into()), Tok::Hash]);
+        assert_eq!(
+            lex("A1#").unwrap(),
+            vec![Tok::Ident("A1".into()), Tok::Hash]
+        );
     }
 
     #[test]
     fn nested_table_brackets() {
         assert_eq!(
             lex("Table1[[#Headers],[Col]]").unwrap(),
-            vec![Tok::Ident("Table1".into()), Tok::Bracket("[[#Headers],[Col]]".into())]
+            vec![
+                Tok::Ident("Table1".into()),
+                Tok::Bracket("[[#Headers],[Col]]".into())
+            ]
         );
     }
 

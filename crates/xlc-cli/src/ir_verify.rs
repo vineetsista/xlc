@@ -12,7 +12,9 @@ use rayon::prelude::*;
 use xlc_eval::interp::{Interp, Origin};
 
 fn walk(dir: &Path, out: &mut Vec<PathBuf>) {
-    let Ok(entries) = fs::read_dir(dir) else { return };
+    let Ok(entries) = fs::read_dir(dir) else {
+        return;
+    };
     for entry in entries.flatten() {
         let p = entry.path();
         if p.is_dir() {
@@ -24,7 +26,10 @@ fn walk(dir: &Path, out: &mut Vec<PathBuf>) {
 }
 
 fn arg_value<'a>(args: &'a [String], flag: &str) -> Option<&'a str> {
-    args.iter().position(|a| a == flag).and_then(|i| args.get(i + 1)).map(String::as_str)
+    args.iter()
+        .position(|a| a == flag)
+        .and_then(|i| args.get(i + 1))
+        .map(String::as_str)
 }
 
 #[derive(Default)]
@@ -50,8 +55,10 @@ pub fn ir_verify_cmd(args: &[String]) -> i32 {
     files.sort();
     files.retain(|p| {
         let mut magic = [0u8; 2];
-        matches!(fs::File::open(p).and_then(|mut f| f.read_exact(&mut magic)), Ok(()))
-            && &magic == b"PK"
+        matches!(
+            fs::File::open(p).and_then(|mut f| f.read_exact(&mut magic)),
+            Ok(())
+        ) && &magic == b"PK"
     });
     eprintln!("ir-verify: {} workbooks", files.len());
 
@@ -79,8 +86,15 @@ pub fn ir_verify_cmd(args: &[String]) -> i32 {
                             t.parse_skipped += 1;
                             continue;
                         };
-                        let scalar = Interp::new(&wb, Origin { sheet: fam.sheet, row, col })
-                            .eval_formula(&parsed.expr);
+                        let scalar = Interp::new(
+                            &wb,
+                            Origin {
+                                sheet: fam.sheet,
+                                row,
+                                col,
+                            },
+                        )
+                        .eval_formula(&parsed.expr);
                         let ir = fam.eval_lane(&wb, lane);
                         t.cells += 1;
                         if !xlc_ir::bit_equal(&scalar, &ir) {

@@ -44,7 +44,9 @@ pub fn analyze(wb: &Workbook) -> Vec<Finding> {
         // Parse every formula cell once.
         let mut cells: Vec<CellShape> = Vec::new();
         for (&(row, col), src) in &sheet.formulas {
-            let Ok(parsed) = xlc_parse::parse_formula(src) else { continue };
+            let Ok(parsed) = xlc_parse::parse_formula(src) else {
+                continue;
+            };
             let sh = shapes(&parsed.expr, row, col);
             if sh.has_ref_error {
                 findings.push(Finding {
@@ -60,7 +62,12 @@ pub fn analyze(wb: &Workbook) -> Vec<Finding> {
                     ),
                 });
             }
-            cells.push(CellShape { row, col, formula: src.clone(), shapes: sh });
+            cells.push(CellShape {
+                row,
+                col,
+                formula: src.clone(),
+                shapes: sh,
+            });
         }
 
         // Sheet-wide shape frequencies: a deviant whose shape appears
@@ -74,8 +81,20 @@ pub fn analyze(wb: &Workbook) -> Vec<Finding> {
         // Horizontal runs (fixed row, contiguous columns) and vertical
         // runs (fixed column, contiguous rows).
         let mut sheet_findings: Vec<(Finding, bool, u32)> = Vec::new();
-        run_findings(&mut sheet_findings, &sheet.name, &cells, &shape_counts, true);
-        run_findings(&mut sheet_findings, &sheet.name, &cells, &shape_counts, false);
+        run_findings(
+            &mut sheet_findings,
+            &sheet.name,
+            &cells,
+            &shape_counts,
+            true,
+        );
+        run_findings(
+            &mut sheet_findings,
+            &sheet.name,
+            &cells,
+            &shape_counts,
+            false,
+        );
 
         // (f) lane-repeat filter, generic findings only: the same column
         // deviating the same way in several horizontal runs (or row in
@@ -109,7 +128,10 @@ fn run_findings(
     // Group by the fixed axis.
     let mut lanes: HashMap<u32, Vec<&CellShape>> = HashMap::new();
     for c in cells {
-        lanes.entry(if horizontal { c.row } else { c.col }).or_default().push(c);
+        lanes
+            .entry(if horizontal { c.row } else { c.col })
+            .or_default()
+            .push(c);
     }
     for lane in lanes.values_mut() {
         lane.sort_by_key(|c| if horizontal { c.col } else { c.row });
@@ -148,18 +170,27 @@ fn flag_run(
     if majority_n * 4 < run.len() * 3 || majority_n == run.len() {
         return; // majority under 75%, or no deviants at all
     }
-    let deviants: Vec<&&CellShape> =
-        run.iter().filter(|c| c.shapes.full != majority_shape).collect();
+    let deviants: Vec<&&CellShape> = run
+        .iter()
+        .filter(|c| c.shapes.full != majority_shape)
+        .collect();
     if deviants.len() > 2 {
         return;
     }
-    let exemplar = run.iter().find(|c| c.shapes.full == majority_shape).unwrap();
+    let exemplar = run
+        .iter()
+        .find(|c| c.shapes.full == majority_shape)
+        .unwrap();
     let first = run.first().unwrap();
     let last = run.last().unwrap();
     for d in deviants {
         // Interior only: run edges are routinely intentional.
         let pos = if horizontal { d.col } else { d.row };
-        let (lo, hi) = if horizontal { (first.col, last.col) } else { (first.row, last.row) };
+        let (lo, hi) = if horizontal {
+            (first.col, last.col)
+        } else {
+            (first.row, last.row)
+        };
         if pos == lo || pos == hi {
             continue;
         }
@@ -212,7 +243,12 @@ fn flag_run(
                 horizontal,
                 if horizontal { d.col } else { d.row },
             ));
-        } else if shape_counts.get(d.shapes.full.as_str()).copied().unwrap_or(0) > 1 {
+        } else if shape_counts
+            .get(d.shapes.full.as_str())
+            .copied()
+            .unwrap_or(0)
+            > 1
+        {
             // (c) generic findings only: a deviant shape that repeats on
             // this sheet is a second copied pattern (alternating-region
             // layout), not a mistake.
@@ -252,16 +288,20 @@ fn flag_run(
 
 /// Did any range flip between row-vector and column-vector orientation?
 fn orientation_flip(d: &CellShape, exemplar: &CellShape) -> bool {
-    d.shapes.ranges.iter().zip(&exemplar.shapes.ranges).any(|(ra, rb)| {
-        if ra == rb || ra.single || rb.single {
-            return false;
-        }
-        let a_horiz = ra.r0 == ra.r1 && ra.c0 != ra.c1;
-        let a_vert = ra.c0 == ra.c1 && ra.r0 != ra.r1;
-        let b_horiz = rb.r0 == rb.r1 && rb.c0 != rb.c1;
-        let b_vert = rb.c0 == rb.c1 && rb.r0 != rb.r1;
-        (a_horiz && b_vert) || (a_vert && b_horiz)
-    })
+    d.shapes
+        .ranges
+        .iter()
+        .zip(&exemplar.shapes.ranges)
+        .any(|(ra, rb)| {
+            if ra == rb || ra.single || rb.single {
+                return false;
+            }
+            let a_horiz = ra.r0 == ra.r1 && ra.c0 != ra.c1;
+            let a_vert = ra.c0 == ra.c1 && ra.r0 != ra.r1;
+            let b_horiz = rb.r0 == rb.r1 && rb.c0 != rb.c1;
+            let b_vert = rb.c0 == rb.c1 && rb.r0 != rb.r1;
+            (a_horiz && b_vert) || (a_vert && b_horiz)
+        })
 }
 
 /// Same multiset of range descriptors in a different order?
@@ -367,7 +407,11 @@ mod tests {
         assert_eq!(fs.len(), 1, "{fs:?}");
         assert_eq!(fs[0].detector, "range-off-by-one");
         assert_eq!(fs[0].cell, "G10");
-        assert!(fs[0].proof.contains("one boundary short/long by one"), "{}", fs[0].proof);
+        assert!(
+            fs[0].proof.contains("one boundary short/long by one"),
+            "{}",
+            fs[0].proof
+        );
     }
 
     #[test]

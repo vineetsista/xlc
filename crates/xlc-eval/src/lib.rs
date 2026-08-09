@@ -5,7 +5,7 @@ pub mod dates;
 mod funcs_range;
 mod funcs_scalar;
 pub mod interp;
-pub mod workbook;
 pub mod value;
+pub mod workbook;
 
 pub use value::{ExcelError, Value};

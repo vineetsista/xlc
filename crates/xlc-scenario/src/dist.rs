@@ -13,12 +13,31 @@ use crate::rng::{uniform, uniform2, DrawAddr};
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum Dist {
     /// Degenerate point mass (the N=1 oracle uses this).
-    Point { value: f64 },
-    Normal { mean: f64, sd: f64 },
-    LogNormal { mu: f64, sigma: f64 },
-    Uniform { a: f64, b: f64 },
-    Triangular { a: f64, m: f64, b: f64 },
-    Pert { a: f64, m: f64, b: f64 },
+    Point {
+        value: f64,
+    },
+    Normal {
+        mean: f64,
+        sd: f64,
+    },
+    LogNormal {
+        mu: f64,
+        sigma: f64,
+    },
+    Uniform {
+        a: f64,
+        b: f64,
+    },
+    Triangular {
+        a: f64,
+        m: f64,
+        b: f64,
+    },
+    Pert {
+        a: f64,
+        m: f64,
+        b: f64,
+    },
 }
 
 impl Dist {
@@ -44,9 +63,7 @@ impl Dist {
                 (s2.exp() - 1.0) * (2.0 * mu + s2).exp()
             }
             Dist::Uniform { a, b } => (b - a) * (b - a) / 12.0,
-            Dist::Triangular { a, m, b } => {
-                (a * a + m * m + b * b - a * m - a * b - m * b) / 18.0
-            }
+            Dist::Triangular { a, m, b } => (a * a + m * m + b * b - a * m - a * b - m * b) / 18.0,
             Dist::Pert { a, m, b } => {
                 // Beta(alpha, beta) scaled to [a, b] with the PERT
                 // parameterization (lambda = 4).
@@ -75,8 +92,20 @@ impl Dist {
             }
             Dist::Pert { a, m, b } => {
                 let (al, be) = pert_shape(a, m, b);
-                let x = gamma_sample(al, DrawAddr { draw: addr.draw, ..addr });
-                let y = gamma_sample(be, DrawAddr { draw: addr.draw + 1, ..addr });
+                let x = gamma_sample(
+                    al,
+                    DrawAddr {
+                        draw: addr.draw,
+                        ..addr
+                    },
+                );
+                let y = gamma_sample(
+                    be,
+                    DrawAddr {
+                        draw: addr.draw + 1,
+                        ..addr
+                    },
+                );
                 a + (b - a) * (x / (x + y))
             }
         }
@@ -107,7 +136,10 @@ fn gamma_sample(shape: f64, addr: DrawAddr) -> f64 {
                 let g = d * v3;
                 return if boosted {
                     // Boost correction: G(a) = G(a+1) * U^(1/a).
-                    let (u3, _) = uniform2(DrawAddr { attempt: attempt | 0x8000, ..addr });
+                    let (u3, _) = uniform2(DrawAddr {
+                        attempt: attempt | 0x8000,
+                        ..addr
+                    });
                     g * u3.powf(1.0 / shape)
                 } else {
                     g
@@ -149,6 +181,7 @@ fn poly(c: &[f64], x: f64) -> f64 {
     c.iter().rev().fold(0.0, |acc, &k| acc * x + k)
 }
 
+#[allow(clippy::excessive_precision)] // AS241 published coefficients, verbatim
 const A: [f64; 8] = [
     3.387_132_872_796_366_5e0,
     1.331_416_678_917_843_8e2,
@@ -167,7 +200,7 @@ const B: [f64; 8] = [
     2.121_379_430_415_576e4,
     3.930_789_580_009_271e4,
     2.872_908_573_572_194_3e4,
-    5.226_495_278_852_545_5e3,
+    5.226_495_278_852_545e3,
 ];
 const C: [f64; 8] = [
     1.423_437_110_749_683_5e0,
@@ -230,15 +263,41 @@ mod tests {
         let n = 400_000u32;
         for (name, d) in [
             ("normal", Dist::Normal { mean: 3.0, sd: 2.0 }),
-            ("lognormal", Dist::LogNormal { mu: 0.2, sigma: 0.5 }),
+            (
+                "lognormal",
+                Dist::LogNormal {
+                    mu: 0.2,
+                    sigma: 0.5,
+                },
+            ),
             ("uniform", Dist::Uniform { a: -1.0, b: 5.0 }),
-            ("triangular", Dist::Triangular { a: 1.0, m: 4.0, b: 11.0 }),
-            ("pert", Dist::Pert { a: 1.0, m: 4.0, b: 11.0 }),
+            (
+                "triangular",
+                Dist::Triangular {
+                    a: 1.0,
+                    m: 4.0,
+                    b: 11.0,
+                },
+            ),
+            (
+                "pert",
+                Dist::Pert {
+                    a: 1.0,
+                    m: 4.0,
+                    b: 11.0,
+                },
+            ),
         ] {
             let mut sum = 0.0;
             let mut sumsq = 0.0;
             for k in 0..n {
-                let x = d.sample(DrawAddr { seed: 7, cell: 1, scenario: k, draw: 0, attempt: 0 });
+                let x = d.sample(DrawAddr {
+                    seed: 7,
+                    cell: 1,
+                    scenario: k,
+                    draw: 0,
+                    attempt: 0,
+                });
                 sum += x;
                 sumsq += x * x;
             }
@@ -263,7 +322,13 @@ mod tests {
         let d = Dist::Point { value: 42.5 };
         for k in 0..10 {
             assert_eq!(
-                d.sample(DrawAddr { seed: 1, cell: 0, scenario: k, draw: 0, attempt: 0 }),
+                d.sample(DrawAddr {
+                    seed: 1,
+                    cell: 0,
+                    scenario: k,
+                    draw: 0,
+                    attempt: 0
+                }),
                 42.5
             );
         }

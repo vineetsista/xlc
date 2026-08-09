@@ -231,7 +231,11 @@ impl<C: Ctx> Interp<'_, C> {
 
     pub(crate) fn fn_case(&self, args: &[CallArg], upper: bool) -> Value {
         match self.arg_text(args, 0) {
-            Ok(t) => Value::Text(if upper { t.to_uppercase() } else { t.to_lowercase() }),
+            Ok(t) => Value::Text(if upper {
+                t.to_uppercase()
+            } else {
+                t.to_lowercase()
+            }),
             Err(e) => Value::Err(e),
         }
     }
@@ -243,7 +247,11 @@ impl<C: Ctx> Interp<'_, C> {
                 let mut cap = true;
                 for c in t.chars() {
                     if c.is_alphabetic() {
-                        out.extend(if cap { c.to_uppercase().collect::<Vec<_>>() } else { c.to_lowercase().collect() });
+                        out.extend(if cap {
+                            c.to_uppercase().collect::<Vec<_>>()
+                        } else {
+                            c.to_lowercase().collect()
+                        });
                         cap = false;
                     } else {
                         out.push(c);
@@ -411,9 +419,17 @@ impl<C: Ctx> Interp<'_, C> {
         if inst.unsigned_abs() as usize > hits.len() {
             return Value::Err(ExcelError::NA);
         }
-        let idx = if inst > 0 { inst - 1 } else { hits.len() as i64 + inst } as usize;
+        let idx = if inst > 0 {
+            inst - 1
+        } else {
+            hits.len() as i64 + inst
+        } as usize;
         let pos = hits[idx];
-        let s = if after { &t[pos + delim.len()..] } else { &t[..pos] };
+        let s = if after {
+            &t[pos + delim.len()..]
+        } else {
+            &t[..pos]
+        };
         Value::Text(s.to_string())
     }
 
@@ -531,8 +547,11 @@ impl<C: Ctx> Interp<'_, C> {
     // ---- date / time ----
 
     pub(crate) fn fn_date(&self, args: &[CallArg]) -> Value {
-        let (y, m, d) = match (self.arg_num(args, 0), self.arg_num(args, 1), self.arg_num(args, 2))
-        {
+        let (y, m, d) = match (
+            self.arg_num(args, 0),
+            self.arg_num(args, 1),
+            self.arg_num(args, 2),
+        ) {
             (Ok(a), Ok(b), Ok(c)) => (a, b, c),
             (Err(e), _, _) | (_, Err(e), _) | (_, _, Err(e)) => return Value::Err(e),
         };
@@ -542,7 +561,11 @@ impl<C: Ctx> Interp<'_, C> {
             y += 1900;
         }
         let serial = dates::ymd_to_serial_1900(y, m.trunc() as i32, d.trunc() as i32);
-        let serial = if self.ctx.epoch_1904() { serial - 1462 } else { serial };
+        let serial = if self.ctx.epoch_1904() {
+            serial - 1462
+        } else {
+            serial
+        };
         if serial < 0 {
             return Value::Err(ExcelError::Num);
         }
@@ -550,8 +573,11 @@ impl<C: Ctx> Interp<'_, C> {
     }
 
     pub(crate) fn fn_time(&self, args: &[CallArg]) -> Value {
-        let (h, m, s) = match (self.arg_num(args, 0), self.arg_num(args, 1), self.arg_num(args, 2))
-        {
+        let (h, m, s) = match (
+            self.arg_num(args, 0),
+            self.arg_num(args, 1),
+            self.arg_num(args, 2),
+        ) {
             (Ok(a), Ok(b), Ok(c)) => (a, b, c),
             (Err(e), _, _) | (_, Err(e), _) | (_, _, Err(e)) => return Value::Err(e),
         };
@@ -709,7 +735,11 @@ impl<C: Ctx> Interp<'_, C> {
             Err(e) => return Value::Err(e),
         };
         if sig == 0.0 {
-            return if floor { Value::Err(ExcelError::Div0) } else { Value::Num(0.0) };
+            return if floor {
+                Value::Err(ExcelError::Div0)
+            } else {
+                Value::Num(0.0)
+            };
         }
         if x > 0.0 && sig < 0.0 {
             return Value::Err(ExcelError::Num);
@@ -790,9 +820,7 @@ impl<C: Ctx> Interp<'_, C> {
         };
         match self.arg_bool_or(args, 1, true) {
             Ok(true) => Value::Num(phi(z)),
-            Ok(false) => {
-                Value::Num((-0.5 * z * z).exp() / (2.0 * std::f64::consts::PI).sqrt())
-            }
+            Ok(false) => Value::Num((-0.5 * z * z).exp() / (2.0 * std::f64::consts::PI).sqrt()),
             Err(e) => Value::Err(e),
         }
     }

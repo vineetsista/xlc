@@ -96,7 +96,12 @@ pub fn shapes(e: &Expr, host_row: u32, host_col: u32) -> Shapes {
         has_ref_error: false,
     };
     s.walk(e);
-    Shapes { full: s.full, structural: s.structural, ranges: s.ranges, has_ref_error: s.has_ref_error }
+    Shapes {
+        full: s.full,
+        structural: s.structural,
+        ranges: s.ranges,
+        has_ref_error: s.has_ref_error,
+    }
 }
 
 struct Shaper {
@@ -199,7 +204,12 @@ impl Shaper {
                         };
                         self.push_range(d);
                     }
-                    Area::Cols { first, last, first_anchored, last_anchored } => {
+                    Area::Cols {
+                        first,
+                        last,
+                        first_anchored,
+                        last_anchored,
+                    } => {
                         let c0 = if *first_anchored {
                             Axis::Abs(*first)
                         } else {
@@ -220,7 +230,12 @@ impl Shaper {
                         };
                         self.push_range(d);
                     }
-                    Area::Rows { first, last, first_anchored, last_anchored } => {
+                    Area::Rows {
+                        first,
+                        last,
+                        first_anchored,
+                        last_anchored,
+                    } => {
                         let r0 = if *first_anchored {
                             Axis::Abs(*first)
                         } else {

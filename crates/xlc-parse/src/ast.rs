@@ -6,15 +6,15 @@
 /// The seven-plus-two Excel error literals.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ErrorLit {
-    Div0,    // #DIV/0!
-    NA,      // #N/A
-    Value,   // #VALUE!
-    Ref,     // #REF!
-    Name,    // #NAME?
-    Num,     // #NUM!
-    Null,    // #NULL!
-    Spill,   // #SPILL!
-    Calc,    // #CALC!
+    Div0,        // #DIV/0!
+    NA,          // #N/A
+    Value,       // #VALUE!
+    Ref,         // #REF!
+    Name,        // #NAME?
+    Num,         // #NUM!
+    Null,        // #NULL!
+    Spill,       // #SPILL!
+    Calc,        // #CALC!
     GettingData, // #GETTING_DATA — appears in cached files
 }
 
@@ -87,9 +87,19 @@ pub enum Area {
     /// `A1:B2` (both corners kept verbatim)
     CellRange(Coord, Coord),
     /// `A:C` whole columns; 0-based indices + anchors
-    Cols { first: u32, last: u32, first_anchored: bool, last_anchored: bool },
+    Cols {
+        first: u32,
+        last: u32,
+        first_anchored: bool,
+        last_anchored: bool,
+    },
     /// `5:9` whole rows
-    Rows { first: u32, last: u32, first_anchored: bool, last_anchored: bool },
+    Rows {
+        first: u32,
+        last: u32,
+        first_anchored: bool,
+        last_anchored: bool,
+    },
     /// `#REF!` after deletions — a ref-shaped error
     RefError,
 }
@@ -109,31 +119,34 @@ pub struct TableRef {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum RefExpr {
-    Area { sheet: Option<SheetPrefix>, area: Area },
+    Area {
+        sheet: Option<SheetPrefix>,
+        area: Area,
+    },
     Table(TableRef),
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum BinOp {
     // Reference operators (bind tightest)
-    Range,      // :   (general form, e.g. INDEX(..):C5)
-    Intersect,  // ' ' (single space)
-    Union,      // ,   (only within parens)
+    Range,     // :   (general form, e.g. INDEX(..):C5)
+    Intersect, // ' ' (single space)
+    Union,     // ,   (only within parens)
     // Arithmetic
-    Pow,        // ^
-    Mul,        // *
-    Div,        // /
-    Add,        // +
-    Sub,        // -
+    Pow, // ^
+    Mul, // *
+    Div, // /
+    Add, // +
+    Sub, // -
     // Text
-    Concat,     // &
+    Concat, // &
     // Comparison (bind loosest)
-    Eq,         // =
-    Ne,         // <>
-    Lt,         // <
-    Le,         // <=
-    Gt,         // >
-    Ge,         // >=
+    Eq, // =
+    Ne, // <>
+    Lt, // <
+    Le, // <=
+    Gt, // >
+    Ge, // >=
 }
 
 impl BinOp {
@@ -160,9 +173,9 @@ impl BinOp {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum UnOp {
-    Neg,      // -x
-    Pos,      // +x
-    Percent,  // x%  (postfix)
+    Neg,               // -x
+    Pos,               // +x
+    Percent,           // x%  (postfix)
     ImplicitIntersect, // @x (postfix-prefix in modern dynamic-array formulas)
     SpillRange,        // x# (postfix: A1# spill reference)
 }
@@ -172,25 +185,51 @@ pub enum UnOp {
 #[derive(Debug, Clone, PartialEq)]
 pub enum Expr {
     /// Numeric literal with its original lexeme for exact round-trip.
-    Number { value: f64, lexeme: String },
+    Number {
+        value: f64,
+        lexeme: String,
+    },
     /// String literal, unescaped content ("" → ").
     Text(String),
-    Bool { value: bool, lexeme: String },
+    Bool {
+        value: bool,
+        lexeme: String,
+    },
     Error(ErrorLit),
     Ref(RefExpr),
     /// Defined name (workbook- or sheet-scoped resolved later), possibly
     /// sheet-qualified: `Sheet1!MyName`.
-    Name { sheet: Option<SheetPrefix>, name: String },
-    Call { name: String, args: Vec<CallArg> },
+    Name {
+        sheet: Option<SheetPrefix>,
+        name: String,
+    },
+    Call {
+        name: String,
+        args: Vec<CallArg>,
+    },
     /// ws_l sits before the operator, ws_r after. For Intersect the
     /// whitespace run IS the operator and lives in ws_l (ws_r empty).
-    Binary { op: BinOp, lhs: Box<Expr>, rhs: Box<Expr>, ws_l: String, ws_r: String },
+    Binary {
+        op: BinOp,
+        lhs: Box<Expr>,
+        rhs: Box<Expr>,
+        ws_l: String,
+        ws_r: String,
+    },
     /// Prefix ops: ws between op and operand. Postfix: ws before the op.
-    Unary { op: UnOp, expr: Box<Expr>, ws: String },
+    Unary {
+        op: UnOp,
+        expr: Box<Expr>,
+        ws: String,
+    },
     /// `{1,2;3,4}` — rows of constants.
     ArrayLit(Vec<Vec<ArrayElem>>),
     /// Explicit parentheses, preserved for round-trip.
-    Paren { ws_open: String, inner: Box<Expr>, ws_close: String },
+    Paren {
+        ws_open: String,
+        inner: Box<Expr>,
+        ws_close: String,
+    },
 }
 
 /// One call argument with surrounding whitespace: `IF(a , b)` keeps the
@@ -319,7 +358,12 @@ impl Area {
                 out.push(':');
                 b.print(out);
             }
-            Area::Cols { first, last, first_anchored, last_anchored } => {
+            Area::Cols {
+                first,
+                last,
+                first_anchored,
+                last_anchored,
+            } => {
                 if *first_anchored {
                     out.push('$');
                 }
@@ -330,7 +374,12 @@ impl Area {
                 }
                 out.push_str(&col_letters(*last));
             }
-            Area::Rows { first, last, first_anchored, last_anchored } => {
+            Area::Rows {
+                first,
+                last,
+                first_anchored,
+                last_anchored,
+            } => {
                 if *first_anchored {
                     out.push('$');
                 }
@@ -398,7 +447,13 @@ impl Expr {
                 }
                 out.push(')');
             }
-            Expr::Binary { op, lhs, rhs, ws_l, ws_r } => {
+            Expr::Binary {
+                op,
+                lhs,
+                rhs,
+                ws_l,
+                ws_r,
+            } => {
                 lhs.print(out);
                 out.push_str(ws_l);
                 if *op != BinOp::Intersect {
@@ -451,7 +506,11 @@ impl Expr {
                 }
                 out.push('}');
             }
-            Expr::Paren { ws_open, inner, ws_close } => {
+            Expr::Paren {
+                ws_open,
+                inner,
+                ws_close,
+            } => {
                 out.push('(');
                 out.push_str(ws_open);
                 inner.print(out);
@@ -501,11 +560,15 @@ impl Expr {
     pub fn has_external_ref(&self) -> bool {
         let mut found = false;
         self.walk(&mut |e| match e {
-            Expr::Ref(RefExpr::Area { sheet: Some(sp), .. }) if sp.workbook.is_some() => {
+            Expr::Ref(RefExpr::Area {
+                sheet: Some(sp), ..
+            }) if sp.workbook.is_some() => {
                 found = true;
             }
             Expr::Ref(RefExpr::Table(t)) if t.workbook.is_some() => found = true,
-            Expr::Name { sheet: Some(sp), .. } if sp.workbook.is_some() => found = true,
+            Expr::Name {
+                sheet: Some(sp), ..
+            } if sp.workbook.is_some() => found = true,
             _ => {}
         });
         found
@@ -532,7 +595,13 @@ mod tests {
     #[test]
     fn print_anchors() {
         let mut s = String::new();
-        Coord { row: 4, col: 2, row_anchored: true, col_anchored: true }.print(&mut s);
+        Coord {
+            row: 4,
+            col: 2,
+            row_anchored: true,
+            col_anchored: true,
+        }
+        .print(&mut s);
         assert_eq!(s, "$C$5");
     }
 

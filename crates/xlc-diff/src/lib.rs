@@ -73,7 +73,11 @@ pub fn diff_output(
             }
         }
     }
-    DiffReport { scenarios, divergent, witness }
+    DiffReport {
+        scenarios,
+        divergent,
+        witness,
+    }
 }
 
 #[cfg(test)]
@@ -101,7 +105,13 @@ mod tests {
         let wb2 = build(1.11); // the planted change
         let spec = ScenarioSpec {
             seed: 99,
-            inputs: vec![((0, 0, 0), Dist::Normal { mean: 10.0, sd: 2.0 })],
+            inputs: vec![(
+                (0, 0, 0),
+                Dist::Normal {
+                    mean: 10.0,
+                    sd: 2.0,
+                },
+            )],
         };
         let rep = diff_output(&wb1, &wb2, &spec, (0, 19, 1), 2000);
         assert_eq!(rep.divergent, 2000, "every scenario diverges");

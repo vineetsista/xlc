@@ -30,13 +30,25 @@ pub enum Inst {
     Bool(bool),
     /// Reference template: the exemplar's area with the axes that shift
     /// per lane (unanchored ones) rebased at evaluation time.
-    RefT { sheets: Vec<SheetId>, area: Area },
-    Binary { op: BinOp, a: InstId, b: InstId },
-    Unary { op: UnOp, a: InstId },
+    RefT {
+        sheets: Vec<SheetId>,
+        area: Area,
+    },
+    Binary {
+        op: BinOp,
+        a: InstId,
+        b: InstId,
+    },
+    Unary {
+        op: UnOp,
+        a: InstId,
+    },
     /// Lazy black box: names, calls, array literals, table refs, error
     /// literals, external refs — evaluated through the scalar interpreter
     /// at the lane's origin.
-    Opaque { ast: Expr },
+    Opaque {
+        ast: Expr,
+    },
 }
 
 /// A coarsened node: W lanes sharing one instruction body.
@@ -152,7 +164,10 @@ pub fn lower(wb: &Workbook) -> Module {
             }
         }
     }
-    Module { families, formula_cells }
+    Module {
+        families,
+        formula_cells,
+    }
 }
 
 fn push_family(
@@ -163,9 +178,21 @@ fn push_family(
     cells: &HashMap<(u32, u32), (Expr, String)>,
 ) {
     let exemplar = &cells[&lanes[0]].0;
-    let mut lo = Lowerer { wb, sheet, insts: Vec::new(), cse: HashMap::new(), tree_insts: 0 };
+    let mut lo = Lowerer {
+        wb,
+        sheet,
+        insts: Vec::new(),
+        cse: HashMap::new(),
+        tree_insts: 0,
+    };
     let result = lo.lower_expr(exemplar);
-    families.push(Family { sheet, lanes, insts: lo.insts, result, tree_insts: lo.tree_insts });
+    families.push(Family {
+        sheet,
+        lanes,
+        insts: lo.insts,
+        result,
+        tree_insts: lo.tree_insts,
+    });
 }
 
 struct Lowerer<'a> {
@@ -205,9 +232,10 @@ impl Lowerer<'_> {
                 self.tree_insts -= 1; // parens are free
                 self.lower_expr(inner)
             }
-            Expr::Ref(xlc_parse::ast::RefExpr::Area { sheet: prefix, area })
-                if !matches!(area, Area::RefError) =>
-            {
+            Expr::Ref(xlc_parse::ast::RefExpr::Area {
+                sheet: prefix,
+                area,
+            }) if !matches!(area, Area::RefError) => {
                 // Resolve the sheet span ONCE at lower time; anything odd
                 // (external workbook, unknown sheet) becomes opaque.
                 let sheets: Option<Vec<SheetId>> = match prefix {
@@ -228,7 +256,13 @@ impl Lowerer<'_> {
                 match sheets {
                     Some(sheets) => {
                         let key = format!("r{sheets:?}|{area:?}");
-                        self.push(Inst::RefT { sheets, area: area.clone() }, Some(key))
+                        self.push(
+                            Inst::RefT {
+                                sheets,
+                                area: area.clone(),
+                            },
+                            Some(key),
+                        )
                     }
                     None => self.push(Inst::Opaque { ast: e.clone() }, None),
                 }
@@ -236,7 +270,10 @@ impl Lowerer<'_> {
             Expr::Binary { op, lhs, rhs, .. } => {
                 let a = self.lower_expr(lhs);
                 let b = self.lower_expr(rhs);
-                self.push(Inst::Binary { op: *op, a, b }, Some(format!("B{op:?}|{a}|{b}")))
+                self.push(
+                    Inst::Binary { op: *op, a, b },
+                    Some(format!("B{op:?}|{a}|{b}")),
+                )
             }
             Expr::Unary { op, expr, .. } => {
                 let a = self.lower_expr(expr);
@@ -256,11 +293,23 @@ fn rebase_expr(e: &Expr, dr: i64, dc: i64) -> Expr {
     use xlc_parse::ast::{ArrayElem, CallArg, RefExpr};
     match e {
         Expr::Ref(RefExpr::Area { sheet, area }) => match rebase(area, dr, dc) {
-            Some(a) => Expr::Ref(RefExpr::Area { sheet: sheet.clone(), area: a }),
+            Some(a) => Expr::Ref(RefExpr::Area {
+                sheet: sheet.clone(),
+                area: a,
+            }),
             // Off-sheet shift: Excel shows #REF! for the dead axis.
-            None => Expr::Ref(RefExpr::Area { sheet: sheet.clone(), area: Area::RefError }),
+            None => Expr::Ref(RefExpr::Area {
+                sheet: sheet.clone(),
+                area: Area::RefError,
+            }),
         },
-        Expr::Binary { op, lhs, rhs, ws_l, ws_r } => Expr::Binary {
+        Expr::Binary {
+            op,
+            lhs,
+            rhs,
+            ws_l,
+            ws_r,
+        } => Expr::Binary {
             op: *op,
             lhs: Box::new(rebase_expr(lhs, dr, dc)),
             rhs: Box::new(rebase_expr(rhs, dr, dc)),
@@ -272,7 +321,11 @@ fn rebase_expr(e: &Expr, dr: i64, dc: i64) -> Expr {
             expr: Box::new(rebase_expr(expr, dr, dc)),
             ws: ws.clone(),
         },
-        Expr::Paren { ws_open, inner, ws_close } => Expr::Paren {
+        Expr::Paren {
+            ws_open,
+            inner,
+            ws_close,
+        } => Expr::Paren {
             ws_open: ws_open.clone(),
             inner: Box::new(rebase_expr(inner, dr, dc)),
             ws_close: ws_close.clone(),
@@ -308,16 +361,42 @@ fn rebase_expr(e: &Expr, dr: i64, dc: i64) -> Expr {
 /// Shift the unanchored axes of an area template by the lane delta.
 fn rebase(area: &Area, dr: i64, dc: i64) -> Option<Area> {
     let shift_coord = |c: &Coord| -> Option<Coord> {
-        let row = if c.row_anchored { c.row } else { u32::try_from(c.row as i64 + dr).ok()? };
-        let col = if c.col_anchored { c.col } else { u32::try_from(c.col as i64 + dc).ok()? };
-        Some(Coord { row, col, row_anchored: c.row_anchored, col_anchored: c.col_anchored })
+        let row = if c.row_anchored {
+            c.row
+        } else {
+            u32::try_from(c.row as i64 + dr).ok()?
+        };
+        let col = if c.col_anchored {
+            c.col
+        } else {
+            u32::try_from(c.col as i64 + dc).ok()?
+        };
+        Some(Coord {
+            row,
+            col,
+            row_anchored: c.row_anchored,
+            col_anchored: c.col_anchored,
+        })
     };
     Some(match area {
         Area::Cell(c) => Area::Cell(shift_coord(c)?),
         Area::CellRange(a, b) => Area::CellRange(shift_coord(a)?, shift_coord(b)?),
-        Area::Cols { first, last, first_anchored, last_anchored } => {
-            let f = if *first_anchored { *first } else { u32::try_from(*first as i64 + dc).ok()? };
-            let l = if *last_anchored { *last } else { u32::try_from(*last as i64 + dc).ok()? };
+        Area::Cols {
+            first,
+            last,
+            first_anchored,
+            last_anchored,
+        } => {
+            let f = if *first_anchored {
+                *first
+            } else {
+                u32::try_from(*first as i64 + dc).ok()?
+            };
+            let l = if *last_anchored {
+                *last
+            } else {
+                u32::try_from(*last as i64 + dc).ok()?
+            };
             Area::Cols {
                 first: f,
                 last: l,
@@ -325,9 +404,22 @@ fn rebase(area: &Area, dr: i64, dc: i64) -> Option<Area> {
                 last_anchored: *last_anchored,
             }
         }
-        Area::Rows { first, last, first_anchored, last_anchored } => {
-            let f = if *first_anchored { *first } else { u32::try_from(*first as i64 + dr).ok()? };
-            let l = if *last_anchored { *last } else { u32::try_from(*last as i64 + dr).ok()? };
+        Area::Rows {
+            first,
+            last,
+            first_anchored,
+            last_anchored,
+        } => {
+            let f = if *first_anchored {
+                *first
+            } else {
+                u32::try_from(*first as i64 + dr).ok()?
+            };
+            let l = if *last_anchored {
+                *last
+            } else {
+                u32::try_from(*last as i64 + dr).ok()?
+            };
             Area::Rows {
                 first: f,
                 last: l,
@@ -346,7 +438,14 @@ impl Family {
         let (er, ec) = self.lanes[0];
         let dr = row as i64 - er as i64;
         let dc = col as i64 - ec as i64;
-        let interp = Interp::new(ctx, Origin { sheet: self.sheet, row, col });
+        let interp = Interp::new(
+            ctx,
+            Origin {
+                sheet: self.sheet,
+                row,
+                col,
+            },
+        );
 
         let mut vals: Vec<Operand> = Vec::with_capacity(self.insts.len());
         for inst in &self.insts {
@@ -417,8 +516,15 @@ mod tests {
             for (lane, &(row, col)) in fam.lanes.iter().enumerate() {
                 let src = &wb.sheets[fam.sheet as usize].formulas[&(row, col)];
                 let parsed = xlc_parse::parse_formula(src).unwrap();
-                let scalar = Interp::new(wb, Origin { sheet: fam.sheet, row, col })
-                    .eval_formula(&parsed.expr);
+                let scalar = Interp::new(
+                    wb,
+                    Origin {
+                        sheet: fam.sheet,
+                        row,
+                        col,
+                    },
+                )
+                .eval_formula(&parsed.expr);
                 let ir = fam.eval_lane(wb, lane);
                 compared += 1;
                 if !bit_equal(&scalar, &ir) {
@@ -432,8 +538,9 @@ mod tests {
     #[test]
     fn column_family_coarsens_and_agrees() {
         let values: Vec<(u32, u32, f64)> = (0..50u32).map(|r| (r, 0u32, r as f64 + 1.0)).collect();
-        let owned: Vec<(u32, u32, String)> =
-            (0..50u32).map(|r| (r, 1u32, format!("A{}*2", r + 1))).collect();
+        let owned: Vec<(u32, u32, String)> = (0..50u32)
+            .map(|r| (r, 1u32, format!("A{}*2", r + 1)))
+            .collect();
         let refs: Vec<(u32, u32, &str)> =
             owned.iter().map(|(r, c, f)| (*r, *c, f.as_str())).collect();
         let wb = wb_with(&refs, &values);
@@ -450,7 +557,12 @@ mod tests {
         let wb = wb_with(&[(0, 1, "(A1*2)+(A1*2)")], &[(0, 0, 21.0)]);
         let m = lower(&wb);
         let fam = &m.families[0];
-        assert!(fam.insts.len() < fam.tree_insts, "{} < {}", fam.insts.len(), fam.tree_insts);
+        assert!(
+            fam.insts.len() < fam.tree_insts,
+            "{} < {}",
+            fam.insts.len(),
+            fam.tree_insts
+        );
         assert_eq!(fam.eval_lane(&wb, 0), Value::Num(84.0));
     }
 
@@ -458,7 +570,11 @@ mod tests {
     fn mixed_shapes_split_families() {
         let owned: Vec<(u32, u32, String)> = (0..10u32)
             .map(|r| {
-                let f = if r < 5 { format!("A{}*2", r + 1) } else { format!("A{}*3", r + 1) };
+                let f = if r < 5 {
+                    format!("A{}*2", r + 1)
+                } else {
+                    format!("A{}*3", r + 1)
+                };
                 (r, 1u32, f)
             })
             .collect();
@@ -479,7 +595,16 @@ mod tests {
         }
         let owned: Vec<(u32, u32, String)> = (2..20u32)
             .map(|r| {
-                (r, 3u32, format!("IF(C{}>$A$1,SUM(C1:C{}),ROUND(C{}%,2))", r + 1, r + 1, r + 1))
+                (
+                    r,
+                    3u32,
+                    format!(
+                        "IF(C{}>$A$1,SUM(C1:C{}),ROUND(C{}%,2))",
+                        r + 1,
+                        r + 1,
+                        r + 1
+                    ),
+                )
             })
             .collect();
         let refs: Vec<(u32, u32, &str)> =

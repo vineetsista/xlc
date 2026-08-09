@@ -45,7 +45,9 @@ pub struct FilterOutput {
 }
 
 fn walk(dir: &Path, out: &mut Vec<PathBuf>) {
-    let Ok(entries) = fs::read_dir(dir) else { return };
+    let Ok(entries) = fs::read_dir(dir) else {
+        return;
+    };
     for entry in entries.flatten() {
         let p = entry.path();
         if p.is_dir() {
@@ -76,7 +78,11 @@ fn probe_workbook(path: &Path) -> Result<(usize, usize), String> {
 }
 
 fn examine(root: &Path, path: &Path) -> FileRecord {
-    let rel = path.strip_prefix(root).unwrap_or(path).to_string_lossy().into_owned();
+    let rel = path
+        .strip_prefix(root)
+        .unwrap_or(path)
+        .to_string_lossy()
+        .into_owned();
     let bytes = fs::metadata(path).map(|m| m.len()).unwrap_or(0);
     let mut rec = FileRecord {
         path: rel,
@@ -132,7 +138,10 @@ fn examine(root: &Path, path: &Path) -> FileRecord {
 }
 
 fn arg_value<'a>(args: &'a [String], flag: &str) -> Option<&'a str> {
-    args.iter().position(|a| a == flag).and_then(|i| args.get(i + 1)).map(String::as_str)
+    args.iter()
+        .position(|a| a == flag)
+        .and_then(|i| args.get(i + 1))
+        .map(String::as_str)
 }
 
 pub fn filter_cmd(args: &[String]) -> i32 {
@@ -146,7 +155,11 @@ pub fn filter_cmd(args: &[String]) -> i32 {
     let mut files = Vec::new();
     walk(&root, &mut files);
     files.sort();
-    eprintln!("corpus-filter: {} files under {}", files.len(), root.display());
+    eprintln!(
+        "corpus-filter: {} files under {}",
+        files.len(),
+        root.display()
+    );
 
     // calamine may panic on hostile input; keep the run quiet and count them.
     let prev_hook = panic::take_hook();
@@ -166,7 +179,10 @@ pub fn filter_cmd(args: &[String]) -> i32 {
     panic::set_hook(prev_hook);
 
     let ok = records.iter().filter(|r| r.status == "ok").count();
-    let with_formulas = records.iter().filter(|r| r.status == "ok" && r.formula_cells > 0).count();
+    let with_formulas = records
+        .iter()
+        .filter(|r| r.status == "ok" && r.formula_cells > 0)
+        .count();
     let out = FilterOutput {
         root: root.display().to_string(),
         scanned: records.len(),
@@ -206,9 +222,12 @@ pub fn subset_cmd(args: &[String]) -> i32 {
         eprintln!("usage: xlc corpus-subset <filtered.json> --n 500 --min-formulas 10 --out-dir subset --manifest manifest.json");
         return 2;
     };
-    let n: usize = arg_value(args, "--n").and_then(|v| v.parse().ok()).unwrap_or(500);
-    let min_formulas: usize =
-        arg_value(args, "--min-formulas").and_then(|v| v.parse().ok()).unwrap_or(10);
+    let n: usize = arg_value(args, "--n")
+        .and_then(|v| v.parse().ok())
+        .unwrap_or(500);
+    let min_formulas: usize = arg_value(args, "--min-formulas")
+        .and_then(|v| v.parse().ok())
+        .unwrap_or(10);
     let out_dir = PathBuf::from(arg_value(args, "--out-dir").unwrap_or("subset"));
     let manifest_path = arg_value(args, "--manifest").unwrap_or("manifest.json");
 
@@ -281,7 +300,10 @@ pub fn subset_cmd(args: &[String]) -> i32 {
         eprintln!("corpus-subset: cannot write {manifest_path}: {e}");
         return 1;
     }
-    println!("corpus-subset: wrote {n} workbooks to {} + {manifest_path}", out_dir.display());
+    println!(
+        "corpus-subset: wrote {n} workbooks to {} + {manifest_path}",
+        out_dir.display()
+    );
     0
 }
 
@@ -301,20 +323,24 @@ pub fn verify_cmd(args: &[String]) -> i32 {
     panic::set_hook(Box::new(|_| {}));
     let failures: Vec<String> = files
         .par_iter()
-        .filter_map(|p| {
-            match panic::catch_unwind(AssertUnwindSafe(|| probe_workbook(p))) {
+        .filter_map(
+            |p| match panic::catch_unwind(AssertUnwindSafe(|| probe_workbook(p))) {
                 Ok(Ok((_, formulas))) if formulas > 0 => None,
                 Ok(Ok((_, _))) => Some(format!("{}: loads but has no formula cells", p.display())),
                 Ok(Err(e)) => Some(format!("{}: {e}", p.display())),
                 Err(_) => Some(format!("{}: panic while loading", p.display())),
-            }
-        })
+            },
+        )
         .collect();
     panic::set_hook(prev_hook);
     for f in &failures {
         eprintln!("corpus-verify: {f}");
     }
-    println!("corpus-verify: {}/{} workbooks load with >=1 formula", files.len() - failures.len(), files.len());
+    println!(
+        "corpus-verify: {}/{} workbooks load with >=1 formula",
+        files.len() - failures.len(),
+        files.len()
+    );
     if failures.is_empty() {
         0
     } else {
