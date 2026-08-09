@@ -3,6 +3,25 @@
 Dated entries written for a human reader; the Phase 9 engineering essay is
 assembled from these.
 
+## 2026-08-09 — Web v2: the scenario lab lives in the tab
+
+The site grew from a receipt-printer into an instrument. One click loads
+an embedded sample workbook (two planted defects, receipt green), the
+receipt line now expands into its exact/1-ulp/sig15 split with
+exclusions printed beside it, and findings triage like a code review —
+filter chips, copy-the-proof buttons, j/k/x keyboard flow, suppressions
+that survive a reload. The headline is the scenario lab: a new wasm
+`Session` keeps the compiled workbook and its prepared engine alive
+across calls, so `prepare()` builds the cone and schedule once and every
+slider tick re-evaluates only the cone — the what-if readout updates in
+microseconds, next to a canvas response curve and a 10,000-scenario
+Monte-Carlo histogram with p5/p50/p95, all computed in the tab. Drop a
+second file and the diff reports divergence with a concrete witness
+input vector. Twenty-eight headless-Chromium checks cover all of it
+locally, and today the same smoke sequence ran green against the live
+GitHub Pages deploy — zero console errors on the public URL. All ten
+gates still pass.
+
 ## 2026-08-09 — Shipped: public repo, live site, and the oracle's confession
 
 The last HUMAN_TODO items fell to stubbornness. LibreOffice does not need

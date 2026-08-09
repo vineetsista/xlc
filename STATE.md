@@ -6,6 +6,11 @@ https://github.com/vineetsista/xlc · Pages: https://vineetsista.github.io/xlc/
 ## Done / In flight / Blocked
 - Every phase 0-9 complete; every gate written before its code (Law 12).
 - Repo public + GitHub Pages enabled via API (deploys web/dist from main).
+- Web v2 shipped AND live-verified (2026-08-09): one-click sample,
+  receipt breakdown, findings triage (chips/copy/keyboard/suppression),
+  scenario lab (wasm Session: prepare-once cone re-eval, what-if slider,
+  response curve, 10k Monte-Carlo histogram), version diff with witness.
+  28/28 headless checks local; live-site smoke green, 0 console errors.
 - Live demo + essay published as artifacts (private until shared).
 - LibreOffice installed user-space (no sudo); all 5,194 disputed cells
   adjudicated: 49.6% oracle noise / 41.5% real gaps / 8.9% three-way.
