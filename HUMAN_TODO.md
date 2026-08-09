@@ -30,6 +30,11 @@ steps when ready to launch:
 1. Choose + register a domain; host `web/dist/` on any static CDN
    (the only server the product ever has, per Law 1).
 2. Review the page copy in `web/index.html`.
-3. The launch posts themselves are drafted in Phase 9 (two messages, two
-   surfaces, Law 11); early soft-launch is possible sooner if desired —
-   tell the agent and it will draft the copy for review.
+3. Launch posts are DRAFTED and ready for review: docs/launch/hn.md
+   (compiler story) and docs/launch/finance.md (found-bug story). Replace
+   [SITE-LINK]/[ESSAY-LINK] with the hosted URLs, then post — the posting
+   itself is yours alone (Law 13).
+4. YC application draft: docs/application/yc.md. Engineering essay for
+   the blog: docs/essay.md.
+5. Payment checkout (deferred product decision): pick a third-party
+   checkout (e.g. Paddle/Stripe) for the CLI tier when pricing is set.
