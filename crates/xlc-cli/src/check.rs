@@ -22,6 +22,9 @@ pub fn check_cmd(args: &[String]) -> i32 {
         return 2;
     };
     let timing_out = arg_value(args, "--timing-out");
+    let ci = args.iter().any(|a| a == "--ci");
+    let baseline_path = arg_value(args, "--baseline");
+    let write_baseline = arg_value(args, "--write-baseline");
     let path = PathBuf::from(target);
 
     let t0 = Instant::now();
@@ -62,6 +65,20 @@ pub fn check_cmd(args: &[String]) -> i32 {
         (formula_cells as f64 / elapsed) as u64
     );
 
+    let finding_key = |f: &Finding| format!("{}|{}|{}", f.detector, f.sheet, f.cell);
+    if let Some(p) = write_baseline {
+        let keys: Vec<String> = findings.iter().map(&finding_key).collect();
+        fs::write(p, serde_json::to_vec_pretty(&keys).unwrap()).ok();
+    }
+    let baseline: std::collections::HashSet<String> = baseline_path
+        .and_then(|p| fs::read(p).ok())
+        .and_then(|b| serde_json::from_slice::<Vec<String>>(&b).ok())
+        .unwrap_or_default()
+        .into_iter()
+        .collect();
+    let new_findings =
+        findings.iter().filter(|f| !baseline.contains(&finding_key(f))).count();
+
     if let Some(out) = timing_out {
         let machine = fs::read_to_string("/proc/cpuinfo")
             .ok()
@@ -84,6 +101,10 @@ pub fn check_cmd(args: &[String]) -> i32 {
             let _ = fs::create_dir_all(parent);
         }
         fs::write(out, serde_json::to_vec_pretty(&artifact).unwrap()).ok();
+    }
+    if ci && new_findings > 0 {
+        eprintln!("xlc check --ci: {new_findings} new finding(s) — failing the build");
+        return 1;
     }
     0
 }

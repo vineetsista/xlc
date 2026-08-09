@@ -64,6 +64,18 @@ precision at which caches are written) — is printed on every artifact.
 - **Anything about `.xls` (BIFF), Power Query refresh, RTD/DDE feeds, or
   add-in functions.** Out of scope in v1 and reported as exclusions.
 
+## Browser execution model
+
+The wasm build is single-threaded today; it requires no special headers
+and runs in any modern browser. When multi-threaded wasm lands (rayon
+over scenario tiles), it will require `SharedArrayBuffer`, which browsers
+gate behind cross-origin isolation (COOP: same-origin, COEP:
+require-corp). The fallback is automatic and total: without
+SharedArrayBuffer the engine runs exactly the current single-threaded
+path — same results bit-for-bit, longer wall-clock — and the page states
+which mode is active. The hosted site sends the COOP/COEP headers; the
+verification suite exercises the page under those headers.
+
 ## Reproducibility
 
 - Deterministic RNG: counter-based (scenario k derivable from (seed, k));

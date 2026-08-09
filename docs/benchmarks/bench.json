@@ -1,0 +1,19 @@
+{
+ "machine": "12th Gen Intel(R) Core(TM) i7-1250U",
+ "kernel": "6.6.87.2-microsoft-standard-WSL2",
+ "isa_features": [
+  "sse2",
+  "avx",
+  "avx2",
+  "fma"
+ ],
+ "command": "make bench",
+ "artifacts": {
+  "receipt": "docs/benchmarks/receipt.json",
+  "scenario": "docs/benchmarks/scenario.json",
+  "phase7": "docs/benchmarks/phase7.json",
+  "analyze_timing": "docs/benchmarks/analyze-timing.json",
+  "parse_roundtrip": "docs/benchmarks/parse-roundtrip.json",
+  "ir": "docs/benchmarks/ir.json"
+ }
+}

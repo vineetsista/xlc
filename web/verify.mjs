@@ -7,7 +7,20 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
-const server = await preview({ root, preview: { port: 4173, strictPort: true } });
+const coop = process.argv.includes('--coop');
+const server = await preview({
+  root,
+  preview: {
+    port: 4173,
+    strictPort: true,
+    headers: coop
+      ? {
+          'Cross-Origin-Opener-Policy': 'same-origin',
+          'Cross-Origin-Embedder-Policy': 'require-corp',
+        }
+      : {},
+  },
+});
 const url = 'http://localhost:4173/';
 
 const browser = await chromium.launch();
@@ -59,6 +72,23 @@ check('suppression persists across re-analysis', /0 defects found.*1 marked inte
 check('no console/page errors', errors.length === 0);
 if (errors.length) console.log('errors:', errors);
 
+if (coop) {
+  const resp = await page.request.get(url);
+  const h = resp.headers();
+  const present =
+    h['cross-origin-opener-policy'] === 'same-origin' &&
+    h['cross-origin-embedder-policy'] === 'require-corp';
+  const fs = await import('node:fs');
+  fs.writeFileSync(
+    path.join(root, '../docs/benchmarks/browser-coop.json'),
+    JSON.stringify(
+      { coop_coep_headers_present: present, checks_failed: failures, checks_run: 13 },
+      null,
+      1,
+    ),
+  );
+  console.log(`coop headers present: ${present}`);
+}
 await browser.close();
 await server.close();
 process.exit(failures === 0 ? 0 : 1);

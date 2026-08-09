@@ -55,7 +55,7 @@
   "bytes_moved": {
     "measured_per_scenario": 3128.0,
     "theoretical_min_per_scenario": 3128.0,
-    "peak_live_bytes": 2523136,
+    "peak_live_bytes": 2187264,
     "residency_budget_bytes": 8388608,
     "stream_reads_counted": false,
     "stream_reads_per_scenario_8B_units": 1140.0
@@ -64,8 +64,8 @@
     "workbook": "corpus/work/fuse-bins/cc-binaries/56cbca12-9c02-49e5-a064-53129669df80",
     "cone_cells": 390,
     "scenarios": 10000,
-    "elapsed_s": 8.601239253,
-    "native_cells_x_scenarios_per_s": 453423.0342028599,
+    "elapsed_s": 8.73055735,
+    "native_cells_x_scenarios_per_s": 446706.8760507025,
     "fast_path_cells": 0,
     "scalar_path_cells": 3900,
     "machine": "12th Gen Intel(R) Core(TM) i7-1250U",
@@ -75,8 +75,8 @@
     "label": "synthetic 20-column x 2000-row arithmetic chain (fast-path showcase, NOT the public-workbook claim)",
     "cone_cells": 1000,
     "scenarios": 10000,
-    "elapsed_s": 0.068947354,
-    "cells_x_scenarios_per_s": 145038198.27516514,
+    "elapsed_s": 0.190394738,
+    "cells_x_scenarios_per_s": 52522459.943194434,
     "fast_path_cells": 10000,
     "scalar_path_cells": 0
   },

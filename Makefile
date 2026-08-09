@@ -7,7 +7,7 @@
 
 PHASE := $(shell cat .phase 2>/dev/null || echo 0)
 
-.PHONY: gate gate-all corpus receipt build test clippy
+.PHONY: gate gate-all corpus receipt build test clippy bench
 
 gate:
 	@bash scripts/gate.sh $(PHASE)
@@ -33,7 +33,11 @@ corpus:
 	@$(MAKE) -C corpus all
 
 receipt:
-	@echo "receipt: not implemented until Phase 3" && exit 2
+	cargo build --release -p xlc-cli -q
+	target/release/xlc receipt corpus/subset --out docs/benchmarks/receipt.json
+
+bench:
+	bash scripts/bench.sh
 
 build:
 	cargo build --workspace

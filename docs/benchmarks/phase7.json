@@ -1,10 +1,10 @@
 {
   "incremental": {
-    "latency_ms": 12.631725999999999,
+    "latency_ms": 22.80208,
     "model_formulas": 40000,
     "cone_cells": 20,
     "scenarios": 100000,
-    "schedule_build_ms": 131.865187,
+    "schedule_build_ms": 207.886403,
     "model": "synthetic 20x2000 row-independent chains, single input changed"
   },
   "ad": {
