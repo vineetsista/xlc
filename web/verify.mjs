@@ -5,6 +5,7 @@ import { chromium } from 'playwright';
 import { preview } from 'vite';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import fs from 'node:fs';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const coop = process.argv.includes('--coop');
@@ -89,10 +90,11 @@ check('input candidates listed', (await page.locator('#input-sel option').count(
 check('cone info shows schedule build', /cone: .* schedule built/.test(await page.locator('#cone-info').textContent()));
 const read0 = await page.locator('#whatif-read').textContent();
 check('what-if readout live with timing', /µs|ms/.test(read0));
+const out0 = await page.locator('#whatif-read .ok').textContent(); // output value only — the µs suffix always changes
 await page.locator('#whatif').fill('900');
 await page.locator('#whatif').dispatchEvent('input');
-const read1 = await page.locator('#whatif-read').textContent();
-check('slider changes the output', read1 !== read0 && /→/.test(read1));
+const out1 = await page.locator('#whatif-read .ok').textContent();
+check('slider changes the output', out1 !== out0 && /→/.test(await page.locator('#whatif-read').textContent()));
 check('response curve painted', await page.locator('#curve').evaluate((cv) => {
   const ctx = cv.getContext('2d');
   return ctx.getImageData(0, 0, cv.width, cv.height).data.some((v) => v !== 0);
@@ -121,6 +123,81 @@ await page.locator('#file-b').setInputFiles(path.join(root, '../tests/cases/diff
 await page.waitForFunction(() => !document.getElementById('diff-out')?.hidden, null, { timeout: 60000 });
 const diffText = await page.locator('#diff-out').textContent();
 check('diff reports divergence with witness', /diverges/.test(diffText) && /witness/.test(diffText) && /version A =/.test(diffText));
+
+// --- v3: sticky nav + scrollspy ---
+check('topnav appears after load', await page.locator('#topnav').isVisible());
+await page.locator('#topnav a[data-spy="lab"]').click();
+await page.waitForFunction(
+  () => document.querySelector('#topnav a[data-spy="lab"]')?.classList.contains('active'),
+  null,
+  { timeout: 10000 },
+);
+check('nav click scrolls and scrollspy activates lab', true);
+await page.evaluate(() => scrollTo(0, 0));
+await page.waitForFunction(
+  () => document.querySelector('#topnav a[data-spy="log"]')?.classList.contains('active'),
+  null,
+  { timeout: 10000 },
+);
+check('scrollspy returns to receipt at top', true);
+
+// --- v3: caret diagnostics (rust-style, under the offending range) ---
+check('caret line under finding formula', /\^/.test(await page.locator('.finding .caret').first().textContent()));
+
+// --- v3: tornado sensitivity ---
+await page.waitForFunction(() => !document.getElementById('tornado-wrap')?.hidden, null, { timeout: 30000 });
+check('tornado painted', await page.locator('#tornado').evaluate((cv) => {
+  const ctx = cv.getContext('2d');
+  return ctx.getImageData(0, 0, cv.width, cv.height).data.some((v) => v !== 0);
+}));
+await page.locator('#tornado').hover({ position: { x: 300, y: 20 } });
+check('tornado row tooltip', await page.locator('#tornado-tip').isVisible());
+
+// --- v3: goal seek (bisection on the prepared cone) ---
+await page.locator('#goal-target').fill('999999999999');
+await page.locator('#goal-run').click();
+check('goal seek reports unreachable targets honestly', /not reachable/.test(await page.locator('#goal-read').textContent()));
+await page.locator('#whatif').fill('800');
+await page.locator('#whatif').dispatchEvent('input');
+const goalTarget = (await page.locator('#whatif-read .ok').textContent()).replace(/,/g, '');
+await page.locator('#whatif').fill('500');
+await page.locator('#whatif').dispatchEvent('input');
+await page.locator('#goal-target').fill(goalTarget);
+await page.locator('#goal-run').click();
+check('goal seek finds the input', /found:/.test(await page.locator('#goal-read').textContent()));
+
+// --- v3: histogram/CDF view toggle (pixel-diff, not just non-blank) ---
+const histPixels = await page.locator('#hist').evaluate((cv) => cv.toDataURL());
+await page.locator('#view-cdf').click();
+check('cdf view active', await page.locator('#view-cdf').evaluate((el) => el.classList.contains('active')));
+check('cdf repaints the canvas', (await page.locator('#hist').evaluate((cv) => cv.toDataURL())) !== histPixels);
+await page.locator('#view-hist').click();
+check('toggle back restores the histogram', (await page.locator('#hist').evaluate((cv) => cv.toDataURL())) === histPixels);
+
+// --- v3: command palette + export report download (content verified) ---
+await page.locator('.finding [data-act="sup"]').first().click(); // 1 marked intentional for the export
+await page.keyboard.press('Control+k');
+check('ctrl-k opens the palette', await page.locator('#palette-ov').isVisible());
+await page.locator('#palette-q').fill('zzzz-no-such-command');
+check('palette shows the zero-match state', /no matching command/.test(await page.locator('#palette-list').textContent()));
+await page.locator('#palette-q').fill('export');
+const dlPromise = page.waitForEvent('download');
+await page.keyboard.press('Enter');
+const download = await dlPromise;
+check('export downloads a markdown report', download.suggestedFilename().endsWith('-xlc-report.md'));
+check('palette closes after running a command', await page.locator('#palette-ov').isHidden());
+const report = fs.readFileSync(await download.path(), 'utf8');
+check('report carries the receipt line', /29\/29 verifiable formula cells re-derived bit-exact \(100\.00%\)/.test(report));
+check('report lists both findings with proofs', (report.match(/### /g) ?? []).length === 2 && /proof: /.test(report));
+check('report marks the suppressed finding intentional', (report.match(/\[intentional\]/g) ?? []).length === 1);
+check('report includes scenario stats and sensitivity table', /## scenario lab/.test(report) && /## sensitivity/.test(report));
+await page.locator('.finding.suppressed [data-act="sup"]').click(); // restore
+
+// --- v3: help overlay ---
+await page.keyboard.press('?');
+check('? opens keyboard help', await page.locator('#help-ov').isVisible());
+await page.keyboard.press('Escape');
+check('esc closes help', await page.locator('#help-ov').isHidden());
 
 check('no console/page errors', errors.length === 0);
 if (errors.length) console.log('errors:', errors.slice(0, 5));

@@ -3,10 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#0d1117" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230d1117'/%3E%3Ctext x='8' y='12.5' font-family='monospace' font-size='12' fill='%233fb950' text-anchor='middle'%3Ex%3C/text%3E%3C/svg%3E" />
   <title>xlc — a compiler for Excel</title>
   <link rel="stylesheet" href="/src/style.css" />
 </head>
 <body>
+  <nav id="topnav" hidden>
+    <span class="brand">xlc</span>
+    <a href="#log" data-spy="log" class="active">receipt</a>
+    <a href="#findings" data-spy="findings">findings</a>
+    <a href="#lab" data-spy="lab">lab</a>
+    <a href="#compare" data-spy="compare">compare</a>
+    <span class="flex"></span>
+    <button id="export-report" class="ghost">export report</button>
+    <span class="kbd-chip" title="command palette">ctrl k</span>
+  </nav>
+
   <main id="app">
     <header>
       <h1>xlc<span class="dim"> — an optimizing compiler for Excel</span></h1>
@@ -15,6 +29,7 @@
     </header>
 
     <section id="drop" tabindex="0" role="button" aria-label="drop an xlsx file or click to choose">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
       <p><strong>drop an .xlsx here</strong> <span class="dim">or click to choose a file</span></p>
       <p class="dim small">no workbook handy? <button id="try-sample" class="ghost">audit the sample budget</button></p>
       <input type="file" id="file" accept=".xlsx,.xlsm" hidden />
@@ -22,13 +37,14 @@
 
     <section id="log" hidden>
       <div id="act1" class="act"></div>
-      <div id="act2" class="act clickable" title="click for the verification breakdown"></div>
+      <div id="act2" class="act clickable" title="click for the verification breakdown"
+           tabindex="0" role="button" aria-expanded="false" aria-controls="receipt-detail"></div>
       <div id="receipt-detail" class="detail" hidden></div>
       <div id="act3" class="act"></div>
 
       <div id="finding-bar" hidden>
         <span id="chips"></span>
-        <span class="dim kbd-hint">j/k select · x intentional · c copy proof</span>
+        <span class="dim kbd-hint">j/k select · x intentional · c copy proof · ? help</span>
       </div>
       <div id="findings"></div>
       <div id="capability" class="dim"></div>
@@ -51,8 +67,23 @@
       </div>
       <div class="chart-wrap">
         <div class="chart-title dim">response of <span id="curve-watch" class="loc"></span> to <span id="curve-input" class="loc"></span></div>
-        <canvas id="curve" width="840" height="180"></canvas>
+        <canvas id="curve" width="840" height="180" role="img"></canvas>
         <div id="curve-tip" class="tip" hidden></div>
+      </div>
+
+      <div class="row">
+        <label class="dim" for="goal-target">goal seek</label>
+        <input type="number" id="goal-target" step="any" placeholder="target output" />
+        <button id="goal-run">solve for input</button>
+        <span id="goal-read"></span>
+      </div>
+
+      <div id="tornado-wrap" class="chart-wrap" hidden>
+        <div class="chart-title dim">sensitivity of <span id="tornado-watch" class="loc"></span> when each input moves ±10%
+          <span class="key"><i class="sw sw-lo"></i>input −10%</span>
+          <span class="key"><i class="sw sw-hi"></i>input +10%</span></div>
+        <canvas id="tornado" width="840" height="200" role="img"></canvas>
+        <div id="tornado-tip" class="tip" hidden></div>
       </div>
 
       <div class="row">
@@ -73,9 +104,13 @@
 
       <div id="monte-out" hidden>
         <div id="monte-stats" class="act"></div>
+        <div class="row view-row">
+          <button id="view-hist" class="chip active">histogram</button>
+          <button id="view-cdf" class="chip">cumulative</button>
+        </div>
         <div class="chart-wrap">
           <div class="chart-title dim">distribution of <span id="hist-watch" class="loc"></span> over <span id="hist-n"></span> scenarios</div>
-          <canvas id="hist" width="840" height="200"></canvas>
+          <canvas id="hist" width="840" height="200" role="img"></canvas>
           <div id="hist-tip" class="tip" hidden></div>
         </div>
         <div class="dim small">deterministic: seed 42 — scenario <em>k</em> is derivable from (seed, k) on any machine.</div>
@@ -100,8 +135,35 @@
       against the value Excel itself cached in the file. policy: bit-identical,
       1 ULP, or 15 significant decimal digits. exclusions are always listed,
       never hidden.</p>
+      <p style="margin-top:0.4rem"><kbd>ctrl k</kbd> command palette · <kbd>?</kbd> keyboard help · MIT · runs entirely in your tab</p>
     </footer>
   </main>
+
+  <div id="palette-ov" class="overlay" hidden>
+    <div class="panel" role="dialog" aria-modal="true" aria-label="command palette">
+      <input id="palette-q" placeholder="type a command… (esc closes)" autocomplete="off" spellcheck="false"
+             role="combobox" aria-expanded="true" aria-controls="palette-list" aria-label="command palette" />
+      <div id="palette-list" role="listbox" aria-label="commands"></div>
+    </div>
+  </div>
+
+  <div id="help-ov" class="overlay" hidden>
+    <div id="help" class="panel" role="dialog" aria-modal="true" aria-label="keyboard shortcuts" tabindex="-1">
+      <h3>keyboard</h3>
+      <table>
+        <tr><td><kbd>ctrl k</kbd></td><td>command palette</td></tr>
+        <tr><td><kbd>j</kbd> / <kbd>k</kbd></td><td>next / previous finding</td></tr>
+        <tr><td><kbd>x</kbd></td><td>mark finding intentional (persists for this workbook)</td></tr>
+        <tr><td><kbd>c</kbd></td><td>copy the active finding's proof</td></tr>
+        <tr><td><kbd>?</kbd></td><td>this help</td></tr>
+        <tr><td><kbd>esc</kbd></td><td>close overlays</td></tr>
+      </table>
+      <p class="dim small" style="margin-top:0.6rem">esc closes</p>
+    </div>
+  </div>
+
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+
   <script type="module" src="/src/main.ts"></script>
 </body>
 </html>

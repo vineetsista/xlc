@@ -77,13 +77,17 @@ CDN serving static files.
 ## Live demo
 
 Drop a workbook at the hosted page (nothing uploads — the engine runs in
-your tab), or click **try the sample** for a one-click tour. Beyond the
-three-act receipt and findings triage, the **scenario lab** picks your
+your tab), or click **try the sample** for a one-click tour. Findings
+render as compiler diagnostics — rule, cell, caret under the offending
+range, machine-checkable proof. The **scenario lab** picks your
 highest-impact inputs, scrubs a what-if slider with microsecond re-evals
-(the engine re-runs only the dependency cone), draws the response curve,
-and runs a 10,000-scenario Monte-Carlo with a histogram and p5/p50/p95 —
-all in the tab. Drop a second version of the file to get a semantic diff
-with a concrete witness input. Build your own from source:
+(the engine re-runs only the dependency cone), draws the response curve
+and a **tornado sensitivity chart**, inverts the model with **goal
+seek**, and runs a 10,000-scenario Monte-Carlo with histogram/CDF views
+and p5/p50/p95 — all in the tab. Drop a second version of the file to
+get a semantic diff with a concrete witness input. `ctrl-k` opens a
+command palette; **export report** writes the whole audit to markdown,
+locally. Build your own from source:
 `make deploy-package` produces a static site zip;
 `.github/workflows/deploy-pages.yml` deploys to GitHub Pages on push.
 

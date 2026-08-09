@@ -10,7 +10,13 @@ https://github.com/vineetsista/xlc · Pages: https://vineetsista.github.io/xlc/
   receipt breakdown, findings triage (chips/copy/keyboard/suppression),
   scenario lab (wasm Session: prepare-once cone re-eval, what-if slider,
   response curve, 10k Monte-Carlo histogram), version diff with witness.
-  28/28 headless checks local; live-site smoke green, 0 console errors.
+- Web v3 (2026-08-09): caret diagnostics (§9 cashed), sticky nav +
+  scrollspy, ctrl-k command palette, help overlay, tornado sensitivity
+  (±10% per ranked input, validated 2-hue pair), goal seek (bisection
+  on the cone), histogram/CDF toggle + p5/p50/p95 markers, markdown
+  report export, a11y pass (aria-modal + focus trap, combobox wiring,
+  chart aria-labels, aria-live toast). Adversarial review (3 lenses ×
+  refuters) found 18 real issues — all fixed. Suite 28 → 49 checks.
 - Live demo + essay published as artifacts (private until shared).
 - LibreOffice installed user-space (no sudo); all 5,194 disputed cells
   adjudicated: 49.6% oracle noise / 41.5% real gaps / 8.9% three-way.

@@ -3,6 +3,36 @@
 Dated entries written for a human reader; the Phase 9 engineering essay is
 assembled from these.
 
+## 2026-08-09 — Web v3: the caret, the tornado, and a command palette
+
+The interface caught up with its own constitution. §9 always said a
+finding should render like a compiler diagnostic — "filename, cell
+reference, caret" — and the caret finally exists: each warning now
+underlines the exact range the proof names, computed by matching the
+proof's cell references back into the formula text. Around it, the page
+grew the organs of a real tool: a sticky section nav with scrollspy, a
+ctrl-k command palette, a keyboard-help overlay, and an export button
+that writes the whole audit — receipt, findings with proofs,
+exclusions, scenario stats, sensitivity table — to a markdown report,
+generated locally like everything else. The lab gained three verbs on
+the same prepared-cone engine: a tornado chart that re-prepares each
+ranked input, nudges it ±10%, and draws the output swing against a
+validated two-hue pair (ΔE 29.4 under protanopia — the dataviz
+validator, not an eyeball); goal seek, which brackets the target on the
+response curve and bisects what_if calls to invert the model in
+milliseconds; and a cumulative view of the Monte-Carlo with p5/p50/p95
+marked on both projections. The headless suite grew from 28 to 49
+checks, and the release went through an adversarial review pass —
+three independent reviewers over the diff, every claim then attacked
+by a verifier — which confirmed eighteen findings worth fixing before
+shipping: an exported report that could carry the previous workbook's
+Monte-Carlo stats, a `display:flex` rule that silently defeated the
+`hidden` attribute on the nav, dialogs with no focus containment,
+goal-seek brackets that could span a non-numeric gap in the response
+curve, and a set of tautological test assertions that would have let
+future regressions through. All eighteen are fixed; the suite now
+reads the exported markdown back and asserts its contents.
+
 ## 2026-08-09 — Web v2: the scenario lab lives in the tab
 
 The site grew from a receipt-printer into an instrument. One click loads
