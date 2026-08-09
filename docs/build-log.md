@@ -3,6 +3,28 @@
 Dated entries written for a human reader; the Phase 9 engineering essay is
 assembled from these.
 
+## 2026-08-09 — The launch homework: pricing the empty middle
+
+With all ten gates green the remaining work was strategy, so today was a
+research day: four parallel agents pulled the live pricing pages of
+every Monte-Carlo and audit incumbent, twenty open-core monetization
+precedents, and — most usefully — the actual posting rules of every
+launch channel. Two findings changed the plan. First, r/FPandA's rule 3
+auto-permabans any tool post, and our own checklist cheerfully said to
+post there; HUMAN_TODO and the finance draft now route around it
+(r/excel Show-and-Tell with a how-it-works section, a LinkedIn findings
+carousel with the link in the first comment, EuSpRIG's mailing list).
+Second, the market has a hollow middle: professional Monte-Carlo seats
+run €1,550–3,500/yr, audit add-ins $250–2,000/yr, the only free web
+auditor uploads your file to its servers, and nobody anywhere offers
+CI — so the free local-first tier sits on unoccupied ground and the
+paid tier gets to name its own comparable. The recommendation, written
+into docs/launch/playbook.md with sources: free forever for the browser
+tool and CLI, a $29 one-time supporter SKU to harvest launch goodwill,
+and a $950/yr flat per-organization CI license with offline keys — the
+Sidekiq shape, sold into the model-risk budget line rather than the
+developer-productivity one that killed Earthly.
+
 ## 2026-08-09 — Web v3: the caret, the tornado, and a command palette
 
 The interface caught up with its own constitution. §9 always said a

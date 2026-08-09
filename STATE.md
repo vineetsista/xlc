@@ -17,6 +17,12 @@ https://github.com/vineetsista/xlc · Pages: https://vineetsista.github.io/xlc/
   report export, a11y pass (aria-modal + focus trap, combobox wiring,
   chart aria-labels, aria-live toast). Adversarial review (3 lenses ×
   refuters) found 18 real issues — all fixed. Suite 28 → 49 checks.
+- Launch playbook (2026-08-09): 4-agent live market sweep — incumbent
+  pricing + channel rules verified; r/FPandA rerouted (rule-3 permaban
+  found in our own checklist); tiers recommended (free forever / $29
+  supporter / $950-yr-org CI, offline keys) in docs/launch/playbook.md;
+  HN + finance drafts updated to match (maker first-comment, r/excel
+  Show-and-Tell, LinkedIn carousel).
 - Live demo + essay published as artifacts (private until shared).
 - LibreOffice installed user-space (no sudo); all 5,194 disputed cells
   adjudicated: 49.6% oracle noise / 41.5% real gaps / 8.9% three-way.
@@ -24,7 +30,8 @@ https://github.com/vineetsista/xlc · Pages: https://vineetsista.github.io/xlc/
   payment account when pricing exists. That is the whole list.
 
 ## Next action
-Human: work through HUMAN_TODO.md. Agent (post-launch backlog, spec
+Human: HUMAN_TODO.md — decide the free/paid line (Step 1), then post in
+the verified channel order (docs/launch/playbook.md). Agent (backlog, spec
 "Later" section + measured gaps): TEXT function number-format engine
 (21,936 census cells), INDIRECT/OFFSET static-resolvable subset,
 LET/LAMBDA if census justifies, pow-precision class (~2.3k cells),

@@ -29,3 +29,52 @@ model re-simulates 100k scenarios in 12.6 ms.
 Try it: https://vineetsista.github.io/xlc/ · Repo (MIT, every artifact committed): https://github.com/vineetsista/xlc ·
 Essay: https://github.com/vineetsista/xlc/blob/main/docs/essay.md. Every number is reproducible
 with `make bench`.
+
+---
+
+## Posting notes (channel rules live-verified 2026-08-09)
+
+- **Window:** Tue–Thu, 13:00–16:00 UTC (9am–12pm ET) — where this
+  niche's winners posted (Excel-to-Python compiler 79 pts, Probly 171,
+  WASM-compiler posts 137–225, while "Excel productivity tool" framings
+  died at 2–5). Low-competition alternative: Sunday 11–16 UTC.
+- **Title variant with the hooks explicit:** "Show HN: XLC – an
+  optimizing compiler for Excel (Rust → WASM, runs entirely in your
+  browser)".
+- **Before posting:** open the live site and click the sample workbook
+  once. Show HN requires something people can play with instantly —
+  nobody will upload their own file first.
+- **Immediately after posting:** add the first comment below. Answer
+  every comment for the first 90 minutes. Never defensive. Never ask
+  anyone to upvote — voting-ring detection kills posts and accounts.
+  If asked about money, answer honestly: browser tool and CLI free
+  forever; a paid per-organization CI tier is planned.
+- Reposts are only acceptable after ~a year with no traction — treat
+  this as the one shot and don't post until the sample flow is verified.
+
+**Prepared first comment:**
+
+Author here. I built this because Excel is the most-used programming
+language on Earth with none of the toolchain we take for granted — and
+because .xlsx files secretly contain a perfect test oracle: Excel
+stores its own computed value next to every formula, so a compiler can
+grade itself against 7M real cells with no human in the loop.
+
+Architecture in one paragraph: calamine reads the file; a hand-written
+Pratt parser round-trips 99.997% of 7M corpus formulas byte-exactly
+(whitespace is data — a lone space is Excel's intersection operator);
+Tarjan SCC isolates circular blocks; a scalar interpreter re-derives
+Excel's cached values (99.35% of verifiable cells on the committed
+500-workbook subset, exclusions printed, never hidden); then formulas
+are coarsened into copied-family vector nodes (11.2×) and a
+pulp-vectorized interpreter runs the scenario axis. No JIT — Cranelift
+can't emit the wide SIMD this needs, and at 10⁵–10⁶ scenarios dispatch
+amortizes to noise anyway.
+
+Honest limitations: ~75 functions implemented (that covers 99% of
+cell-mentions in the corpus, but TEXT's format engine, INDIRECT/OFFSET,
+and LET/LAMBDA aren't in yet — excluded cells are reported per-cell);
+the oracle itself has a noise floor (some real files are saved with
+stale caches, and we publish the adjudication); and the browser build
+is currently single-threaded, so native is ~8× faster. MIT; every
+number reproduces with `make bench`.
