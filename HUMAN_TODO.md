@@ -20,12 +20,10 @@ after all) and its adjudication runs automatically.
 
 ## 2. Post the launches (posting is yours alone)
 
-Drafts are final in `docs/launch/hn.md` (compiler story) and
-`docs/launch/finance.md` (found-bug story). Both already carry working
-links (the private artifacts — share them from their page menus, or swap
-in your hosted URLs) — then post. Essay artifact:
-https://claude.ai/code/artifact/dd596b1c-16a7-4fe6-91e8-e0516d4c72d0
-The YC application draft is `docs/application/yc.md`.
+Drafts are final and carry the LIVE public URLs (site + repo + essay).
+Read `docs/launch/hn.md` and `docs/launch/finance.md`, then post them —
+that click is yours alone. The YC application draft is
+`docs/application/yc.md`.
 
 ## 3. Payment checkout (only when you set pricing)
 

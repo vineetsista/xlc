@@ -26,5 +26,6 @@ pulp-vectorized interpreter over coarsened copied-formula families gets
 AVX-512 that Cranelift can't emit; a single-input change on a 40k-formula
 model re-simulates 100k scenarios in 12.6 ms.
 
-Engineering essay with all the artifacts: https://claude.ai/code/artifact/dd596b1c-16a7-4fe6-91e8-e0516d4c72d0 (or your hosted copy). Every number is
-reproducible with `make bench`.
+Try it: https://vineetsista.github.io/xlc/ · Repo (MIT, every artifact committed): https://github.com/vineetsista/xlc ·
+Essay: https://github.com/vineetsista/xlc/blob/main/docs/essay.md. Every number is reproducible
+with `make bench`.
