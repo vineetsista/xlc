@@ -44,8 +44,9 @@ warning shows its evidence (which siblings disagree, which cell fell
 out of the sum), and one click marks it "intentional" and keeps it
 suppressed for that file.
 
-*(embed two screenshots here: the green receipt, and one finding with
-its caret diagnostic)*
+*(embed the two ready screenshots here — `docs/launch/assets/receipt.png`
+and `docs/launch/assets/finding-caret.png`, both captured from the live
+sample audit)*
 
 It will not tell you your discount rate is wrong. It will tell you that
 K25 sums three rows where sixteen siblings sum four, and show you the
