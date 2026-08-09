@@ -21,6 +21,17 @@ repeated-slip findings (the uniqueness guard belongs to the generic class
 only). v4 adds guards d/e/f for the three v2 classes. Every rejected
 version's samples are preserved in docs/precision/.
 
+## 2026-08-09 — Secondary oracle installed user-space; adjudication verdicts
+The "needs sudo" assumption was wrong: LibreOffice 26.2.5 runs from the
+TDF deb bundle extracted with `dpkg -x` into ~/opt (no root, WSL2-safe),
+with UNO available via its bundled python. scripts/lo_oracle.py loads
+each disputed workbook, calls calculateAll() explicitly (never
+--convert-to, per §8.4), and adjudicated all 5,194 disputed receipt
+cells: 49.6% stale-cache oracle noise (LO agrees with XLC), 41.5% real
+XLC gaps (0.27% of verifiable cells, dominated by ^-chain precision),
+8.9% three-way disagreement (Excel, XLC, LO all differ). Recorded in
+docs/benchmarks/oracle-adjudication.json with 200 per-cell samples.
+
 ## 2026-08-09 — Bytes-moved accounting: DRAM model with a residency witness
 Gate 6's bytes-per-scenario metric models DRAM traffic under the tiling
 schedule: each cone value is written once (8B) and inputs read once;

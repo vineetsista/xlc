@@ -3,6 +3,23 @@
 Dated entries written for a human reader; the Phase 9 engineering essay is
 assembled from these.
 
+## 2026-08-09 — Shipped: public repo, live site, and the oracle's confession
+
+The last HUMAN_TODO items fell to stubbornness. LibreOffice does not need
+sudo — the TDF deb bundle extracts with dpkg -x into a home directory,
+its bundled python speaks UNO, and the adjudicator ran calculateAll()
+over every one of the 5,194 cells where XLC and Excel's caches disagree.
+The verdict vindicates the receipt's residual: on 49.6% of disputed
+cells LibreOffice sides with XLC against the file's own cache —
+confirmed stale-cache noise — while 41.5% are real gaps (0.27% of
+verifiable cells, mostly the ^-precision chain) and 8.9% split all
+three engines. The product shipped three ways in one evening: a
+self-contained single-file demo (wasm and fonts embedded, verified in
+Chromium before publishing), the public repository, and GitHub Pages
+enabled by API so the site deploys from main with a relative base that
+survives any mount point. What remains for a human is exactly what the
+constitution reserves: pressing "post".
+
 ## 2026-08-09 — All ten gates green
 
 The last three phases fell in one continuous run. The scenario engine

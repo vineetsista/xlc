@@ -1,12 +1,16 @@
 # XLC — STATE
 Updated: 2026-08-09   |   LAUNCH: awaiting human steps (HUMAN_TODO.md)   |   Week 1
-Phase: 9 — COMPLETE. All ten gates PASS (`make gate-all` green 0-9).
+Phase: 9 — COMPLETE + SHIPPED. All ten gates PASS. Repo public:
+https://github.com/vineetsista/xlc · Pages: https://vineetsista.github.io/xlc/
 
 ## Done / In flight / Blocked
 - Every phase 0-9 complete; every gate written before its code (Law 12).
-- Blocked: launch itself — human-only steps in HUMAN_TODO.md (domain,
-  hosting web/dist, posting docs/launch/*, LibreOffice-UNO install for
-  oracle adjudication). Nothing blocks further engineering.
+- Repo public + GitHub Pages enabled via API (deploys web/dist from main).
+- Live demo + essay published as artifacts (private until shared).
+- LibreOffice installed user-space (no sudo); all 5,194 disputed cells
+  adjudicated: 49.6% oracle noise / 41.5% real gaps / 8.9% three-way.
+- Blocked (human-only, Law 13): posting the launch drafts; custom domain;
+  payment account when pricing exists. That is the whole list.
 
 ## Next action
 Human: work through HUMAN_TODO.md. Agent (post-launch backlog, spec
@@ -27,7 +31,7 @@ analyzer: 58,389 formulas 0.52s native / 4.19s wasm | IR coarsening 11.20x, 0 dr
 scenario: N=1 oracle 21,047/21,047 | moments <=1.6 sigma | (seed,k) reproducible
 bytes/scenario 1.00x min (residency witness 2.5MB/8MB) | fast path 1.45e8 cell-scen/s synthetic
 incremental 12.6ms @ 40k formulas x 1e5 | AD 8.0e-7 max rel err (232 gradients) | diff witness exact
-tests: 96 | clippy: 0 warnings | gates: 10/10 PASS
+tests: 96 | clippy: 0 | rustfmt: clean | gates: 10/10 PASS | oracle adjudication: 2575/2156/463 (noise/real/3-way)
 
 ## Outside conversations
 last: never | count: 0 — launch drafts ready; posting is human-only.
