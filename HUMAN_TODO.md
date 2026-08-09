@@ -13,7 +13,8 @@ after all) and its adjudication runs automatically.
 - **Real hosting (one click, pick one):**
   - GitHub Pages: push the repo to GitHub → Settings → Pages → Source
     "GitHub Actions". `.github/workflows/deploy-pages.yml` does the rest.
-  - Netlify/Cloudflare Pages: drag-and-drop `xlc-site.zip` (already built;
+  - Netlify/Cloudflare Pages: drag-and-drop `xlc-site.zip` — the built
+    `web/dist` site zipped (already built;
     regenerate anytime with `make deploy-package`). COOP/COEP headers are
     preconfigured in `web/netlify.toml` and `web/public/_headers`.
   - Optionally buy a domain and point it at the host.

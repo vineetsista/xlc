@@ -20,7 +20,8 @@ range-axis tiling for very-wide live sets, Cranelift fusion (v2 slide).
 ## Numbers of Record
 corpus: 16,167 wbs / 7,003,444 formula cells | parse 99.9970% RT, 0 panics
 receipt: 99.35% subset / 98.81% full corpus (verifiable), 0 panics | ULP policy: bit|1ulp|sig15
-functions: ~75 implemented (99% cell-mention coverage at 75) | refusal 5.7% | partial 14.1%
+functions: ~75 implemented | 99th-percentile function cut-off: 75 (top-75 = 99% of cell-mentions)
+refusal rate: 5.7% | partial-compile rate: 14.1% (projected, census)
 detectors: ref-error 100% (200) · off-by-one 100% (34 census) · slipped-ref 90.8% (65 census)
 analyzer: 58,389 formulas 0.52s native / 4.19s wasm | IR coarsening 11.20x, 0 drift
 scenario: N=1 oracle 21,047/21,047 | moments <=1.6 sigma | (seed,k) reproducible
