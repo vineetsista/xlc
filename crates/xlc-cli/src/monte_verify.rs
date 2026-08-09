@@ -2,12 +2,10 @@
 //! (seed,k) reproducibility, bytes-moved accounting, and native throughput
 //! on a named public workbook.
 
-use std::collections::HashMap;
 use std::fs;
 use std::path::Path;
 use std::time::Instant;
 
-use xlc_eval::interp::Rect;
 use xlc_eval::Value;
 use xlc_scenario::dist::Dist;
 use xlc_scenario::engine::{CellKey, Engine, ScenarioSpec};
@@ -18,43 +16,6 @@ fn arg_value<'a>(args: &'a [String], flag: &str) -> Option<&'a str> {
         .position(|a| a == flag)
         .and_then(|i| args.get(i + 1))
         .map(String::as_str)
-}
-
-/// Choose up to `k` uncertain inputs for a workbook: static numeric cells
-/// ranked by how many formula-cell dependency rects contain them
-/// (deterministic; maximizes the cone).
-fn auto_inputs(wb: &xlc_eval::workbook::Workbook, k: usize) -> Vec<(CellKey, f64)> {
-    let module = xlc_ir::lower(wb);
-    let mut rects: Vec<Rect> = Vec::new();
-    for fam in &module.families {
-        for lane in 0..fam.lanes.len() {
-            rects.extend(xlc_scenario::engine::family_dep_rects_pub(wb, fam, lane));
-        }
-    }
-    let mut counts: HashMap<CellKey, (usize, f64)> = HashMap::new();
-    for (sid, sheet) in wb.sheets.iter().enumerate() {
-        for (&(row, col), v) in &sheet.values {
-            if sheet.formulas.contains_key(&(row, col)) {
-                continue;
-            }
-            let Value::Num(x) = v else { continue };
-            let key = (sid as u32, row, col);
-            let n = rects
-                .iter()
-                .filter(|r| r.sheet == key.0 && r.contains(row, col))
-                .count();
-            if n > 0 {
-                counts.insert(key, (n, *x));
-            }
-        }
-    }
-    let mut ranked: Vec<(CellKey, (usize, f64))> = counts.into_iter().collect();
-    ranked.sort_by(|a, b| b.1 .0.cmp(&a.1 .0).then(a.0.cmp(&b.0)));
-    ranked
-        .into_iter()
-        .take(k)
-        .map(|(key, (_, x))| (key, x))
-        .collect()
 }
 
 pub fn monte_verify_cmd(args: &[String]) -> i32 {
@@ -74,7 +35,7 @@ pub fn monte_verify_cmd(args: &[String]) -> i32 {
         let Ok(wb) = xlc_ingest::ingest_path(path) else {
             continue;
         };
-        let inputs = auto_inputs(&wb, 8);
+        let inputs: Vec<(CellKey, f64)> = xlc_scenario::engine::auto_inputs(&wb, 8).into_iter().map(|(k, x, _)| (k, x)).collect();
         if inputs.is_empty() {
             continue;
         }
@@ -181,7 +142,7 @@ pub fn monte_verify_cmd(args: &[String]) -> i32 {
     // ---- 4 + 5 + 6. reproducibility, bytes, throughput on the named book ----
     let bench = (|| -> Option<serde_json::Value> {
         let wb = xlc_ingest::ingest_path(Path::new(bench_wb)).ok()?;
-        let inputs = auto_inputs(&wb, 32);
+        let inputs: Vec<(CellKey, f64)> = xlc_scenario::engine::auto_inputs(&wb, 32).into_iter().map(|(k, x, _)| (k, x)).collect();
         let spec = ScenarioSpec {
             seed: 42,
             inputs: inputs

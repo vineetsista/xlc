@@ -14,17 +14,85 @@
       <em>on this machine</em> — nothing is uploaded, there is no server.</p>
     </header>
 
-    <section id="drop" tabindex="0">
+    <section id="drop" tabindex="0" role="button" aria-label="drop an xlsx file or click to choose">
       <p><strong>drop an .xlsx here</strong> <span class="dim">or click to choose a file</span></p>
+      <p class="dim small">no workbook handy? <button id="try-sample" class="ghost">audit the sample budget</button></p>
       <input type="file" id="file" accept=".xlsx,.xlsm" hidden />
     </section>
 
     <section id="log" hidden>
       <div id="act1" class="act"></div>
-      <div id="act2" class="act"></div>
+      <div id="act2" class="act clickable" title="click for the verification breakdown"></div>
+      <div id="receipt-detail" class="detail" hidden></div>
       <div id="act3" class="act"></div>
+
+      <div id="finding-bar" hidden>
+        <span id="chips"></span>
+        <span class="dim kbd-hint">j/k select · x intentional · c copy proof</span>
+      </div>
       <div id="findings"></div>
       <div id="capability" class="dim"></div>
+    </section>
+
+    <section id="lab" hidden>
+      <div class="rule"></div>
+      <h2>scenario lab <span class="dim">— the same engine, live</span></h2>
+
+      <div class="row">
+        <label class="dim" for="input-sel">uncertain input</label>
+        <select id="input-sel"></select>
+        <span id="cone-info" class="dim"></span>
+      </div>
+
+      <div class="row">
+        <label class="dim" for="whatif">what-if</label>
+        <input type="range" id="whatif" min="0" max="1000" value="500" step="1" />
+        <span id="whatif-read"></span>
+      </div>
+      <div class="chart-wrap">
+        <div class="chart-title dim">response of <span id="curve-watch" class="loc"></span> to <span id="curve-input" class="loc"></span></div>
+        <canvas id="curve" width="840" height="180"></canvas>
+        <div id="curve-tip" class="tip" hidden></div>
+      </div>
+
+      <div class="row">
+        <label class="dim" for="dist-sel">distribution</label>
+        <select id="dist-sel">
+          <option value="normal">normal(μ, σ)</option>
+          <option value="uniform">uniform(a, b)</option>
+          <option value="triangular">triangular(a, m, b)</option>
+          <option value="pert">pert(a, m, b)</option>
+        </select>
+        <input type="number" id="p1" step="any" />
+        <input type="number" id="p2" step="any" />
+        <input type="number" id="p3" step="any" hidden />
+        <label class="dim" for="watch-sel">watching</label>
+        <select id="watch-sel"></select>
+        <button id="run-monte">run 10,000 scenarios</button>
+      </div>
+
+      <div id="monte-out" hidden>
+        <div id="monte-stats" class="act"></div>
+        <div class="chart-wrap">
+          <div class="chart-title dim">distribution of <span id="hist-watch" class="loc"></span> over <span id="hist-n"></span> scenarios</div>
+          <canvas id="hist" width="840" height="200"></canvas>
+          <div id="hist-tip" class="tip" hidden></div>
+        </div>
+        <div class="dim small">deterministic: seed 42 — scenario <em>k</em> is derivable from (seed, k) on any machine.</div>
+      </div>
+    </section>
+
+    <section id="compare" hidden>
+      <div class="rule"></div>
+      <h2>compare versions <span class="dim">— where do two models disagree?</span></h2>
+      <p class="dim small">drop or choose the <em>other</em> version of this workbook. both run over
+      identical scenario tiles; any divergence is reported with a concrete input vector.</p>
+      <div class="row">
+        <button id="pick-b" class="ghost">choose version B…</button>
+        <input type="file" id="file-b" accept=".xlsx,.xlsm" hidden />
+        <span id="diff-status" class="dim"></span>
+      </div>
+      <div id="diff-out" hidden></div>
     </section>
 
     <footer class="dim">

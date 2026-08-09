@@ -1,5 +1,7 @@
 /* §9: a compiler, not a dashboard. Near-black, mono, diagnostic colors,
-   one accent. Numbers use tabular figures so counters don't jitter. */
+   one accent. Numbers use tabular figures so counters don't jitter.
+   Chart marks use --data (validated against the surface); status greens/
+   ambers/reds are reserved for status and never used as series colors. */
 
 @font-face {
   font-family: 'JetBrains Mono';
@@ -20,7 +22,9 @@
   --amber: #d29922;
   --red: #f85149;
   --accent: #58a6ff;
+  --data: #2f81f7;
   --rule: #21262d;
+  --raise: #161b22;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -38,47 +42,152 @@ body {
 
 header h1 { font-size: 1.25rem; font-weight: 700; }
 header p { margin-top: 0.5rem; }
+h2 { font-size: 1rem; font-weight: 700; margin: 1.25rem 0 0.75rem; }
 .dim { color: var(--dim); }
+.small { font-size: 12px; }
 em { color: var(--fg); font-style: normal; font-weight: 700; }
+.rule { border-top: 1px solid var(--rule); margin: 2rem 0 0; }
+.loc { color: var(--accent); }
 
 #drop {
   margin: 2rem 0;
-  padding: 3rem 1.5rem;
+  padding: 2.5rem 1.5rem;
   border: 1px dashed var(--dim);
   text-align: center;
   cursor: pointer;
 }
 #drop.over { border-color: var(--accent); color: var(--accent); }
+#drop:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+#drop .small { margin-top: 0.6rem; }
 
-#log { margin: 2rem 0; border-top: 1px solid var(--rule); padding-top: 1.5rem; }
+button {
+  background: none;
+  border: 1px solid var(--rule);
+  color: var(--fg);
+  font: inherit;
+  padding: 0.15rem 0.7rem;
+  cursor: pointer;
+}
+button:hover { border-color: var(--dim); }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+button.ghost { color: var(--dim); }
+button.ghost:hover { color: var(--fg); }
+#run-monte { border-color: var(--dim); }
+
+select, input[type="number"] {
+  background: var(--raise);
+  border: 1px solid var(--rule);
+  color: var(--fg);
+  font: inherit;
+  padding: 0.15rem 0.4rem;
+}
+input[type="number"] { width: 8.5rem; }
+select:focus-visible, input:focus-visible { outline: 2px solid var(--accent); }
+
+#log { margin: 2rem 0 0; border-top: 1px solid var(--rule); padding-top: 1.5rem; }
 .act { margin-bottom: 0.4rem; white-space: pre-wrap; }
 .act .ok { color: var(--green); font-weight: 700; }
 .act .warn { color: var(--amber); }
 .act .err { color: var(--red); }
+.act.clickable { cursor: pointer; }
+.act.clickable:hover .ok { text-decoration: underline; }
+.detail {
+  margin: 0.25rem 0 0.75rem 1rem;
+  padding-left: 0.75rem;
+  border-left: 2px solid var(--rule);
+  color: var(--dim);
+  white-space: pre;
+  overflow-x: auto;
+}
 
-#findings { margin-top: 1.25rem; }
+#finding-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 0.9rem 0 0.6rem;
+  flex-wrap: wrap;
+}
+.chip {
+  border: 1px solid var(--rule);
+  color: var(--dim);
+  padding: 0 0.55rem;
+  margin-right: 0.4rem;
+  cursor: pointer;
+  font-size: 12px;
+  background: none;
+}
+.chip.active { color: var(--fg); border-color: var(--dim); }
+.kbd-hint { font-size: 12px; }
+
+#findings { margin-top: 0.5rem; }
 .finding {
   margin-bottom: 1rem;
-  padding-left: 0.75rem;
+  padding: 0.1rem 0 0.1rem 0.75rem;
   border-left: 2px solid var(--amber);
 }
+.finding.active { background: var(--raise); }
 .finding.suppressed { opacity: 0.35; border-left-color: var(--dim); }
 .finding .head { color: var(--amber); font-weight: 700; }
-.finding .loc { color: var(--accent); }
+.finding .head .loc { font-weight: 700; }
 .finding .formula { color: var(--fg); }
 .finding .proof { color: var(--dim); }
 .finding button {
-  background: none;
-  border: 1px solid var(--rule);
-  color: var(--dim);
-  font: inherit;
   font-size: 12px;
   padding: 0 0.5rem;
-  cursor: pointer;
   margin-left: 0.5rem;
+  color: var(--dim);
 }
-.finding button:hover { border-color: var(--dim); color: var(--fg); }
+.finding button:hover { color: var(--fg); }
+.finding .copied { color: var(--green); font-size: 12px; margin-left: 0.5rem; }
 
-#capability { margin-top: 1.5rem; white-space: pre-wrap; }
+#capability { margin-top: 1.25rem; white-space: pre-wrap; }
+
+/* scenario lab */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.7rem 0;
+  flex-wrap: wrap;
+}
+.row label { min-width: 9.5rem; }
+input[type="range"] {
+  flex: 1;
+  min-width: 200px;
+  accent-color: var(--accent);
+  background: transparent;
+}
+#whatif-read { min-width: 22rem; }
+#whatif-read .ok { color: var(--green); font-weight: 700; }
+
+.chart-wrap { position: relative; margin: 0.6rem 0 1rem; }
+.chart-title { font-size: 12px; margin-bottom: 0.25rem; }
+canvas { display: block; width: 100%; height: auto; background: var(--bg); }
+.tip {
+  position: absolute;
+  pointer-events: none;
+  background: var(--raise);
+  border: 1px solid var(--rule);
+  color: var(--fg);
+  font-size: 12px;
+  padding: 0.15rem 0.5rem;
+  white-space: pre;
+  transform: translate(-50%, -130%);
+}
+
+#diff-out { margin-top: 0.75rem; }
+#diff-out table { border-collapse: collapse; margin: 0.5rem 0; }
+#diff-out td, #diff-out th {
+  border: 1px solid var(--rule);
+  padding: 0.15rem 0.7rem;
+  text-align: left;
+  font-weight: 400;
+}
+#diff-out th { color: var(--dim); }
 
 footer { margin-top: 3rem; border-top: 1px solid var(--rule); padding-top: 1rem; font-size: 12px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

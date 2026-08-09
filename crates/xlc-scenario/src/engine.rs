@@ -486,19 +486,54 @@ impl<'wb> Engine<'wb> {
     }
 
     fn run_tile(&self, s0: u32, t: u32, watch: &HashSet<CellKey>, out: &mut SweepResult) {
+        self.run_tile_with(s0, t, watch, out, None)
+    }
+
+    /// Evaluate a single scenario with EXPLICIT input values (the what-if
+    /// slider path: no distribution sampling, engine reused across calls).
+    pub fn eval_with_inputs(&self, values: &[f64], watch: &[CellKey]) -> HashMap<CellKey, Value> {
+        let watch_set: HashSet<CellKey> = watch.iter().copied().collect();
+        let mut r = SweepResult {
+            watched: watch.iter().map(|w| (*w, Vec::new())).collect(),
+            scenarios: 1,
+            cone_cells: self.schedule.len(),
+            bytes_written: 0,
+            bytes_read_streams: 0,
+            fast_path_cells: 0,
+            scalar_path_cells: 0,
+            peak_live_buffers: 0,
+        };
+        self.run_tile_with(0, 1, &watch_set, &mut r, Some(values));
+        r.watched
+            .into_iter()
+            .map(|(k2, mut v)| (k2, v.pop().unwrap_or(Value::Blank)))
+            .collect()
+    }
+
+    fn run_tile_with(
+        &self,
+        s0: u32,
+        t: u32,
+        watch: &HashSet<CellKey>,
+        out: &mut SweepResult,
+        override_vals: Option<&[f64]>,
+    ) {
         let tl = t as usize;
         // Input sample buffers for this tile.
         let mut input_bufs: Vec<Vec<f64>> = Vec::with_capacity(self.spec.inputs.len());
         for (i, (_, dist)) in self.spec.inputs.iter().enumerate() {
             let mut b = Vec::with_capacity(tl);
             for s in 0..t {
-                b.push(dist.sample(DrawAddr {
-                    seed: self.spec.seed,
-                    cell: i as u32,
-                    scenario: s0 + s,
-                    draw: 0,
-                    attempt: 0,
-                }));
+                b.push(match override_vals {
+                    Some(vals) => vals[i],
+                    None => dist.sample(DrawAddr {
+                        seed: self.spec.seed,
+                        cell: i as u32,
+                        scenario: s0 + s,
+                        draw: 0,
+                        attempt: 0,
+                    }),
+                });
             }
             input_bufs.push(b);
         }
@@ -896,6 +931,43 @@ fn fast_plan(fam: &Family) -> Option<FastPlan> {
 /// Public wrapper for input auto-selection in the CLI.
 pub fn family_dep_rects_pub(wb: &Workbook, fam: &Family, lane: usize) -> Vec<Rect> {
     family_dep_rects(wb, fam, lane)
+}
+
+/// Choose up to `k` uncertain-input candidates: static numeric cells
+/// ranked by how many formula-cell dependency rects contain them.
+/// Returns (cell, current value, impact count), deterministic order.
+pub fn auto_inputs(wb: &Workbook, k: usize) -> Vec<(CellKey, f64, usize)> {
+    let module = xlc_ir::lower(wb);
+    let mut rects: Vec<Rect> = Vec::new();
+    for fam in &module.families {
+        for lane in 0..fam.lanes.len() {
+            rects.extend(family_dep_rects(wb, fam, lane));
+        }
+    }
+    let mut counts: HashMap<CellKey, (usize, f64)> = HashMap::new();
+    for (sid, sheet) in wb.sheets.iter().enumerate() {
+        for (&(row, col), v) in &sheet.values {
+            if sheet.formulas.contains_key(&(row, col)) {
+                continue;
+            }
+            let Value::Num(x) = v else { continue };
+            let key = (sid as u32, row, col);
+            let n = rects
+                .iter()
+                .filter(|r| r.sheet == key.0 && r.contains(row, col))
+                .count();
+            if n > 0 {
+                counts.insert(key, (n, *x));
+            }
+        }
+    }
+    let mut ranked: Vec<(CellKey, (usize, f64))> = counts.into_iter().collect();
+    ranked.sort_by(|a, b| b.1 .0.cmp(&a.1 .0).then(a.0.cmp(&b.0)));
+    ranked
+        .into_iter()
+        .take(k)
+        .map(|(key, (n, x))| (key, x, n))
+        .collect()
 }
 
 /// Rects a lane depends on (deps for the cone + schedule), via the same

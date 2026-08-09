@@ -16,3 +16,5 @@ xlc-ingest.workspace = true
 xlc-lint.workspace = true
 xlc-parse.workspace = true
 xlc-eval.workspace = true
+xlc-scenario.workspace = true
+xlc-diff.workspace = true

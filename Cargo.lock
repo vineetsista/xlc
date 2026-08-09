@@ -639,10 +639,12 @@ version = "0.1.0"
 dependencies = [
  "serde_json",
  "wasm-bindgen",
+ "xlc-diff",
  "xlc-eval",
  "xlc-ingest",
  "xlc-lint",
  "xlc-parse",
+ "xlc-scenario",
 ]
 
 [[package]]

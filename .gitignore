@@ -18,3 +18,4 @@
 
 # Build artifact (make deploy-package)
 /xlc-site.zip
+/web/dist-single

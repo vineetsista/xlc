@@ -1,6 +1,6 @@
-// Real-browser verification of the three-act sequence (Phase 4 Definition
-// of Done). Serves the production build, drives headless Chromium, drops
-// two workbooks, and exercises suppression persistence.
+// Real-browser verification of the v2 surface: three acts, findings
+// triage (chips, copy, suppression, keyboard), the scenario lab (slider,
+// response curve, Monte-Carlo histogram), and version diff.
 import { chromium } from 'playwright';
 import { preview } from 'vite';
 import { fileURLToPath } from 'node:url';
@@ -32,7 +32,9 @@ page.on('console', (m) => {
 });
 
 let failures = 0;
+let checks = 0;
 const check = (name, cond) => {
+  checks++;
   console.log(`${cond ? 'ok  ' : 'FAIL'} ${name}`);
   if (!cond) failures++;
 };
@@ -41,36 +43,87 @@ await page.goto(url);
 check('page title', (await page.title()).includes('xlc'));
 check('drop zone visible', await page.locator('#drop').isVisible());
 
-// Act sequence on the clean fixture.
-await page.setInputFiles('#file', path.join(root, '../tests/cases/basic-sum.xlsx'));
-await page.waitForFunction(() => document.getElementById('act3')?.textContent?.length > 0, null, { timeout: 20000 });
-const act1a = await page.locator('#act1').textContent();
-const act2a = await page.locator('#act2').textContent();
-const act3a = await page.locator('#act3').textContent();
-check('act1: compiled N formulas', /compiled 2 formulas across 1 sheet/.test(act1a));
-check('act2: receipt 100%', /2\/2 verifiable cells.*\(100\.00%\)/.test(act2a));
-check('act2: rendered green', await page.locator('#act2 .ok').count() === 1);
-check('act3: zero defects', /0 defects found/.test(act3a));
+// --- one-click sample ---
+await page.locator('#try-sample').click();
+await page.waitForFunction(() => /defect/.test(document.getElementById('act3')?.textContent ?? ''), null, { timeout: 30000 });
+check('sample: act1 compiled 29', /compiled 29 formulas/.test(await page.locator('#act1').textContent()));
+check('sample: receipt 100% green', await page.locator('#act2 .ok').count() === 1);
+check('sample: 2 defects', /2 defects found/.test(await page.locator('#act3').textContent()));
 
-// The planted slipped reference.
-await page.setInputFiles('#file', path.join(root, '../tests/cases/slipped-ref.xlsx'));
-await page.waitForFunction(() => /defect/.test(document.getElementById('act3')?.textContent ?? ''), null, { timeout: 20000 });
-const act3b = await page.locator('#act3').textContent();
-check('act3: one defect found', /1 defect found/.test(act3b));
-const proof = await page.locator('.finding .proof').first().textContent();
-check('finding carries proof', /7 of 8 cells share the copied formula pattern/.test(proof));
-check('finding names the cell', (await page.locator('.finding .loc').first().textContent()).includes('Model!B4'));
+// --- receipt expandable ---
+await page.locator('#act2').click();
+check('receipt detail expands', await page.locator('#receipt-detail').isVisible());
+check('receipt detail shows exact split', /exact 29/.test(await page.locator('#receipt-detail').textContent()));
 
-// Suppression: click [intentional], count drops, persists across re-drop.
-await page.locator('.finding button').first().click();
-check('suppression flips count', /0 defects found/.test(await page.locator('#act3').textContent()));
-check('suppressed style applied', await page.locator('.finding.suppressed').count() === 1);
-await page.setInputFiles('#file', path.join(root, '../tests/cases/slipped-ref.xlsx'));
-await page.waitForFunction(() => /marked intentional/.test(document.getElementById('act3')?.textContent ?? ''), null, { timeout: 20000 });
-check('suppression persists across re-analysis', /0 defects found.*1 marked intentional/.test(await page.locator('#act3').textContent()));
+// --- chips filter ---
+check('chips render with counts', /all \(2\)/.test(await page.locator('#chips').textContent()));
+await page.locator('.chip[data-f="range-off-by-one"]').click();
+check('filter narrows to 1 finding', (await page.locator('.finding').count()) === 1);
+await page.locator('.chip[data-f="all"]').click();
+
+// --- copy proof ---
+await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
+await page.locator('.finding [data-act="copy"]').first().click();
+const clip = await page.evaluate(() => navigator.clipboard.readText());
+check('copy proof puts evidence on clipboard', /proof|pattern/.test(clip) || clip.includes('!'));
+
+// --- keyboard triage: j selects, x suppresses ---
+await page.keyboard.press('j');
+check('j activates first finding', (await page.locator('.finding.active').count()) === 1);
+await page.keyboard.press('x');
+check('x suppresses active finding', /1 defect found.*1 marked intentional/.test(await page.locator('#act3').textContent()));
+await page.keyboard.press('x'); // restore
+check('x again unsuppresses', /2 defects found/.test(await page.locator('#act3').textContent()));
+
+// --- suppression persistence across reload ---
+await page.locator('.finding', { hasText: 'Budget!G7' }).locator('[data-act="sup"]').click();
+await page.reload();
+await page.locator('#try-sample').click();
+await page.waitForFunction(() => /marked intentional/.test(document.getElementById('act3')?.textContent ?? ''), null, { timeout: 30000 });
+check('suppression survives reload + re-drop', /1 defect found.*1 marked intentional/.test(await page.locator('#act3').textContent()));
+await page.locator('.finding', { hasText: 'Budget!G7' }).locator('[data-act="sup"]').click(); // restore
+
+// --- scenario lab ---
+check('lab appears', await page.locator('#lab').isVisible());
+check('input candidates listed', (await page.locator('#input-sel option').count()) > 3);
+check('cone info shows schedule build', /cone: .* schedule built/.test(await page.locator('#cone-info').textContent()));
+const read0 = await page.locator('#whatif-read').textContent();
+check('what-if readout live with timing', /µs|ms/.test(read0));
+await page.locator('#whatif').fill('900');
+await page.locator('#whatif').dispatchEvent('input');
+const read1 = await page.locator('#whatif-read').textContent();
+check('slider changes the output', read1 !== read0 && /→/.test(read1));
+check('response curve painted', await page.locator('#curve').evaluate((cv) => {
+  const ctx = cv.getContext('2d');
+  return ctx.getImageData(0, 0, cv.width, cv.height).data.some((v) => v !== 0);
+}));
+// curve hover tooltip
+await page.locator('#curve').hover({ position: { x: 400, y: 90 } });
+check('curve tooltip on hover', await page.locator('#curve-tip').isVisible());
+
+// --- Monte-Carlo ---
+await page.locator('#run-monte').click();
+await page.waitForFunction(() => !document.getElementById('monte-out')?.hidden, null, { timeout: 30000 });
+const stats = await page.locator('#monte-stats').textContent();
+check('monte stats line', /10,000 scenarios.*mean.*p95/.test(stats));
+check('histogram painted', await page.locator('#hist').evaluate((cv) => {
+  const ctx = cv.getContext('2d');
+  return ctx.getImageData(0, 0, cv.width, cv.height).data.some((v) => v !== 0);
+}));
+await page.locator('#hist').hover({ position: { x: 420, y: 150 } });
+check('histogram bin tooltip', await page.locator('#hist-tip').isVisible());
+const readAfter = await page.locator('#whatif-read').textContent();
+check('slider still live after monte', /→/.test(readAfter));
+
+// --- version diff (v2 = sample with one coefficient changed) ---
+check('compare section appears', await page.locator('#compare').isVisible());
+await page.locator('#file-b').setInputFiles(path.join(root, '../tests/cases/diff-b-sample.xlsx'));
+await page.waitForFunction(() => !document.getElementById('diff-out')?.hidden, null, { timeout: 60000 });
+const diffText = await page.locator('#diff-out').textContent();
+check('diff reports divergence with witness', /diverges/.test(diffText) && /witness/.test(diffText) && /version A =/.test(diffText));
 
 check('no console/page errors', errors.length === 0);
-if (errors.length) console.log('errors:', errors);
+if (errors.length) console.log('errors:', errors.slice(0, 5));
 
 if (coop) {
   const resp = await page.request.get(url);
@@ -82,7 +135,7 @@ if (coop) {
   fs.writeFileSync(
     path.join(root, '../docs/benchmarks/browser-coop.json'),
     JSON.stringify(
-      { coop_coep_headers_present: present, checks_failed: failures, checks_run: 13 },
+      { coop_coep_headers_present: present, checks_failed: failures, checks_run: checks },
       null,
       1,
     ),
