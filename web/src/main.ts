@@ -207,8 +207,14 @@ async function run(bytes: ArrayBuffer, name: string, ticket?: number) {
   ($('goal-read') as HTMLElement).textContent = '';
   ($('goal-target') as HTMLInputElement).value = '';
   ($('whatif-read') as HTMLElement).textContent = '';
+  RO.built = false;
   sweepPts = [];
   sweepGen = -1;
+  curveKey = '';
+  lastMarker = null;
+  exactAt = NaN;
+  exactOut = null;
+  sentValue = NaN;
   for (const t of ['curve-tip', 'tornado-tip', 'hist-tip']) ($(t) as HTMLElement).hidden = true;
   ($('diff-out') as HTMLElement).hidden = true;
   ($('diff-status') as HTMLElement).textContent = '';
@@ -411,7 +417,9 @@ async function setupLab() {
   // The previous workbook's readout/curve must not show while the new
   // cone prepares; sweepPts was cleared in run(), so this blanks the chart.
   ($('whatif-read') as HTMLElement).innerHTML = '<span class="dim">preparing…</span>';
-  drawCurve();
+  RO.built = false; // the stable nodes were just replaced
+  curveKey = '';
+  chartFrame($('curve') as HTMLCanvasElement); // clear the previous workbook's curve
   const sel = $('input-sel') as HTMLSelectElement;
   sel.innerHTML = inputCands
     .map((c, i) => `<option value="${i}">${esc(c.name)} = ${fmtV(c.value)}  (feeds ${c.impact} formulas)</option>`)
@@ -511,22 +519,121 @@ function syncDistParams() {
   }
 }
 
-// ---------- what-if: latest-wins pipeline ----------
-// At most one what_if is ever in flight; new input while waiting just
-// marks the pipeline dirty and the newest slider value is sent the
-// moment the previous answer lands. Nothing queues, nothing freezes.
+// ---------- what-if: one frame, one paint, one engine call ----------
+// The drag loop is rAF-driven, never event-driven. A range input fires
+// `input` far faster than the display refreshes, and the engine (in a
+// worker) can answer in microseconds — so an event-driven loop repaints
+// hundreds of times per second and blocks the main thread, which is what
+// paints a blank tab. Here an input event only records the position and
+// asks for a frame. Per frame: interpolate the response curve for an
+// instant (approximate) readout, blit the cached curve and move the
+// marker, and send at most one engine call. The exact value replaces the
+// approximation the moment it lands.
 const slider = $('whatif') as HTMLInputElement;
 let whatifInflight = false;
-slider.addEventListener('input', () => void pumpWhatIf());
+let framePending = false;
+let sentValue = NaN; // last x handed to the engine
+let exactAt = NaN; // x the exact readout belongs to
+let exactOut: { text: string; note: string; err: boolean } | null = null;
+
+slider.addEventListener('input', scheduleFrame);
 function sliderValue(): number {
   return sliderLo + ((sliderHi - sliderLo) * +slider.value) / 1000;
 }
-async function pumpWhatIf() {
-  if (whatifInflight || !hasSession || !curInput) return;
-  whatifInflight = true;
-  const g = gen;
+function scheduleFrame() {
+  if (framePending) return;
+  framePending = true;
+  requestAnimationFrame(frame);
+}
+
+// Linear interpolation on the precomputed 81-point sweep: an honest
+// approximation of the engine's answer, available instantly.
+function interpAt(x: number): number | null {
+  if (sweepPts.length < 2) return null;
+  if (x <= sweepPts[0][0]) return sweepPts[0][1];
+  if (x >= sweepPts[sweepPts.length - 1][0]) return sweepPts[sweepPts.length - 1][1];
+  let lo = 0;
+  let hi = sweepPts.length - 1;
+  while (hi - lo > 1) {
+    const mid = (lo + hi) >> 1;
+    if (sweepPts[mid][0] <= x) lo = mid;
+    else hi = mid;
+  }
+  const [x0, y0] = sweepPts[lo];
+  const [x1, y1] = sweepPts[hi];
+  return x1 === x0 ? y0 : y0 + ((y1 - y0) * (x - x0)) / (x1 - x0);
+}
+
+// Stable readout nodes: setting innerHTML re-parses HTML and relayouts
+// the row on every frame. These are built once and only their text
+// changes, so a drag frame costs three textContent writes.
+const RO = {
+  built: false,
+  input: null as HTMLElement | null,
+  x: null as HTMLElement | null,
+  watch: null as HTMLElement | null,
+  eq: null as HTMLElement | null,
+  val: null as HTMLElement | null,
+  note: null as HTMLElement | null,
+};
+function buildReadout() {
+  const read = $('whatif-read') as HTMLElement;
+  read.textContent = '';
+  const mk = (cls?: string, text = '') => {
+    const s = document.createElement('span');
+    if (cls) s.className = cls;
+    s.textContent = text;
+    read.appendChild(s);
+    return s;
+  };
+  RO.input = mk();
+  mk('dim', ' = ');
+  RO.x = mk();
+  mk('dim', ' → ');
+  RO.watch = mk('loc');
+  RO.eq = mk('dim', ' = ');
+  RO.val = mk('ok');
+  RO.note = mk('dim');
+  RO.built = true;
+}
+let ariaStamp = 0;
+
+function frame() {
+  framePending = false;
+  if (!curInput) return;
+  if (!RO.built) buildReadout();
   const x = sliderValue();
-  slider.setAttribute('aria-valuetext', `${curInput.name} = ${fmtV(x)}`);
+  // The a11y value only needs to be current, not 60 times a second.
+  const now = performance.now();
+  if (now - ariaStamp > 150) {
+    slider.setAttribute('aria-valuetext', `${curInput.name} = ${fmtV(x)}`);
+    ariaStamp = now;
+  }
+  const watch = ($('watch-sel') as HTMLSelectElement).selectedOptions[0]?.textContent ?? '';
+  RO.input!.textContent = curInput.name;
+  RO.x!.textContent = fmtV(x);
+  RO.watch!.textContent = watch;
+  if (x === exactAt && exactOut) {
+    RO.eq!.textContent = ' = ';
+    RO.val!.className = exactOut.err ? 'err' : 'ok';
+    RO.val!.textContent = exactOut.text;
+    RO.note!.textContent = exactOut.note;
+  } else {
+    const approx = interpAt(x);
+    RO.eq!.textContent = ' ≈ ';
+    RO.val!.className = 'approx';
+    RO.val!.textContent = approx === null ? '…' : fmtV(approx);
+    RO.note!.textContent = approx === null ? ' · computing' : ' · interpolated, exact landing…';
+  }
+  paintCurve(x);
+  if (!whatifInflight && x !== sentValue) void sendWhatIf(x);
+}
+
+async function sendWhatIf(x: number) {
+  if (!hasSession || !curInput) return;
+  whatifInflight = true;
+  sentValue = x;
+  const g = gen;
   let out: any;
   let us = 0;
   try {
@@ -538,12 +645,15 @@ async function pumpWhatIf() {
   }
   whatifInflight = false;
   if (g !== gen) return;
-  const watch = ($('watch-sel') as HTMLSelectElement).selectedOptions[0]?.textContent ?? '';
-  ($('whatif-read') as HTMLElement).innerHTML = out.ok
-    ? `${esc(curInput.name)} = ${fmtV(x)} → <span class="loc">${esc(watch)}</span> = <span class="ok">${out.output !== undefined ? fmtV(out.output) : esc(out.output_text)}</span> <span class="dim">· ${us < 1000 ? us.toFixed(0) + ' µs' : (us / 1000).toFixed(1) + ' ms'}</span>`
-    : `<span class="err">${esc(out.error)}</span>`;
-  drawCurve();
-  if (sliderValue() !== x) void pumpWhatIf(); // newest wins
+  exactAt = x;
+  exactOut = out.ok
+    ? {
+        text: out.output !== undefined ? fmtV(out.output) : String(out.output_text),
+        note: ` · ${us < 1000 ? us.toFixed(0) + ' µs' : (us / 1000).toFixed(1) + ' ms'}`,
+        err: false,
+      }
+    : { text: String(out.error), note: '', err: true };
+  scheduleFrame(); // repaint with the exact value, or chase a newer position
 }
 
 async function refreshCurve() {
@@ -558,10 +668,12 @@ async function refreshCurve() {
   if (g !== gen) return;
   sweepPts = pts;
   sweepGen = g;
+  curveKey = ''; // the cached curve layer is stale
+  exactAt = NaN;
+  sentValue = NaN;
   const watch = ($('watch-sel') as HTMLSelectElement).selectedOptions[0]?.textContent ?? '';
   ($('curve-watch') as HTMLElement).textContent = watch;
-  drawCurve();
-  void pumpWhatIf();
+  scheduleFrame();
 }
 
 // ---------- goal seek ----------
@@ -636,7 +748,7 @@ async function runGoalSeek() {
       return;
     }
     slider.value = String(Math.round(Math.min(1000, Math.max(0, (1000 * (x - sliderLo)) / (sliderHi - sliderLo)))));
-    void pumpWhatIf();
+    scheduleFrame();
     read.innerHTML =
       `found: <span class="loc">${esc(curInput.name)}</span> = <strong>${fmtV(x)}</strong> → ${fmtV(y)} ` +
       `<span class="dim">(target ${fmtV(t)} · bisection, ${ms.toFixed(1)} ms)</span>`;
@@ -706,7 +818,7 @@ function drawTornado() {
   const rowH = 30;
   const padT = 8;
   const padB = 26;
-  cv.setAttribute('height', String(padT + rows.length * rowH + padB));
+  setLogicalHeight(cv, padT + rows.length * rowH + padB);
   const { ctx, w, h } = chartFrame(cv);
   const gut = Math.min(230, Math.floor(w * 0.32));
   const padR = 14;
@@ -786,24 +898,45 @@ function drawTornado() {
 }
 
 // ---------- charts (validated hues, hover layer, dim grid) ----------
-function chartFrame(cv: HTMLCanvasElement) {
+// Resizing a canvas reallocates its backing store, so only do it when the
+// size actually changed. Clearing is the caller's choice: the drag path
+// repaints a ~20px square, not a megapixel.
+// The logical (CSS) height lives in data-h and NEVER comes back out of the
+// height attribute: assigning canvas.height rewrites that attribute, so
+// deriving logical height from it made the backing store grow by a factor
+// of dpr on every single paint (180 → 360 → 720 … at dpr 2). That runaway
+// is what blanked the tab mid-drag on any HiDPI display.
+function logicalHeight(cv: HTMLCanvasElement): number {
+  return +(cv.dataset.h ?? cv.getAttribute('height') ?? 180);
+}
+function setLogicalHeight(cv: HTMLCanvasElement, h: number) {
+  cv.dataset.h = String(h);
+  cv.style.height = `${h}px`;
+}
+function ensureCanvas(cv: HTMLCanvasElement) {
   const ctx = cv.getContext('2d')!;
-  const dpr = devicePixelRatio || 1;
+  // Cap the device ratio: beyond 2x the extra pixels are invisible here
+  // and cost real main-thread time on 3-4x mobile panels.
+  const dpr = Math.min(devicePixelRatio || 1, 2);
   const w = cv.clientWidth || +cv.getAttribute('width')!;
-  const h = +cv.getAttribute('height')!;
-  // Resizing a canvas reallocates its backing store; at drag frequency
-  // that reallocation is the difference between smooth and dead. Keep
-  // the store and only reallocate when the size actually changed.
+  const h = logicalHeight(cv);
+  if (cv.style.height !== `${h}px`) cv.style.height = `${h}px`; // decouple layout from the backing store
   const bw = Math.round(w * dpr);
   const bh = Math.round(h * dpr);
+  let resized = false;
   if (cv.width !== bw || cv.height !== bh) {
     cv.width = bw;
     cv.height = bh;
+    resized = true;
   }
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  ctx.clearRect(0, 0, w, h);
   ctx.font = '11px "JetBrains Mono", monospace';
-  return { ctx, w, h };
+  return { ctx, w, h, dpr, resized };
+}
+function chartFrame(cv: HTMLCanvasElement) {
+  const f = ensureCanvas(cv);
+  f.ctx.clearRect(0, 0, f.w, f.h);
+  return f;
 }
 
 function grid(ctx: CanvasRenderingContext2D, w: number, h: number, pad: number) {
@@ -832,10 +965,15 @@ function vmark(ctx: CanvasRenderingContext2D, x: number, top: number, bot: numbe
   ctx.fillText(label, x - ctx.measureText(label).width / 2, top - 2);
 }
 
-function drawCurve() {
-  const cv = $('curve') as HTMLCanvasElement;
-  const { ctx, w, h } = chartFrame(cv);
-  if (sweepPts.length < 2) return;
+// The curve itself never changes while the slider moves — only the
+// marker does. So it is rendered once into an offscreen layer and blitted
+// per frame; a drag costs one drawImage and one dot instead of a full
+// grid + 81-segment path + six text measurements at device resolution.
+let curveLayer: HTMLCanvasElement | null = null;
+let curveKey = '';
+let curveGeom: { pad: number; x0: number; x1: number; y0: number; y1: number; w: number; h: number } | null = null;
+
+function buildCurveLayer(w: number, h: number, dprNow: number) {
   const pad = 34;
   const xs = sweepPts.map((p) => p[0]);
   const ys = sweepPts.map((p) => p[1]);
@@ -845,12 +983,16 @@ function drawCurve() {
     y0 -= 1;
     y1 += 1;
   }
+  curveGeom = { pad, x0, x1, y0, y1, w, h };
   const X = (x: number) => pad + ((w - 2 * pad) * (x - x0)) / (x1 - x0);
   const Y = (y: number) => h - pad - ((h - 2 * pad) * (y - y0)) / (y1 - y0);
-  cv.setAttribute(
-    'aria-label',
-    `response curve: input ${fmtV(x0)} to ${fmtV(x1)}, output ${fmtV(y0)} to ${fmtV(y1)}`,
-  );
+  const layer = curveLayer ?? (curveLayer = document.createElement('canvas'));
+  layer.width = Math.round(w * dprNow);
+  layer.height = Math.round(h * dprNow);
+  const ctx = layer.getContext('2d')!;
+  ctx.setTransform(dprNow, 0, 0, dprNow, 0, 0);
+  ctx.clearRect(0, 0, w, h);
+  ctx.font = '11px "JetBrains Mono", monospace';
   grid(ctx, w, h, pad);
   // axis end labels (text tokens, not series color)
   ctx.fillStyle = DIM;
@@ -865,18 +1007,59 @@ function drawCurve() {
   ctx.beginPath();
   sweepPts.forEach(([x, y], i) => (i ? ctx.lineTo(X(x), Y(y)) : ctx.moveTo(X(x), Y(y))));
   ctx.stroke();
-  // current slider position: emphasized marker with surface ring
-  const sx = sliderValue();
-  const near = sweepPts.reduce((a, b) => (Math.abs(b[0] - sx) < Math.abs(a[0] - sx) ? b : a));
+}
+
+// Dirty-rect marker painting: a drag frame repairs the ~20px square the
+// marker just vacated (copied back from the cached layer) and stamps the
+// new dot. Clearing and re-blitting the whole canvas every frame was 37%
+// of main-thread CPU in a profile — enough to starve the compositor and
+// blank the tab.
+let lastMarker: { x: number; y: number } | null = null;
+const MR = 9; // marker radius + ring, with slack
+
+function paintCurve(sx: number) {
+  const cv = $('curve') as HTMLCanvasElement;
+  const { ctx, w, h, dpr, resized } = ensureCanvas(cv);
+  if (sweepPts.length < 2 || w < 2) return;
+  const key = `${w}x${h}x${dpr}x${sweepGen}x${sweepPts.length}`;
+  if (key !== curveKey || resized) {
+    buildCurveLayer(w, h, dpr);
+    curveKey = key;
+    ctx.clearRect(0, 0, w, h);
+    ctx.drawImage(curveLayer!, 0, 0, w, h);
+    lastMarker = null;
+    const g = curveGeom!;
+    cv.setAttribute(
+      'aria-label',
+      `response curve: input ${fmtV(g.x0)} to ${fmtV(g.x1)}, output ${fmtV(g.y0)} to ${fmtV(g.y1)}`,
+    );
+  }
+  const gm = curveGeom!;
+  const X = (x: number) => gm.pad + ((w - 2 * gm.pad) * (x - gm.x0)) / (gm.x1 - gm.x0);
+  const Y = (y: number) => h - gm.pad - ((h - 2 * gm.pad) * (y - gm.y0)) / (gm.y1 - gm.y0);
+  const sy = interpAt(sx);
+  if (sy === null) return;
+  const mx = X(sx);
+  const my = Y(sy);
+  if (lastMarker) {
+    if (Math.abs(lastMarker.x - mx) < 0.35 && Math.abs(lastMarker.y - my) < 0.35) return; // nothing moved
+    const rx = Math.max(0, lastMarker.x - MR);
+    const ry = Math.max(0, lastMarker.y - MR);
+    const rw = Math.min(w - rx, MR * 2);
+    const rh = Math.min(h - ry, MR * 2);
+    ctx.clearRect(rx, ry, rw, rh);
+    ctx.drawImage(curveLayer!, rx * dpr, ry * dpr, rw * dpr, rh * dpr, rx, ry, rw, rh);
+  }
   ctx.beginPath();
-  ctx.arc(X(near[0]), Y(near[1]), 5, 0, Math.PI * 2);
+  ctx.arc(mx, my, 5, 0, Math.PI * 2);
   ctx.fillStyle = DATA;
   ctx.fill();
   ctx.strokeStyle = '#0d1117';
   ctx.lineWidth = 2;
   ctx.stroke();
+  lastMarker = { x: mx, y: my };
   hoverLayer(cv, $('curve-tip') as HTMLElement, (px) => {
-    const fx = x0 + ((px - pad) / (w - 2 * pad)) * (x1 - x0);
+    const fx = gm.x0 + ((px - gm.pad) / (w - 2 * gm.pad)) * (gm.x1 - gm.x0);
     const p = sweepPts.reduce((a, b) => (Math.abs(b[0] - fx) < Math.abs(a[0] - fx) ? b : a));
     return { x: X(p[0]), y: Y(p[1]), text: `${fmtV(p[0])} → ${fmtV(p[1])}` };
   });
@@ -978,20 +1161,26 @@ for (const [id, mode] of [
   });
 }
 
-function hoverLayer(
-  cv: HTMLCanvasElement,
-  tip: HTMLElement,
-  probe: (px: number, py: number) => { x: number; y: number; text: string },
-) {
-  cv.onmousemove = (e) => {
+// Handlers are installed once per canvas and read the current probe from
+// a map — reassigning closures on every paint churned the GC during drags.
+type Probe = (px: number, py: number) => { x: number; y: number; text: string };
+const probes = new WeakMap<HTMLCanvasElement, Probe>();
+const wired = new WeakSet<HTMLCanvasElement>();
+function hoverLayer(cv: HTMLCanvasElement, tip: HTMLElement, probe: Probe) {
+  probes.set(cv, probe);
+  if (wired.has(cv)) return;
+  wired.add(cv);
+  cv.addEventListener('mousemove', (e) => {
+    const p = probes.get(cv);
+    if (!p) return;
     const r = cv.getBoundingClientRect();
-    const { x, y, text } = probe(e.clientX - r.left, e.clientY - r.top);
+    const { x, y, text } = p(e.clientX - r.left, e.clientY - r.top);
     tip.hidden = false;
     tip.textContent = text;
     tip.style.left = `${x}px`;
     tip.style.top = `${Math.max(24, y)}px`;
-  };
-  cv.onmouseleave = () => (tip.hidden = true);
+  });
+  cv.addEventListener('mouseleave', () => (tip.hidden = true));
 }
 
 // ---------- monte-carlo (worker B: the slider stays live while it runs) ----------

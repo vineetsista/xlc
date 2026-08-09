@@ -196,6 +196,44 @@ check('tornado painted', await page.locator('#tornado').evaluate((cv) => {
 await page.locator('#tornado').hover({ position: { x: 300, y: 20 } });
 check('tornado row tooltip', await page.locator('#tornado-tip').isVisible());
 
+// --- v6: the drag must not grow the canvas or block the main thread ---
+// (the canvas backing store used to double every paint at dpr>1, which
+// blanked the tab mid-drag; and an event-driven repaint starved the
+// compositor). Emulate dpr 2 for this check.
+{
+  const cdp = await page.context().newCDPSession(page);
+  await cdp.send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 2, mobile: false });
+  await page.locator('#whatif').scrollIntoViewIfNeeded();
+  await page.waitForTimeout(200);
+  // one repaint at the new ratio first — that resize is legitimate; what
+  // must not happen is the store growing again on every later frame
+  await page.locator('#whatif').fill('520');
+  await page.locator('#whatif').dispatchEvent('input');
+  await page.waitForTimeout(250);
+  const before = await page.locator('#curve').evaluate((c) => `${c.width}x${c.height}`);
+  await page.evaluate(() => {
+    window.__drag = { long: 0, blocked: 0 };
+    new PerformanceObserver((l) => { for (const e of l.getEntries()) { window.__drag.long++; window.__drag.blocked += e.duration; } })
+      .observe({ entryTypes: ['longtask'] });
+  });
+  const box = await page.locator('#whatif').boundingBox();
+  const cy = box.y + box.height / 2;
+  await page.mouse.move(box.x + box.width * 0.5, cy);
+  await page.mouse.down();
+  for (let s = 0; s < 2; s++) for (let i = 0; i <= 30; i++) {
+    const f = s % 2 === 0 ? i / 30 : 1 - i / 30;
+    await page.mouse.move(box.x + box.width * (0.1 + 0.8 * f), cy);
+  }
+  await page.mouse.up();
+  await page.waitForTimeout(300);
+  const after = await page.locator('#curve').evaluate((c) => `${c.width}x${c.height}`);
+  const dm = await page.evaluate(() => window.__drag);
+  check('drag: canvas backing store stays fixed (no dpr runaway)', before === after);
+  check(`drag: main thread never blocked (${dm.long} long tasks, ${Math.round(dm.blocked)}ms)`, dm.long === 0);
+  check('drag: readout tracks the slider', /→/.test(await page.locator('#whatif-read').textContent()));
+  await cdp.send('Emulation.clearDeviceMetricsOverride');
+}
+
 // --- v3: goal seek (bisection on the prepared cone, async in worker A) ---
 await page.locator('#goal-target').fill('999999999999');
 await page.locator('#goal-run').click();

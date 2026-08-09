@@ -6,6 +6,8 @@
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#0d1117" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230d1117'/%3E%3Ctext x='8' y='12.5' font-family='monospace' font-size='12' fill='%233fb950' text-anchor='middle'%3Ex%3C/text%3E%3C/svg%3E" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; worker-src 'self' blob:; child-src 'self' blob:; object-src 'none'; base-uri 'none'; form-action 'none'" />
+  <meta name="referrer" content="no-referrer" />
   <title>xlc — a compiler for Excel</title>
   <link rel="stylesheet" href="/src/style.css" />
 </head>
@@ -83,7 +85,7 @@
         </div>
         <div class="chart-wrap">
           <div class="chart-title dim">response of <span id="curve-watch" class="loc"></span> to <span id="curve-input" class="loc"></span> across the slider's range</div>
-          <canvas id="curve" width="840" height="180" role="img"></canvas>
+          <canvas id="curve" width="840" height="180" data-h="180" role="img"></canvas>
           <div id="curve-tip" class="tip" hidden></div>
         </div>
         <div class="row">
@@ -101,7 +103,7 @@
           <div class="chart-title dim">swing of <span id="tornado-watch" class="loc"></span>
             <span class="key"><i class="sw sw-lo"></i>assumption −10%</span>
             <span class="key"><i class="sw sw-hi"></i>assumption +10%</span></div>
-          <canvas id="tornado" width="840" height="200" role="img"></canvas>
+          <canvas id="tornado" width="840" height="200" data-h="200" role="img"></canvas>
           <div id="tornado-tip" class="tip" hidden></div>
         </div>
       </div>
@@ -130,7 +132,7 @@
           </div>
           <div class="chart-wrap">
             <div class="chart-title dim">distribution of <span id="hist-watch" class="loc"></span> over <span id="hist-n"></span> scenarios</div>
-            <canvas id="hist" width="840" height="200" role="img"></canvas>
+            <canvas id="hist" width="840" height="200" data-h="200" role="img"></canvas>
             <div id="hist-tip" class="tip" hidden></div>
           </div>
           <div class="dim small">deterministic: seed 42 — scenario <em>k</em> is derivable from (seed, k) on any machine.</div>
@@ -152,11 +154,21 @@
     </section>
 
     <footer class="dim">
+      <p id="pricing"><strong class="free">free, forever, for everyone — including commercial use.</strong>
+      the whole tool and the whole CLI: no signup, no account, no telemetry, no
+      file-size cap, no seat counting. it costs nothing to serve because there is
+      no server — your workbook never leaves this machine. one thing will
+      eventually cost money: <em>xlc ci</em>, for an organization enforcing the
+      auditor on a shared build pipeline — <strong>$950/year flat per
+      organization</strong>, unlimited users and repos, offline license key,
+      price published rather than quoted. always free even then: open source,
+      students, educators, research, nonprofits, and any individual. nothing
+      that is free today will ever move behind that.</p>
       <p>the receipt re-derives every verifiable formula cell and bit-compares
       against the value Excel itself cached in the file. policy: bit-identical,
       1 ULP, or 15 significant decimal digits. exclusions are always listed,
       never hidden.</p>
-      <p style="margin-top:0.4rem"><kbd>ctrl k</kbd> command palette · <kbd>?</kbd> keyboard help · MIT · runs entirely in your tab</p>
+      <p class="mt"><kbd>ctrl k</kbd> command palette · <kbd>?</kbd> keyboard help · MIT · runs entirely in your tab</p>
     </footer>
   </main>
 
@@ -179,7 +191,7 @@
         <tr><td><kbd>?</kbd></td><td>this help</td></tr>
         <tr><td><kbd>esc</kbd></td><td>close overlays</td></tr>
       </table>
-      <p class="dim small" style="margin-top:0.6rem">esc closes</p>
+      <p class="dim small mt">esc closes</p>
     </div>
   </div>
 

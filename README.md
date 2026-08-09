@@ -91,6 +91,42 @@ locally. Build your own from source:
 `make deploy-package` produces a static site zip;
 `.github/workflows/deploy-pages.yml` deploys to GitHub Pages on push.
 
+## Pricing — the promise
+
+**Everything described above is free, forever, for everyone — including
+commercial use at work.** Not a trial, not a freemium tease, not
+"free for personal use". Specifically and permanently free:
+
+- the entire browser tool — audit, receipt, findings with proofs,
+  suppression, scenario lab, sensitivity, goal seek, Monte-Carlo,
+  version diff, report export;
+- the entire CLI — `xlc check`, `xlc monte`, `xlc diff`, including
+  `--ci` on your own machine;
+- no signup, no account, no telemetry, no file-size cap, no usage
+  metering, no seat counting, no nag.
+
+It stays free because it costs nothing to serve: there is no server.
+Your workbook never leaves your machine (Law 1), so there is no bill
+for me to pass on to you.
+
+**What will eventually cost money:** one thing — **XLC CI**, for an
+*organization* that wants the auditor enforcing on a shared build
+pipeline: hosted-free license administration, baseline management across
+repos, and support with an SLA. The planned price is **$950/year, flat,
+per organization** — not per seat, unlimited users, unlimited repos,
+published openly rather than hidden behind "contact sales", and verified
+by an **offline** license key that never phones home. It does not exist
+yet; when it does, none of the free capabilities above move behind it.
+
+**Always free, no questions asked, even for CI:** open-source projects,
+students and educators, academic research, nonprofits, and any
+individual using it for their own work.
+
+Two commitments, so you can build on this without worrying: **nothing
+that is free today will ever become paid**, and the free tier will never
+require an account. New paid capabilities only ever appear alongside
+what already exists.
+
 ## License and attribution
 
 Code: MIT (see LICENSE). The committed 500-workbook regression subset in
