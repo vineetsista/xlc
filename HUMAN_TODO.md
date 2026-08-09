@@ -1,31 +1,60 @@
-# HUMAN_TODO
+# HUMAN_TODO — your exact checklist
 
-Only what Law 13 forbids the agent: accounts, money, identity, public
-posting. Everything else has been done — the demo is live, hosting is
-one click, the secondary oracle is installed user-space (no sudo needed
-after all) and its adjudication runs automatically.
+Everything else is done: the code (ten gates green), the public repo, the
+live site, the benchmarks, the drafts. This file is the complete list of
+what only you can do, written so you can come back cold in a month and
+finish in one sitting.
 
-## 1. Hosting — DONE (verify, optionally add a domain)
+---
 
-- Public repo: https://github.com/vineetsista/xlc (created + pushed).
-- GitHub Pages enabled via API; the site deploys from `main` to
-  **https://vineetsista.github.io/xlc/** on every push. Verify it loads
-  and drop an .xlsx.
-- Also live as a private-until-shared artifact:
-  https://claude.ai/code/artifact/02d27d90-befe-44db-8195-d2e8525e6595
-- Optional: buy a custom domain and point it at either host (alternate
-  one-click hosts preconfigured: `xlc-site.zip` for Netlify/CF drop,
-  regenerate with `make deploy-package`; the `web/dist` build output is
-  what every host serves).
+## Step 0 — Sanity check (2 minutes)
 
-## 2. Post the launches (posting is yours alone)
+Open **https://vineetsista.github.io/xlc/** and drop any `.xlsx` you have.
+You should see three lines: *compiled N formulas*, a green *receipt*, and
+any findings as warnings with proofs. Nothing uploads — you can do this
+with a real work file.
 
-Drafts are final and carry the LIVE public URLs (site + repo + essay).
-Read `docs/launch/hn.md` and `docs/launch/finance.md`, then post them —
-that click is yours alone. The YC application draft is
-`docs/application/yc.md`.
+If anything looks wrong, open Claude Code in this directory and say:
+`Read XLC.md and STATE.md, then fix <what you saw>.`
 
-## 3. Payment checkout (only when you set pricing)
+## Step 1 — Post the two launches (the only real task)
 
-Third-party checkout (Paddle/Stripe) for the CLI/CI tier — an account
-decision, deferred until pricing exists.
+Two audiences, two messages, posted separately (Law 11 — HN upvotes
+compilers; finance people buy bug-finders):
+
+1. **Hacker News** — open `docs/launch/hn.md`, copy the title and body,
+   submit at https://news.ycombinator.com/submit as a **Show HN**.
+   Links inside already point at the live site and repo.
+   Tip: post on a weekday morning US-Pacific; stay around for the first
+   hour to answer comments (the essay at `docs/essay.md` has the answers
+   to the likely technical questions).
+2. **Finance surfaces** — open `docs/launch/finance.md`, post to
+   r/excel and/or r/FPandA and/or LinkedIn. It reads standalone.
+
+## Step 2 — Optional, whenever you feel like it
+
+- **Custom domain**: buy one, then in GitHub → xlc → Settings → Pages →
+  Custom domain. (The site also works fine at the github.io URL, which
+  serves the built `web/dist`.)
+- **YC application**: `docs/application/yc.md` is drafted with the real
+  numbers. Paste into the form at apply.ycombinator.com if you want to.
+- **Payment / pricing**: when you decide to charge for the CLI/CI tier,
+  create a Paddle or Stripe account and tell the agent — it will wire
+  the checkout into the site. Nothing to do until you set a price.
+
+## Reference — where everything lives
+
+| thing | where |
+|---|---|
+| live site | https://vineetsista.github.io/xlc/ (auto-deploys from `main`) |
+| repo | https://github.com/vineetsista/xlc |
+| backup demo (private until you share) | https://claude.ai/code/artifact/02d27d90-befe-44db-8195-d2e8525e6595 |
+| launch drafts | `docs/launch/hn.md`, `docs/launch/finance.md` |
+| essay / application | `docs/essay.md`, `docs/application/yc.md` |
+| every published number | `docs/benchmarks/` (re-derive: `make bench`) |
+| what the tool can't tell you | `docs/methodology.md` |
+| project state / backlog | `STATE.md` |
+
+To resume building (backlog: `^`-precision class, TEXT function, wasm
+threads, more detectors): open Claude Code here and say
+`Read XLC.md in full. Follow its Session Protocol. Continue from STATE.md.`
