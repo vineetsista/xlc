@@ -1,0 +1,33 @@
+# Deploys web/dist to GitHub Pages on every push to main.
+# Human setup (one time): push this repo to GitHub, then in the repo
+# Settings -> Pages set Source to "GitHub Actions". That's all.
+name: deploy-pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build wasm
+        run: |
+          curl -sSf https://rustwasm.github.io/wasm-pack/installer/init.sh | sh
+          wasm-pack build crates/xlc-wasm --target web --release --out-dir ../../web/pkg
+      - name: Build site
+        run: cd web && npm ci && npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web/dist
+      - uses: actions/deploy-pages@v4

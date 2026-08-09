@@ -1,40 +1,31 @@
 # HUMAN_TODO
 
-Items only a human may do (Law 13: no money, no accounts, no identity, no
-public posts). Each carries exact steps. Nothing here blocks the build unless
-flagged at the top of STATE.md.
+Only what Law 13 forbids the agent: accounts, money, identity, public
+posting. Everything else has been done — the demo is live, hosting is
+one click, the secondary oracle is installed user-space (no sudo needed
+after all) and its adjudication runs automatically.
 
-## Install LibreOffice + UNO for the secondary oracle (Phase 3, non-blocking)
+## 1. Share or host the product (pick either; both are prepared)
 
-The receipt found oracle-noise classes (stale caches, display-rounded
-caches — docs/methodology.md "The oracle's noise floor"). The planned
-adjudicator is LibreOffice driven via UNO (XLC.md §8.4 — never
-`soffice --convert-to`, it silently emits cached values). Installing needs
-sudo, which the agent does not use:
+- **Zero-effort demo (already live, private until you share):**
+  https://claude.ai/code/artifact/02d27d90-befe-44db-8195-d2e8525e6595
+  Open it, drop an .xlsx, use the page's share menu when satisfied.
+- **Real hosting (one click, pick one):**
+  - GitHub Pages: push the repo to GitHub → Settings → Pages → Source
+    "GitHub Actions". `.github/workflows/deploy-pages.yml` does the rest.
+  - Netlify/Cloudflare Pages: drag-and-drop `xlc-site.zip` (already built;
+    regenerate anytime with `make deploy-package`). COOP/COEP headers are
+    preconfigured in `web/netlify.toml` and `web/public/_headers`.
+  - Optionally buy a domain and point it at the host.
 
-```
-sudo apt-get install -y libreoffice-calc python3-uno
-```
+## 2. Post the launches (posting is yours alone)
 
-After install, tell the agent; it will build the UNO adjudication harness
-(`scripts/lo_oracle.py`) and re-classify the disputed-cell list. Until then
-the receipt's mismatch classes simply retain the suspected-oracle-noise
-cells — measured, documented, non-blocking.
+Drafts are final in `docs/launch/hn.md` (compiler story) and
+`docs/launch/finance.md` (found-bug story). Replace [SITE-LINK] and
+[ESSAY-LINK] with your hosted URLs and post. The YC application draft is
+`docs/application/yc.md`; the essay is `docs/essay.md`.
 
-## Phase 4 first-launch actions (agent-prepared, human-posted — Law 13)
+## 3. Payment checkout (only when you set pricing)
 
-The free, no-signup, in-browser Excel bug finder is built and verified
-(web/dist after `npm run build`; 13/13 headless-Chromium checks). Human
-steps when ready to launch:
-
-1. Choose + register a domain; host `web/dist/` on any static CDN
-   (the only server the product ever has, per Law 1).
-2. Review the page copy in `web/index.html`.
-3. Launch posts are DRAFTED and ready for review: docs/launch/hn.md
-   (compiler story) and docs/launch/finance.md (found-bug story). Replace
-   [SITE-LINK]/[ESSAY-LINK] with the hosted URLs, then post — the posting
-   itself is yours alone (Law 13).
-4. YC application draft: docs/application/yc.md. Engineering essay for
-   the blog: docs/essay.md.
-5. Payment checkout (deferred product decision): pick a third-party
-   checkout (e.g. Paddle/Stripe) for the CLI tier when pricing is set.
+Third-party checkout (Paddle/Stripe) for the CLI/CI tier — an account
+decision, deferred until pricing exists.

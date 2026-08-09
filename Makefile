@@ -7,7 +7,7 @@
 
 PHASE := $(shell cat .phase 2>/dev/null || echo 0)
 
-.PHONY: gate gate-all corpus receipt build test clippy bench
+.PHONY: gate gate-all corpus receipt build test clippy bench deploy-package
 
 gate:
 	@bash scripts/gate.sh $(PHASE)
@@ -38,6 +38,13 @@ receipt:
 
 bench:
 	bash scripts/bench.sh
+
+# Produce a ready-to-upload static site package (any host: Netlify drop,
+# Cloudflare Pages, S3, GitHub Pages).
+deploy-package:
+	~/.cargo/bin/wasm-pack build crates/xlc-wasm --target web --release --out-dir ../../web/pkg
+	cd web && npm run build
+	python3 -m zipfile -c xlc-site.zip web/dist/. && ls -la xlc-site.zip
 
 build:
 	cargo build --workspace
