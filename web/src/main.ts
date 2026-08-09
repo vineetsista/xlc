@@ -1,21 +1,22 @@
-// xlc web surface v4: the same engine behind a staged anatomy — §1 audit
-// (three acts + findings triage), §2 scenario lab (a shared
-// assumption→output context row over three grouped tools: what-if with
-// goal seek, tornado sensitivity, Monte-Carlo with histogram/CDF), §3
-// compare — plus a command palette and an exportable audit report.
+// xlc web surface v5: the v4 staged anatomy with the engine moved off
+// the main thread. Two workers host independent wasm Sessions — A
+// (interactive: prepare / what-if / sweep, behind a latest-wins slider
+// pipeline) and B (analysis: tornado / monte-carlo / diff) — so a heavy
+// workbook can never freeze the page: the slider stays live even while
+// a tornado or 10,000-scenario run is in flight. Canvases keep their
+// backing store between paints (resizing a canvas reallocates it, and
+// doing that once per input event is how drags die).
 // Everything local (Law 1).
 // Charts follow the dataviz method: the mark pair --data/--data2 is
 // validated against the surface (CVD dE 29.4 protan, 34.1 normal),
 // hover layer always, recessive grid, text in text tokens, legend
 // present for the two-series tornado.
 
-import init, { Session, diff_books } from '../pkg/xlc_wasm.js';
 import { SAMPLE_B64, SAMPLE_NAME } from './sample';
 
 type Finding = { detector: string; sheet: string; cell: string; formula: string; proof: string };
 
 const $ = (id: string) => document.getElementById(id)!;
-const wasmReady = init();
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const DATA = '#2f81f7';
@@ -23,7 +24,48 @@ const DATA2 = '#db6a2a';
 const DIM = '#7d8590';
 const RULE = '#21262d';
 
-let session: Session | null = null;
+// ---------- engine workers ----------
+type RpcResult = { r: string; ms: number };
+type Rpc = (op: string, args?: any) => Promise<RpcResult>;
+function makeWorker(): Rpc {
+  const w = new Worker(new URL('./worker.ts', import.meta.url), { type: 'module' });
+  let seq = 0;
+  const pend = new Map<number, [(v: RpcResult) => void, (e: Error) => void]>();
+  // A worker that dies (chunk 404 on a redeploy, browser kill) must
+  // reject every pending call, or run() hangs at "compiling…" forever
+  // and a latched whatifInflight silently kills the slider.
+  const failAll = (why: string) => {
+    for (const [, p] of pend) p[1](new Error(why));
+    pend.clear();
+  };
+  w.onerror = (e) => failAll(`engine worker failed: ${(e as ErrorEvent).message || 'script error'}`);
+  w.onmessageerror = () => failAll('engine worker message error');
+  w.onmessage = (e: MessageEvent) => {
+    const { id, ok, r, ms, err } = e.data;
+    const p = pend.get(id);
+    if (!p) return;
+    pend.delete(id);
+    ok ? p[0]({ r, ms }) : p[1](new Error(err));
+  };
+  return (op, args = {}) =>
+    new Promise((res, rej) => {
+      const id = ++seq;
+      pend.set(id, [res, rej]);
+      w.postMessage({ id, op, args });
+    });
+}
+const A = makeWorker(); // interactive: open+analyze, candidates, prepare, what-if, sweep
+const B = makeWorker(); // analysis: tornado, monte-carlo, diff — own Session, never blocks A
+
+let hasSession = false;
+// Two generations guard async continuations. wbGen is workbook identity:
+// claimed synchronously at intake (before any file-read/hash await) so
+// the LAST drop always wins, regardless of which file hashes faster.
+// gen is model state: bumped on load, input switch, and watch switch;
+// continuations capture it and drop stale results instead of painting.
+let wbGen = 0;
+let gen = 0;
+
 let bytesA: ArrayBuffer | null = null;
 let wbHash = '';
 let lastName = '';
@@ -35,6 +77,7 @@ let filter = 'all';
 let inputCands: { sheet: number; row: number; col: number; name: string; value: number; impact: number }[] = [];
 let curInput: (typeof inputCands)[0] | null = null;
 let sweepPts: [number, number][] = [];
+let sweepGen = -1; // the gen sweepPts was computed under — goal seek refuses a stale curve
 let sliderLo = 0;
 let sliderHi = 1;
 
@@ -102,15 +145,21 @@ drop.addEventListener('dragover', (e) => {
   drop.classList.add('over');
 });
 drop.addEventListener('dragleave', () => drop.classList.remove('over'));
+// Claim the workbook ticket BEFORE reading the file: two rapid drops
+// must resolve in drop order, not in file-read-completion order.
+function intakeFile(f: File) {
+  const ticket = ++wbGen;
+  f.arrayBuffer().then((b) => run(b, f.name, ticket));
+}
 drop.addEventListener('drop', (e) => {
   e.preventDefault();
   drop.classList.remove('over');
   const f = e.dataTransfer?.files?.[0];
-  if (f) f.arrayBuffer().then((b) => run(b, f.name));
+  if (f) intakeFile(f);
 });
 fileInput.addEventListener('change', () => {
   const f = fileInput.files?.[0];
-  if (f) f.arrayBuffer().then((b) => run(b, f.name));
+  if (f) intakeFile(f);
 });
 $('try-sample').addEventListener('click', (e) => {
   e.stopPropagation();
@@ -121,11 +170,16 @@ $('try-sample').addEventListener('click', (e) => {
 });
 
 // ---------- the three acts ----------
-async function run(bytes: ArrayBuffer, name: string) {
-  await wasmReady;
+async function run(bytes: ArrayBuffer, name: string, ticket?: number) {
+  const wg = ticket ?? ++wbGen;
+  if (wg !== wbGen) return; // a later drop superseded this file while it was being read
+  ++gen; // every continuation from the previous model is now stale
+  hasSession = false;
+  lastAnalysis = null;
   bytesA = bytes;
   lastName = name;
   wbHash = await sha256hex(bytes);
+  if (wg !== wbGen) return; // superseded while hashing
   suppressed = loadSuppressions();
   // Per-workbook triage state must never survive into the next file: a
   // stale detector filter silently empties the findings list, and a stale
@@ -148,9 +202,13 @@ async function run(bytes: ArrayBuffer, name: string) {
   ($('monte-out') as HTMLElement).hidden = true;
   ($('tornado-wrap') as HTMLElement).hidden = true;
   ($('tool-tornado') as HTMLElement).hidden = true;
+  ($('tornado-status') as HTMLElement).hidden = true;
   ($('next-hint') as HTMLElement).hidden = true;
   ($('goal-read') as HTMLElement).textContent = '';
   ($('goal-target') as HTMLInputElement).value = '';
+  ($('whatif-read') as HTMLElement).textContent = '';
+  sweepPts = [];
+  sweepGen = -1;
   for (const t of ['curve-tip', 'tornado-tip', 'hist-tip']) ($(t) as HTMLElement).hidden = true;
   ($('diff-out') as HTMLElement).hidden = true;
   ($('diff-status') as HTMLElement).textContent = '';
@@ -166,24 +224,25 @@ async function run(bytes: ArrayBuffer, name: string) {
   clearTimeout(tornadoTimer);
 
   const t0 = performance.now();
-  try {
-    session?.free();
-  } catch {}
-  session = null;
-  lastAnalysis = null;
+  // B opens the same bytes (parse only, no analyze) so tornado/monte/diff
+  // get their own engine — but off the audit's critical path: a slow or
+  // failing B must neither delay nor kill the audit. B-dependent features
+  // surface their own errors through their own catch paths.
+  B('open', { bytes, analyze: false }).catch(() => {});
   let a: any;
   try {
-    session = new Session(new Uint8Array(bytes));
-    a = JSON.parse(session.analyze());
+    a = JSON.parse((await A('open', { bytes, analyze: true })).r);
   } catch (e) {
-    $('act1').innerHTML = `<span class="err">error:</span> ${esc(String(e))}`;
+    if (wg === wbGen) $('act1').innerHTML = `<span class="err">error:</span> ${esc(String(e))}`;
     return;
   }
+  if (wg !== wbGen) return; // superseded by a newer drop
   const secs = (performance.now() - t0) / 1000;
   if (!a.ok) {
     $('act1').innerHTML = `<span class="err">error:</span> ${esc(a.error ?? 'unknown')}`;
     return;
   }
+  hasSession = true;
   lastAnalysis = a;
   ($('topnav') as HTMLElement).hidden = false;
 
@@ -198,6 +257,7 @@ async function run(bytes: ArrayBuffer, name: string) {
   const cls = r.rate >= 0.97 ? 'ok' : r.rate >= 0.8 ? 'warn' : 'err';
   const excl = Object.values(r.excluded as Record<string, number>).reduce((x, y) => x + y, 0);
   setTimeout(() => {
+    if (wg !== wbGen) return; // never paint a superseded file's receipt
     $('act2').innerHTML =
       `receipt: <span class="${cls} landed">${fmt(r.pass)}/${fmt(r.verifiable)} verifiable cells re-derived bit-exact (${pct}%)</span>` +
       (excl > 0 ? ` <span class="dim">· ${fmt(excl)} excluded ▸</span>` : ' <span class="dim">▸</span>');
@@ -213,11 +273,12 @@ async function run(bytes: ArrayBuffer, name: string) {
   // Act 3 (findings).
   findings = a.findings as Finding[];
   setTimeout(() => {
+    if (wg !== wbGen) return; // never paint a superseded file's findings
     renderAct3();
     renderChips();
     renderFindings();
     renderCapability(a.capability);
-    setupLab();
+    void setupLab();
     ($('compare') as HTMLElement).hidden = false;
   }, reduced ? 0 : 300);
 }
@@ -333,29 +394,52 @@ function renderCapability(cap: Record<string, number>) {
 }
 
 // ---------- scenario lab ----------
-function setupLab() {
-  if (!session) return;
-  inputCands = JSON.parse(session.input_candidates(12));
+async function setupLab() {
+  if (!hasSession) return;
+  const g = gen;
+  let cands: typeof inputCands = [];
+  try {
+    cands = JSON.parse((await A('candidates', { n: 12 })).r);
+  } catch {
+    return;
+  }
+  if (g !== gen) return;
+  inputCands = cands;
   if (!inputCands.length) return;
   ($('lab') as HTMLElement).hidden = false;
   ($('next-hint') as HTMLElement).hidden = false;
+  // The previous workbook's readout/curve must not show while the new
+  // cone prepares; sweepPts was cleared in run(), so this blanks the chart.
+  ($('whatif-read') as HTMLElement).innerHTML = '<span class="dim">preparing…</span>';
+  drawCurve();
   const sel = $('input-sel') as HTMLSelectElement;
   sel.innerHTML = inputCands
     .map((c, i) => `<option value="${i}">${esc(c.name)} = ${fmtV(c.value)}  (feeds ${c.impact} formulas)</option>`)
     .join('');
-  sel.onchange = () => prepareInput(inputCands[+sel.value]);
-  prepareInput(inputCands[0]);
+  sel.onchange = () => void prepareInput(inputCands[+sel.value]);
   ($('dist-sel') as HTMLSelectElement).onchange = syncDistParams;
-  $('run-monte').addEventListener('click', runMonte);
+  await prepareInput(inputCands[0]);
 }
 
-function prepareInput(c: (typeof inputCands)[0]) {
-  if (!session) return;
+async function prepareInput(c: (typeof inputCands)[0]) {
+  if (!hasSession) return;
   curInput = c;
+  const g = ++gen;
+  ($('cone-info') as HTMLElement).textContent = 'building the schedule…';
   const t0 = performance.now();
-  const p = JSON.parse(session.prepare(c.sheet, c.row, c.col));
+  let p: any;
+  try {
+    p = JSON.parse((await A('prepare', { sheet: c.sheet, row: c.row, col: c.col })).r);
+  } catch (e) {
+    p = { ok: false, error: String(e) };
+  }
+  if (g !== gen) return;
   if (!p.ok) {
     ($('cone-info') as HTMLElement).textContent = p.error;
+    // No cone means no tornado build will be scheduled — don't leave a
+    // stale "computing…" or an old chart standing.
+    ($('tool-tornado') as HTMLElement).hidden = true;
+    ($('tornado-status') as HTMLElement).hidden = true;
     return;
   }
   const ms = performance.now() - t0;
@@ -368,9 +452,15 @@ function prepareInput(c: (typeof inputCands)[0]) {
   ($('monte-watch') as HTMLElement).textContent = wsel.selectedOptions[0]?.textContent ?? '';
   wsel.onchange = () => {
     const [sh, r, co] = wsel.value.split(',').map(Number);
-    session!.set_watch(sh, r, co);
+    // A watch switch invalidates every in-flight continuation: a what-if
+    // computed against the old output must not paint under the new
+    // label, and a goal-seek bisection must not mix outputs mid-solve.
+    gen++;
+    // Worker A serializes its queue, so set_watch lands before any
+    // later sweep/what-if without an explicit await.
+    void A('set_watch', { sheet: sh, row: r, col: co });
     ($('monte-watch') as HTMLElement).textContent = wsel.selectedOptions[0]?.textContent ?? '';
-    refreshCurve();
+    void refreshCurve();
     scheduleTornado();
   };
   ($('curve-input') as HTMLElement).textContent = c.name;
@@ -381,8 +471,7 @@ function prepareInput(c: (typeof inputCands)[0]) {
   ($('whatif') as HTMLInputElement).value = '500';
   ($('goal-read') as HTMLElement).textContent = '';
   syncDistParams();
-  refreshCurve();
-  onSlider();
+  await refreshCurve();
   scheduleTornado();
 }
 
@@ -422,37 +511,63 @@ function syncDistParams() {
   }
 }
 
+// ---------- what-if: latest-wins pipeline ----------
+// At most one what_if is ever in flight; new input while waiting just
+// marks the pipeline dirty and the newest slider value is sent the
+// moment the previous answer lands. Nothing queues, nothing freezes.
 const slider = $('whatif') as HTMLInputElement;
-slider.addEventListener('input', onSlider);
+let whatifInflight = false;
+slider.addEventListener('input', () => void pumpWhatIf());
 function sliderValue(): number {
   return sliderLo + ((sliderHi - sliderLo) * +slider.value) / 1000;
 }
-function onSlider() {
-  if (!session || !curInput) return;
+async function pumpWhatIf() {
+  if (whatifInflight || !hasSession || !curInput) return;
+  whatifInflight = true;
+  const g = gen;
   const x = sliderValue();
   slider.setAttribute('aria-valuetext', `${curInput.name} = ${fmtV(x)}`);
-  const t0 = performance.now();
-  const out = JSON.parse(session.what_if(x));
-  const us = (performance.now() - t0) * 1000;
+  let out: any;
+  let us = 0;
+  try {
+    const res = await A('what_if', { x });
+    out = JSON.parse(res.r);
+    us = res.ms * 1000; // engine time only — queue wait would inflate it ~100x
+  } catch (e) {
+    out = { ok: false, error: String(e) };
+  }
+  whatifInflight = false;
+  if (g !== gen) return;
   const watch = ($('watch-sel') as HTMLSelectElement).selectedOptions[0]?.textContent ?? '';
   ($('whatif-read') as HTMLElement).innerHTML = out.ok
     ? `${esc(curInput.name)} = ${fmtV(x)} → <span class="loc">${esc(watch)}</span> = <span class="ok">${out.output !== undefined ? fmtV(out.output) : esc(out.output_text)}</span> <span class="dim">· ${us < 1000 ? us.toFixed(0) + ' µs' : (us / 1000).toFixed(1) + ' ms'}</span>`
     : `<span class="err">${esc(out.error)}</span>`;
   drawCurve();
+  if (sliderValue() !== x) void pumpWhatIf(); // newest wins
 }
 
-function refreshCurve() {
-  if (!session) return;
-  sweepPts = JSON.parse(session.sweep(sliderLo, sliderHi, 81));
+async function refreshCurve() {
+  if (!hasSession) return;
+  const g = gen;
+  let pts: [number, number][] = [];
+  try {
+    pts = JSON.parse((await A('sweep', { lo: sliderLo, hi: sliderHi, n: 81 })).r);
+  } catch {
+    pts = [];
+  }
+  if (g !== gen) return;
+  sweepPts = pts;
+  sweepGen = g;
   const watch = ($('watch-sel') as HTMLSelectElement).selectedOptions[0]?.textContent ?? '';
   ($('curve-watch') as HTMLElement).textContent = watch;
   drawCurve();
-  onSlider();
+  void pumpWhatIf();
 }
 
 // ---------- goal seek ----------
-function runGoalSeek() {
-  if (!session || !curInput) return;
+let goalInflight = false;
+async function runGoalSeek() {
+  if (goalInflight || !hasSession || !curInput) return;
   const read = $('goal-read') as HTMLElement;
   const t = parseFloat(($('goal-target') as HTMLInputElement).value);
   if (!isFinite(t)) {
@@ -463,8 +578,15 @@ function runGoalSeek() {
     read.innerHTML = `<span class="err">no response curve to search</span>`;
     return;
   }
-  const f = (x: number): number => {
-    const o = JSON.parse(session!.what_if(x));
+  // Bracketing on a curve from a different input/watch than the engine's
+  // current state converges to garbage and reports it as "found".
+  if (sweepGen !== gen) {
+    read.innerHTML = `<span class="warn">the response curve is still updating — try again in a moment</span>`;
+    return;
+  }
+  const g = gen;
+  const f = async (x: number): Promise<number> => {
+    const o = JSON.parse((await A('what_if', { x })).r);
     return o.ok && o.output !== undefined ? (o.output as number) : NaN;
   };
   const ys = sweepPts.map((p) => p[1]);
@@ -486,33 +608,50 @@ function runGoalSeek() {
     return;
   }
   let [a, b] = bracket;
-  const t0 = performance.now();
-  for (let i = 0; i < 60 && Math.abs(b - a) > Math.abs(b) * 1e-13 + 1e-13; i++) {
-    const m = (a + b) / 2;
-    const ym = f(m);
-    if (!isFinite(ym)) break;
-    if ((f(a) - t) * (ym - t) <= 0) b = m;
-    else a = m;
+  read.innerHTML = `<span class="dim">bisecting…</span>`;
+  const cancelled = () => {
+    read.innerHTML = `<span class="dim">cancelled — the model changed mid-solve</span>`;
+  };
+  goalInflight = true;
+  try {
+    const t0 = performance.now();
+    let fa = await f(a);
+    for (let i = 0; i < 60 && Math.abs(b - a) > Math.abs(b) * 1e-13 + 1e-13; i++) {
+      if (g !== gen) return cancelled(); // model switched mid-solve — drop the result
+      const m = (a + b) / 2;
+      const ym = await f(m);
+      if (!isFinite(ym)) break;
+      if ((fa - t) * (ym - t) <= 0) b = m;
+      else {
+        a = m;
+        fa = ym;
+      }
+    }
+    const x = (a + b) / 2;
+    const y = await f(x);
+    const ms = performance.now() - t0;
+    if (g !== gen) return cancelled();
+    if (!isFinite(y)) {
+      read.innerHTML = `<span class="warn">the output is non-numeric near ${fmtV(x)}</span>`;
+      return;
+    }
+    slider.value = String(Math.round(Math.min(1000, Math.max(0, (1000 * (x - sliderLo)) / (sliderHi - sliderLo)))));
+    void pumpWhatIf();
+    read.innerHTML =
+      `found: <span class="loc">${esc(curInput.name)}</span> = <strong>${fmtV(x)}</strong> → ${fmtV(y)} ` +
+      `<span class="dim">(target ${fmtV(t)} · bisection, ${ms.toFixed(1)} ms)</span>`;
+  } catch {
+    read.innerHTML = `<span class="err">the engine stopped responding — reload the workbook</span>`;
+  } finally {
+    goalInflight = false;
   }
-  const x = (a + b) / 2;
-  const y = f(x);
-  const ms = performance.now() - t0;
-  if (!isFinite(y)) {
-    read.innerHTML = `<span class="warn">the output is non-numeric near ${fmtV(x)}</span>`;
-    return;
-  }
-  slider.value = String(Math.round(Math.min(1000, Math.max(0, (1000 * (x - sliderLo)) / (sliderHi - sliderLo)))));
-  onSlider();
-  read.innerHTML =
-    `found: <span class="loc">${esc(curInput.name)}</span> = <strong>${fmtV(x)}</strong> → ${fmtV(y)} ` +
-    `<span class="dim">(target ${fmtV(t)} · bisection, ${ms.toFixed(1)} ms)</span>`;
 }
-$('goal-run').addEventListener('click', runGoalSeek);
+$('goal-run').addEventListener('click', () => void runGoalSeek());
 $('goal-target').addEventListener('keydown', (e) => {
-  if ((e as KeyboardEvent).key === 'Enter') runGoalSeek();
+  if ((e as KeyboardEvent).key === 'Enter') void runGoalSeek();
 });
 
-// ---------- tornado sensitivity ----------
+// ---------- tornado sensitivity (worker B: never blocks the slider) ----------
 type TornadoRow = { name: string; loOut: number; hiOut: number };
 let tornadoRows: TornadoRow[] = [];
 let tornadoBase = 0;
@@ -520,51 +659,42 @@ let tornadoTimer = 0;
 
 function scheduleTornado() {
   clearTimeout(tornadoTimer);
-  tornadoTimer = window.setTimeout(buildTornado, 30);
+  tornadoTimer = window.setTimeout(() => void buildTornado(), 30);
 }
 
-function buildTornado() {
-  if (!session || !curInput) return;
+async function buildTornado() {
+  if (!hasSession || !curInput) return;
   const wsel = $('watch-sel') as HTMLSelectElement;
   if (!wsel.value) return;
+  const g = gen;
   const [wsh, wr, wc] = wsel.value.split(',').map(Number);
-  const at = (x: number): number | null => {
-    const o = JSON.parse(session!.what_if(x));
-    return o.ok && o.output !== undefined ? (o.output as number) : null;
-  };
-  const rows: TornadoRow[] = [];
-  let base: number | null = null;
-  for (const c of inputCands) {
-    const p = JSON.parse(session.prepare(c.sheet, c.row, c.col));
-    if (!p.ok) continue;
-    session.set_watch(wsh, wr, wc);
-    const b = at(c.value);
-    const lo = at(c.value * 0.9);
-    const hi = at(c.value * 1.1);
-    if (b === null || lo === null || hi === null) continue; // watch outside this cone
-    base ??= b;
-    if (Math.abs(lo - b) < 1e-12 && Math.abs(hi - b) < 1e-12) continue; // no effect
-    rows.push({ name: c.name, loOut: lo, hiOut: hi });
+  const tool = $('tool-tornado') as HTMLElement;
+  const status = $('tornado-status') as HTMLElement;
+  tool.hidden = false;
+  ($('tornado-wrap') as HTMLElement).hidden = true;
+  status.hidden = false;
+  status.textContent = `computing ±10% swings across ${inputCands.length} assumptions…`;
+  let r: any;
+  try {
+    r = JSON.parse((await B('tornado', { cands: inputCands, watch: { sheet: wsh, row: wr, col: wc } })).r);
+  } catch {
+    r = { ok: false };
   }
-  // Restore the interactive engine for the selected input + watch.
-  const cur = curInput;
-  session.prepare(cur.sheet, cur.row, cur.col);
-  session.set_watch(wsh, wr, wc);
-  onSlider();
-
-  tornadoBase = base ?? 0;
-  tornadoRows = rows
-    .sort((a, b) => Math.abs(b.hiOut - b.loOut) - Math.abs(a.hiOut - a.loOut))
-    .slice(0, 10);
+  if (g !== gen) return; // input/watch/workbook changed while computing
+  status.hidden = true;
+  tornadoBase = r.ok ? r.base : 0;
+  tornadoRows = r.ok
+    ? (r.rows as TornadoRow[]).sort((a, b) => Math.abs(b.hiOut - b.loOut) - Math.abs(a.hiOut - a.loOut)).slice(0, 10)
+    : [];
   const wrap = $('tornado-wrap') as HTMLElement;
   wrap.hidden = tornadoRows.length < 2;
-  ($('tool-tornado') as HTMLElement).hidden = wrap.hidden;
+  tool.hidden = wrap.hidden;
   if (wrap.hidden) return;
   ($('tornado-watch') as HTMLElement).textContent = wsel.selectedOptions[0]?.textContent ?? '';
   $('tornado').setAttribute(
     'aria-label',
     `sensitivity, base output ${fmtV(tornadoBase)}: ` +
-      tornadoRows.map((r) => `${r.name} −10% → ${fmtV(r.loOut)}, +10% → ${fmtV(r.hiOut)}`).join('; '),
+      tornadoRows.map((r2) => `${r2.name} −10% → ${fmtV(r2.loOut)}, +10% → ${fmtV(r2.hiOut)}`).join('; '),
   );
   drawTornado();
 }
@@ -659,11 +789,18 @@ function drawTornado() {
 function chartFrame(cv: HTMLCanvasElement) {
   const ctx = cv.getContext('2d')!;
   const dpr = devicePixelRatio || 1;
-  const w = cv.clientWidth || cv.width;
+  const w = cv.clientWidth || +cv.getAttribute('width')!;
   const h = +cv.getAttribute('height')!;
-  cv.width = w * dpr;
-  cv.height = h * dpr;
-  ctx.scale(dpr, dpr);
+  // Resizing a canvas reallocates its backing store; at drag frequency
+  // that reallocation is the difference between smooth and dead. Keep
+  // the store and only reallocate when the size actually changed.
+  const bw = Math.round(w * dpr);
+  const bh = Math.round(h * dpr);
+  if (cv.width !== bw || cv.height !== bh) {
+    cv.width = bw;
+    cv.height = bh;
+  }
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.clearRect(0, 0, w, h);
   ctx.font = '11px "JetBrains Mono", monospace';
   return { ctx, w, h };
@@ -857,15 +994,47 @@ function hoverLayer(
   cv.onmouseleave = () => (tip.hidden = true);
 }
 
-function runMonte() {
-  if (!session || !curInput) return;
+// ---------- monte-carlo (worker B: the slider stays live while it runs) ----------
+async function runMonte() {
+  if (!hasSession || !curInput) return;
+  const wsel = $('watch-sel') as HTMLSelectElement;
+  if (!wsel.value) return;
+  const [wsh, wr, wc] = wsel.value.split(',').map(Number);
   const kind = ($('dist-sel') as HTMLSelectElement).value;
   const p1 = +($('p1') as HTMLInputElement).value;
   const p2 = +($('p2') as HTMLInputElement).value;
   const p3 = +($('p3') as HTMLInputElement).value || 0;
+  const btn = $('run-monte') as HTMLButtonElement;
+  const label = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'running…';
+  const g = gen;
   const t0 = performance.now();
-  const m = JSON.parse(session.monte(kind, p1, p2, p3, 10_000));
+  let m: any;
+  try {
+    m = JSON.parse(
+      (
+        await B('monte', {
+          input: { sheet: curInput.sheet, row: curInput.row, col: curInput.col },
+          watch: { sheet: wsh, row: wr, col: wc },
+          kind,
+          p1,
+          p2,
+          p3,
+          n: 10_000,
+        })
+      ).r,
+    );
+  } catch (e) {
+    m = { ok: false, error: String(e) };
+  }
   const ms = performance.now() - t0;
+  btn.disabled = false;
+  btn.textContent = label;
+  if (g !== gen) {
+    toast('scenario run discarded — the model changed while it ran');
+    return;
+  }
   const out = $('monte-out') as HTMLElement;
   out.hidden = false;
   if (!m.ok) {
@@ -875,32 +1044,35 @@ function runMonte() {
   $('monte-stats').innerHTML =
     `<span class="ok">${fmt(m.n)} scenarios</span> over a ${fmt(m.cone_cells)}-cell cone in <strong>${ms.toFixed(0)} ms</strong> — ` +
     `mean <strong>${fmtV(m.mean)}</strong> · sd ${fmtV(m.sd)} · p5 ${fmtV(m.p5)} · p50 ${fmtV(m.p50)} · p95 ${fmtV(m.p95)}`;
-  ($('hist-watch') as HTMLElement).textContent = ($('watch-sel') as HTMLSelectElement).selectedOptions[0]?.textContent ?? '';
+  ($('hist-watch') as HTMLElement).textContent = wsel.selectedOptions[0]?.textContent ?? '';
   ($('hist-n') as HTMLElement).textContent = fmt(m.n);
   histData = { bins: m.bins, lo: m.bin_lo, width: m.bin_width, n: m.n, p5: m.p5, p50: m.p50, p95: m.p95 };
   drawHist();
-  // The what-if engine was rebuilt with the sampling distribution; restore
-  // the point engine so the slider stays live.
-  const c = curInput;
-  const keep = ($('watch-sel') as HTMLSelectElement).value;
-  session.prepare(c.sheet, c.row, c.col);
-  if (keep) {
-    const [sh, r2, co] = keep.split(',').map(Number);
-    session.set_watch(sh, r2, co);
-  }
-  onSlider();
+  // Worker A's prepared engine was never touched — the slider was live
+  // the whole time and needs no restore.
 }
+$('run-monte').addEventListener('click', () => void runMonte());
 
-// ---------- compare versions ----------
+// ---------- compare versions (worker B) ----------
 $('pick-b').addEventListener('click', () => ($('file-b') as HTMLInputElement).click());
 ($('file-b') as HTMLInputElement).addEventListener('change', async () => {
   const f = ($('file-b') as HTMLInputElement).files?.[0];
   if (!f || !bytesA) return;
+  // Capture the workbook this diff belongs to: a new drop mid-diff must
+  // neither swap version A under us nor get the result painted under it.
+  const wg = wbGen;
+  const verA = bytesA;
   ($('diff-status') as HTMLElement).textContent = `running both versions over identical scenario tiles…`;
-  await new Promise((r) => setTimeout(r, 30)); // let the status paint
   const bb = await f.arrayBuffer();
+  if (wg !== wbGen) return;
   const t0 = performance.now();
-  const d = JSON.parse(diff_books(new Uint8Array(bytesA), new Uint8Array(bb), 5000));
+  let d: any;
+  try {
+    d = JSON.parse((await B('diff', { a: verA, b: bb, n: 5000 })).r);
+  } catch (e) {
+    d = { ok: false, error: String(e) };
+  }
+  if (wg !== wbGen) return; // a new workbook loaded while the diff ran
   const ms = performance.now() - t0;
   const out = $('diff-out') as HTMLElement;
   out.hidden = false;
@@ -1051,7 +1223,7 @@ const commands: Cmd[] = [
   { name: 'open a workbook…', hint: 'file', run: () => fileInput.click() },
   { name: 'export audit report', hint: '.md download', when: loaded, run: exportReport },
   { name: 'copy all proofs', hint: 'clipboard', when: () => findings.length > 0, run: copyAllProofs },
-  { name: 'run 10,000 scenarios', hint: 'monte-carlo', when: () => !($('lab') as HTMLElement).hidden, run: runMonte },
+  { name: 'run 10,000 scenarios', hint: 'monte-carlo', when: () => !($('lab') as HTMLElement).hidden, run: () => void runMonte() },
   { name: 'toggle receipt breakdown', when: loaded, run: () => ($('act2') as HTMLElement).click() },
   { name: 'go to audit', when: loaded, run: () => jump('#log') },
   { name: 'goal seek: solve for an input', when: () => !($('lab') as HTMLElement).hidden, run: () => ($('goal-target') as HTMLElement).focus() },

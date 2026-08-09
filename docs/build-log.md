@@ -3,6 +3,32 @@
 Dated entries written for a human reader; the Phase 9 engineering essay is
 assembled from these.
 
+## 2026-08-09 — Web v5: the engine leaves the main thread
+
+The first field bug report: dragging the what-if slider on a real
+workbook turned the page white. The root cause wasn't rendering — it was
+architecture. The wasm engine lived on the page's main thread, where a
+single input-switch prepare on a 58k-formula workbook costs ~850 ms and
+the tornado build strings twelve of those back-to-back; drag during that
+window and the tab is frozen. Each slider event also reallocated the
+canvas backing store at 2× DPR — sixty reallocations a second. v5 moves
+the engine into two Web Workers with independent Sessions: one serves
+the slider through a latest-wins pipeline (at most one evaluation in
+flight, newest value always next), the other runs tornado, Monte-Carlo,
+and diff, so heavy analysis can never contend with a live drag — the
+slider now works *while* 10,000 scenarios compute. Canvases keep their
+backing store between paints. Measured on the 58,389-formula benchmark
+workbook: a 120-event drag storm went from 4.7 s of wall time with a
+1.8-second main-thread freeze to ideal pacing with zero milliseconds
+blocked (docs/benchmarks/browser-drag.json). The adversarial review
+earned its keep a second time — thirteen confirmed async findings,
+including two beauties: the winner of two rapid file drops was decided
+by SHA-256 completion order rather than drop order, and goal seek could
+bracket on a stale curve after a watch switch and confidently report a
+bogus "found". Workbook tickets claimed synchronously at intake,
+generation stamps on the sweep, worker onerror rejecting all pending
+calls, and panic-poisoned Sessions that fail loudly closed all of them.
+
 ## 2026-08-09 — Web v4: structure for the person who just arrived
 
 The verdict from the first real user test was blunt: "things are just

@@ -90,9 +90,10 @@ await page.waitForFunction(() => /marked intentional/.test(document.getElementBy
 check('suppression survives reload + re-drop', /1 defect found.*1 marked intentional/.test(await page.locator('#act3').textContent()));
 await page.locator('.finding', { hasText: 'Budget!G7' }).locator('[data-act="sup"]').click(); // restore
 
-// --- scenario lab ---
+// --- scenario lab (engine runs in a worker: wait for async results) ---
 check('lab appears', await page.locator('#lab').isVisible());
 check('input candidates listed', (await page.locator('#input-sel option').count()) > 3);
+await page.waitForFunction(() => /schedule built/.test(document.getElementById('cone-info')?.textContent ?? ''), null, { timeout: 30000 });
 check('cone info shows schedule build', /downstream formulas? recompute \(the cone\) · schedule built/.test(await page.locator('#cone-info').textContent()));
 
 // --- v4: staged anatomy + grouped tools ---
@@ -110,11 +111,20 @@ await page.selectOption('#dist-sel', 'normal');
 check('normal relabels back and hides the third param', (await page.locator('#p1-lab').textContent()) === 'mean μ' && await page.locator('#p3-wrap').isHidden());
 check('monte head names the assumption and output', (await page.locator('#monte-input').textContent()).length > 0 && (await page.locator('#monte-watch').textContent()).length > 0);
 check('pipeline orientation hides once a workbook is loaded', await page.locator('#pipeline').isHidden());
+await page.waitForFunction(() => /µs|ms/.test(document.getElementById('whatif-read')?.textContent ?? ''), null, { timeout: 30000 });
 const read0 = await page.locator('#whatif-read').textContent();
 check('what-if readout live with timing', /µs|ms/.test(read0));
 const out0 = await page.locator('#whatif-read .ok').textContent(); // output value only — the µs suffix always changes
 await page.locator('#whatif').fill('900');
 await page.locator('#whatif').dispatchEvent('input');
+await page.waitForFunction(
+  (prev) => {
+    const t = document.querySelector('#whatif-read .ok')?.textContent ?? '';
+    return t !== '' && t !== prev;
+  },
+  out0,
+  { timeout: 15000 },
+);
 const out1 = await page.locator('#whatif-read .ok').textContent();
 check('slider changes the output', out1 !== out0 && /→/.test(await page.locator('#whatif-read').textContent()));
 check('response curve painted', await page.locator('#curve').evaluate((cv) => {
@@ -136,8 +146,19 @@ check('histogram painted', await page.locator('#hist').evaluate((cv) => {
 }));
 await page.locator('#hist').hover({ position: { x: 420, y: 150 } });
 check('histogram bin tooltip', await page.locator('#hist-tip').isVisible());
-const readAfter = await page.locator('#whatif-read').textContent();
-check('slider still live after monte', /→/.test(readAfter));
+// prove the interactive worker survived the monte run: drag and expect a fresh answer
+const preLive = await page.locator('#whatif-read .ok').textContent();
+await page.locator('#whatif').fill('640');
+await page.locator('#whatif').dispatchEvent('input');
+await page.waitForFunction(
+  (prev) => {
+    const t = document.querySelector('#whatif-read .ok')?.textContent ?? '';
+    return t !== '' && t !== prev;
+  },
+  preLive,
+  { timeout: 15000 },
+);
+check('slider still live after monte', /→/.test(await page.locator('#whatif-read').textContent()));
 
 // --- version diff (v2 = sample with one coefficient changed) ---
 check('compare section appears', await page.locator('#compare').isVisible());
@@ -175,17 +196,28 @@ check('tornado painted', await page.locator('#tornado').evaluate((cv) => {
 await page.locator('#tornado').hover({ position: { x: 300, y: 20 } });
 check('tornado row tooltip', await page.locator('#tornado-tip').isVisible());
 
-// --- v3: goal seek (bisection on the prepared cone) ---
+// --- v3: goal seek (bisection on the prepared cone, async in worker A) ---
 await page.locator('#goal-target').fill('999999999999');
 await page.locator('#goal-run').click();
+await page.waitForFunction(() => /not reachable|found:|non-numeric/.test(document.getElementById('goal-read')?.textContent ?? ''), null, { timeout: 20000 });
 check('goal seek reports unreachable targets honestly', /not reachable/.test(await page.locator('#goal-read').textContent()));
+const preGoal = await page.locator('#whatif-read .ok').textContent();
 await page.locator('#whatif').fill('800');
 await page.locator('#whatif').dispatchEvent('input');
+await page.waitForFunction(
+  (prev) => {
+    const t = document.querySelector('#whatif-read .ok')?.textContent ?? '';
+    return t !== '' && t !== prev;
+  },
+  preGoal,
+  { timeout: 15000 },
+);
 const goalTarget = (await page.locator('#whatif-read .ok').textContent()).replace(/,/g, '');
 await page.locator('#whatif').fill('500');
 await page.locator('#whatif').dispatchEvent('input');
 await page.locator('#goal-target').fill(goalTarget);
 await page.locator('#goal-run').click();
+await page.waitForFunction(() => /found:|not reachable|non-numeric/.test(document.getElementById('goal-read')?.textContent ?? ''), null, { timeout: 20000 });
 check('goal seek finds the input', /found:/.test(await page.locator('#goal-read').textContent()));
 
 // --- v3: histogram/CDF view toggle (pixel-diff, not just non-blank) ---

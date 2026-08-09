@@ -17,6 +17,16 @@ https://github.com/vineetsista/xlc · Pages: https://vineetsista.github.io/xlc/
   report export, a11y pass (aria-modal + focus trap, combobox wiring,
   chart aria-labels, aria-live toast). Adversarial review (3 lenses ×
   refuters) found 18 real issues — all fixed. Suite 28 → 49 checks.
+- Web v5 (2026-08-09): engine off the main thread — two workers with
+  independent wasm Sessions (A: interactive what-if/sweep behind a
+  latest-wins pipeline; B: tornado/monte/diff), canvas backing-store
+  caching, workbook-ticket + generation guards on every continuation,
+  worker onerror rejecting pending RPCs, panic-poisoned Sessions fail
+  loudly. User-reported white-page-on-drag: fixed. Measured (58k-formula
+  corpus wb, docs/benchmarks/browser-drag.json): drag storm 4.7s with a
+  1.8s main-thread freeze → ideal pacing with ZERO blocked ms; slider
+  stays live during monte/tornado. Adversarial review round 2 confirmed
+  13 async/worker issues — all fixed. Suite still 61 checks, 0 errors.
 - Web v4 (2026-08-09): staged anatomy for new-user comprehension — §1
   audit / §2 scenario lab / §3 compare with plain-language purpose
   lines; assumption→output context row hoisted above three grouped

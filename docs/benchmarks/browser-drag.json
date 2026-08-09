@@ -1,0 +1,23 @@
+{
+  "what": "120 slider input events at 16ms pacing on the what-if slider; measures main-thread health during a continuous drag. Reproduce: cd web && node measure-drag.mjs <path-to-xlsx>",
+  "workbook": "corpus/work/fuse-bins/cc-binaries/56cbca12-9c02-49e5-a064-53129669df80 (58,389 formulas; selected assumption cone: 390 cells, schedule build ~850-910 ms)",
+  "machine": "12th Gen Intel(R) Core(TM) i7-1250U, WSL2, headless Chromium (playwright)",
+  "date": "2026-08-09",
+  "before_main_thread_engine": {
+    "commit": "97deba8",
+    "wall_ms": 4700,
+    "readout_repaints": 121,
+    "long_tasks": 1,
+    "longest_task_ms": 1798,
+    "total_blocked_ms": 1798
+  },
+  "after_worker_engine": {
+    "wall_ms": 2329,
+    "ideal_wall_ms": 2220,
+    "readout_repaints": 120,
+    "long_tasks": 0,
+    "longest_task_ms": 0,
+    "total_blocked_ms": 0
+  },
+  "note": "The engine (two wasm Sessions) runs in Web Workers; the what-if slider is a latest-wins pipeline with at most one evaluation in flight. Zero long tasks means the main thread was never blocked >50ms at any point during the drag."
+}
