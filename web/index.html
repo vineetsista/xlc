@@ -12,7 +12,7 @@
 <body>
   <nav id="topnav" hidden>
     <span class="brand">xlc</span>
-    <a href="#log" data-spy="log" class="active">receipt</a>
+    <a href="#log" data-spy="log" class="active">audit</a>
     <a href="#findings" data-spy="findings">findings</a>
     <a href="#lab" data-spy="lab">lab</a>
     <a href="#compare" data-spy="compare">compare</a>
@@ -35,7 +35,14 @@
       <input type="file" id="file" accept=".xlsx,.xlsm" hidden />
     </section>
 
+    <div id="pipeline" class="dim small">what happens: <em class="dim">§1 audit</em> —
+    parse, recompute every formula, bit-compare against the values Excel cached in your
+    file (the receipt), then findings, each with a proof ·
+    <em class="dim">§2 lab</em> — live what-if, sensitivity, monte-carlo ·
+    <em class="dim">§3 compare</em> — where two versions disagree. all on this machine.</div>
+
     <section id="log" hidden>
+      <h2 class="stage"><span class="sn">§1</span> audit <span class="q dim">— can the compiler reproduce your workbook, and what did it find?</span></h2>
       <div id="act1" class="act"></div>
       <div id="act2" class="act clickable" title="click for the verification breakdown"
            tabindex="0" role="button" aria-expanded="false" aria-controls="receipt-detail"></div>
@@ -48,80 +55,93 @@
       </div>
       <div id="findings"></div>
       <div id="capability" class="dim"></div>
+      <div id="next-hint" class="dim small" hidden>next <span aria-hidden="true">→</span>
+        <a href="#tool-whatif">drag a what-if</a> ·
+        <a href="#tool-monte">run 10,000 scenarios</a> ·
+        <a href="#compare">compare two versions</a></div>
     </section>
 
     <section id="lab" hidden>
       <div class="rule"></div>
-      <h2>scenario lab <span class="dim">— the same engine, live</span></h2>
+      <h2 class="stage"><span class="sn">§2</span> scenario lab <span class="q dim">— what happens when an assumption changes? pick an assumption and an output; the tools below share them</span></h2>
 
-      <div class="row">
-        <label class="dim" for="input-sel">uncertain input</label>
+      <div class="row ctx" role="group" aria-label="lab context: which assumption varies, which output is watched">
+        <label class="dim" for="input-sel">assumption</label>
         <select id="input-sel"></select>
-        <span id="cone-info" class="dim"></span>
-      </div>
-
-      <div class="row">
-        <label class="dim" for="whatif">what-if</label>
-        <input type="range" id="whatif" min="0" max="1000" value="500" step="1" />
-        <span id="whatif-read"></span>
-      </div>
-      <div class="chart-wrap">
-        <div class="chart-title dim">response of <span id="curve-watch" class="loc"></span> to <span id="curve-input" class="loc"></span></div>
-        <canvas id="curve" width="840" height="180" role="img"></canvas>
-        <div id="curve-tip" class="tip" hidden></div>
-      </div>
-
-      <div class="row">
-        <label class="dim" for="goal-target">goal seek</label>
-        <input type="number" id="goal-target" step="any" placeholder="target output" />
-        <button id="goal-run">solve for input</button>
-        <span id="goal-read"></span>
-      </div>
-
-      <div id="tornado-wrap" class="chart-wrap" hidden>
-        <div class="chart-title dim">sensitivity of <span id="tornado-watch" class="loc"></span> when each input moves ±10%
-          <span class="key"><i class="sw sw-lo"></i>input −10%</span>
-          <span class="key"><i class="sw sw-hi"></i>input +10%</span></div>
-        <canvas id="tornado" width="840" height="200" role="img"></canvas>
-        <div id="tornado-tip" class="tip" hidden></div>
-      </div>
-
-      <div class="row">
-        <label class="dim" for="dist-sel">distribution</label>
-        <select id="dist-sel">
-          <option value="normal">normal(μ, σ)</option>
-          <option value="uniform">uniform(a, b)</option>
-          <option value="triangular">triangular(a, m, b)</option>
-          <option value="pert">pert(a, m, b)</option>
-        </select>
-        <input type="number" id="p1" step="any" />
-        <input type="number" id="p2" step="any" />
-        <input type="number" id="p3" step="any" hidden />
-        <label class="dim" for="watch-sel">watching</label>
+        <span class="dim" aria-hidden="true">→</span>
+        <label class="dim" for="watch-sel">output</label>
         <select id="watch-sel"></select>
-        <button id="run-monte">run 10,000 scenarios</button>
+        <span id="cone-info" class="dim small"></span>
       </div>
 
-      <div id="monte-out" hidden>
-        <div id="monte-stats" class="act"></div>
-        <div class="row view-row">
-          <button id="view-hist" class="chip active">histogram</button>
-          <button id="view-cdf" class="chip">cumulative</button>
+      <div class="tool" id="tool-whatif" tabindex="-1">
+        <h3 class="tool-head">what-if · goal seek <span class="dim">— drag the assumption, or solve backwards for the value that hits a target</span></h3>
+        <div class="row">
+          <input type="range" id="whatif" min="0" max="1000" value="500" step="1"
+                 aria-label="what-if value of the selected assumption" />
+          <span id="whatif-read"></span>
         </div>
         <div class="chart-wrap">
-          <div class="chart-title dim">distribution of <span id="hist-watch" class="loc"></span> over <span id="hist-n"></span> scenarios</div>
-          <canvas id="hist" width="840" height="200" role="img"></canvas>
-          <div id="hist-tip" class="tip" hidden></div>
+          <div class="chart-title dim">response of <span id="curve-watch" class="loc"></span> to <span id="curve-input" class="loc"></span> across the slider's range</div>
+          <canvas id="curve" width="840" height="180" role="img"></canvas>
+          <div id="curve-tip" class="tip" hidden></div>
         </div>
-        <div class="dim small">deterministic: seed 42 — scenario <em>k</em> is derivable from (seed, k) on any machine.</div>
+        <div class="row">
+          <label class="dim" for="goal-target">goal seek</label>
+          <input type="number" id="goal-target" step="any" placeholder="target output" />
+          <button id="goal-run">solve for input</button>
+          <span id="goal-read"></span>
+        </div>
+      </div>
+
+      <div class="tool" id="tool-tornado" tabindex="-1" hidden>
+        <h3 class="tool-head">sensitivity <span class="dim">— every assumption nudged ±10%, ranked by how far the output moves</span></h3>
+        <div id="tornado-wrap" class="chart-wrap" hidden>
+          <div class="chart-title dim">swing of <span id="tornado-watch" class="loc"></span>
+            <span class="key"><i class="sw sw-lo"></i>assumption −10%</span>
+            <span class="key"><i class="sw sw-hi"></i>assumption +10%</span></div>
+          <canvas id="tornado" width="840" height="200" role="img"></canvas>
+          <div id="tornado-tip" class="tip" hidden></div>
+        </div>
+      </div>
+
+      <div class="tool" id="tool-monte" tabindex="-1">
+        <h3 class="tool-head">monte-carlo <span class="dim">— draw 10,000 values of <span id="monte-input" class="loc"></span>; see the distribution of <span id="monte-watch" class="loc"></span></span></h3>
+        <div class="row">
+          <label class="dim" for="dist-sel">distribution</label>
+          <select id="dist-sel">
+            <option value="normal">normal(μ, σ)</option>
+            <option value="uniform">uniform(a, b)</option>
+            <option value="triangular">triangular(a, m, b)</option>
+            <option value="pert">pert(a, m, b)</option>
+          </select>
+          <label class="pfield"><span class="plab" id="p1-lab">mean μ</span><input type="number" id="p1" step="any" /></label>
+          <label class="pfield"><span class="plab" id="p2-lab">sd σ</span><input type="number" id="p2" step="any" /></label>
+          <label class="pfield" id="p3-wrap" hidden><span class="plab" id="p3-lab">max</span><input type="number" id="p3" step="any" /></label>
+          <button id="run-monte">run 10,000 scenarios</button>
+        </div>
+
+        <div id="monte-out" hidden>
+          <div id="monte-stats" class="act"></div>
+          <div class="row view-row">
+            <button id="view-hist" class="chip active">histogram</button>
+            <button id="view-cdf" class="chip">cumulative</button>
+          </div>
+          <div class="chart-wrap">
+            <div class="chart-title dim">distribution of <span id="hist-watch" class="loc"></span> over <span id="hist-n"></span> scenarios</div>
+            <canvas id="hist" width="840" height="200" role="img"></canvas>
+            <div id="hist-tip" class="tip" hidden></div>
+          </div>
+          <div class="dim small">deterministic: seed 42 — scenario <em>k</em> is derivable from (seed, k) on any machine.</div>
+        </div>
       </div>
     </section>
 
     <section id="compare" hidden>
       <div class="rule"></div>
-      <h2>compare versions <span class="dim">— where do two models disagree?</span></h2>
-      <p class="dim small">drop or choose the <em>other</em> version of this workbook. both run over
-      identical scenario tiles; any divergence is reported with a concrete input vector.</p>
+      <h2 class="stage"><span class="sn">§3</span> compare <span class="q dim">— where do two versions of this model disagree, and on which inputs?</span></h2>
+      <p class="dim small">drop or choose the <em>other</em> version of this workbook. both versions
+      run over the same sampled inputs; any divergence is reported with a concrete input vector.</p>
       <div class="row">
         <button id="pick-b" class="ghost">choose version B…</button>
         <input type="file" id="file-b" accept=".xlsx,.xlsm" hidden />

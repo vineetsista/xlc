@@ -1,7 +1,9 @@
-// xlc web surface v3: three acts + findings triage + the scenario lab
-// (live what-if, tornado sensitivity, goal seek, Monte-Carlo with
-// histogram/CDF views, version diff), a command palette, and an
-// exportable audit report. Everything local (Law 1).
+// xlc web surface v4: the same engine behind a staged anatomy — §1 audit
+// (three acts + findings triage), §2 scenario lab (a shared
+// assumption→output context row over three grouped tools: what-if with
+// goal seek, tornado sensitivity, Monte-Carlo with histogram/CDF), §3
+// compare — plus a command palette and an exportable audit report.
+// Everything local (Law 1).
 // Charts follow the dataviz method: the mark pair --data/--data2 is
 // validated against the surface (CVD dE 29.4 protan, 34.1 normal),
 // hover layer always, recessive grid, text in text tokens, legend
@@ -125,6 +127,14 @@ async function run(bytes: ArrayBuffer, name: string) {
   lastName = name;
   wbHash = await sha256hex(bytes);
   suppressed = loadSuppressions();
+  // Per-workbook triage state must never survive into the next file: a
+  // stale detector filter silently empties the findings list, and a stale
+  // findings array lets keyboard triage resurrect the previous workbook
+  // after a failed load.
+  findings = [];
+  filter = 'all';
+  activeIdx = -1;
+  ($('pipeline') as HTMLElement).hidden = true;
   $('log').hidden = false;
   ($('act1') as HTMLElement).textContent = `compiling ${name}…`;
   $('act2').textContent = '';
@@ -137,7 +147,11 @@ async function run(bytes: ArrayBuffer, name: string) {
   ($('compare') as HTMLElement).hidden = true;
   ($('monte-out') as HTMLElement).hidden = true;
   ($('tornado-wrap') as HTMLElement).hidden = true;
+  ($('tool-tornado') as HTMLElement).hidden = true;
+  ($('next-hint') as HTMLElement).hidden = true;
   ($('goal-read') as HTMLElement).textContent = '';
+  ($('goal-target') as HTMLInputElement).value = '';
+  for (const t of ['curve-tip', 'tornado-tip', 'hist-tip']) ($(t) as HTMLElement).hidden = true;
   ($('diff-out') as HTMLElement).hidden = true;
   ($('diff-status') as HTMLElement).textContent = '';
   // Reset per-workbook lab state so a later export can never carry the
@@ -324,6 +338,7 @@ function setupLab() {
   inputCands = JSON.parse(session.input_candidates(12));
   if (!inputCands.length) return;
   ($('lab') as HTMLElement).hidden = false;
+  ($('next-hint') as HTMLElement).hidden = false;
   const sel = $('input-sel') as HTMLSelectElement;
   sel.innerHTML = inputCands
     .map((c, i) => `<option value="${i}">${esc(c.name)} = ${fmtV(c.value)}  (feeds ${c.impact} formulas)</option>`)
@@ -344,14 +359,17 @@ function prepareInput(c: (typeof inputCands)[0]) {
     return;
   }
   const ms = performance.now() - t0;
-  ($('cone-info') as HTMLElement).textContent = `cone: ${fmt(p.cone_cells)} formula${p.cone_cells === 1 ? '' : 's'} · schedule built in ${ms.toFixed(1)} ms`;
+  ($('cone-info') as HTMLElement).textContent = `${fmt(p.cone_cells)} downstream formula${p.cone_cells === 1 ? '' : 's'} recompute (the cone) · schedule built in ${ms.toFixed(1)} ms`;
   const wsel = $('watch-sel') as HTMLSelectElement;
   wsel.innerHTML = (p.sinks as any[])
     .map((s) => `<option value="${s.sheet},${s.row},${s.col}">${esc(s.name)}</option>`)
     .join('');
+  ($('monte-input') as HTMLElement).textContent = c.name;
+  ($('monte-watch') as HTMLElement).textContent = wsel.selectedOptions[0]?.textContent ?? '';
   wsel.onchange = () => {
     const [sh, r, co] = wsel.value.split(',').map(Number);
     session!.set_watch(sh, r, co);
+    ($('monte-watch') as HTMLElement).textContent = wsel.selectedOptions[0]?.textContent ?? '';
     refreshCurve();
     scheduleTornado();
   };
@@ -368,6 +386,13 @@ function prepareInput(c: (typeof inputCands)[0]) {
   scheduleTornado();
 }
 
+const P_LABELS: Record<string, [string, string, string]> = {
+  normal: ['mean μ', 'sd σ', ''],
+  uniform: ['min', 'max', ''],
+  triangular: ['min', 'most likely', 'max'],
+  pert: ['min', 'most likely', 'max'],
+};
+
 function syncDistParams() {
   if (!curInput) return;
   const kind = ($('dist-sel') as HTMLSelectElement).value;
@@ -375,7 +400,11 @@ function syncDistParams() {
   const p1 = $('p1') as HTMLInputElement;
   const p2 = $('p2') as HTMLInputElement;
   const p3 = $('p3') as HTMLInputElement;
-  p3.hidden = !(kind === 'triangular' || kind === 'pert');
+  const [l1, l2, l3] = P_LABELS[kind] ?? P_LABELS.normal;
+  $('p1-lab').textContent = l1;
+  $('p2-lab').textContent = l2;
+  if (l3) $('p3-lab').textContent = l3;
+  ($('p3-wrap') as HTMLElement).hidden = !(kind === 'triangular' || kind === 'pert');
   // ±20% around the current value; for negative values 0.8v > 1.2v, so
   // order the bounds explicitly or triangular/pert get a > b.
   const lo = Math.min(v * 0.8, v * 1.2);
@@ -401,6 +430,7 @@ function sliderValue(): number {
 function onSlider() {
   if (!session || !curInput) return;
   const x = sliderValue();
+  slider.setAttribute('aria-valuetext', `${curInput.name} = ${fmtV(x)}`);
   const t0 = performance.now();
   const out = JSON.parse(session.what_if(x));
   const us = (performance.now() - t0) * 1000;
@@ -528,6 +558,7 @@ function buildTornado() {
     .slice(0, 10);
   const wrap = $('tornado-wrap') as HTMLElement;
   wrap.hidden = tornadoRows.length < 2;
+  ($('tool-tornado') as HTMLElement).hidden = wrap.hidden;
   if (wrap.hidden) return;
   ($('tornado-watch') as HTMLElement).textContent = wsel.selectedOptions[0]?.textContent ?? '';
   $('tornado').setAttribute(
@@ -935,21 +966,23 @@ function exportReport() {
     L.push('');
     for (const [k, v] of cap) L.push(`- ${k}: ${fmt(v)}`);
   }
-  if (histData) {
-    const s = $('monte-stats').textContent ?? '';
+  if (histData || tornadoRows.length) {
     L.push('');
     L.push(`## scenario lab`);
-    L.push('');
-    L.push(`- ${s.trim()}`);
-    L.push(`- deterministic: seed 42 — scenario k is derivable from (seed, k)`);
-  }
-  if (tornadoRows.length) {
-    L.push('');
-    L.push(`## sensitivity (each input ±10%, base output ${fmtV(tornadoBase)})`);
-    L.push('');
-    L.push(`| input | −10% → | +10% → |`);
-    L.push(`|---|---|---|`);
-    for (const t of tornadoRows) L.push(`| ${t.name} | ${fmtV(t.loOut)} | ${fmtV(t.hiOut)} |`);
+    if (histData) {
+      const s = $('monte-stats').textContent ?? '';
+      L.push('');
+      L.push(`- distribution of ${$('hist-watch').textContent}: ${s.trim()}`);
+      L.push(`- deterministic: seed 42 — scenario k is derivable from (seed, k)`);
+    }
+    if (tornadoRows.length) {
+      L.push('');
+      L.push(`### sensitivity — swing of ${$('tornado-watch').textContent} (each assumption ±10%, base ${fmtV(tornadoBase)})`);
+      L.push('');
+      L.push(`| assumption | −10% → | +10% → |`);
+      L.push(`|---|---|---|`);
+      for (const t of tornadoRows) L.push(`| ${t.name} | ${fmtV(t.loOut)} | ${fmtV(t.hiOut)} |`);
+    }
   }
   L.push('');
   L.push(`---`);
@@ -978,7 +1011,12 @@ async function copyAllProofs() {
 }
 
 // ---------- sticky nav + scrollspy ----------
-const jump = (sel: string) => document.querySelector(sel)?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+const jump = (sel: string) => {
+  const el = document.querySelector<HTMLElement>(sel);
+  el?.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+  // .tool targets carry tabindex="-1" so palette jumps move focus too
+  if (el?.getAttribute('tabindex') === '-1') el.focus({ preventScroll: true });
+};
 document.querySelectorAll('#topnav a').forEach((a) =>
   a.addEventListener('click', (e) => {
     e.preventDefault();
@@ -1015,9 +1053,12 @@ const commands: Cmd[] = [
   { name: 'copy all proofs', hint: 'clipboard', when: () => findings.length > 0, run: copyAllProofs },
   { name: 'run 10,000 scenarios', hint: 'monte-carlo', when: () => !($('lab') as HTMLElement).hidden, run: runMonte },
   { name: 'toggle receipt breakdown', when: loaded, run: () => ($('act2') as HTMLElement).click() },
-  { name: 'go to receipt', when: loaded, run: () => jump('#log') },
+  { name: 'go to audit', when: loaded, run: () => jump('#log') },
+  { name: 'goal seek: solve for an input', when: () => !($('lab') as HTMLElement).hidden, run: () => ($('goal-target') as HTMLElement).focus() },
   { name: 'go to findings', when: () => findings.length > 0, run: () => jump('#findings') },
   { name: 'go to scenario lab', when: () => !($('lab') as HTMLElement).hidden, run: () => jump('#lab') },
+  { name: 'go to sensitivity', when: () => !($('tool-tornado') as HTMLElement).hidden, run: () => jump('#tool-tornado') },
+  { name: 'go to monte-carlo', when: () => !($('lab') as HTMLElement).hidden, run: () => jump('#tool-monte') },
   { name: 'go to compare versions', when: () => !($('compare') as HTMLElement).hidden, run: () => jump('#compare') },
   { name: 'compare with another version…', when: loaded, run: () => ($('file-b') as HTMLInputElement).click() },
   { name: 'keyboard shortcuts', hint: '?', run: () => showOverlay('help-ov') },

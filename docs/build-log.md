@@ -3,6 +3,28 @@
 Dated entries written for a human reader; the Phase 9 engineering essay is
 assembled from these.
 
+## 2026-08-09 — Web v4: structure for the person who just arrived
+
+The verdict from the first real user test was blunt: "things are just
+thrown everywhere." Fair — v1 through v3 grew by accretion, and the lab
+had become a flat stack of control rows where four tools interleaved and
+the output selector that drives three different charts lived inside the
+Monte-Carlo row. v4 is the same engine behind a legible anatomy: three
+numbered stages (§1 audit, §2 scenario lab, §3 compare), each header
+carrying the plain-English question it answers; a shared assumption →
+output context bar at the top of the lab; the tools grouped and named
+(what-if · goal seek, sensitivity, monte-carlo) with one-line
+explanations that name the actual cells they operate on; and the three
+formerly naked number boxes now labeled mean μ / sd σ — switching to
+min / most likely / max when the distribution changes. A pipeline line
+under the drop zone tells a newcomer what will happen before anything
+runs, and hides once it has. The adversarial review pass (three lenses,
+every claim attacked by a refuter) earned its tokens again: fifteen
+confirmed issues, the best of which was a stale detector filter that
+made the page claim "2 defects found" while listing none after loading
+a second workbook. The headless suite grew from 49 to 61 checks,
+including a regression test for exactly that bug.
+
 ## 2026-08-09 — The launch homework: pricing the empty middle
 
 With all ten gates green the remaining work was strategy, so today was a

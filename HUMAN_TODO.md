@@ -79,7 +79,7 @@ not a product.
 
 | thing | where |
 |---|---|
-| live site | https://vineetsista.github.io/xlc/ (auto-deploys from `main`) |
+| live site | https://vineetsista.github.io/xlc/ (CI builds `web/dist` and deploys it on every push to `main`) |
 | repo | https://github.com/vineetsista/xlc |
 | backup demo (private until you share) | https://claude.ai/code/artifact/02d27d90-befe-44db-8195-d2e8525e6595 |
 | launch playbook (why every step above) | `docs/launch/playbook.md` |

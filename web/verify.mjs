@@ -1,6 +1,8 @@
-// Real-browser verification of the v2 surface: three acts, findings
-// triage (chips, copy, suppression, keyboard), the scenario lab (slider,
-// response curve, Monte-Carlo histogram), and version diff.
+// Real-browser verification of the web surface: three acts, findings
+// triage (chips, copy, suppression, keyboard), the v4 staged anatomy
+// (stage headers, assumption→output context row, grouped tools, labeled
+// distribution params), the scenario lab (slider, response curve,
+// Monte-Carlo histogram), and version diff.
 import { chromium } from 'playwright';
 import { preview } from 'vite';
 import { fileURLToPath } from 'node:url';
@@ -60,7 +62,11 @@ check('receipt detail shows exact split', /exact 29/.test(await page.locator('#r
 check('chips render with counts', /all \(2\)/.test(await page.locator('#chips').textContent()));
 await page.locator('.chip[data-f="range-off-by-one"]').click();
 check('filter narrows to 1 finding', (await page.locator('.finding').count()) === 1);
-await page.locator('.chip[data-f="all"]').click();
+
+// stale-filter regression: a detector filter must not survive a new load
+await page.locator('#try-sample').click();
+await page.waitForFunction(() => /defect/.test(document.getElementById('act3')?.textContent ?? ''), null, { timeout: 30000 });
+check('detector filter resets on a new load', (await page.locator('.finding').count()) === 2 && await page.locator('.chip[data-f="all"]').evaluate((el) => el.classList.contains('active')));
 
 // --- copy proof ---
 await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
@@ -87,7 +93,23 @@ await page.locator('.finding', { hasText: 'Budget!G7' }).locator('[data-act="sup
 // --- scenario lab ---
 check('lab appears', await page.locator('#lab').isVisible());
 check('input candidates listed', (await page.locator('#input-sel option').count()) > 3);
-check('cone info shows schedule build', /cone: .* schedule built/.test(await page.locator('#cone-info').textContent()));
+check('cone info shows schedule build', /downstream formulas? recompute \(the cone\) · schedule built/.test(await page.locator('#cone-info').textContent()));
+
+// --- v4: staged anatomy + grouped tools ---
+check('three stage headers (§1 audit, §2 lab, §3 compare)', (await page.locator('h2.stage').count()) === 3);
+check('nav labels the audit stage', (await page.locator('#topnav a[data-spy="log"]').textContent()) === 'audit');
+check('context row pairs assumption with output', (await page.locator('.ctx #input-sel').count()) === 1 && (await page.locator('.ctx #watch-sel').count()) === 1);
+check('lab groups exactly three tools', (await page.locator('#lab .tool').count()) === 3);
+check('next-hint guides from audit into the lab', await page.locator('#next-hint').isVisible());
+check('normal params labeled mean/sd', (await page.locator('#p1-lab').textContent()) === 'mean μ' && (await page.locator('#p2-lab').textContent()) === 'sd σ');
+await page.selectOption('#dist-sel', 'uniform');
+check('uniform relabels to min/max live', (await page.locator('#p1-lab').textContent()) === 'min' && (await page.locator('#p2-lab').textContent()) === 'max' && await page.locator('#p3-wrap').isHidden());
+await page.selectOption('#dist-sel', 'triangular');
+check('triangular relabels to min/most likely/max', (await page.locator('#p2-lab').textContent()) === 'most likely' && await page.locator('#p3-wrap').isVisible());
+await page.selectOption('#dist-sel', 'normal');
+check('normal relabels back and hides the third param', (await page.locator('#p1-lab').textContent()) === 'mean μ' && await page.locator('#p3-wrap').isHidden());
+check('monte head names the assumption and output', (await page.locator('#monte-input').textContent()).length > 0 && (await page.locator('#monte-watch').textContent()).length > 0);
+check('pipeline orientation hides once a workbook is loaded', await page.locator('#pipeline').isHidden());
 const read0 = await page.locator('#whatif-read').textContent();
 check('what-if readout live with timing', /µs|ms/.test(read0));
 const out0 = await page.locator('#whatif-read .ok').textContent(); // output value only — the µs suffix always changes
@@ -188,7 +210,7 @@ check('export downloads a markdown report', download.suggestedFilename().endsWit
 check('palette closes after running a command', await page.locator('#palette-ov').isHidden());
 const report = fs.readFileSync(await download.path(), 'utf8');
 check('report carries the receipt line', /29\/29 verifiable formula cells re-derived bit-exact \(100\.00%\)/.test(report));
-check('report lists both findings with proofs', (report.match(/### /g) ?? []).length === 2 && /proof: /.test(report));
+check('report lists both findings with proofs', (report.match(/### (\[intentional\] )?warning\[/g) ?? []).length === 2 && /proof: /.test(report));
 check('report marks the suppressed finding intentional', (report.match(/\[intentional\]/g) ?? []).length === 1);
 check('report includes scenario stats and sensitivity table', /## scenario lab/.test(report) && /## sensitivity/.test(report));
 await page.locator('.finding.suppressed [data-act="sup"]').click(); // restore

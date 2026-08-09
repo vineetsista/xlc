@@ -17,6 +17,14 @@ https://github.com/vineetsista/xlc · Pages: https://vineetsista.github.io/xlc/
   report export, a11y pass (aria-modal + focus trap, combobox wiring,
   chart aria-labels, aria-live toast). Adversarial review (3 lenses ×
   refuters) found 18 real issues — all fixed. Suite 28 → 49 checks.
+- Web v4 (2026-08-09): staged anatomy for new-user comprehension — §1
+  audit / §2 scenario lab / §3 compare with plain-language purpose
+  lines; assumption→output context row hoisted above three grouped
+  tools (watch-sel had been buried in the monte row); labeled
+  distribution params; pipeline orientation line; next-hint; slider
+  aria-valuetext; palette jumps move focus. Adversarial review (3
+  lenses × refuters) confirmed 15 issues incl. a stale-filter bug that
+  emptied workbook B's findings list — all fixed. Suite 49 → 61 checks.
 - Launch playbook (2026-08-09): 4-agent live market sweep — incumbent
   pricing + channel rules verified; r/FPandA rerouted (rule-3 permaban
   found in our own checklist); tiers recommended (free forever / $29
