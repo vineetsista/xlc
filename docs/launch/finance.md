@@ -26,4 +26,4 @@ number that fell out. In our audits, nine out of ten findings the tool
 ships are real drift — we measure that precision on public data and
 publish the audit, including the detector versions we rejected.
 
-[SITE-LINK]
+https://claude.ai/code/artifact/02d27d90-befe-44db-8195-d2e8525e6595 (or your hosted copy)
