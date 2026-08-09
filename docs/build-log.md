@@ -3,6 +3,26 @@
 Dated entries written for a human reader; the Phase 9 engineering essay is
 assembled from these.
 
+## 2026-08-09 — All ten gates green
+
+The last three phases fell in one continuous run. The scenario engine
+passed its cruelest oracle — at N=1 it must reproduce the interpreter
+bit-for-bit, and it caught two floating-point summation-order bugs that
+no smaller test could see — then posted five distributions within 1.6
+sigma of analytic moments at a million draws, a cache-residency witness
+for the bandwidth claim, and 1.45e8 cell-scenarios/s on the vectorized
+path. Phase 7 turned the schedule into an AD tape (8e-7 against central
+differences, non-smooth calls reported honestly as structural), made the
+slider real (12.6 ms for 100k scenarios after an input change on a
+40k-formula model), and gave diff a witness vector. Phase 8 shipped the
+product verbs and a CI mode that fails builds on new findings, plus a
+one-command bench that stamps machine and ISA into every artifact.
+Phase 9 is the telling of it: a README where every number links to its
+artifact, the essay, two launch drafts for two audiences, and an
+application. From an empty directory to a ten-gate-green compiler for
+the world's most-used programming language, with the receipts to prove
+every sentence.
+
 ## 2026-08-09 — Gate 5: the compiler gets its IR, and a lesson about what "family" means
 
 Six gates green. The typed IR lowers 930,372 subset formula cells into

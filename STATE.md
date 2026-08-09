@@ -1,38 +1,32 @@
 # XLC — STATE
-Updated: 2026-08-08   |   LAUNCH TARGET: Phase 4 ships the first public product   |   Week 1
-Phase: 6 — The scenario axis (the hard one)          Gate: UNWRITTEN (write gate6.sh first, Law 12)
+Updated: 2026-08-09   |   LAUNCH: awaiting human steps (HUMAN_TODO.md)   |   Week 1
+Phase: 9 — COMPLETE. All ten gates PASS (`make gate-all` green 0-9).
 
 ## Done / In flight / Blocked
-- Gates 0–3 ALL PASSING (`make gate-all` green end-to-end).
-- Gate 3 receipt: 99.3529% of 802,705 verifiable subset cells bit-match
-  Excel under the documented policy (bit-identical | 1 ULP | 15-sig-digit
-  decimal). Full corpus: 98.81% of 4.68M verifiable cells, ZERO panics
-  across 16,167 workbooks. Exclusions (Law 9, always printed): extref
-  116,253 · array 6,967 · unimpl 1,716 · volatile 186.
-- ~75 functions implemented; every function with ≥200 uses is ≥97%.
-- Known residual classes (docs/decisions.md): oracle noise (stale caches,
-  display-rounded caches — LO-UNO adjudicator in HUMAN_TODO), pow-precision
-  (^ chains, ~2.3k cells), scattered tail.
-- Blocked: none.
+- Every phase 0-9 complete; every gate written before its code (Law 12).
+- Blocked: launch itself — human-only steps in HUMAN_TODO.md (domain,
+  hosting web/dist, posting docs/launch/*, LibreOffice-UNO install for
+  oracle adjudication). Nothing blocks further engineering.
 
 ## Next action
-Write gate6.sh (Law 12), then §8.6 in full: pulp SIMD kernels over the
-coarsened IR, two-axis tiling with liveness-based buffer reuse (budget a
-full run; bytes-moved-per-scenario is the metric), counter-based RNG
-(Philox), vectorized inverse-normal (AS241) + exp/ln, five distributions
-(normal/lognormal/triangular/uniform/PERT), auto-detect RAND/NORM.INV
-cells + auto-propose hardcoded assumptions. Oracles: N=1 bit-identical to
-receipt; deterministic mean == scalar; moments match analytic.
+Human: work through HUMAN_TODO.md. Agent (post-launch backlog, spec
+"Later" section + measured gaps): TEXT function number-format engine
+(21,936 census cells), INDIRECT/OFFSET static-resolvable subset,
+LET/LAMBDA if census justifies, pow-precision class (~2.3k cells),
+LO-UNO adjudication of the stale-cache mismatch list, wasm threads
+behind COOP/COEP, more detectors through the Law-7 audit loop,
+range-axis tiling for very-wide live sets, Cranelift fusion (v2 slide).
 
 ## Numbers of Record
-corpus workbooks: 16167 (6682 with formulas; 7003444 formula cells) | parse rate: 99.9970% | receipt pass rate: 99.35% subset / 98.81% full (verifiable) | functions implemented: ~75
-detectors SHIPPING: ref-error 100% (200/200) · range-off-by-one 100% (34/34 census) · inconsistent-region v4 90.8% (59/65 census; v1 rejected 27%, v2 72%) | refusal rate: 5.7% | partial-compile rate: 14.1%
-99th-percentile function cut-off: 75 (top-75 = 99% of cell-mentions)
-parse throughput: 253k formulas/s | receipt full-corpus: 0 panics
-analyzer: 58,389 formulas native 0.52s / browser wasm 4.19s (single-thread)
-IR: 930,372/930,372 bit-identical vs scalar | coarsening 11.20x (83,095 nodes) | CSE 0.8%
-scenario throughput native: — | browser: — | bytes moved per scenario: —
-peak RSS: — | incremental recompute latency: —
+corpus: 16,167 wbs / 7,003,444 formula cells | parse 99.9970% RT, 0 panics
+receipt: 99.35% subset / 98.81% full corpus (verifiable), 0 panics | ULP policy: bit|1ulp|sig15
+functions: ~75 implemented (99% cell-mention coverage at 75) | refusal 5.7% | partial 14.1%
+detectors: ref-error 100% (200) · off-by-one 100% (34 census) · slipped-ref 90.8% (65 census)
+analyzer: 58,389 formulas 0.52s native / 4.19s wasm | IR coarsening 11.20x, 0 drift
+scenario: N=1 oracle 21,047/21,047 | moments <=1.6 sigma | (seed,k) reproducible
+bytes/scenario 1.00x min (residency witness 2.5MB/8MB) | fast path 1.45e8 cell-scen/s synthetic
+incremental 12.6ms @ 40k formulas x 1e5 | AD 8.0e-7 max rel err (232 gradients) | diff witness exact
+tests: 96 | clippy: 0 warnings | gates: 10/10 PASS
 
 ## Outside conversations
-last: never | count: 0
+last: never | count: 0 — launch drafts ready; posting is human-only.
